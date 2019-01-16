@@ -28,5 +28,10 @@
 			<result name="success">itemList.jsp</result>
 		</action>
 
+		<action name="AddItemAction" class="com.internousdev.ShoppingSite.action.AddItemAction" method="execute">
+			<result name="success">index.jsp</result>
+			<result name="error">itemList.jsp</result>
+		</action>
+
 	</package>
 </struts>

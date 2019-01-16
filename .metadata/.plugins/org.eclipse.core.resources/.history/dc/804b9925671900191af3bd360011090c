@@ -1,0 +1,16 @@
+package com.internousdev.ShoppingSite.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AddItemAction extends ActionSupport
+{
+
+	public String execute()
+	{
+		String result = ERROR;
+
+
+
+		return result;
+	}
+}

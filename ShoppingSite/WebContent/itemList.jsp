@@ -24,7 +24,12 @@
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
 						<s:if test="session.isLogin == true">
-							<td><input type="submit" value="追加"></td>
+							<td>
+								<form id="LoginAction" name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form">
+								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
+								<input type="submit" value="追加"/>
+								</form>
+							</td>
 						</s:if>
 					</tr>
 				</s:iterator>

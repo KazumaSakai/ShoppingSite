@@ -1,0 +1,49 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class AddItemDAO
+{
+
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+
+	public boolean addItemToCart(int item_id, int user_id, int request_count)
+	{
+		String sql = "SELECT * FROM carts WHERE item_id = ? AND user_id = ?";
+		String u_sql = "UPDATE item SET item_count = item_count - "
+				+ "CASE WHEN item_count IS NULL OR item_count < ? THEN 0 "
+				+ "ELSE ? END "
+				+ "WHERE id = ?";
+
+		try
+		{
+			PreparedStatement preparedStatement = connection.prepareStatement(u_sql);
+			preparedStatement.setInt(1, request_count);
+			preparedStatement.setInt(2, request_count);
+			preparedStatement.setInt(3, item_id);
+
+
+			int line = preparedStatement.executeUpdate();
+			if(line == 1)
+			{
+				preparedStatement = connection.prepareStatement(sql);
+
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+}
