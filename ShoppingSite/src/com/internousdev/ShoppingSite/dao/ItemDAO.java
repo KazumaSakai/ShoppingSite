@@ -15,7 +15,6 @@ public class ItemDAO
 	private Connection connection = dbConnector.getConnection();
 	private ItemDTO itemDTO = new ItemDTO();
 
-
 	public ItemDTO getItem(int item_id)
 	{
 		 String sql = "SELECT * FROM items WHERE id = ?";

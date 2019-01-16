@@ -39,6 +39,7 @@ public class LoginDAO
 				 if(pass.equals(login_pass))
 				 {
 					 userDTO.setId(get_id);
+					 userDTO.setLogin_id(get_login_id);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setInsert_date(get_insert_date);

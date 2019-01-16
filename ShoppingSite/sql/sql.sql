@@ -30,3 +30,11 @@ create table items(
 );
 
 insert into items(item_name, item_price, item_count) VALUES("鉛筆", 120, 59);
+
+drop table if exists carts;
+
+create table carts(
+	user_id int not null,
+	item_id int not null,
+	item_count int not null
+);

@@ -1,0 +1,18 @@
+package com.internousdev.ShoppingSite.dao;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class ItemListDAO {
+
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+
+	private ItemListDAO itemListDAO = new ItemListDAO();
+
+	public UserDTO getItemList()
+	{
+		 String sql = "SELECT * FROM items ";
+	}
+}
