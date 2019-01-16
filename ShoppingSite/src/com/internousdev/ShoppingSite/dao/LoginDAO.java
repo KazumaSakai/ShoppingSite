@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.internousdev.ShoppingSite.dto.UserDTO;
-import com.internousdev.ShoppingSite.util.Crypto;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
@@ -35,14 +34,15 @@ public class LoginDAO
 				 String get_user_name = resultSet.getString("user_name");
 				 String get_insert_date = resultSet.getString("insert_date");
 
-				 String pass = Crypto.decrypto(get_login_pass);
+				 String pass = get_login_pass;
 
-				 if(pass == login_pass)
+				 if(pass.equals(login_pass))
 				 {
 					 userDTO.setId(get_id);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setInsert_date(get_insert_date);
+
 					 userDTO.setLoginFlg(true);
 				 }
 			 }

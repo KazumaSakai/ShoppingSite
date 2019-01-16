@@ -26,6 +26,14 @@ header
   color: white;
 }
 
+header #main_menu a
+{
+	color: white;
+}
+header #main_menu a:visited
+{
+	color: lightgray;
+}
 
 /*
       Footer
@@ -197,3 +205,33 @@ main #right
 {
   padding: 5px 10px 10px 10px;
 }
+
+/*
+ *	ErrorMessage
+ */
+ .errorMessage
+ {
+	color: red;
+ }
+
+ /*
+ 	Center
+  */
+  .center
+  {
+  	margin: 0 auto;
+  }
+  .text-center
+  {
+  	text-align: center;
+  }
+
+ .form
+ {
+ 	text-align: center;
+ }
+
+ .form td
+ {
+ 	padding: 5px;
+ }

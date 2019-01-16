@@ -15,7 +15,9 @@ public class Crypto implements Serializable
 		byte[] iv  = "u7aTAfOMMKJvD02S".getBytes();
 
 		// IV(暗号化時のスタートブロック用の初期値 128ビット固定長）
-		byte[] key = "passhash_key".getBytes();
+		byte[] key = "u7aTAfOMMKJvD02S".getBytes();
+
+
 		// 暗号解読キー(128ビット固定長)
 
 		try
@@ -108,9 +110,11 @@ public class Crypto implements Serializable
 	{
 		//	暗号化されている文字列を配列に
 		byte[] str = Base64.getDecoder().decode(str64);
+		byte[] str2 = new byte[128];
+		System.arraycopy(str, 0, str2, 0, str.length);
 
 		//	暗号を複合化する
-		byte[] text = decrypter.doFinal(str);
+		byte[] text = decrypter.doFinal(str2);
 
 		//	文字列に変換して返す
 		return new String(text);

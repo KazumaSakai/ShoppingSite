@@ -31,11 +31,13 @@
     <header>
         <p id="site_title">ShoppingSite</p>
         <ul id="main_menu">
-          <li>Item</li>
-          <li>Item</li>
-          <li>Item</li>
-          <li>Item</li>
-          <li>Item</li>
+          <li><a href='<s:url action="GoHomeAction"/>'>ホーム</a>
+          <c:if test="${session.isLogin != true }">
+          	<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a>
+          </c:if>
+          <c:if test="${session.isLogin == true }">
+          	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+          </c:if>
         </ul>
         <c:if test="${param.showSlider == true }">
         <div id="header_under">

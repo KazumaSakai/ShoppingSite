@@ -1,0 +1,19 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class LogoutAction extends ActionSupport implements SessionAware
+{
+	public String execute()
+	{
+		result = SUCCESS;
+
+		session.put("login_user_id", "");
+		session.put("user_name", "");
+		session.put("isLogin", false);
+
+		return result;
+	}
+}
