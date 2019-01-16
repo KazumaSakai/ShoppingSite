@@ -6,6 +6,9 @@ public class ItemDTO
 	private String item_name;
 	private int item_price;
 	private int item_count;
+	private String insert_date;
+	private String last_add_date;
+	private String last_sell_date;
 
 	public int getItem_count() {
 		return item_count;
@@ -32,4 +35,22 @@ public class ItemDTO
 		this.item_price = item_price;
 	}
 
+	public String getInsert_date() {
+		return insert_date;
+	}
+	public void setInsert_date(String insert_date) {
+		this.insert_date = insert_date;
+	}
+	public String getLast_add_date() {
+		return last_add_date;
+	}
+	public void setLast_add_date(String last_add_date) {
+		this.last_add_date = last_add_date;
+	}
+	public String getLast_sell_date() {
+		return last_sell_date;
+	}
+	public void setLast_sell_date(String last_sell_date) {
+		this.last_sell_date = last_sell_date;
+	}
 }

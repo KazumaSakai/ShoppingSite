@@ -28,6 +28,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 		{
 			result = SUCCESS;
 
+			session.put("user_id", userDTO.getId());
 			session.put("login_user_id", userDTO.getLogin_id());
 			session.put("user_name", userDTO.getUser_name());
 			session.put("isLogin", true);

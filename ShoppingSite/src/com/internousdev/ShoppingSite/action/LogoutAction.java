@@ -14,6 +14,7 @@ public class LogoutAction extends ActionSupport implements SessionAware
 	{
 		String result = SUCCESS;
 
+		session.put("user_id", "");
 		session.put("login_user_id", "");
 		session.put("user_name", "");
 		session.put("isLogin", false);
