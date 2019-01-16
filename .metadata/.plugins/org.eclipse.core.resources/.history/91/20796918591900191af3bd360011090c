@@ -1,0 +1,22 @@
+package com.internousdev.ShoppingSite.dao;
+
+import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class ItemDAO
+{
+
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+	private ItemDTO itemDTO = new ItemDTO();
+
+
+	public ItemDTO getItem(int item_id)
+	{
+		 String sql = "SELECT * FROM items WHERE id = ?";
+
+		 return itemDTO;
+	}
+}
