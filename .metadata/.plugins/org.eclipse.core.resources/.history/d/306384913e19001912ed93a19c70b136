@@ -1,0 +1,8 @@
+package com.internousdev.ShoppingSite.dto;
+
+public class UserDTO
+{
+	private int id;
+	private String login_id;
+	private
+}

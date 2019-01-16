@@ -1,0 +1,15 @@
+package com.internousdev.ShoppingSite.util;
+
+public class DBConnector
+{
+	private static String driverName = "com.mysql.jdbc.Driver";
+	private static String uri = "jdbc:mysql://localhost/ShoppingSite";
+
+	private static String user = "root";
+	private static String password = "mysql";
+
+	public Connection getConnection()
+	{
+
+	}
+}

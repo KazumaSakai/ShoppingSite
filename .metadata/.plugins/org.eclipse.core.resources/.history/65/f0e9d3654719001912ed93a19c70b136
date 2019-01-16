@@ -1,0 +1,11 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.sun.javafx.collections.MappingChange.Map;
+
+public class LoginAction extends ActionSupport implements SessionAware
+{
+	private Map<String, Object> session;
+}

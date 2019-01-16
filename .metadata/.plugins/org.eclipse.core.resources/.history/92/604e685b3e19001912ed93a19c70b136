@@ -1,0 +1,25 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.sql.DriverManager;
+
+import com.mysql.jdbc.Connection;
+
+public class DBConnector
+{
+	private static String driverName = "com.mysql.jdbc.Driver";
+	private static String uri = "jdbc:mysql://localhost/ShoppingSite";
+
+	private static String user = "root";
+	private static String password = "mysql";
+
+	public Connection getConnection()
+	{
+		Connection connection = null;
+
+		try
+		{
+			Class.forName(driverName);
+			connection = (Connection) DriverManager.getConnection(url, user, password);
+		}
+	}
+}

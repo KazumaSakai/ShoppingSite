@@ -1,0 +1,45 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.Crypto;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class UserDAO
+{
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+	private UserDTO userDTO = new UserDTO();
+
+	public UserDTO getLoginUserInfo(String login_id, String login_pass)
+	{
+		 String sql = "SELECT * FROM users "
+		 		+ "WHERE login_id = ?";
+
+		 try
+		 {
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 preparedStatement.setString(1, login_id);
+
+			 ResultSet resultSet = preparedStatement.executeQuery();
+
+			 if(resultSet.next())
+			 {
+				 String get_login_id = resultSet.getString("login_id");
+				 String get_login_pass = resultSet.getString("login_pass");
+
+				 String pass = Crypto.decrypto(get_login_pass);
+			 }
+		 }
+		 catch(SQLException e)
+		 {
+			 e.printStackTrace();
+		 }
+
+		 return null;
+	}
+}

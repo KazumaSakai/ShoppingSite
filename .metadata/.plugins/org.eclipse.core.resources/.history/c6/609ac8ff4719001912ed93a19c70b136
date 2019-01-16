@@ -1,0 +1,35 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.UserDAO;
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.opensymphony.xwork2.ActionSupport;
+import com.sun.javafx.collections.MappingChange.Map;
+
+public class LoginAction extends ActionSupport implements SessionAware
+{
+	private Map<String, Object> session;
+	private String login_id;
+	private String login_pass;
+	private String result;
+
+	public String execute()
+	{
+		UserDAO userDAO = new UserDAO();
+		UserDTO userDTO = new UserDTO();
+
+		result = ERROR;
+		userDTO = userDAO.getLoginUserInfo(login_id, login_pass);
+
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+}

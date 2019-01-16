@@ -10,7 +10,7 @@ drop table if exists users;
 create table users(
 	id int not null primary key auto_increment,
 	login_id varchar(16) unique,
-	login_pass varchar(60),
+	login_pass varchar(255),
 	user_name varchar(60),
 	insert_date datetime DEFAULT CURRENT_TIMESTAMP
 );

@@ -1,0 +1,18 @@
+package com.internousdev.ShoppingSite.dao;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class UserDAO
+{
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+	private UserDTO userDTO = new UserDTO();
+
+	public UserDTO getLoginUserInfo(String login_id, String login_pass)
+	{
+		 String sql = "SELECT * FROM users "
+		 		+ "WHERE user_id = ?"
+	}
+}
