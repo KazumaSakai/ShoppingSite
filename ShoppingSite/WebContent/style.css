@@ -235,3 +235,19 @@ main #right
  {
  	padding: 5px;
  }
+
+
+.itemList
+{
+	margin: 0 auto;
+}
+.itemList th
+{
+	text-align: center;
+	padding: 3px 5px;
+}
+.itemList td
+{
+	text-align: center;
+	padding: 3px 5px;
+}

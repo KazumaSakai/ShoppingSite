@@ -32,6 +32,7 @@
         <p id="site_title">ShoppingSite</p>
         <ul id="main_menu">
           <li><a href='<s:url action="GoHomeAction"/>'>ホーム</a>
+          <li><a href='<s:url action="ItemListAction"/>'>商品リスト</a>
           <c:if test="${session.isLogin != true }">
           	<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a>
           </c:if>
