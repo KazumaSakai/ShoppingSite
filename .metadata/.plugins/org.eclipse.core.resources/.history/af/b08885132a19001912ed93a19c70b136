@@ -12,7 +12,5 @@ create table users(
 	login_id varchar(16) unique,
 	login_pass varchar(60),
 	user_name varchar(60),
-	insert_date datetime DEFAULT CURRENT_TIMESTAMP
+	insert_date datetime
 );
-
-insert into users(login_id, login_pass, user_name) VALUES("admin","pass", "admin");
