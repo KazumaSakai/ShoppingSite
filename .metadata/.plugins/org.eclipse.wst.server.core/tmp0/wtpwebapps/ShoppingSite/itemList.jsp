@@ -6,6 +6,7 @@
 	<jsp:param value="商品リスト" name="title"  />
 	<jsp:param value="false" name="showSlider"/>
 	<jsp:param value="true" name="showSideMenu"/>
+	<jsp:param value="true" name="showMain"/>
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>商品リスト</h1>
@@ -25,7 +26,8 @@
 						<td><s:property value="item_count" />個</td>
 						<s:if test="session.isLogin == true">
 							<td>
-								<form id="LoginAction" name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form">
+								<form name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form">
+								<input type="number" name="request_Quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
 								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
 								<input type="submit" value="追加"/>
 								</form>

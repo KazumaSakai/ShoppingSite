@@ -1,5 +1,7 @@
 package com.internousdev.ShoppingSite.dto;
 
+import com.internousdev.ShoppingSite.dao.BuyItemDAO;
+
 public class ItemDTO
 {
 	private int item_id;
@@ -9,6 +11,12 @@ public class ItemDTO
 	private String insert_date;
 	private String last_add_date;
 	private String last_sell_date;
+
+	public boolean buyItem(int user_id)
+	{
+		BuyItemDAO buyItemDAO = new BuyItemDAO();
+		return buyItemDAO.buyItem(item_id, user_id, item_count);
+	}
 
 	public int getItem_count() {
 		return item_count;

@@ -53,6 +53,7 @@
         </div>
         </c:if>
     </header>
+    <c:if test="${param.showMain == true }">
     <main>
       <c:if test="${param.showSideMenu == true }">
       <div id="left">
@@ -77,6 +78,7 @@
       </div>
       </c:if>
     </main>
+    </c:if>
     <footer>
           copyright © internous | 4each blog is the one which provides A to Z about programming.
     </footer>

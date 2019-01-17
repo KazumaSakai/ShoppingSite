@@ -10,17 +10,17 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AddItemAction extends ActionSupport implements SessionAware
 {
 	private int item_id;
-	private int request_count;
+	private int request_Quantity;
 	private Map<String, Object> session;
 
 	public String execute()
 	{
 		int user_id = (int)session.get("user_id");
-		if(request_count < 0) request_count = 1;
+		if(request_Quantity <= 0) request_Quantity = 1;
 
 		AddItemDAO addItemDAO = new AddItemDAO();
 
-		boolean result = addItemDAO.addItemToCart(item_id, user_id, 1);
+		boolean result = addItemDAO.addItemToCart(item_id, user_id, request_Quantity);
 
 		return result ? SUCCESS : ERROR;
 	}
@@ -35,6 +35,14 @@ public class AddItemAction extends ActionSupport implements SessionAware
 
 	public Map<String, Object> getSession() {
 		return session;
+	}
+
+	public int getRequest_Quantity() {
+		return request_Quantity;
+	}
+
+	public void setRequest_Quantity(int request_Quantity) {
+		this.request_Quantity = request_Quantity;
 	}
 
 	@Override

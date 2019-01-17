@@ -29,13 +29,23 @@
 		</action>
 
 		<action name="AddItemAction" class="com.internousdev.ShoppingSite.action.AddItemAction" method="execute">
-			<result name="success">index.jsp</result>
-			<result name="error">itemList.jsp</result>
+			<result name="success" type="chain">MyCartAction</result>
+			<result name="error"  type="chain">MyCartAction</result>
 		</action>
 
 		<action name="MyCartAction" class="com.internousdev.ShoppingSite.action.MyCartAction" method="execute">
 			<result name="success">myCart.jsp</result>
 			<result name="needLogin">login.jsp</result>
+		</action>
+
+		<action name="DeleteItemAction" class="com.internousdev.ShoppingSite.action.DeleteItemAction" method="execute">
+			<result name="success" type="chain">MyCartAction</result>
+			<result name="error" type="chain">MyCartAction</result>
+		</action>
+
+		<action name="BuyCartItemAction" class="com.internousdev.ShoppingSite.action.BuyCartItemAction" method="execute">
+			<result name="success">confirmBuyCartItem.jsp</result>
+			<result name="error">confirmBuyCartItem</result>
 		</action>
 
 	</package>

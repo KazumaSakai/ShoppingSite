@@ -6,6 +6,7 @@
 	<jsp:param value="ShoppingSite" name="title"  />
 	<jsp:param value="true" name="showSlider"/>
 	<jsp:param value="true" name="showSideMenu"/>
+	<jsp:param value="false" name="showMain"/>
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>SubTitle</h1>

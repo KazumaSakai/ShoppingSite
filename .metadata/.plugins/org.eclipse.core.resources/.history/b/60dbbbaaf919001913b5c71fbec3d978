@@ -1,0 +1,40 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class DeleteItemDAO
+{
+
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+
+	public boolean deleteCartItem(int item_id, int user_id, int newCount)
+	{
+		String delete = "DELETE FROM carts WHERE item_id = ? AND user_id = ?";
+
+		try
+		{
+			if(newCount == 0)
+			{
+				PreparedStatement p_delete = connection.prepareStatement(delete);
+				p_delete.setInt(1, item_id);
+				p_delete.setInt(2, user_id);
+				p_delete.executeUpdate();_
+			}
+			else
+			{
+
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+}

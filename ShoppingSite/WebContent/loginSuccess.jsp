@@ -6,6 +6,7 @@
 	<jsp:param value="ログイン成功" name="title"  />
 	<jsp:param value="false" name="showSlider"/>
 	<jsp:param value="false" name="showSideMenu"/>
+	<jsp:param value="true" name="showMain"/>
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>ログイン成功</h1>

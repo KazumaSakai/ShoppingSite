@@ -1,0 +1,5 @@
+package com.internousdev.ShoppingSite.action;
+
+public class DeleteItemAction {
+
+}
