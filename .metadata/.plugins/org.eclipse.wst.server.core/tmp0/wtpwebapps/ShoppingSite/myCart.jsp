@@ -16,32 +16,36 @@
 					<th style="width: 100px">商品名</th>
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">数量</th>
-					<s:if test="session.isLogin == true">
-						<th>数を変更</th>
-					</s:if>
+					<th>数を変更</th>
 				</tr>
 				<s:iterator value="itemList">
 					<tr>
 						<td><s:property value="item_name" /></td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
-						<s:if test="session.isLogin == true">
-							<td>
-								<form name="DeleteItemAction" action="/ShoppingSite/DeleteItemAction.action" method="post" class="form">
-								<input type="number" name="newQuantity" value='<s:property value="item_count" />' style="width:50px; text-align: right; padding:2px">個
-								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
-								<input type="submit" value="変更"/>
-								</form>
-							</td>
-						</s:if>
+						<td>
+							<form name="DeleteItemAction" action="/ShoppingSite/DeleteItemAction.action" method="post" class="form">
+							<input type="number" name="newQuantity" value='<s:property value="item_count" />' style="width:50px; text-align: right; padding:2px">個
+							<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
+							<input type="submit" value="変更"/>
+							</form>
+						</td>
 					</tr>
 				</s:iterator>
 				<tr>
-					<th colspan="4" style="text-align:center">
+					<td colspan="2">
+						合計金額
+					</td>
+					<td colspan="2">
+						<c:out value="${totalPrice }" />円
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="text-align:center">
 						<form name="BuyCartItemAction" action="/ShoppingSite/BuyCartItemAction.action" method="post" class="form">
 							<input type="submit" value="購入する" style="padding: 5px 30px" />
 						</form>
-					</th>
+					</td>
 				</tr>
 			</table>
 			</s:if>

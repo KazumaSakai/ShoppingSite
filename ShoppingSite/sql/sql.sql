@@ -15,7 +15,7 @@ create table users(
 	insert_date datetime DEFAULT CURRENT_TIMESTAMP
 );
 
-insert into users(login_id, login_pass, user_name) VALUES("admin","pass", "管理者");
+insert into users(login_id, login_pass, user_name) VALUES("admin","2e7d01869cd65058cb884c7c039b804bc76d2a259f6143e84a86980e7cdfe23a", "管理者");
 
 drop table if exists items;
 

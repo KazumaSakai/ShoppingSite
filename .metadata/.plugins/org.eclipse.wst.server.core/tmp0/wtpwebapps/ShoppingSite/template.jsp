@@ -22,6 +22,11 @@
           speed: 700,
           pause: 5000
         });
+        $('#item_slider').bxSlider({
+            auto: true,
+            speed: 700,
+            pause: 5000
+          });
       });
     </script>
 
@@ -31,28 +36,30 @@
     <header>
         <p id="site_title">ShoppingSite</p>
         <ul id="main_menu">
-          <li><a href='<s:url action="GoHomeAction"/>'>ホーム</a>
-          <li><a href='<s:url action="ItemListAction"/>'>商品リスト</a>
+          <li><a href='<s:url action="GoHomeAction"/>'>ホーム</a></li>
+          <li><a href='<s:url action="ItemListAction"/>'>商品リスト</a></li>
           <c:if test="${session.isLogin != true }">
-          	<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a>
+          	<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
+          	<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a></li>
           </c:if>
           <c:if test="${session.isLogin == true }">
-          	<li><a href='<s:url action="MyCartAction"/>'>マイカート</a>
-          	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a>
+          	<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
+          	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
+          	<li><c:out value="${session.user_name }"/></li>
           </c:if>
         </ul>
-        <c:if test="${param.showSlider == true }">
-        <div id="header_under">
-          <div id="top_slider">
-            <div><img src="./Images/jQuery_image1.jpg"></div>
-            <div><img src="./Images/jQuery_image2.jpg"></div>
-            <div><img src="./Images/jQuery_image3.jpg"></div>
-            <div><img src="./Images/jQuery_image4.jpg"></div>
-            <div><img src="./Images/jQuery_image5.jpg"></div>
-          </div>
-        </div>
-        </c:if>
     </header>
+
+    <c:if test="${param.showSlider == true }">
+      <div id="top_slider">
+        <div><img src="./Images/jQuery_image1.jpg"></div>
+        <div><img src="./Images/jQuery_image2.jpg"></div>
+        <div><img src="./Images/jQuery_image3.jpg"></div>
+        <div><img src="./Images/jQuery_image4.jpg"></div>
+        <div><img src="./Images/jQuery_image5.jpg"></div>
+      </div>
+    </c:if>
+
     <c:if test="${param.showMain == true }">
     <main>
       <c:if test="${param.showSideMenu == true }">
@@ -65,6 +72,13 @@
       </div>
       <div id="right">
         <div class="boxarea">
+           <h2>リスト</h2>
+           <ul class="side_menu">
+             <li>アイテム</li>
+             <li>アイテム</li>
+             <li>アイテム</li>
+             <li>アイテム</li>
+           </ul>
         </div>
       </div>
       </c:if>

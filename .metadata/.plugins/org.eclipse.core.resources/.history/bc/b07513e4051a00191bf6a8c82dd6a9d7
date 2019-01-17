@@ -1,0 +1,58 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.Passworder;
+import com.mysql.jdbc.Connection;
+
+public class SignUpDAO
+{
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+	private UserDTO userDTO = new UserDTO();
+
+	public UserDTO getLoginUserInfo(String login_id, String login_pass, String user_name)
+	{
+		 String sql = "INSERT INTO users(login_id, login_pass, user_name) VALUES("admin","2e7d01869cd65058cb884c7c039b804bc76d2a259f6143e84a86980e7cdfe23a", "管理者")";
+
+		 try
+		 {
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 preparedStatement.setString(1, login_id);
+
+			 ResultSet resultSet = preparedStatement.executeQuery();
+
+			 if(resultSet.next())
+			 {
+				 int get_id = resultSet.getInt("id");
+				 String get_login_id = resultSet.getString("login_id");
+				 String get_login_pass = resultSet.getString("login_pass");
+				 String get_user_name = resultSet.getString("user_name");
+				 String get_insert_date = resultSet.getString("insert_date");
+
+				 String pass = Passworder.getSafetyPassword(login_pass, login_id);
+
+				 if(pass.equals(get_login_pass))
+				 {
+					 userDTO.setId(get_id);
+					 userDTO.setLogin_id(get_login_id);
+					 userDTO.setUser_name(get_user_name);
+					 userDTO.setUser_name(get_user_name);
+					 userDTO.setInsert_date(get_insert_date);
+
+					 userDTO.setLoginFlg(true);
+				 }
+			 }
+		 }
+		 catch(SQLException e)
+		 {
+			 e.printStackTrace();
+		 }
+
+		 return userDTO;
+	}
+}

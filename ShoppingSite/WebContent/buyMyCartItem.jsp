@@ -15,9 +15,9 @@
 					<th style="width: 100px">商品名</th>
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">数量</th>
-					<s:if test="session.isLogin == true">
-						<th>購入が完了しました</th>
-					</s:if>
+				</tr>
+				<tr>
+					<th>購入が完了しました</th>
 				</tr>
 				<s:iterator value="buyItemList">
 					<tr>
@@ -26,6 +26,14 @@
 						<td><s:property value="item_count" />個</td>
 					</tr>
 				</s:iterator>
+				<tr>
+					<td colspan="2">
+						合計金額
+					</td>
+					<td colspan="1">
+						<c:out value="${totalPrice }" />円
+					</td>
+				</tr>
 			</table>
 		</jsp:attribute>
 	</jsp:param>

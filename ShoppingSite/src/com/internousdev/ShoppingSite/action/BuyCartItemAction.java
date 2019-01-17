@@ -15,7 +15,15 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 {
 	private List<ItemDTO> buyItemList;
 	private Map<String, Object> session;
+	private int totalPrice;
 
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
 	public String execute()
 	{
@@ -43,6 +51,12 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 			{
 				buyItemList.add(item);
 			}
+		}
+
+		totalPrice = 0;
+		for (ItemDTO item : buyItemList)
+		{
+			totalPrice += item.getItem_price() * item.getItem_count();
 		}
 
 		return AllSuccess ? SUCCESS : ERROR;

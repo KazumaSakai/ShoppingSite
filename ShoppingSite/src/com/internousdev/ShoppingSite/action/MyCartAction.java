@@ -13,6 +13,7 @@ public class MyCartAction extends ActionSupport implements SessionAware
 {
 	private Map<String, Object> session;
 	private List<ItemDTO> itemList;
+	private int totalPrice;
 
 	public String execute()
 	{
@@ -26,7 +27,21 @@ public class MyCartAction extends ActionSupport implements SessionAware
 		MyCartDAO myCartDAO = new MyCartDAO();
 		itemList = myCartDAO.getMyCart(user_id).getCartItemList();
 
+		totalPrice = 0;
+		for (ItemDTO item : itemList)
+		{
+			totalPrice += item.getItem_price() * item.getItem_count();
+		}
+
 		return SUCCESS;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public Map<String, Object> getSession() {

@@ -26,6 +26,14 @@
 						<td><s:property value="item_count" />個</td>
 					</tr>
 				</s:iterator>
+				<tr>
+					<td colspan="2">
+						合計金額
+					</td>
+					<td colspan="1">
+						<c:out value="${totalPrice }" />円
+					</td>
+				</tr>
 			</table>
 			<p class="text-center">
 				ご購入ありがとう御座いました。<br />

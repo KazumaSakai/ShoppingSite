@@ -1,0 +1,73 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.MyCartDAO;
+import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dto.ItemListDTO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class BuyCartItemAction extends ActionSupport implements SessionAware
+{
+	private List<ItemDTO> buyItemList;
+	private Map<String, Object> session;
+
+
+	public String execute()
+	{
+		boolean isLogin = (boolean)session.get("isLogin");
+
+		if(!isLogin)
+		{
+			return "needLogin";
+		}
+
+		int user_id = (int)session.get("user_id");
+		MyCartDAO myCartDAO = new MyCartDAO();
+		ItemListDTO itemListDTO = myCartDAO.getMyCart(user_id);
+
+		buyItemList = new ArrayList<ItemDTO>(itemListDTO.getCartItemList().size());
+
+		boolean AllSuccess = true;
+		for (ItemDTO item : itemListDTO.getCartItemList())
+		{
+			if(!item.buyItem(user_id))
+			{
+				AllSuccess = false;
+			}
+			else
+			{
+				buyItemList.add(item);
+			}
+		}
+
+		totalPrice = 0;
+		for (ItemDTO item : itemList)
+		{
+			totalPrice += item.getItem_price() * item.getItem_count();
+		}
+
+		return AllSuccess ? SUCCESS : ERROR;
+	}
+
+	public List<ItemDTO> getBuyItemList() {
+		return buyItemList;
+	}
+
+	public void setBuyItemList(List<ItemDTO> buyItemList) {
+		this.buyItemList = buyItemList;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+}

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.Passworder;
 import com.mysql.jdbc.Connection;
 
 public class LoginDAO
@@ -16,8 +17,7 @@ public class LoginDAO
 
 	public UserDTO getLoginUserInfo(String login_id, String login_pass)
 	{
-		 String sql = "SELECT * FROM users "
-		 		+ "WHERE login_id = ?";
+		 String sql = "SELECT * FROM users WHERE login_id = ?";
 
 		 try
 		 {
@@ -34,9 +34,9 @@ public class LoginDAO
 				 String get_user_name = resultSet.getString("user_name");
 				 String get_insert_date = resultSet.getString("insert_date");
 
-				 String pass = get_login_pass;
+				 String pass = Passworder.getSafetyPassword(login_pass, login_id);
 
-				 if(pass.equals(login_pass))
+				 if(pass.equals(get_login_pass))
 				 {
 					 userDTO.setId(get_id);
 					 userDTO.setLogin_id(get_login_id);

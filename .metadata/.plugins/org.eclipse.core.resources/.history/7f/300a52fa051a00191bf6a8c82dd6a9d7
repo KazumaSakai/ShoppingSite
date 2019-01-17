@@ -1,0 +1,34 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
+
+public class SignUpDAO
+{
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+	private UserDTO userDTO = new UserDTO();
+
+	public UserDTO getLoginUserInfo(String login_id, String login_pass, String user_name)
+	{
+		 String sql = "INSERT INTO users(login_id, login_pass, user_name) VALUES(?, ?, ?)";
+
+		 try
+		 {
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 preparedStatement.setString(1, login_id);
+			 preparedStatement.setString(2, login_id);
+			 preparedStatement.setString(3, user_name);
+		 }
+		 catch(SQLException e)
+		 {
+			 e.printStackTrace();
+		 }
+
+		 return userDTO;
+	}
+}
