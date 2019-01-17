@@ -38,3 +38,22 @@ create table carts(
 	item_id int not null,
 	item_count int not null
 );
+
+drop table if exists item_description;
+
+create table description(
+	id int not null primary key,
+	description text,
+	seller int not null,
+	image_num int not null DEFAULT 0
+);
+
+drop table if exists item_review;
+
+create table item_review(
+	item_id int not null,
+	user_id int not null,
+	point int not null,
+	comment text,
+	insert_date datetime
+);

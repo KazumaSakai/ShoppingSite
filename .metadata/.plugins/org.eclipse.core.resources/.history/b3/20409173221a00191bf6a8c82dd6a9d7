@@ -1,0 +1,56 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.Passworder;
+import com.mysql.jdbc.Connection;
+
+public class UserNameDAO
+{
+	private DBConnector dbConnector = new DBConnector();
+	private Connection connection = dbConnector.getConnection();
+
+	public static String getUserName(int user_id)
+	{
+		 String sql = "SELECT * FROM users WHERE login_id = ?";
+
+		 try
+		 {
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 preparedStatement.setString(1, login_id);
+
+			 ResultSet resultSet = preparedStatement.executeQuery();
+
+			 if(resultSet.next())
+			 {
+				 int get_id = resultSet.getInt("id");
+				 String get_login_id = resultSet.getString("login_id");
+				 String get_login_pass = resultSet.getString("login_pass");
+				 String get_user_name = resultSet.getString("user_name");
+				 String get_insert_date = resultSet.getString("insert_date");
+
+				 String pass = Passworder.getSafetyPassword(login_pass, login_id);
+
+				 if(pass.equals(get_login_pass))
+				 {
+					 userDTO.setId(get_id);
+					 userDTO.setLogin_id(get_login_id);
+					 userDTO.setUser_name(get_user_name);
+					 userDTO.setUser_name(get_user_name);
+					 userDTO.setInsert_date(get_insert_date);
+
+					 userDTO.setLoginFlg(true);
+				 }
+			 }
+		 }
+		 catch(SQLException e)
+		 {
+			 e.printStackTrace();
+		 }
+
+		 return userDTO;
+	}
+}

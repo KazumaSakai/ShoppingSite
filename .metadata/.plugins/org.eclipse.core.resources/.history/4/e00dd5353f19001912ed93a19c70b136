@@ -1,9 +1,0 @@
-package com.internousdev.ShoppingSite.dao;
-
-import com.internousdev.ShoppingSite.util.DBConnector;
-
-public class UserDAO
-{
-	private DBConnector dbConnector = new DBConnector();
-
-}

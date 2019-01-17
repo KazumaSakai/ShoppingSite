@@ -269,6 +269,9 @@ main #right ul
   	text-align: center;
   }
 
+/*
+		Form
+ */
  .form
  {
  	text-align: center;
@@ -280,6 +283,9 @@ main #right ul
  }
 
 
+/*
+	ItemList
+ */
 .itemList
 {
 	margin: 0 auto;
@@ -295,8 +301,50 @@ main #right ul
 	padding: 3px 5px;
 }
 
+/*
+		Table
+ */
 .table td
 {
 	padding: 4px 10px;
 	vertical-align: top;
 }
+
+/*
+	ReviewList
+ */
+ .reviewList
+ {
+ 	list-style: none;
+ 	padding: 0;
+ }
+ .reviewList li
+ {
+ 	width: 80%;
+ 	border: solid 1px black;
+ 	margin: 10px auto;
+ 	padding: 0px 10px;
+ }
+
+ .reviewList .title
+ {
+ 	font-size: 22px;
+ 	font-weight: bold;
+
+ 	border-bottom: solid 1px gray;
+
+ 	margin: 0;
+ 	padding: 10px 10px 0px 10px;
+ }
+ .reviewList .comment
+ {
+ 	margin: 0;
+ 	padding: 15px;
+ }
+ .reviewList .username
+ {
+ 	font-size: 15px;
+ 	color: darkgray;
+ 	text-align: right;
+ 	margin: 0;
+ }

@@ -1,0 +1,8 @@
+package com.internousdev.ShoppingSite.dto;
+
+public class ItemDescriptionDTO
+{
+	private int id;
+	private String description;
+	private String seller;
+}

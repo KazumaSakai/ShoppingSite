@@ -1,0 +1,10 @@
+package com.internousdev.ShoppingSite.dto;
+
+public class ItemReviewDTO
+{
+	private int item_id;
+	private int user_id;
+	private int point;
+	private String comment;
+	private String insert_date;
+}

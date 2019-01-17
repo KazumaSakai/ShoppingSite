@@ -17,14 +17,6 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private int totalPrice;
 
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
 	public String execute()
 	{
 		boolean isLogin = (boolean)session.get("isLogin");
@@ -60,6 +52,14 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 		}
 
 		return AllSuccess ? SUCCESS : ERROR;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public List<ItemDTO> getBuyItemList() {
