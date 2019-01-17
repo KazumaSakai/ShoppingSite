@@ -37,6 +37,7 @@
           	<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a>
           </c:if>
           <c:if test="${session.isLogin == true }">
+          	<li><a href='<s:url action="MyCartAction"/>'>マイカート</a>
           	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a>
           </c:if>
         </ul>

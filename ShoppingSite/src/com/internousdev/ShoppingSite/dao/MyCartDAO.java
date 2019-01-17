@@ -31,6 +31,7 @@ public class MyCartDAO
 				int item_id = resultSet.getInt("item_id");
 				ItemDAO itemDAO = new ItemDAO();
 				ItemDTO itemDTO = itemDAO.getItem(item_id);
+				itemDTO.setItem_count(resultSet.getInt("item_count"));
 				itemDAO = null;
 
 				myCartDTO.getCartItemList().add(itemDTO);

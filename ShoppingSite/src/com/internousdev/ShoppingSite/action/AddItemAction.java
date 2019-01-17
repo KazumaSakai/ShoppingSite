@@ -20,7 +20,7 @@ public class AddItemAction extends ActionSupport implements SessionAware
 
 		AddItemDAO addItemDAO = new AddItemDAO();
 
-		boolean result = addItemDAO.addItemToCart(item_id, user_id, request_count);
+		boolean result = addItemDAO.addItemToCart(item_id, user_id, 1);
 
 		return result ? SUCCESS : ERROR;
 	}

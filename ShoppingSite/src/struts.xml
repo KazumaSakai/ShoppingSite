@@ -33,5 +33,10 @@
 			<result name="error">itemList.jsp</result>
 		</action>
 
+		<action name="MyCartAction" class="com.internousdev.ShoppingSite.action.MyCartAction" method="execute">
+			<result name="success">myCart.jsp</result>
+			<result name="needLogin">login.jsp</result>
+		</action>
+
 	</package>
 </struts>
