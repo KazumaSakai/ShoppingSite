@@ -1030,3 +1030,8 @@
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:14 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:26 +0900] "GET /ShoppingSite/GoHomeAction.action HTTP/1.1" 200 2251
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:32 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
+127.0.0.1 - - [18/Jan/2019:17:53:55 +0900] "GET / HTTP/1.1" 404 1019
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:54:21 +0900] "GET /ShoppingSite/GoHomeAction.action HTTP/1.1" 200 2134
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:54:23 +0900] "GET /ShoppingSite/GoLoginAction.action HTTP/1.1" 200 2626
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:54:26 +0900] "POST /ShoppingSite/LoginAction.action HTTP/1.1" 200 2293
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:54:27 +0900] "GET /ShoppingSite/GoUserPageAction.action HTTP/1.1" 200 2893

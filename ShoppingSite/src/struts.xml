@@ -58,7 +58,7 @@
 		</action>
 
 		<action name="GoUserPageAction" class="com.internousdev.ShoppingSite.action.GoUserPageAction" method="execute">
-			<result name="success">signup.jsp</result>
+			<result name="success">userPage.jsp</result>
 			<result name="needLogin">login.jsp</result>
 		</action>
 
