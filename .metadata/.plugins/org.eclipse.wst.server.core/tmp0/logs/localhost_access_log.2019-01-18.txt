@@ -1016,3 +1016,17 @@
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:20:03 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:20:04 +0900] "GET /ShoppingSite/MyCartAction.action HTTP/1.1" 200 2701
 0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:20:06 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
+127.0.0.1 - - [18/Jan/2019:17:46:00 +0900] "GET / HTTP/1.1" 404 1019
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:46:57 +0900] "GET /ShoppingSite/index.jsp HTTP/1.1" 200 2134
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:46:57 +0900] "GET /ShoppingSite/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:00 +0900] "GET /ShoppingSite/GoLoginAction.action HTTP/1.1" 200 2626
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:02 +0900] "POST /ShoppingSite/LoginAction.action HTTP/1.1" 200 2278
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:04 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:06 +0900] "GET /ShoppingSite/MyCartAction.action HTTP/1.1" 200 2701
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:08 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:09 +0900] "POST /ShoppingSite/AdminAddItemQuantityAction.action HTTP/1.1" 200 8097
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:12 +0900] "POST /ShoppingSite/AddItemAction.action HTTP/1.1" 200 3664
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:13 +0900] "POST /ShoppingSite/BuyCartItemAction.action HTTP/1.1" 200 2826
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:14 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:26 +0900] "GET /ShoppingSite/GoHomeAction.action HTTP/1.1" 200 2251
+0:0:0:0:0:0:0:1 - - [18/Jan/2019:17:47:32 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 8097

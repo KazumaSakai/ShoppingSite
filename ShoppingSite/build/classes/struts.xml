@@ -57,6 +57,11 @@
 			<result name="success">signup.jsp</result>
 		</action>
 
+		<action name="GoUserPageAction" class="com.internousdev.ShoppingSite.action.GoUserPageAction" method="execute">
+			<result name="success">signup.jsp</result>
+			<result name="needLogin">login.jsp</result>
+		</action>
+
 		<action name="ItemPageAction" class="com.internousdev.ShoppingSite.action.ItemPageAction" method="execute">
 			<result name="success">itemPage.jsp</result>
 		</action>

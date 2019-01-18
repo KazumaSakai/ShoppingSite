@@ -49,7 +49,7 @@
           		<li><a href='<s:url action="GoAdminAction"/>'><c:out value="${session.user_name }"/></a></li>
           	</c:if>
           	<c:if test="${session.isAdmin != true }">
-          		<li><c:out value="${session.user_name }"/></li>
+          		<li><a href='<s:url action="GoUserPageAction"/>'><c:out value="${session.user_name }"/></a></li>
           	</c:if>
           </c:if>
         </ul>
