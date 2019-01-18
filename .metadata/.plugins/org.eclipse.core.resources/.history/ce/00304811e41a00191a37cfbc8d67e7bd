@@ -1,0 +1,13 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class AdminAddItemDAO
+{
+	public void addItem(String name, int quantity, int price)
+	{
+		PreparedStatement preparedStatement = DBConnector.connection().prepareStatement();
+	}
+}

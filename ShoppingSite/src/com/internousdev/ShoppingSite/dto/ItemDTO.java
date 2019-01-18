@@ -8,6 +8,32 @@ public class ItemDTO
 	private String item_name;
 	private int item_price;
 	private int item_count;
+	private String description;
+	private SellerDTO seller;
+	private int image_num;
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public SellerDTO getSeller() {
+		return seller;
+	}
+
+	public void setSeller(SellerDTO seller) {
+		this.seller = seller;
+	}
+
+	public int getImage_num() {
+		return image_num;
+	}
+
+	public void setImage_num(int image_num) {
+		this.image_num = image_num;
+	}
 	private String insert_date;
 	private String last_add_date;
 	private String last_sell_date;

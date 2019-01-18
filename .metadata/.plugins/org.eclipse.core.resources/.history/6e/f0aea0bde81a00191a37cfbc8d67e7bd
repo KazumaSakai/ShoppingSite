@@ -1,0 +1,11 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class AdminAddItemQuantityDAO
+{
+
+}

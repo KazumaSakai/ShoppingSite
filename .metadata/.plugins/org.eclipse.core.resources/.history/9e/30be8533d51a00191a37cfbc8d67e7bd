@@ -1,0 +1,11 @@
+package com.internousdev.ShoppingSite.dao;
+
+import com.internousdev.ShoppingSite.dto.SellerDTO;
+
+public class SellerDAO
+{
+	public static SellerDTO GetSeller(int id)
+	{
+
+	}
+}

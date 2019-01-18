@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.dto.ItemListDTO;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BuyCartItemAction extends ActionSupport implements SessionAware
@@ -19,12 +20,7 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		boolean isLogin = (boolean)session.get("isLogin");
-
-		if(!isLogin)
-		{
-			return "needLogin";
-		}
+		if(!CheckLogin.IsLogin(session)) return "needLogin";
 
 		int user_id = (int)session.get("user_id");
 		MyCartDAO myCartDAO = new MyCartDAO();

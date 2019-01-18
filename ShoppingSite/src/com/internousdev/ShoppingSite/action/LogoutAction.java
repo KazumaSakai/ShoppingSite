@@ -18,6 +18,7 @@ public class LogoutAction extends ActionSupport implements SessionAware
 		session.put("login_user_id", "");
 		session.put("user_name", "");
 		session.put("isLogin", false);
+		session.put("isAdmin", false);
 
 		return result;
 	}

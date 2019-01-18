@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dto;
 public class UserDTO
 {
 	private int id;
+	private boolean admin;
 	private String login_id;
 	private String login_pass;
 	private String user_name;
@@ -10,6 +11,12 @@ public class UserDTO
 
 	private boolean loginFlg;
 
+	public boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	public boolean getLoginFlg() {
 		return loginFlg;
 	}

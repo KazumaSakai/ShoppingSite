@@ -1,0 +1,24 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class AdminAddItemQuantityDAO
+{
+	public static void addItemQuantity(int id, int quantity)
+	{
+		String sql = "UPDATE items SET item_count = item_count + ? WHERE id = ?";
+
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

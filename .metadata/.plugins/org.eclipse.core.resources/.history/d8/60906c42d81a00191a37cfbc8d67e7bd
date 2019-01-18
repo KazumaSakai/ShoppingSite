@@ -1,0 +1,16 @@
+package com.internousdev.ShoppingSite.action;
+
+import com.internousdev.ShoppingSite.dto.SellerDTO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class SellerAction extends ActionSupport
+{
+	private SellerDTO sellerDTO;
+
+	public String execute()
+	{
+
+
+		return SUCCESS;
+	}
+}

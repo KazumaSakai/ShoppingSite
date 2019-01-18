@@ -1,0 +1,23 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class CheckLogin
+{
+	public static boolean IsLogin(session)
+	{
+		if(staticObj == null) staticObj = new CheckLogin();
+
+
+		Object isLogin_obj = session.get("isLogin");
+		if(isLogin_obj == null)
+		{
+			return false;
+		}
+		return (boolean)isLogin_obj;
+	}
+}

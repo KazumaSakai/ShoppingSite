@@ -7,10 +7,8 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemDAO;
-import com.internousdev.ShoppingSite.dao.ItemDescriptionDAO;
 import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
-import com.internousdev.ShoppingSite.dto.ItemDescriptionDTO;
 import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,7 +17,6 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	private boolean reviewExists;
 	private int id;
 	private ItemDTO itemDTO;
-	private ItemDescriptionDTO itemDescriptionDTO;
 	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
 	private Map<String, Object> session;
 
@@ -27,9 +24,6 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		ItemDescriptionDAO itemDescriptionDAO = new ItemDescriptionDAO();
-		itemDescriptionDTO = itemDescriptionDAO.getItem(id);
-
 		ItemDAO itemDAO = new ItemDAO();
 		itemDTO = itemDAO.getItem(id);
 
@@ -65,17 +59,6 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	public void setItemDTO(ItemDTO itemDTO) {
 		this.itemDTO = itemDTO;
 	}
-
-
-	public ItemDescriptionDTO getItemDescriptionDTO() {
-		return itemDescriptionDTO;
-	}
-
-
-	public void setItemDescriptionDTO(ItemDescriptionDTO itemDescriptionDTO) {
-		this.itemDescriptionDTO = itemDescriptionDTO;
-	}
-
 
 	public int getId() {
 		return id;

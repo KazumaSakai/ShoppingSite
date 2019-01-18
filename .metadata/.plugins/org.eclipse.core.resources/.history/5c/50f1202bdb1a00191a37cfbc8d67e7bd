@@ -1,0 +1,21 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+public class CheckLogin implements SessionAware
+{
+
+	private static Map<String, Object>session;
+
+	public static boolean IsLogin()
+	{
+		Object isLogin_obj = session.get("isLogin");
+		if(isLogin_obj == null)
+		{
+			return false;
+		}
+		return isLogin = (boolean)isLogin_obj;
+	}
+}

@@ -73,5 +73,24 @@
 			<result name="error">errorDeleteReview.jsp</result>
 		</action>
 
+		<action name="SellerAction" class="com.internousdev.ShoppingSite.action.SellerAction" method="execute">
+			<result name="success">seller.jsp</result>
+		</action>
+
+		<action name="AdminAddItemAction" class="com.internousdev.ShoppingSite.action.AdminAddItemAction" method="execute">
+			<result name="success" type="chain">ItemListAction</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
+
+		<action name="AdminAddItemQuantityAction" class="com.internousdev.ShoppingSite.action.AdminAddItemQuantityAction" method="execute">
+			<result name="success" type="chain">ItemListAction</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
+
+		<action name="AdminDeleteItemAction" class="com.internousdev.ShoppingSite.action.AdminDeleteItemAction" method="execute">
+			<result name="success" type="chain">ItemListAction</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
+
 	</package>
 </struts>

@@ -1,0 +1,28 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.ItemDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AdminDeleteItemAction extends ActionSupport implements SessionAware
+{
+	private Map<String, Object> session;
+
+	public String execute()
+	{
+		ItemDAO.DeleteItem(id);
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
+}

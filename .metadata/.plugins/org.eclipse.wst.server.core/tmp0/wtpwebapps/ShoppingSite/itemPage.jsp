@@ -11,8 +11,8 @@
 		<jsp:attribute name="value">
 			<h2 class="text-center"><c:out value="${itemDTO.item_name }" /></h2>
 			<div id="item_slider">
-				<c:forEach begin="1" end="${itemDescriptionDTO.image_num }" step="1" varStatus="status">
-					<div><img src="./Images/jQuery_image${status.index }.jpg"/></div>
+				<c:forEach begin="1" end="${itemDTO.image_num }" step="1" varStatus="status">
+					<div><img src="./Images/ItemImages/${itemDTO.item_id }/${status.index }.jpg"/></div>
 				</c:forEach>
 			</div>
 			<div class="text-center">
@@ -23,7 +23,7 @@
 					<input type="submit" value="カートに追加する" style="width: 500px; height: 50px; font-size: 20px;" />
 				</form>
 				</s:if>
-				<s:if test="session.isLogin != true">ss
+				<s:if test="session.isLogin != true">
 					商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
 				</s:if>
 			</div>
@@ -47,12 +47,12 @@
 				      商品説明
 				    </td>
 				    <td>
-				      <c:out value="${itemDescriptionDTO.description}" />
+				      <c:out value="${itemDTO.description}" />
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>販売会社</td>
-				    <td><c:out value="${itemDescriptionDTO.seller }"/></td>
+				    <td><a href='/ShoppingSite/SellerAction.action?id=<c:out value="${itemDTO.seller.id }" />'><c:out value="${itemDTO.seller.name }"/></a></td>
 				  </tr>
 				  <tr>
 				    <td>発売日</td>
@@ -74,7 +74,7 @@
 								</p>
 								<p class="username">
 									<s:property value="username" />
-									<s:if test="user_id == session.user_id">
+									<s:if test="user_id == session.user_id || session.isAdmin == true">
 										<span style="color:red; margin-left:5px">
 											<a href="/ShoppingSite/DeleteItemReviewAction.action?id=<s:property value="id" />">削除</a>
 										</span>

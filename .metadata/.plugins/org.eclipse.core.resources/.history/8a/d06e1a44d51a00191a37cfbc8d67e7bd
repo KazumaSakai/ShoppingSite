@@ -1,0 +1,18 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+
+import com.internousdev.ShoppingSite.dto.SellerDTO;
+
+public class SellerDAO
+{
+	public static SellerDTO GetSeller(int id)
+	{
+		try
+		{
+			PreparedStatement preparedStatement =
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+}
