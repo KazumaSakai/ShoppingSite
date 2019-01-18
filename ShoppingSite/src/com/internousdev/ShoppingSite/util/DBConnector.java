@@ -13,6 +13,27 @@ public class DBConnector
 	private static String user = "root";
 	private static String password = "mysql";
 
+	public static Connection connection()
+	{
+		Connection connection= null;
+
+		try
+		{
+			Class.forName(driverName);
+			connection = (Connection) DriverManager.getConnection(url, user, password);
+		}
+		catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return connection;
+	}
+
 	public Connection getConnection()
 	{
 		Connection connection = null;

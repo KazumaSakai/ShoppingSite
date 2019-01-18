@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>ログイン</h1>
 			<form id="LoginAction" name="LoginAction" action="/ShoppingSite/LoginAction.action" method="post" class="form">
-				<table class="center">
+				<table class="center table">
 					<tr>
 						<td>ユーザーID</td>
 						<td><input type="text" name="login_user_id" value="" id="LoginAction_login_user_id"/></td>

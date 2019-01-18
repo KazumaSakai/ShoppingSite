@@ -20,7 +20,7 @@
 				</tr>
 				<s:iterator value="itemList">
 					<tr>
-						<td><s:property value="item_name" /></td>
+						<td><a href="/ShoppingSite/ItemPageAction.action?id=<c:out value="${item_id}" />"><s:property value="item_name" /></a></td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
 						<td>

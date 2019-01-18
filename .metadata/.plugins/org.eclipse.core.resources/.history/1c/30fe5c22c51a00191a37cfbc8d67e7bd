@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="./template.jsp">
+	<jsp:param value="レビューが投稿されました" name="title"  />
+	<jsp:param value="false" name="showSlider"/>
+	<jsp:param value="false" name="showSideMenu"/>
+	<jsp:param value="true" name="showMain"/>
+	<jsp:param name="content">
+		<jsp:attribute name="value">
+			<h1>レビューが投稿されました</h1>
+			<table class="center">
+				<tr>
+					<td>タイトル</td>
+					<td><c:out value="${title }" /></td>
+				</tr>
+				<tr>
+					<td>評価ポイント</td>
+					<td><c:out value="${point }" /></td>
+				</tr>
+				<tr>
+					<td>コメント</td>
+					<td><c:out value="${comment }"></c:out></td>
+				</tr>
+				<tr>
+					<td colspan="2" ><input type="submit" value="登録" style="padding: 3px 30px" /></td>
+				</tr>
+			</table>
+		</jsp:attribute>
+	</jsp:param>
+</jsp:include>

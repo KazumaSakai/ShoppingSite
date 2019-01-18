@@ -1,0 +1,18 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class PostItemReviewAction extends ActionSupport implements SessionAware
+{
+	public String execute()
+	{
+		String result = SUCCESS;
+
+		ItemReviewDAO
+
+		return result;
+	}
+}

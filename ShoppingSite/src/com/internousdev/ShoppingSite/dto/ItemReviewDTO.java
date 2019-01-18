@@ -2,6 +2,7 @@ package com.internousdev.ShoppingSite.dto;
 
 public class ItemReviewDTO
 {
+	private int id;
 	private int item_id;
 	private int user_id;
 	private String username;
@@ -12,6 +13,12 @@ public class ItemReviewDTO
 	private String comment_html;
 	private String insert_date;
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}

@@ -1,0 +1,66 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class PostItemReviewAction extends ActionSupport implements SessionAware
+{
+	private int item_id;
+	private int point;
+	private String comment;
+
+	private Map<String, Object>session;
+
+	public String execute()
+	{
+		String result = SUCCESS;
+
+		boolean isLogin = (boolean)session.get("isLogin");
+		if(!isLogin)
+		{
+			return "needLogin";
+		}
+
+		ItemReviewDAO.InsertReview(item_id, user_id, point, comment)
+
+		return result;
+	}
+
+	public int getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+}

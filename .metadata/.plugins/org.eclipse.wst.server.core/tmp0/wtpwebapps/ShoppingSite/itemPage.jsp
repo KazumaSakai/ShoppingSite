@@ -16,7 +16,16 @@
 				</c:forEach>
 			</div>
 			<div class="text-center">
-				<input type="submit" value="カートに追加する" style="padding: 15px 100px; font-size: 20px;" />
+				<s:if test="session.isLogin == true">
+				<form name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form" style="vertical-align: middle">
+					<input type="number" name="request_Quantity" value='<s:property value="1" />' style="width:100px; height: 30px; text-align: right; padding:2px">個
+					<input type="hidden" name="item_id" value='<c:out value="${itemDTO.item_id }" />'>
+					<input type="submit" value="カートに追加する" style="width: 500px; height: 50px; font-size: 20px;" />
+				</form>
+				</s:if>
+				<s:if test="session.isLogin != true">ss
+					商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
+				</s:if>
 			</div>
 			<div style="padding: 10px">
 				<h2 class="text-center">詳細</h2>
@@ -54,27 +63,40 @@
 			<div>
 				<h2 class="text-center">レビュー</h2>
 				<ul class="reviewList">
-					<s:iterator value="itemReviewList">
+					<s:if test="reviewExists == true">
+						<s:iterator value="itemReviewList">
+							<li>
+								<h3 class="title">
+									<s:property value="title" />
+								</h3>
+								<p class="comment">
+									<s:property value="comment" />
+								</p>
+								<p class="username">
+									<s:property value="username" />
+									<s:if test="user_id == session.user_id">
+										<span style="color:red; margin-left:5px">
+											<a href="/ShoppingSite/DeleteItemReviewAction.action?id=<s:property value="id" />">削除</a>
+										</span>
+									</s:if>
+								</p>
+							</li>
+						</s:iterator>
+					</s:if>
+					<s:if test="reviewExists != true">
 						<li>
-							<h3 class="title">
-								<s:property value="title" />
-							</h3>
-							<p class="comment"/>
-								<s:property value="comment" />
-							</p>
-							<p class="username">
-								<s:property value="username" />
-							</p>
+							<h3 class="text-center">レビューが投稿されていません</h3>
 						</li>
-					</s:iterator>
+					</s:if>
 				</ul>
 			</div>
 			<h2 class="title text-center">レビューを投稿する</h2>
-			<form>
+			<form name="PostItemReviewAction" action="/ShoppingSite/PostItemReviewAction.action" method="post" class="form">
+			  <input type="hidden" name="item_id" value="<c:out value='${itemDTO.item_id }' />" />
 			  <table class="text-center center table">
 				<tr>
 				  <td style="width:100px">タイトル</td>
-				  <td style="width:500px"><input name="text" style="padding: 5px 10px; width: 400px"/></td>
+				  <td style="width:500px"><input name="title" type="text" style="padding: 5px 10px; width: 400px"/></td>
 				</tr>
 				<tr>
 			  	  <td style="width:100px">評価</td>

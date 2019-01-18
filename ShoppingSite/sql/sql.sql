@@ -47,13 +47,16 @@ create table description(
 	seller int not null,
 	image_num int not null DEFAULT 0
 );
+INSERT INTO `description`(`id`, `description`, `seller`, `image_num`) VALUES (1, "すらすら書ける鉛筆", 0, 3);
 
 drop table if exists item_review;
 
 create table item_review(
+	id int not null primary key auto_increment,
 	item_id int not null,
 	user_id int not null,
+	title VARCHAR(255) not null,
 	point int not null,
 	comment text,
-	insert_date datetime
+	insert_date datetime DEFAULT CURRENT_TIMESTAMP
 );

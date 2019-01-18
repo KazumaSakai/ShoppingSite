@@ -16,11 +16,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemPageAction extends ActionSupport implements SessionAware
 {
+	private boolean reviewExists;
 	private int id;
 	private ItemDTO itemDTO;
 	private ItemDescriptionDTO itemDescriptionDTO;
 	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
 	private Map<String, Object> session;
+
+
 
 	public String execute()
 	{
@@ -33,7 +36,17 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 		ItemReviewDAO itemReviewDAO = new ItemReviewDAO();
 		itemReviewList = itemReviewDAO.getItem(id);
 
+		reviewExists = itemReviewList.size() > 0;
+
 		return SUCCESS;
+	}
+
+	public boolean isReviewExists() {
+		return reviewExists;
+	}
+
+	public void setReviewExists(boolean reviewExists) {
+		this.reviewExists = reviewExists;
 	}
 
 	public List<ItemReviewDTO> getItemReviewList() {
