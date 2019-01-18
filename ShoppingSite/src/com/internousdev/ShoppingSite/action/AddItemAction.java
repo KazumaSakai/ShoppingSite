@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.AddItemDAO;
+import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -21,9 +21,7 @@ public class AddItemAction extends ActionSupport implements SessionAware
 		int user_id = (int)session.get("user_id");
 		if(request_Quantity <= 0) request_Quantity = 1;
 
-		AddItemDAO addItemDAO = new AddItemDAO();
-
-		boolean result = addItemDAO.addItemToCart(item_id, user_id, request_Quantity);
+		boolean result = MyCartDAO.AddItemToCart(item_id, user_id, request_Quantity);
 
 		return result ? SUCCESS : ERROR;
 	}

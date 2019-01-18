@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.ItemListDAO;
+import com.internousdev.ShoppingSite.dao.ItemDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,8 +18,7 @@ public class ItemListAction extends ActionSupport implements SessionAware
 	{
 		String result = SUCCESS;
 
-		ItemListDAO itemListDAO = new ItemListDAO();
-		itemList = itemListDAO.getItemList().getCartItemList();
+		itemList = ItemDAO.GetItemList();
 
 		return result;
 	}

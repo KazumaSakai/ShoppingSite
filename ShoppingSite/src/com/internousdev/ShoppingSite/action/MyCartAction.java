@@ -22,8 +22,7 @@ public class MyCartAction extends ActionSupport implements SessionAware
 
 		int user_id = (int)session.get("user_id");
 
-		MyCartDAO myCartDAO = new MyCartDAO();
-		itemList = myCartDAO.getMyCart(user_id).getCartItemList();
+		itemList = MyCartDAO.GetMyCart(user_id);
 
 		totalPrice = 0;
 		for (ItemDTO item : itemList)

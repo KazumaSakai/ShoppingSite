@@ -43,8 +43,7 @@ public class BuyItemDAO
 				PreparedStatement p_commit = connection.prepareStatement(commit);
 				p_commit.executeUpdate();
 
-				DeleteItemDAO deleteItemDAO = new DeleteItemDAO();
-				deleteItemDAO.deleteCartItem(item_id, user_id, 0);
+				MyCartDAO.ChangeCartItemQuantity(item_id, user_id, 0);
 
 				return true;
 			}

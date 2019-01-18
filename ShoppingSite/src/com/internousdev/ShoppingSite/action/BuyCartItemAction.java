@@ -8,7 +8,6 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
-import com.internousdev.ShoppingSite.dto.ItemListDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,13 +22,12 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 		if(!CheckLogin.IsLogin(session)) return "needLogin";
 
 		int user_id = (int)session.get("user_id");
-		MyCartDAO myCartDAO = new MyCartDAO();
-		ItemListDTO itemListDTO = myCartDAO.getMyCart(user_id);
+		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
 
-		buyItemList = new ArrayList<ItemDTO>(itemListDTO.getCartItemList().size());
+		buyItemList = new ArrayList<ItemDTO>(itemListDTO.size());
 
 		boolean AllSuccess = true;
-		for (ItemDTO item : itemListDTO.getCartItemList())
+		for (ItemDTO item : itemListDTO)
 		{
 			if(!item.buyItem(user_id))
 			{

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.AdminUserListDAO;
+import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,7 +20,7 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 	{
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 
-		 userList = AdminUserListDAO.GetUserList();
+		 userList = UserDAO.GetUserList();
 
 		return SUCCESS;
 	}

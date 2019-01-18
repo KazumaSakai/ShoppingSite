@@ -24,8 +24,7 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		ItemDAO itemDAO = new ItemDAO();
-		itemDTO = itemDAO.getItem(id);
+		itemDTO = ItemDAO.GetItem(id);
 
 		ItemReviewDAO itemReviewDAO = new ItemReviewDAO();
 		itemReviewList = itemReviewDAO.getItem(id);
