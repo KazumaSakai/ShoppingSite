@@ -1,0 +1,20 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.Map;
+
+import com.internousdev.ShoppingSite.dao.ItemDAO;
+import com.internousdev.ShoppingSite.util.CheckAdmin;
+
+public class AdminUserListAction
+{
+	private Map<String, Object> session;
+
+	public String execute()
+	{
+		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+
+		ItemDAO.DeleteItem(id);
+
+		return SUCCESS;
+	}
+}

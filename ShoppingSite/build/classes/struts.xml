@@ -92,5 +92,19 @@
 			<result name="notAdmin">notAdmin.jsp</result>
 		</action>
 
+		<action name="GoAdminAction" class="com.internousdev.ShoppingSite.action.GoAdminAction" method="execute">
+			<result name="success">admin.jsp</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
+
+		<action name="AdminUserListAction" class="com.internousdev.ShoppingSite.action.AdminUserListAction" method="execute">
+			<result name="success">userList.jsp</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
+
+		<action name="AdminDeleteUserAction" class="com.internousdev.ShoppingSite.action.AdminDeleteUserAction" method="execute">
+			<result name="success" type="chain">AdminUserListAction</result>
+			<result name="notAdmin">notAdmin.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -45,7 +45,12 @@
           <c:if test="${session.isLogin == true }">
           	<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
           	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
-          	<li><c:out value="${session.user_name }"/></li>
+          	<c:if test="${session.isAdmin == true }">
+          		<li><a href='<s:url action="GoAdminAction"/>'><c:out value="${session.user_name }"/></a></li>
+          	</c:if>
+          	<c:if test="${session.isAdmin != true }">
+          		<li><c:out value="${session.user_name }"/></li>
+          	</c:if>
           </c:if>
         </ul>
     </header>

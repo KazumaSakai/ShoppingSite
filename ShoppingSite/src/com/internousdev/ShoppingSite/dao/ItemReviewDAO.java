@@ -108,7 +108,7 @@ public class ItemReviewDAO
 				 itemReviewDTO.setComment(resultSet.getString("comment"));
 				 itemReviewDTO.setTitle(resultSet.getString("title"));
 				 itemReviewDTO.setInsert_date(resultSet.getString("insert_date"));
-				 itemReviewDTO.setUsername(UserNameDAO.getUserName(itemReviewDTO.getUser_id()));
+				 itemReviewDTO.setUsername(UserDAO.GetUserName(itemReviewDTO.getUser_id()));
 
 				 itemReviewDTOList.add(itemReviewDTO);
 			 }

@@ -1,0 +1,35 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class AdminUserListDAO
+{
+	public static void addItem()
+	{
+		String sql = "SELECT id, admin, user_name, insert_date FROM users";
+
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);;
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next())
+			{
+				UserDTO userDTO = new UserDTO();
+				userDTO.setId(resultSet.getInt("id"));
+				userDTO.setAdmin(resultSet.getBoolean("admin"));
+				userDTO.setAdmin(resultSet.getInt("v"));
+
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

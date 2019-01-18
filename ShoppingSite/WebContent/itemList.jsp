@@ -86,10 +86,10 @@
 							</tr>
 							<tr>
 								<td style="text-align: left">説明</td>
-								<td style="text-align: left"><textarea name="description" /></textarea>
+								<td style="text-align: left"><textarea name="description" style="width: 300px; height: 100px"/></textarea>
 							</tr>
 							<tr>
-								<td colspan="2" class="text-center"><input type="submit" value="商品を追加する"/></td>
+								<td colspan="2" class="text-center" ><input type="submit" value="商品を追加する"/></td>
 							</tr>
 						</table>
 					</form>
