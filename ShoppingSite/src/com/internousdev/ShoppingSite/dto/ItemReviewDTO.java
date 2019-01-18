@@ -9,6 +9,7 @@ public class ItemReviewDTO
 	private String title;
 	private int point;
 	private String comment;
+	private String comment_html;
 	private String insert_date;
 
 	public String getUsername() {
@@ -46,6 +47,9 @@ public class ItemReviewDTO
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getComment_html() {
+		return comment.replace("\n", "<br />");
 	}
 	public String getInsert_date() {
 		return insert_date;
