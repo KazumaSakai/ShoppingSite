@@ -14,29 +14,30 @@ public class GoogleOauthAction extends ActionSupport implements SessionAware
 	private String code;
 	private String state;
 	private String scope;
-	private String url;
+	private String email;
+	
 	private Map<String, Object> session;
 	
 	public String execute()
 	{
-		
-		GoogleOAuthToken token = GoogleOAuth.token(code);
+		GoogleOAuthToken token = GoogleOAuth.token(code,"http://localhost:8080/ShoppingSite/GoogleOauthAction.action");
 		GoogleOAuthGMailInfo gMailInfo = GoogleOAuth.GetGMailInfo(token);
+		email = gMailInfo.emailAddress;
+		session.put("gmail", email);
+		session.put("googleToken", token);
+		session.put("isGoogleOAuth", true);
 		
-		
-		System.out.println(gMailInfo.emailAddress);
-		
-		return "redirect";
+		return SUCCESS;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
+	
 	public String getScope() {
 		return scope;
 	}

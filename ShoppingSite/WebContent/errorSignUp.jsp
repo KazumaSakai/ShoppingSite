@@ -31,6 +31,9 @@
 					<tr>
 						<td colspan="2" ><input type="submit" value="登録" style="padding: 3px 30px" /></td>
 					</tr>
+					<tr>
+						<td colspan="2"><a href='<s:url action="StartGoogleOAuthAction?url=GoogleSignUpAction.action"/>'>Googleアカウントで登録する</a></td>
+					</tr>
 				</table>
 			</form>
 			<p class="text-center">

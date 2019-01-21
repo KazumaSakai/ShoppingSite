@@ -12,6 +12,25 @@ import com.internousdev.ShoppingSite.util.Passworder;
 
 public class UserDAO
 {
+	public static boolean Exist(String email, String loginId)
+	{
+		String sql = "SELECT COUNT(*) FROM users WHERE login_id ? OR email = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			
+			preparedStatement.setString(1, loginId);
+			preparedStatement.setString(2, email);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	public static void ChangeUserPassword(int id, String login_id, String newPassword)
 	{
 		newPassword = Passworder.getSafetyPassword(newPassword, login_id);

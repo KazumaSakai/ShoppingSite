@@ -27,6 +27,9 @@
 					<tr>
 						<td colspan="2" ><input type="submit" value="ログイン" id="LoginAction_0" style="padding: 3px 30px" /></td>
 					</tr>
+					<tr>
+						<td colspan="2"><a href='<s:url action="StartGoogleOAuthAction?url=GoogleOauthAction.action"/>'>Googleでログイン</a></td>
+					</tr>
 				</table>
 			</form>
 		</jsp:attribute>

@@ -11,6 +11,11 @@
 			<result name="success">loginSuccess.jsp</result>
 			<result name="error">loginError.jsp</result>
 		</action>
+		
+		<action name="EmailLoginAction" class="com.internousdev.ShoppingSite.action.EmailLoginAction" method="execute">
+			<result name="success">loginSuccess.jsp</result>
+			<result name="error">loginError.jsp</result>
+		</action>
 
 		<action name="LogoutAction" class="com.internousdev.ShoppingSite.action.LogoutAction" method="execute">
 			<result name="success">logoutSuccess.jsp</result>
@@ -52,7 +57,17 @@
 			<result name="success">confirmSignUp.jsp</result>
 			<result name="error">errorSignUp.jsp</result>
 		</action>
+		
+		<action name="EmailSignUpAction" class="com.internousdev.ShoppingSite.action.EmailSignUpAction" method="execute">
+			<result name="success">confirmSignUp.jsp</result>
+			<result name="error">errorSignUp.jsp</result>
+		</action>
 
+		<action name="GoogleSignUpAction" class="com.internousdev.ShoppingSite.action.GoogleSignUpAction" method="execute">
+			<result name="success">googleSignUp.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+		
 		<action name="GoSignUpAction" class="com.internousdev.ShoppingSite.action.GoSignUpAction" method="execute">
 			<result name="success">signup.jsp</result>
 		</action>
@@ -128,9 +143,8 @@
 		</action>
 		
 		<action name="GoogleOauthAction" class="com.internousdev.ShoppingSite.action.GoogleOauthAction" method="execute">
-			<result name="redirect" type="redirect">
-				<param name="location">${url}</param>
-			</result>
+			<result name="success">googleLogin.jsp</result>
+			<result name="error">login.jsp</result>
 		</action>
 		
 		<action name="StartGoogleOAuthAction" class="com.internousdev.ShoppingSite.action.StartGoogleOAuthAction" method="execute">
@@ -138,5 +152,6 @@
 				<param name="location">${url}</param>
 			</result>
 		</action>
+		
 	</package>
 </struts>

@@ -81,14 +81,12 @@ public class GoogleOAuth {
 	}
 	
 	
-	public static GoogleOAuthToken token(String code)
+	public static GoogleOAuthToken token(String code, String redirct)
 	{
-		String callBackURL = "http://localhost:8080/ShoppingSite/GoogleOauthAction.action";
-		
 		String tokenURL = "https://accounts.google.com/o/oauth2/token?"
 				+ "code=" + code
 				+ "&grant_type=authorization_code"
-				+ "&redirect_uri=" + callBackURL
+				+ "&redirect_uri=" + redirct
 				+ "&client_id=" + client_id
 				+ "&client_secret=" + client_secret;
 
@@ -179,12 +177,11 @@ public class GoogleOAuth {
 	{
 		return RequestToken(gmailTokenURL);
 	}
-	
-	public static String RequestToken(String scope)
+
+	public static String RequestToken(String scope, String redirect)
 	{
-		String redirect_uri = "http://localhost:8080/ShoppingSite/GoogleOauthAction.action";
 		String URL = "https://accounts.google.com/o/oauth2/auth?client_id=" + client_id
-				+ "&redirect_uri=" + redirect_uri
+				+ "&redirect_uri=" + redirect
 				+ "&scope=" + scope
 				+ "&response_type=code"
 				+ "&access_type=offline"
@@ -192,5 +189,11 @@ public class GoogleOAuth {
 				+ "&state=" + Passworder.Random();
 		
 		return URL;
+	}
+	public static String RequestToken(String scope)
+	{
+		String redirect_uri = "http://localhost:8080/ShoppingSite/GoogleOauthAction.action";
+		
+		return RequestToken(scope,redirect_uri);
 	}
 }
