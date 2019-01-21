@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";CSS
+CSS
+
+#Case1Wrap
+{
+	position:relative;
+	/*ここからはデザイン*/
+	width:600px;
+	height:300px;
+	background:#CCC;
+}
+	
+#Case1
+{
+	position:absolute;
+	width:100px;
+	height:100px;
+
+	top:0;
+	left:0;
+	background:#666;
+}

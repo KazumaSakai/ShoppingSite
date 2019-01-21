@@ -1,0 +1,4 @@
+function start()
+{
+	canvas = document.getElementById('canvas_e');
+}

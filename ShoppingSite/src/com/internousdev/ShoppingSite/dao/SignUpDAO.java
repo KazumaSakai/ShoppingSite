@@ -10,6 +10,11 @@ public class SignUpDAO
 {
 	public static boolean SignUp(String login_id, String email, String login_pass, String user_name)
 	{
+		 if(UserDAO.Exist(login_id, email))
+		 {
+			 return false;
+		 }
+		 
 		 String sql = "INSERT INTO users(login_id, email, login_pass, user_name) VALUES(?, ?, ?, ?)";
 
 		 try

@@ -1,0 +1,5 @@
+function start()
+{
+	canvas = document.getElementById('canvas_e');
+	ctx = canvas.getContext('2d');
+}

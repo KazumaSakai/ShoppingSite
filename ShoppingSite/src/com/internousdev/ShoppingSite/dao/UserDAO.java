@@ -14,7 +14,7 @@ public class UserDAO
 {
 	public static boolean Exist(String email, String loginId)
 	{
-		String sql = "SELECT COUNT(*) FROM users WHERE login_id ? OR email = ?";
+		String sql = "SELECT COUNT(*) FROM `users` WHERE email = ? OR login_id = ?";
 		
 		try
 		{
@@ -22,6 +22,13 @@ public class UserDAO
 			
 			preparedStatement.setString(1, loginId);
 			preparedStatement.setString(2, email);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+			{
+				int i = resultSet.getInt(1);
+				return (i > 0) ? true : false;
+			}
 		}
 		catch(SQLException e)
 		{

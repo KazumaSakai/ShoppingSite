@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";CSS
+
+#Case4{ 
+	width:100px;
+	height:100px;
+	/*ここからはデザイン*/
+	background:#666;}
+1
+2
+3
+4
+5
+#Case4{ 
+	width:100px;
+	height:100px;
+	
+	background:#666;
+}

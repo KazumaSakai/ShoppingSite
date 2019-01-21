@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+#Case1Wrap
+{
+	position:relative;
+}
+	
+#Case1
+{
+	position:absolute;
+	width:100px;
+	height:100px;
+
+	top:0;
+	left:0;
+	background:#666;
+}
