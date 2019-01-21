@@ -71,4 +71,15 @@ public class Passworder {
         messageDigest.update(salt.getBytes());
         return messageDigest.digest();
     }
+    
+    public static String Random()
+    {
+    	byte[] ary = getHashedSalt(String.valueOf(Math.random()));
+        // 生成されたバイト配列を16進数の文字列に変換
+        StringBuilder sb = new StringBuilder(64);
+        for (byte b : ary) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        return sb.toString();
+    }
 }

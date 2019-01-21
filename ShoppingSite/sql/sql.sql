@@ -60,3 +60,12 @@ create table sellers(
 	id int not null primary key auto_increment,
 	name VARCHAR(255) not null
 )
+
+drop table if exists userPays;
+
+create table userPays(
+	id VARCHAR(255) not null primary key,
+	payType VARCHAR(255) not null,
+	cardNumber VARCHAR(255) not null,
+	cardName VARCHAR(255) not null
+)

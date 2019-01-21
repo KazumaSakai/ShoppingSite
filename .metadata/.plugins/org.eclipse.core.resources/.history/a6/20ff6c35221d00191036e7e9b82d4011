@@ -1,0 +1,23 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class PayInfoDAO
+{
+	public void Insert(int id, int payType, String cardNumber, String cardName)
+	{
+		String sql = "INSERT INTO userPays(id, payType, cardNumber, cardName) VALUES(?, ?, ?, ?)";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

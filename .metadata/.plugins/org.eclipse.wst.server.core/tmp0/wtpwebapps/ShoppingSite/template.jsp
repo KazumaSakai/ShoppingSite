@@ -28,7 +28,7 @@
             pause: 5000
           });
       });
-    </script>
+	   </script>
 
     <title>${param.title}</title>
   </head>

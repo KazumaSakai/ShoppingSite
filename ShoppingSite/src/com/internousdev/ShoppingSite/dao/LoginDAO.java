@@ -7,21 +7,16 @@ import java.sql.SQLException;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.internousdev.ShoppingSite.util.Passworder;
-import com.mysql.jdbc.Connection;
 
 public class LoginDAO
 {
-	private DBConnector dbConnector = new DBConnector();
-	private Connection connection = dbConnector.getConnection();
-	private UserDTO userDTO = new UserDTO();
-
 	public UserDTO getLoginUserInfo(String login_id, String login_pass)
 	{
 		 String sql = "SELECT * FROM users WHERE login_id = ?";
-
+		 UserDTO userDTO = new UserDTO();
 		 try
 		 {
-			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			 preparedStatement.setString(1, login_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

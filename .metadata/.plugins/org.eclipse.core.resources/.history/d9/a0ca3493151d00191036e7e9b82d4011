@@ -1,0 +1,11 @@
+package com.internousdev.ShoppingSite.util;
+
+public interface ISQLQuery
+{
+	public void SetSQL(String sql);
+
+	public void Set(int pos, String str);
+	public void Set(int pos, int str);
+	public void Set(int pos, Boolean str);
+	public void Set(int pos, Boolean str);
+}

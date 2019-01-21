@@ -1,0 +1,19 @@
+package com.internousdev.ShoppingSite.util;
+
+public class SQLQuery implements ISQLQuery
+{
+	private String sql;
+	public void SetQuery(String sql)
+	{
+		this.sql = sql;
+	}
+	
+	public void SetString(Object obj)
+	{
+		this.sql = this.sql.replaceFirst("?", obj.toString());
+	}
+	public void Set(String str)
+	{
+		
+	}
+}

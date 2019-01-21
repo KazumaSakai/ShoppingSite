@@ -1,0 +1,27 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.Passworder;
+
+public class PayInfoDAO
+{
+	public void Insert(int id, int payType, String cardNumber, String cardName)
+	{
+		String sql = "INSERT INTO userPays(id, payType, cardNumber, cardName) VALUES(?, ?, ?, ?)";
+		
+		try
+		{
+			String id = Passworder.getSafetyPassword(String.valueOf(userDTO), "PAYDATASALT");
+			
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setString(1, userDTO.getId());
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

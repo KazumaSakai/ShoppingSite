@@ -1,0 +1,27 @@
+package com.internousdev.ShoppingSite.oauth;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class GoogleOAuth {
+	private static final String client_id = "34746352072-tv6neqgl7uhuqutiqm5e93e4sbhn43li.apps.googleusercontent.com";
+	private static final String client_secret = "_H9AFED1Qxt4rcgYCgHaLtEp ";
+	
+	public static String login()
+	{
+		try
+		{
+			URL cUrl = new URL("");
+			HttpURLConnection connection = (HttpURLConnection)cUrl.openConnection();
+
+			connection.setRequestMethod("GET");
+			connection.setDoOutput(true);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+}

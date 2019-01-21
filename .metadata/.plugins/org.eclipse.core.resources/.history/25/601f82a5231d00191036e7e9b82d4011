@@ -1,0 +1,5 @@
+package com.internousdev.ShoppingSite.oauth;
+
+public class GoogleOAuth {
+	private static final "34746352072-tv6neqgl7uhuqutiqm5e93e4sbhn43li.apps.googleusercontent.com";
+}

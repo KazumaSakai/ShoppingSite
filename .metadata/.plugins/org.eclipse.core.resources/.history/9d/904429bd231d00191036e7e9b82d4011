@@ -1,0 +1,6 @@
+package com.internousdev.ShoppingSite.oauth;
+
+public class GoogleOAuth {
+	private static final String client_id = "34746352072-tv6neqgl7uhuqutiqm5e93e4sbhn43li.apps.googleusercontent.com";
+	private static final String client_secret = "_H9AFED1Qxt4rcgYCgHaLtEp ";
+}

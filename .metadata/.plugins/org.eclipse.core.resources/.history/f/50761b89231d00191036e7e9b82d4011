@@ -1,0 +1,5 @@
+package com.internousdev.ShoppingSite.oauth;
+
+public class GoogleOAuth {
+
+}

@@ -1,0 +1,8 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+public class ChangeUserNameAction extends ActionSupport implements SessionAware
+{
+
+}

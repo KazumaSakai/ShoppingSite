@@ -8,15 +8,9 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
-import com.mysql.jdbc.Connection;
 
 public class ItemReviewDAO
 {
-
-	private DBConnector dbConnector = new DBConnector();
-	private Connection connection = dbConnector.getConnection();
-	private List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();
-
 	public static boolean DeleteReviwe(int review_id)
 	{
 		String sql = "DELETE FROM item_review WHERE id = ?";
@@ -89,10 +83,11 @@ public class ItemReviewDAO
 	public List<ItemReviewDTO> getItem(int item_id)
 	{
 		 String sql = "SELECT * FROM item_review WHERE item_id = ?";
+		 List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();
 
 		 try
 		 {
-			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			 preparedStatement.setInt(1, item_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

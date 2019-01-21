@@ -5,12 +5,18 @@ public class UserDTO
 	private int id;
 	private boolean admin;
 	private String login_id;
+	private String email;
 	private String login_pass;
 	private String user_name;
 	private String insert_date;
-
 	private boolean loginFlg;
 
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public boolean getAdmin() {
 		return admin;
 	}

@@ -33,25 +33,4 @@ public class DBConnector
 
 		return connection;
 	}
-
-	public Connection getConnection()
-	{
-		Connection connection = null;
-
-		try
-		{
-			Class.forName(driverName);
-			connection = (Connection) DriverManager.getConnection(url, user, password);
-		}
-		catch(ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-
-		return connection;
-	}
 }

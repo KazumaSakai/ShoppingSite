@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>ユーザーページ</h1>
 			<ul style="margin: 20px; padding: 0; list-style: none">
-				<li><a href='<s:url action="ChangeNameAction"/>'>ユーザー名を変更する</a></li>
+				<li><a href='<s:url action="GoUserInfoAction"/>'>ユーザー情報 変更・確認</a></li>
 			</ul>
 		</jsp:attribute>
 	</jsp:param>

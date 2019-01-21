@@ -8,9 +8,48 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.Passworder;
 
 public class UserDAO
 {
+	public static void ChangeUserPassword(int id, String login_id, String newPassword)
+	{
+		newPassword = Passworder.getSafetyPassword(newPassword, login_id);
+		
+		String sql = "UPDATE users SET login_pass = ? WHERE id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			
+			preparedStatement.setString(1, newPassword);
+			preparedStatement.setInt(2, id);
+			preparedStatement.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void ChangeUserName(int id, String newName)
+	{
+		String sql = "UPDATE users SET user_name = ? WHERE id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+
+			preparedStatement.setString(1, newName);
+			preparedStatement.setInt(2, id);
+			preparedStatement.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public static List<UserDTO> GetUserList()
 	{
 		String sql = "SELECT id, admin, user_name, insert_date FROM users";
