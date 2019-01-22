@@ -29,10 +29,10 @@
 						<td><input type="text" name="user_name"/></td>
 					</tr>
 					<tr>
-						<td colspan="2" ><input type="submit" value="登録" style="padding: 3px 30px" /></td>
+						<td colspan="2" class="text-center"><input type="submit" value="登録" style="padding: 3px 30px" /></td>
 					</tr>
 					<tr>
-						<td colspan="2"><a href='<s:url action="StartGoogleOAuthAction?url=GoogleSignUpAction.action"/>'>Googleアカウントで登録する</a></td>
+						<td colspan="2" class="text-center"><a href='<s:url action="StartGoogleOAuthAction?url=GoogleSignUpAction.action"/>'>Googleアカウントで登録する</a></td>
 					</tr>
 				</table>
 			</form>

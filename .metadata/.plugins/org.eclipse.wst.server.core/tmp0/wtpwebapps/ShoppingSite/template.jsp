@@ -11,7 +11,7 @@
     <meta http-equiv="imagetoolbar" content="no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8080/ShoppingSite/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
@@ -57,11 +57,11 @@
 
     <c:if test="${param.showSlider == true }">
       <div id="top_slider">
-        <div><img src="./Images/jQuery_image1.jpg"></div>
-        <div><img src="./Images/jQuery_image2.jpg"></div>
-        <div><img src="./Images/jQuery_image3.jpg"></div>
-        <div><img src="./Images/jQuery_image4.jpg"></div>
-        <div><img src="./Images/jQuery_image5.jpg"></div>
+        <div><img src="http://localhost:8080/ShoppingSite/Images/jQuery_image1.jpg"></div>
+        <div><img src="http://localhost:8080/ShoppingSite/Images/jQuery_image2.jpg"></div>
+        <div><img src="http://localhost:8080/ShoppingSite/Images/jQuery_image3.jpg"></div>
+        <div><img src="http://localhost:8080/ShoppingSite/Images/jQuery_image4.jpg"></div>
+        <div><img src="http://localhost:8080/ShoppingSite/Images/jQuery_image5.jpg"></div>
       </div>
     </c:if>
 

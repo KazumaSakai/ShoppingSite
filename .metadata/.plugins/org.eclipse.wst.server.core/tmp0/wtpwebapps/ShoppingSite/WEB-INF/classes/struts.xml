@@ -8,17 +8,17 @@
 	<package name="com.internousdev.ShoppingSite.action" extends="struts-default">
 
 		<action name="LoginAction" class="com.internousdev.ShoppingSite.action.LoginAction" method="execute">
-			<result name="success">loginSuccess.jsp</result>
-			<result name="error">loginError.jsp</result>
+			<result name="success">./Login/loginSuccess.jsp</result>
+			<result name="error">./Login/loginError.jsp</result>
 		</action>
 		
 		<action name="EmailLoginAction" class="com.internousdev.ShoppingSite.action.EmailLoginAction" method="execute">
-			<result name="success">loginSuccess.jsp</result>
-			<result name="error">loginError.jsp</result>
+			<result name="success">./Login/loginSuccess.jsp</result>
+			<result name="error">./Login/loginError.jsp</result>
 		</action>
 
 		<action name="LogoutAction" class="com.internousdev.ShoppingSite.action.LogoutAction" method="execute">
-			<result name="success">logoutSuccess.jsp</result>
+			<result name="success">./Login/logoutSuccess.jsp</result>
 		</action>
 
 		<action name="GoHomeAction" class="com.internousdev.ShoppingSite.action.GoHomeAction" method="execute">
@@ -26,7 +26,7 @@
 		</action>
 
 		<action name="GoLoginAction" class="com.internousdev.ShoppingSite.action.GoLoginAction" method="execute">
-			<result name="success">login.jsp</result>
+			<result name="success">./Login/login.jsp</result>
 		</action>
 
 		<action name="ItemListAction" class="com.internousdev.ShoppingSite.action.ItemListAction" method="execute">
@@ -40,7 +40,7 @@
 
 		<action name="MyCartAction" class="com.internousdev.ShoppingSite.action.MyCartAction" method="execute">
 			<result name="success">myCart.jsp</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="ChangeCartItemQuantityAction" class="com.internousdev.ShoppingSite.action.ChangeCartItemQuantityAction" method="execute">
@@ -64,8 +64,8 @@
 		</action>
 
 		<action name="GoogleSignUpAction" class="com.internousdev.ShoppingSite.action.GoogleSignUpAction" method="execute">
-			<result name="success">googleSignUp.jsp</result>
-			<result name="error">login.jsp</result>
+			<result name="success">./GoogleOAuth/googleSignUp.jsp</result>
+			<result name="error" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="GoSignUpAction" class="com.internousdev.ShoppingSite.action.GoSignUpAction" method="execute">
@@ -74,7 +74,7 @@
 
 		<action name="GoUserPageAction" class="com.internousdev.ShoppingSite.action.GoUserPageAction" method="execute">
 			<result name="success">userPage.jsp</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="ItemPageAction" class="com.internousdev.ShoppingSite.action.ItemPageAction" method="execute">
@@ -83,13 +83,13 @@
 
 		<action name="PostItemReviewAction" class="com.internousdev.ShoppingSite.action.PostItemReviewAction" method="execute">
 			<result name="success">confirmPostReview.jsp</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="error">errorPostReview.jsp</result>
 		</action>
 
 		<action name="DeleteItemReviewAction" class="com.internousdev.ShoppingSite.action.DeleteItemReviewAction" method="execute">
 			<result name="success">confirmDeleteReview.jsp</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="error">errorDeleteReview.jsp</result>
 		</action>
 
@@ -129,22 +129,22 @@
 		
 		<action name="GoUserInfoAction" class="com.internousdev.ShoppingSite.action.GoUserInfoAction" method="execute">
 			<result name="success">userInfo.jsp</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="ChangeUserNameAction" class="com.internousdev.ShoppingSite.action.ChangeUserNameAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="ChangeUserPasswordAction" class="com.internousdev.ShoppingSite.action.ChangeUserPasswordAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
-			<result name="needLogin">login.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="GoogleOauthAction" class="com.internousdev.ShoppingSite.action.GoogleOauthAction" method="execute">
-			<result name="success">googleLogin.jsp</result>
-			<result name="error">login.jsp</result>
+			<result name="success">./GoogleOAuth/googleLogin.jsp</result>
+			<result name="error" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="StartGoogleOAuthAction" class="com.internousdev.ShoppingSite.action.StartGoogleOAuthAction" method="execute">
