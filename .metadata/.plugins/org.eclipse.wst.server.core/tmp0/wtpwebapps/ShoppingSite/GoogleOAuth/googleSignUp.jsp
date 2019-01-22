@@ -22,7 +22,7 @@
 						<td><input type="text" name="user_name"/></td>
 					</tr>
 					<tr>
-						<td colspan="2" ><input type="submit" value="登録" style="padding: 3px 30px" /></td>
+						<td colspan="2" class="text-center"><input type="submit" value="登録" style="padding: 3px 30px" /></td>
 					</tr>
 				</table>
 			</form>
