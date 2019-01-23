@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
+import com.internousdev.ShoppingSite.dto.AddressDTO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
@@ -18,6 +19,7 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 	private List<ItemDTO> buyItemList;
 	private Map<String, Object> session;
 	private int totalPrice;
+	private List<AddressDTO> addressList = new ArrayList<AddressDTO>();
 
 	public String execute()
 	{

@@ -59,7 +59,7 @@ drop table if exists sellers;
 create table sellers(
 	id int not null primary key auto_increment,
 	name VARCHAR(255) not null
-)
+);
 
 drop table if exists userPays;
 
@@ -68,7 +68,7 @@ create table userPays(
 	payType VARCHAR(255) not null,
 	cardNumber VARCHAR(255) not null,
 	cardName VARCHAR(255) not null
-)
+);
 
 
 drop table if exists purchaseHistorys;
@@ -83,4 +83,12 @@ create table purchaseHistorys(
 	shipmentState int NOT NULL,
 	insert_date datetime DEFAULT CURRENT_TIMESTAMP,
 	request_date datetime
-)
+);
+
+drop table if exists addressList;
+
+create table addressList(
+	id int not null primary key auto_increment,
+	user_id int not null,
+	address VARCHAR(255) NOT NULL
+);

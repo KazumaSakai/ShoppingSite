@@ -122,7 +122,7 @@ public class PurchaseHistoryDAO
 		
 		if(exists)
 		{
-			String sql = "UPDATE purchasehistorys SET quantity = quantity + ? WHERE item_id = ? AND user_id = ? shipmentState = 0";
+			String sql = "UPDATE purchasehistorys SET quantity = quantity + ? WHERE item_id = ? AND user_id = ? AND shipmentState = 0";
 			
 			try
 			{
@@ -181,7 +181,7 @@ public class PurchaseHistoryDAO
 	
 	public static boolean ExistsPurchaseHistory(PurchaseHistoryDTO preparedForShipmentDTO)
 	{
-		String sql = "SELECT COUNT(*) FROM purchasehistorys WHERE item_id = ? AND user_id = ? AND address = ?";
+		String sql = "SELECT COUNT(*) FROM purchasehistorys WHERE item_id = ? AND user_id = ? AND address = ? AND shipmentState = 0";
 		
 		try
 		{
