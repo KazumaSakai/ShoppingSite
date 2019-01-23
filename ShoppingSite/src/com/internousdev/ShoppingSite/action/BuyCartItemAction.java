@@ -43,6 +43,8 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 				dto.setItem_id(item.getItem_id());
 				dto.setQuantity(item.getItem_count());
 				dto.setUser_id(user_id);
+				dto.setAddress("東京都");
+				dto.setPhoneNumber("0301230123");
 				PurchaseHistoryDAO.AddPurchaseHistory(dto);
 			}
 		}

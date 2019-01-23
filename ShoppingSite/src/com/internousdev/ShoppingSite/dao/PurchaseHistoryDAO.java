@@ -13,7 +13,7 @@ public class PurchaseHistoryDAO
 {
 	public static List<PurchaseHistoryDTO> GetAllPurchaseHistory(int begin, int length)
 	{
-		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id LIMIT ?, ?";
+		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id ORDER BY insert_date DESC LIMIT ?, ? ";
 		List<PurchaseHistoryDTO> list = new ArrayList<PurchaseHistoryDTO>();
 		
 		try
@@ -66,7 +66,7 @@ public class PurchaseHistoryDAO
 	
 	public static List<PurchaseHistoryDTO>  GetMyPurchaseHistory(int user_id)
 	{
-		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id WHERE PH.user_id = ?";
+		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id WHERE PH.user_id = ? ORDER BY insert_date DESC";
 		List<PurchaseHistoryDTO> list = new ArrayList<PurchaseHistoryDTO>();
 		
 		try
@@ -122,7 +122,7 @@ public class PurchaseHistoryDAO
 		
 		if(exists)
 		{
-			String sql = "UPDATE purchasehistorys SET quantity = quantity + ? WHERE item_id = ? AND user_id = ?";
+			String sql = "UPDATE purchasehistorys SET quantity = quantity + ? WHERE item_id = ? AND user_id = ? shipmentState = 0";
 			
 			try
 			{
@@ -148,7 +148,7 @@ public class PurchaseHistoryDAO
 		}
 		else
 		{
-			String sql = "INSERT INTO purchasehistorys(item_id, user_id, quantity, request_date, address, phoneNumber) VALUES(?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO purchasehistorys(item_id, user_id, quantity, shipmentstate, request_date, address, phoneNumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
 			
 			try
 			{
@@ -156,9 +156,10 @@ public class PurchaseHistoryDAO
 				preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
 				preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
 				preparedStatement.setInt(3, preparedForShipmentDTO.getQuantity());
-				preparedStatement.setString(4, preparedForShipmentDTO.getRequest_date());
-				preparedStatement.setString(5, preparedForShipmentDTO.getAddress());
-				preparedStatement.setString(6, preparedForShipmentDTO.getPhoneNumber());
+				preparedStatement.setInt(4, preparedForShipmentDTO.getShipmentState());
+				preparedStatement.setString(5, preparedForShipmentDTO.getRequest_date());
+				preparedStatement.setString(6, preparedForShipmentDTO.getAddress());
+				preparedStatement.setString(7, preparedForShipmentDTO.getPhoneNumber());
 				
 				int line = preparedStatement.executeUpdate();
 				if(line == 0)
@@ -187,7 +188,7 @@ public class PurchaseHistoryDAO
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
 			preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
-			preparedStatement.setString(2, preparedForShipmentDTO.getAddress());
+			preparedStatement.setString(3, preparedForShipmentDTO.getAddress());
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next())

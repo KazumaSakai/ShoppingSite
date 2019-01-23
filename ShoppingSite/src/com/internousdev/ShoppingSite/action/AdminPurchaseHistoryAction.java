@@ -32,4 +32,20 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public List<PurchaseHistoryDTO> getPurchaseHistoryList() {
+		return purchaseHistoryList;
+	}
+
+	public void setPurchaseHistoryList(List<PurchaseHistoryDTO> purchaseHistoryList) {
+		this.purchaseHistoryList = purchaseHistoryList;
+	}
 }
