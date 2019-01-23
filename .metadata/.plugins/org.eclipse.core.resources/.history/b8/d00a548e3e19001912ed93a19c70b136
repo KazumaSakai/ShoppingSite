@@ -1,8 +1,0 @@
-package com.internousdev.ShoppingSite.dto;
-
-public class UserDTO
-{
-	private int id;
-	private login_id;
-	private
-}

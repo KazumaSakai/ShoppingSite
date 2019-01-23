@@ -12,15 +12,19 @@
 			<h1>購入が完了しました</h1>
 			<table class="itemList" border="1">
 				<tr>
-					<th colspan="3">ご購入された商品</th>
+					<th colspan="4">ご購入された商品</th>
 				</tr>
 				<tr>
+					<th style="width: 100px">商品画像</th>
 					<th style="width: 100px">商品名</th>
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">購入数</th>
 				</tr>
 				<s:iterator value="buyItemList">
 					<tr>
+						<td>
+							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
+						</td>
 						<td><s:property value="item_name" /></td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
@@ -30,7 +34,7 @@
 					<td colspan="2">
 						合計金額
 					</td>
-					<td colspan="1">
+					<td colspan="2">
 						<c:out value="${totalPrice }" />円
 					</td>
 				</tr>

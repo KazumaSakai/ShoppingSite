@@ -37,7 +37,6 @@
         <p id="site_title">ShoppingSite</p>
         <ul id="main_menu">
           <li><a href='<s:url action="GoHomeAction"/>'>ホーム</a></li>
-          <li><a href='<s:url action="GoMergeSortAction"/>'>MergeSort</a></li>
           <li><a href='<s:url action="ItemListAction"/>'>商品リスト</a></li>
           <c:if test="${session.isLogin != true }">
           	<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
@@ -46,12 +45,7 @@
           <c:if test="${session.isLogin == true }">
           	<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
           	<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
-          	<c:if test="${session.isAdmin == true }">
-          		<li><a href='<s:url action="GoAdminAction"/>'><c:out value="${session.user_name }"/></a></li>
-          	</c:if>
-          	<c:if test="${session.isAdmin != true }">
-          		<li><a href='<s:url action="GoUserPageAction"/>'><c:out value="${session.user_name }"/></a></li>
-          	</c:if>
+         	<li><a href='<s:url action="GoUserPageAction"/>'><c:out value="${session.user_name }"/></a></li>
           </c:if>
         </ul>
     </header>
@@ -78,12 +72,9 @@
       </div>
       <div id="right">
         <div class="boxarea">
-           <h2>リスト</h2>
+           <h2>制作物</h2>
            <ul class="side_menu">
-             <li>アイテム</li>
-             <li>アイテム</li>
-             <li>アイテム</li>
-             <li>アイテム</li>
+          	<li><a href='<s:url action="GoMergeSortAction"/>'>MergeSort</a></li>
            </ul>
         </div>
       </div>

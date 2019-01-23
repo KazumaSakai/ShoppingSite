@@ -10,8 +10,10 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>MergeSort</h1>
-			<canvas id="cv" width="700" height="500" style="border: 1px solid black">
-			</canvas>
+			<div class="text-center" >
+				<canvas id="cv" width="700" height="490" style="border: 1px solid black">
+				</canvas>
+			</div>
 			<script type="text/javascript" src="./JavaScript/mergeSortView.js"></script>					
 		</jsp:attribute>
 	</jsp:param>

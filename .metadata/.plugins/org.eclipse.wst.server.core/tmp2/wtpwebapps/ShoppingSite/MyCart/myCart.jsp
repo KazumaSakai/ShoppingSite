@@ -13,6 +13,7 @@
 			<s:if test="itemList.size != 0">
 			<table class="itemList" border="1">
 				<tr>
+					<th style="width: 100px">商品画像</th>
 					<th style="width: 100px">商品名</th>
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">数量</th>
@@ -20,6 +21,9 @@
 				</tr>
 				<s:iterator value="itemList">
 					<tr>
+						<td>
+							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
+						</td>
 						<td><a href="/ShoppingSite/ItemPageAction.action?id=<c:out value="${item_id}" />"><s:property value="item_name" /></a></td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
@@ -36,13 +40,13 @@
 					<td colspan="2">
 						合計金額
 					</td>
-					<td colspan="2">
+					<td colspan="3">
 						<c:out value="${totalPrice }" />円
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4" style="text-align:center">
-						<form name="BuyCartItemAction" action="/ShoppingSite/BuyCartItemAction.action" method="post" class="form">
+					<td colspan="5">
+						<form class="center" name="BuyCartItemAction" action="/ShoppingSite/BuyCartItemAction.action" method="post" class="form">
 							<input type="submit" value="購入する" style="padding: 5px 30px" />
 						</form>
 					</td>

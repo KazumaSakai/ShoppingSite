@@ -12,6 +12,7 @@
 			<h1>商品リスト</h1>
 			<table class="itemList" border="1">
 				<tr>
+					<th style="width: 100px">商品画像</th>
 					<th style="width: 100px">商品名</th>
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">残量</th>
@@ -27,12 +28,15 @@
 				<s:iterator value="itemList">
 					<tr>
 						<td>
+							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
+						</td>
+						<td>
 							<a href="/ShoppingSite/ItemPageAction.action?id=<c:out value="${item_id}" />"><s:property value="item_name" /></a>
 						</td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
 						<s:if test="session.isLogin == true">
-							<td>
+							<td class="center">
 								<form name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form">
 								<input type="number" name="request_Quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
 								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
@@ -43,14 +47,14 @@
 						<s:if test="session.isAdmin == true">
 							<td></td>
 							<td>
-							 	<form name="AdminAddItemQuantityAction" action="/ShoppingSite/AdminAddItemQuantityAction.action" method="post" class="form">
+							 	<form class="center" name="AdminAddItemQuantityAction" action="/ShoppingSite/AdminAddItemQuantityAction.action" method="post" class="form">
 									<input type="number" name="quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
 									<input type="hidden" name="id" value='<s:property value="item_id" />'>
 									<input type="submit" value="追加" />
 							 	</form>
 							</td>
 							<td>
-							 	<form name="AdminDeleteItemAction" action="/ShoppingSite/AdminDeleteItemAction.action" method="post" class="form">
+							 	<form class="center" name="AdminDeleteItemAction" action="/ShoppingSite/AdminDeleteItemAction.action" method="post" class="form">
 									<input type="hidden" name="id" value='<s:property value="item_id" />'>
 									<input type="submit" value="削除" />
 							 	</form>

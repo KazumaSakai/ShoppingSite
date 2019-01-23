@@ -93,15 +93,15 @@
 			<h2 class="title text-center">レビューを投稿する</h2>
 			<form name="PostItemReviewAction" action="/ShoppingSite/PostItemReviewAction.action" method="post" class="form">
 			  <input type="hidden" name="item_id" value="<c:out value='${itemDTO.item_id }' />" />
-			  <table class="text-center center table">
+			  <table class="center table">
 				<tr>
 				  <td style="width:100px">タイトル</td>
-				  <td style="width:500px"><input name="title" type="text" style="padding: 5px 10px; width: 400px"/></td>
+				  <td style="width:40vw"><input name="title" type="text" style="padding: 5px 10px; width: 40vw"/></td>
 				</tr>
 				<tr>
 			  	  <td style="width:100px">評価</td>
-			  	  <td style="width:500px">
-					<select name="point" style="padding: 5px 10px; width: 423px">
+			  	  <td style="width:40vw">
+					<select name="point" style="padding: 5px 10px; width: 40vw">
 					  <option value="1">1</option>
 					  <option value="2">2</option>
 					  <option value="3">3</option>
@@ -114,12 +114,12 @@
 			  	  <td>コメント</td>
 			  	</tr>
 			  	<tr>
-			  	  <td colspan="2">
-			  	    <textarea name="comment" style="resize: vertical; padding: 10px 10px; width: 600px;height: 200px" ></textarea>
+			  	  <td colspan="2" class="text-center">
+			  	    <textarea name="comment" style="resize: vertical; padding: 10px 10px; width: 50vw;height: 200px" ></textarea>
 			  	  </td>
 			  	</tr>
 			  	<tr>
-			  	  <td colspan="2"><input type="submit" value="送信" style="width:500px; height: 60px;font-size: 20px; font-weight: bold" /></td>
+			  	  <td colspan="2" class="text-center"><input type="submit" value="送信" style="width:50vw; height: 60px;font-size: 20px; font-weight: bold" /></td>
 			  	</tr>
 			  </table>
 			</form>

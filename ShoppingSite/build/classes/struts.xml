@@ -157,5 +157,15 @@
 			</result>
 		</action>
 		
+		<action name="MyPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.MyPurchaseHistoryAction" method="execute">
+			<result name="success">./MyCart/purchaseHistory.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+		
+		<action name="AdminPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.AdminPurchaseHistoryAction" method="execute">
+			<result name="success">./Admin/purchaseHistory.jsp</result>
+			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+		</action>
+		
 	</package>
 </struts>

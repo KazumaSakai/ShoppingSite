@@ -19,8 +19,6 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 
 	private Map<String, Object> session;
 
-
-
 	public String execute()
 	{
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";

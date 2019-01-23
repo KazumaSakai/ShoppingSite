@@ -1,0 +1,142 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.internousdev.ShoppingSite.dto.PreparedForShipmentDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class PreparedForShipmentDAO
+{
+	public static PreparedForShipmentDTO GetMyPreparedForShipment(int user_id)
+	{
+		String sql = "SELECT * FROM preparedforshipment WHERE user_id = ?";
+		
+		PreparedForShipmentDTO dto = new PreparedForShipmentDTO();
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, user_id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next())
+			{
+				int get_id = resultSet.getInt("id");
+				int get_item_id = resultSet.getInt("item_id");
+				int get_quantity = resultSet.getInt("quantity");
+				int get_user_id = resultSet.getInt("user_id");
+				String get_addres = resultSet.getString("address");
+				String get_phoneNumber = resultSet.getString("phoneNumber");
+				String insert_date = resultSet.getString("insert_date");
+				String request_date = resultSet.getString("request_date");
+				
+				dto.setId(get_id);
+				dto.setItem_id(get_item_id);
+				dto.setQuantity(get_quantity);
+				dto.setUser_id(get_user_id);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean AddPreparedForShipment(PreparedForShipmentDTO preparedForShipmentDTO)
+	{
+		boolean exists = ExistsPreparedForShipment(preparedForShipmentDTO);
+		
+		if(exists)
+		{
+			String sql = "UPDATE preparedforshipment SET quantity = quantity + ? WHERE item_id = ? AND user_id = ?";
+			
+			try
+			{
+				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+				preparedStatement.setInt(1, preparedForShipmentDTO.getQuantity());
+				preparedStatement.setInt(2, preparedForShipmentDTO.getItem_id());
+				preparedStatement.setInt(3, preparedForShipmentDTO.getUser_id());
+				int line = preparedStatement.executeUpdate();
+				
+				if(line == 0)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			String sql = "INSERT INTO preparedforshipment(item_id, user_id, quantity, request_date, address, phoneNumber) VALUES(?, ?, ?, ?, ?, ?)";
+			
+			try
+			{
+				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+				preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
+				preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
+				preparedStatement.setInt(3, preparedForShipmentDTO.getQuantity());
+				preparedStatement.setString(4, preparedForShipmentDTO.getRequest_date());
+				preparedStatement.setString(5, preparedForShipmentDTO.getAddress());
+				preparedStatement.setString(6, preparedForShipmentDTO.getPhoneNumber());
+				
+				int line = preparedStatement.executeUpdate();
+				if(line == 0)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public static boolean ExistsPreparedForShipment(PreparedForShipmentDTO preparedForShipmentDTO)
+	{
+		String sql = "SELECT COUNT(*) FROM preparedforshipment WHERE item_id = ? AND user_id = ? AND address = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
+			preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
+			preparedStatement.setString(2, preparedForShipmentDTO.getAddress());
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+			{
+				int count = resultSet.getInt(1);
+				if(count > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+}

@@ -7,7 +7,9 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
+import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -36,6 +38,12 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 			else
 			{
 				buyItemList.add(item);
+				
+				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
+				dto.setItem_id(item.getItem_id());
+				dto.setQuantity(item.getItem_count());
+				dto.setUser_id(user_id);
+				PurchaseHistoryDAO.AddPurchaseHistory(dto);
 			}
 		}
 

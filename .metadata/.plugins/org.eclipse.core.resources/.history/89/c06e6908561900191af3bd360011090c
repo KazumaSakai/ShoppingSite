@@ -1,7 +1,0 @@
-package com.internousdev.ShoppingSite.dto;
-
-public class ItemDTO
-{
-	private int item_id;
-	private String item_name;
-}

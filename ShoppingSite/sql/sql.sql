@@ -69,3 +69,18 @@ create table userPays(
 	cardNumber VARCHAR(255) not null,
 	cardName VARCHAR(255) not null
 )
+
+
+drop table if exists purchaseHistorys;
+
+create table purchaseHistorys(
+	id int not null primary key auto_increment,
+	item_id int not null,
+	quantity int not null,
+	user_id int not null,
+	address VARCHAR(255) NOT NULL,
+	phoneNumber VARCHAR(255) NOT NULL,
+	shipmentState int NOT NULL,
+	insert_date datetime DEFAULT CURRENT_TIMESTAMP,
+	request_date datetime
+)

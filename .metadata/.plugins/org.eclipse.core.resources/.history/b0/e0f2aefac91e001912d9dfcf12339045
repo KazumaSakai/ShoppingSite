@@ -1,0 +1,11 @@
+package com.internousdev.ShoppingSite.dto;
+
+public class PreparedForShipmentDTO
+{
+	private int id;
+	private int item_id;
+	private int quantity;
+	private int user_id;
+	private String insert_date;
+	private String request_date;
+}

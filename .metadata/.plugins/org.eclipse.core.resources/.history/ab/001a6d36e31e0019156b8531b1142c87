@@ -1,0 +1,15 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AdminPurchaseHistoryAction extends ActionSupport implements SessionAware
+{
+	private Map<String, Object>
+	
+	public String execute()
+	{
+		
+	}
+}

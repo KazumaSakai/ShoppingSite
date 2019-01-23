@@ -266,12 +266,13 @@ class ArrayRect
             this.renderAry[i].index = i;
         }
 		
+		this.inAction = false;
 		this.done = false;
     }
     
     update()
     {
-		if(!this.done)
+		if(!this.done && this.inAction)
 		{
 			this.sort();
 		}
@@ -290,7 +291,7 @@ class ArrayRect
 		var r = this.generator.next();
 		if(r.done)
 		{
-			this.done = r.done;
+			this.done = r.done
 			return;
 		}
 		var v = r.value;
@@ -306,6 +307,45 @@ class ArrayRect
 		}
     }
     
+	toggleAction()
+	{
+		if(this.inAction)
+		{
+			this.start();
+		}
+		else
+		{
+			this.start();
+		}
+	}
+	
+	start()
+	{
+		if(this.done)
+		{
+			this.reflesh();
+		}
+		this.inAction = true;
+	}
+	
+	stop()
+	{
+		this.inAction = false;
+	}
+	
+	reflesh()
+	{
+        this.valueAry = Sorter.CreateRandomArray(60, 400);
+		this.renderAry = SorterViewObject.CraeteArray(60);
+		
+		this.generator = Sorter.GeneratorMergeSort(this.valueAry, 0, this.valueAry.length);
+        for(var i = 0; i < this.valueAry.length; i++)
+        {
+            this.renderAry[i].value = this.valueAry[i];
+            this.renderAry[i].index = i;
+        }
+		this.done = false;
+	}
 }
 
 function StartCanvas()
@@ -319,13 +359,9 @@ function StartCanvas()
     var rect = new ArrayRect();
     cs.addEventListener('click', function()
     {
-        rect.sort();
+        rect.toggleAction();
     }
     , false);
-    cs.oncontextmenu = function()
-    {
-        return false;
-    }
 
     var objects = [];
     objects.push(rect);

@@ -32,16 +32,22 @@ public class Passworder {
         PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
 
         SecretKeyFactory skf;
-        try {
+        try
+        {
             skf = SecretKeyFactory.getInstance(ALGORITHM);
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e)
+        {
             throw new RuntimeException(e);
         }
 
         SecretKey secretKey;
-        try {
+        try
+        {
             secretKey = skf.generateSecret(keySpec);
-        } catch (InvalidKeySpecException e) {
+        }
+        catch (InvalidKeySpecException e)
+        {
             throw new RuntimeException(e);
         }
         byte[] passByteAry = secretKey.getEncoded();
@@ -53,6 +59,7 @@ public class Passworder {
         }
         return sb.toString();
     }
+    
 
     /**
      * ソルトをハッシュ化して返却します
@@ -63,9 +70,12 @@ public class Passworder {
      */
     private static byte[] getHashedSalt(String salt) {
         MessageDigest messageDigest;
-        try {
+        try
+        {
             messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e)
+        {
             throw new RuntimeException(e);
         }
         messageDigest.update(salt.getBytes());
