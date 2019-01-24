@@ -17,10 +17,9 @@
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">残量</th>
 					<s:if test="session.isLogin == true">
-						<th>カートに追加</th>
+						<th>カート内の数</th>
 					</s:if>
 					<s:if test="session.isAdmin == true">
-						<th></th>
 						<th>商品の数を追加する</th>
 						<th>商品を削除する</th>
 					</s:if>
@@ -37,15 +36,25 @@
 						<td><s:property value="item_count" />個</td>
 						<s:if test="session.isLogin == true">
 							<td class="center">
-								<form name="AddItemAction" action="/ShoppingSite/AddItemAction.action" method="post" class="form">
-								<input type="number" name="request_Quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
-								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
-								<input type="submit" value="追加"/>
-								</form>
+								<s:if test="myCart_quantity == 0">
+									<form action="AddItemAction">
+										<input type="hidden" name="toCart" value="false" />
+										<input type="number" name="request_Quantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
+										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
+										<input type="submit" value="変更"/>
+									</form>
+								</s:if>
+								<s:if test="myCart_quantity != 0">
+									<form action="ChangeCartItemQuantityAction">
+										<input type="hidden" name="toCart" value="false" />
+										<input type="number" name="newQuantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
+										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
+										<input type="submit" value="変更"/>
+									</form>
+								</s:if>
 							</td>
 						</s:if>
 						<s:if test="session.isAdmin == true">
-							<td></td>
 							<td>
 							 	<form class="center" name="AdminAddItemQuantityAction" action="/ShoppingSite/AdminAddItemQuantityAction.action" method="post" class="form">
 									<input type="number" name="quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個

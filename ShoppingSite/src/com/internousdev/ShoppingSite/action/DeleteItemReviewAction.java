@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
+import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,7 +20,7 @@ public class DeleteItemReviewAction extends ActionSupport implements SessionAwar
 
 		int user_id = (int)session.get("user_id");
 		boolean isMineReview = ItemReviewDAO.GetUserId(id) == user_id;
-		if(isMineReview)
+		if(isMineReview || CheckAdmin.IsAdmin(session))
 		{
 			return (ItemReviewDAO.DeleteReviwe(id)) ? SUCCESS : ERROR;
 		}

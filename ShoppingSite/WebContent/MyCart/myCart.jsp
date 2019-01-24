@@ -28,10 +28,11 @@
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
 						<td>
-							<form name="ChangeCartItemQuantityAction" action="/ShoppingSite/ChangeCartItemQuantityAction.action" method="post" class="form">
-							<input type="number" name="newQuantity" value='<s:property value="item_count" />' style="width:50px; text-align: right; padding:2px">個
-							<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
-							<input type="submit" value="変更"/>
+							<form action="ChangeCartItemQuantityAction">
+								<input type="hidden" name="toCart" value="true" />
+								<input type="number" name="newQuantity" value='<s:property value="item_count" />' min="0" style="width:50px; text-align: right; padding:2px">個
+								<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
+								<input type="submit" value="変更"/>
 							</form>
 						</td>
 					</tr>

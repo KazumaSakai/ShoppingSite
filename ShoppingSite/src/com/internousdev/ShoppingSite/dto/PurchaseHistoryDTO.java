@@ -8,10 +8,10 @@ public class PurchaseHistoryDTO
 	private int user_id;
 	private String insert_date;
 	private String request_date;
-	private String address;
+	private int address;
+	private String addressName;
 	private String phoneNumber;
 	private int shipmentState;
-	
 	private String item_name;
 	private int item_price;
 	
@@ -51,10 +51,10 @@ public class PurchaseHistoryDTO
 	public void setRequest_date(String request_date) {
 		this.request_date = request_date;
 	}
-	public String getAddress() {
+	public int getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(int address) {
 		this.address = address;
 	}
 	public String getPhoneNumber() {
@@ -80,6 +80,12 @@ public class PurchaseHistoryDTO
 	}
 	public void setItem_price(int item_price) {
 		this.item_price = item_price;
+	}
+	public String getAddressName() {
+		return addressName;
+	}
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
 	}
 	
 	

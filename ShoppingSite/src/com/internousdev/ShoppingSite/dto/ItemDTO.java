@@ -11,6 +11,8 @@ public class ItemDTO
 	private String description;
 	private SellerDTO seller;
 	private int image_num;
+	private int myCart_quantity;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -86,5 +88,13 @@ public class ItemDTO
 	}
 	public void setLast_sell_date(String last_sell_date) {
 		this.last_sell_date = last_sell_date;
+	}
+
+	public int getMyCart_quantity() {
+		return myCart_quantity;
+	}
+
+	public void setMyCart_quantity(int myCart_quantity) {
+		this.myCart_quantity = myCart_quantity;
 	}
 }

@@ -11,6 +11,29 @@ import com.internousdev.ShoppingSite.util.DBConnector;
 
 public class AddressDAO
 {
+	public static String GetAddress(int id)
+	{
+		String sql = "SELECT address FROM addressList WHERE id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next())
+			{
+				return resultSet.getString("address");
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+	
 	public static boolean AddUserAddress(int user_id, String address)
 	{
 		String sql = "INSERT INTO addressList(address, user_id) VALUES(?, ?)";

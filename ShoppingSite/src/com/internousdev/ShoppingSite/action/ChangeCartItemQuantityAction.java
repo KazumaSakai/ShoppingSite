@@ -13,6 +13,7 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 	private int item_id;
 	private int newQuantity;
 	private Map<String, Object> session;
+	private boolean toCart;
 
 	public String execute()
 	{
@@ -23,7 +24,21 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 
 		boolean result = MyCartDAO.ChangeCartItemQuantity(item_id, user_id, newQuantity);
 
-		return result ? SUCCESS : ERROR;
+		if(result)
+		{
+			if(toCart)
+			{
+				return "toCart";
+			}
+			else
+			{
+				return "toItemList";
+			}
+		}
+		else
+		{
+			return ERROR;
+		}
 	}
 
 	public int getNewQuantity() {
@@ -49,5 +64,13 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public boolean isToCart() {
+		return toCart;
+	}
+
+	public void setToCart(boolean toCart) {
+		this.toCart = toCart;
 	}
 }

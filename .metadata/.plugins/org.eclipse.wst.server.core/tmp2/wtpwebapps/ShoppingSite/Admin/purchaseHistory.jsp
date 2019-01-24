@@ -43,7 +43,7 @@
 							<c:if test="${shipmentState == 5 }">配達中</c:if>
 							<c:if test="${shipmentState == 6 }">配達済</c:if>
 						</td>
-						<td style="padding: 5px"><c:out value="${address }" /></td>
+						<td style="padding: 5px"><c:out value="${addressName }" /></td>
 						<td style="padding: 5px">
 							<c:if test="${request_date == null }">指定なし</c:if>
 							<c:if test="${request_date != null }"><c:out value="${request_date }" /></c:if>

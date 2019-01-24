@@ -18,7 +18,7 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 	private List<ItemDTO> buyItemList;
 	private Map<String, Object> session;
 	private int totalPrice;
-	private String address;
+	private int address;
 	private String phoneNumber;
 	private String request_date;
 
@@ -89,11 +89,11 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 		this.session = session;
 	}
 
-	public String getAddress() {
+	public int getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(int address) {
 		this.address = address;
 	}
 

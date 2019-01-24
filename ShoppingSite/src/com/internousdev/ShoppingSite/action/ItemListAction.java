@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemDAO;
+import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemListAction extends ActionSupport implements SessionAware
@@ -20,6 +22,15 @@ public class ItemListAction extends ActionSupport implements SessionAware
 
 		itemList = ItemDAO.GetItemList();
 
+		if(CheckLogin.IsLogin(session))
+		{
+			int user_id = (int)session.get("user_id");
+			for (ItemDTO itemDTO : itemList)
+			{
+				itemDTO.setMyCart_quantity(MyCartDAO.MyCartItemQuantity(user_id, itemDTO.getItem_id()));
+			}
+		}
+		
 		return result;
 	}
 

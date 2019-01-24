@@ -38,8 +38,8 @@
 		</action>
 
 		<action name="AddItemAction" class="com.internousdev.ShoppingSite.action.AddItemAction" method="execute">
-			<result name="success" type="chain">MyCartAction</result>
-			<result name="error"  type="chain">MyCartAction</result>
+			<result name="success" type="chain">ItemListAction</result>
+			<result name="error" type="chain">ItemListAction</result>
 		</action>
 
 		<action name="MyCartAction" class="com.internousdev.ShoppingSite.action.MyCartAction" method="execute">
@@ -48,7 +48,8 @@
 		</action>
 
 		<action name="ChangeCartItemQuantityAction" class="com.internousdev.ShoppingSite.action.ChangeCartItemQuantityAction" method="execute">
-			<result name="success" type="chain">MyCartAction</result>
+			<result name="toCart" type="chain">MyCartAction</result>
+			<result name="toItemList" type="chain">ItemListAction</result>
 			<result name="error" type="chain">MyCartAction</result>
 		</action>
 
@@ -168,7 +169,7 @@
 		</action>
 		
 		<action name="AddAddressAction" class="com.internousdev.ShoppingSite.action.AddAddressAction" method="execute">
-			<result name="goBuy">./MyCart/buyItemAddressSelect.jsp</result>
+			<result name="goBuy" type="chain">GoBuyAction</result>
 			<result name="success">./User/addAddress.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>

@@ -11,6 +11,30 @@ import com.internousdev.ShoppingSite.util.DBConnector;
 
 public class MyCartDAO
 {
+	public static int MyCartItemQuantity(int user_id, int item_id)
+	{
+		String sql = "SELECT item_count FROM carts WHERE user_id = ? AND item_id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(2, item_id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next())
+			{
+				return resultSet.getInt("item_count");
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
 	public static boolean ChangeCartItemQuantity(int item_id, int user_id, int newCount)
 	{
 		try

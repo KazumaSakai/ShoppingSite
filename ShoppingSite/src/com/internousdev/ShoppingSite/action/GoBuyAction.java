@@ -19,6 +19,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private List<AddressDTO> addressList;
 	private List<ItemDTO> myCartItemList;
+	private int totalPrice;
 	private String max;
 	private String min;
 
@@ -32,12 +33,18 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 		addressList = AddressDAO.GetUserAddressList(user_id);
 
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        min = sdf.format(c.getTime());
-        c.add(Calendar.DAY_OF_MONTH, 15);
-        max = sdf.format(c.getTime());
+        SimpleDateFormat a = new SimpleDateFormat("yyyy-MM-dd");
         
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        min = a.format(c.getTime()) + "T08:00";
+        c.add(Calendar.DAY_OF_MONTH, 15);
+        max = a.format(c.getTime()) + "T22:00";
+
+		totalPrice = 0;
+		for (ItemDTO item : myCartItemList)
+		{
+			totalPrice += item.getItem_price() * item.getItem_count();
+		}
 		return SUCCESS;
 	}
 	
@@ -80,6 +87,14 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 
 	public void setMin(String min) {
 		this.min = min;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

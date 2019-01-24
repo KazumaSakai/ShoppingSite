@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.ShoppingSite.dao.AddressDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
@@ -21,7 +22,11 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 		
 		purchaseHistoryList = PurchaseHistoryDAO.GetAllPurchaseHistory(50 * page, 50);
-		
+
+		for (PurchaseHistoryDTO dto : purchaseHistoryList)
+		{
+			dto.setAddressName(AddressDAO.GetAddress(dto.getAddress()));
+		}
 		return SUCCESS;
 	}
 

@@ -30,7 +30,7 @@ public class PurchaseHistoryDAO
 				int get_quantity = resultSet.getInt("quantity");
 				int get_user_id = resultSet.getInt("user_id");
 				int get_shipmentState = resultSet.getInt("shipmentState");
-				String get_addres = resultSet.getString("address");
+				int get_addres = resultSet.getInt("address");
 				String get_phoneNumber = resultSet.getString("phoneNumber");
 				String get_insert_date = resultSet.getString("insert_date");
 				String get_request_date = resultSet.getString("request_date");
@@ -82,7 +82,7 @@ public class PurchaseHistoryDAO
 				int get_quantity = resultSet.getInt("quantity");
 				int get_user_id = resultSet.getInt("user_id");
 				int get_shipmentState = resultSet.getInt("shipmentState");
-				String get_addres = resultSet.getString("address");
+				int get_addres = resultSet.getInt("address");
 				String get_phoneNumber = resultSet.getString("phoneNumber");
 				String get_insert_date = resultSet.getString("insert_date");
 				String get_request_date = resultSet.getString("request_date");
@@ -158,7 +158,7 @@ public class PurchaseHistoryDAO
 				preparedStatement.setInt(3, purchasehistoryDTO.getQuantity());
 				preparedStatement.setInt(4, purchasehistoryDTO.getShipmentState());
 				preparedStatement.setString(5, purchasehistoryDTO.getRequest_date());
-				preparedStatement.setString(6, purchasehistoryDTO.getAddress());
+				preparedStatement.setInt(6, purchasehistoryDTO.getAddress());
 				preparedStatement.setString(7, purchasehistoryDTO.getPhoneNumber());
 				
 				
@@ -189,7 +189,7 @@ public class PurchaseHistoryDAO
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
 			preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
-			preparedStatement.setString(3, preparedForShipmentDTO.getAddress());
+			preparedStatement.setInt(3, preparedForShipmentDTO.getAddress());
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next())
