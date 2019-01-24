@@ -38,7 +38,6 @@
 							<td class="center">
 								<s:if test="myCart_quantity == 0">
 									<form action="AddItemAction">
-										<input type="hidden" name="toCart" value="false" />
 										<input type="number" name="request_Quantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
 										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
 										<input type="submit" value="変更"/>
@@ -46,7 +45,6 @@
 								</s:if>
 								<s:if test="myCart_quantity != 0">
 									<form action="ChangeCartItemQuantityAction">
-										<input type="hidden" name="toCart" value="false" />
 										<input type="number" name="newQuantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
 										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
 										<input type="submit" value="変更"/>

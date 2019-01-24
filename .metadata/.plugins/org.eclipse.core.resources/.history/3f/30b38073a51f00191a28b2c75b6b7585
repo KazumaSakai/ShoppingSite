@@ -1,0 +1,9 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class PurchaseHistoryDeleteAction extends ActionSupport implements SessionAware{
+
+}

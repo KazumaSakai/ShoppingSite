@@ -47,7 +47,10 @@
 							<c:if test="${request_date != null }"><c:out value="${request_date }" /></c:if>
 						</td>
 						<td>
-							<input type="submit" value="変更" />
+							<form action="PurchaseHistoryDeleteAction">
+								<input type="hidden" name="id" value="${id }" />
+								<input type="submit" value="削除" />
+							</form>
 						</td>
 					</tr>
 				</s:iterator>
