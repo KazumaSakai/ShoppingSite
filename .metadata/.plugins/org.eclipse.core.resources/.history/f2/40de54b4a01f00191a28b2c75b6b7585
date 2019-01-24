@@ -17,7 +17,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		boolean result = SignUpDAO.SignUp(login_id, email, login_pass, user_name, false);
+		boolean result = SignUpDAO.SignUp(login_id, email, login_pass, user_name, true);
 
 		return result ? SUCCESS : ERROR;
 	}

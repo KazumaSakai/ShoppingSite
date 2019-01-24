@@ -4,7 +4,6 @@ public class UserDTO
 {
 	private int id;
 	private boolean admin;
-	private boolean oauthUser;
 	private String login_id;
 	private String email;
 	private String login_pass;
@@ -59,11 +58,5 @@ public class UserDTO
 	}
 	public void setInsert_date(String insert_date) {
 		this.insert_date = insert_date;
-	}
-	public boolean getOauthUser() {
-		return oauthUser;
-	}
-	public void setOauthUser(boolean oauthUser) {
-		this.oauthUser = oauthUser;
 	}
 }

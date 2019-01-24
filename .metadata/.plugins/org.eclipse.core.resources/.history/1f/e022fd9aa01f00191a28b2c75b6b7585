@@ -8,14 +8,14 @@ import com.internousdev.ShoppingSite.util.Passworder;
 
 public class SignUpDAO
 {
-	public static boolean SignUp(String login_id, String email, String login_pass, String user_name, boolean oauthUser)
+	public static boolean SignUp(String login_id, String email, String login_pass, String user_name,boolean oauthUser)
 	{
 		 if(UserDAO.Exist(login_id, email))
 		 {
 			 return false;
 		 }
 		 
-		 String sql = "INSERT INTO users(login_id, email, login_pass, user_name, oauthUser) VALUES(?, ?, ?, ?, ?)";
+		 String sql = "INSERT INTO users(login_id, email, login_pass, user_name) VALUES(?, ?, ?, ?)";
 
 		 try
 		 {
@@ -25,7 +25,6 @@ public class SignUpDAO
 			 preparedStatement.setString(2, email);
 			 preparedStatement.setString(3, Passworder.getSafetyPassword(login_pass, login_id));
 			 preparedStatement.setString(4, user_name);
-			 preparedStatement.setBoolean(5, oauthUser);
 
 			 int line =preparedStatement.executeUpdate();
 

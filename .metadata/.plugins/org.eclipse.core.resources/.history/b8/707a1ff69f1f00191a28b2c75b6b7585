@@ -60,10 +60,4 @@ public class UserDTO
 	public void setInsert_date(String insert_date) {
 		this.insert_date = insert_date;
 	}
-	public boolean getOauthUser() {
-		return oauthUser;
-	}
-	public void setOauthUser(boolean oauthUser) {
-		this.oauthUser = oauthUser;
-	}
 }

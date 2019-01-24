@@ -32,6 +32,11 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 
 		UserDTO userDTO = new UserDTO();
 		userDTO = LoginDAO.LoginAtEmail(email, safePass);
+		if(userDTO.getOauthUser())
+		{
+			return ERROR;
+		}
+		
 		session.put("login_user", userDTO);
 
 		if(((UserDTO)session.get("login_user")).getLoginFlg())

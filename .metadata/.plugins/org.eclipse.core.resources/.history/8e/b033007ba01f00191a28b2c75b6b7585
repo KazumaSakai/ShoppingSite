@@ -31,7 +31,7 @@ public class GoogleSignUpAction extends ActionSupport implements SessionAware
 		String pass = "AGgh_+" + tokenInfo.user_id;
 		String safePass = Passworder.getSafetyPassword(pass, email);
 		
-		boolean result = SignUpDAO.SignUp(email, email, safePass, email, true);
+		boolean result = SignUpDAO.SignUp(email, email, safePass, email);
 		return result ? SUCCESS : ERROR;
 	}
 
