@@ -14,19 +14,19 @@
 				<table class="center">
 					<tr>
 						<td>ユーザーID</td>
-						<td><input type="text" name="login_id" value=""/></td>
+						<td><input type="text" name="login_id" required="required"/></td>
 					</tr>
 					<tr>
 						<td>メールアドレス</td>
-						<td><input type="email" name="email" /></td>
+						<td><input type="email" name="email" required="required"/></td>
 					</tr>
 					<tr>
 						<td>パスワードID</td>
-						<td><input type="password" name="login_pass"/></td>
+						<td><input type="password" name="login_pass" required="required"/></td>
 					</tr>
 					<tr>
 						<td>ユーザー名</td>
-						<td><input type="text" name="user_name"/></td>
+						<td><input type="text" name="user_name" required="required"/></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="text-center"><input type="submit" value="登録" style="padding: 3px 30px" /></td>

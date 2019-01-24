@@ -1,0 +1,20 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AddAddressAction extends ActionSupport implements SessionAware
+{
+	private String execute();
+	private 
+	
+	public String execute()
+	{
+		String result = ERROR;
+		
+		
+		
+		return result;
+	}
+}

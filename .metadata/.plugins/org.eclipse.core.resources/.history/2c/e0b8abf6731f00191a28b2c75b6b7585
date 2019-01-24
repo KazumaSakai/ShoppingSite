@@ -1,0 +1,20 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AddAddressAction extends ActionSupport implements SessionAware
+{
+	private String address;
+	
+	public String execute()
+	{
+		String result = ERROR;
+		
+		if(!CheckLogin.IsLogin(session))
+		
+		return result;
+	}
+}

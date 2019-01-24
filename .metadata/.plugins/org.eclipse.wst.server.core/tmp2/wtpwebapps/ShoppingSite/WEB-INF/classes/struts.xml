@@ -52,11 +52,6 @@
 			<result name="error" type="chain">MyCartAction</result>
 		</action>
 
-		<action name="BuyCartItemAction" class="com.internousdev.ShoppingSite.action.BuyCartItemAction" method="execute">
-			<result name="success">./MyCart/buyItemAddressSelect.jsp</result>
-			<result name="error">./MyCart/confirmBuyCartItem</result>
-		</action>
-
 		<action name="SignUpAction" class="com.internousdev.ShoppingSite.action.SignUpAction" method="execute">
 			<result name="success">./SignUp/confirmSignUp.jsp</result>
 			<result name="error">./SignUp/errorSignUp.jsp</result>
@@ -165,6 +160,28 @@
 		<action name="AdminPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.AdminPurchaseHistoryAction" method="execute">
 			<result name="success">./Admin/purchaseHistory.jsp</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+		</action>
+		
+		<action name="GoAddAddressAction" class="com.internousdev.ShoppingSite.action.GoAddAddressAction" method="execute">
+			<result name="success">./User/addAddress.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+		
+		<action name="AddAddressAction" class="com.internousdev.ShoppingSite.action.AddAddressAction" method="execute">
+			<result name="goBuy">./MyCart/buyItemAddressSelect.jsp</result>
+			<result name="success">./User/addAddress.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+		
+		<action name="GoBuyAction" class="com.internousdev.ShoppingSite.action.GoBuyAction" method="execute">
+			<result name="success">./MyCart/buyItemAddressSelect.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+		
+		<action name="BuyCartItemAction" class="com.internousdev.ShoppingSite.action.BuyCartItemAction" method="execute">
+			<result name="success">./MyCart/confirmBuyCartItem.jsp</result>
+			<result name="error">./User/buyItemAddressSelect</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		
 	</package>

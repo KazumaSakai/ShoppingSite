@@ -1,0 +1,21 @@
+package com.internousdev.ShoppingSite.action;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.sun.javafx.collections.MappingChange.Map;
+
+public class AddAddressAction extends ActionSupport implements SessionAware
+{
+	private String ;
+	private Map<String, F>
+	
+	public String execute()
+	{
+		String result = ERROR;
+		
+		
+		
+		return result;
+	}
+}

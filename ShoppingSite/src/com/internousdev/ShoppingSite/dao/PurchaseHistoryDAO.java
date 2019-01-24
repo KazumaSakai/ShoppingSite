@@ -116,9 +116,9 @@ public class PurchaseHistoryDAO
 		return list;
 	}
 	
-	public static boolean AddPurchaseHistory(PurchaseHistoryDTO preparedForShipmentDTO)
+	public static boolean AddPurchaseHistory(PurchaseHistoryDTO purchasehistoryDTO)
 	{
-		boolean exists = ExistsPurchaseHistory(preparedForShipmentDTO);
+		boolean exists = ExistsPurchaseHistory(purchasehistoryDTO);
 		
 		if(exists)
 		{
@@ -127,9 +127,9 @@ public class PurchaseHistoryDAO
 			try
 			{
 				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
-				preparedStatement.setInt(1, preparedForShipmentDTO.getQuantity());
-				preparedStatement.setInt(2, preparedForShipmentDTO.getItem_id());
-				preparedStatement.setInt(3, preparedForShipmentDTO.getUser_id());
+				preparedStatement.setInt(1, purchasehistoryDTO.getQuantity());
+				preparedStatement.setInt(2, purchasehistoryDTO.getItem_id());
+				preparedStatement.setInt(3, purchasehistoryDTO.getUser_id());
 				int line = preparedStatement.executeUpdate();
 				
 				if(line == 0)
@@ -153,13 +153,14 @@ public class PurchaseHistoryDAO
 			try
 			{
 				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
-				preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
-				preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
-				preparedStatement.setInt(3, preparedForShipmentDTO.getQuantity());
-				preparedStatement.setInt(4, preparedForShipmentDTO.getShipmentState());
-				preparedStatement.setString(5, preparedForShipmentDTO.getRequest_date());
-				preparedStatement.setString(6, preparedForShipmentDTO.getAddress());
-				preparedStatement.setString(7, preparedForShipmentDTO.getPhoneNumber());
+				preparedStatement.setInt(1, purchasehistoryDTO.getItem_id());
+				preparedStatement.setInt(2, purchasehistoryDTO.getUser_id());
+				preparedStatement.setInt(3, purchasehistoryDTO.getQuantity());
+				preparedStatement.setInt(4, purchasehistoryDTO.getShipmentState());
+				preparedStatement.setString(5, purchasehistoryDTO.getRequest_date());
+				preparedStatement.setString(6, purchasehistoryDTO.getAddress());
+				preparedStatement.setString(7, purchasehistoryDTO.getPhoneNumber());
+				
 				
 				int line = preparedStatement.executeUpdate();
 				if(line == 0)

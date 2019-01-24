@@ -1,0 +1,37 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.internousdev.ShoppingSite.dto.AddressDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class AddressDAO
+{
+	public static List<AddressDTO> GetUserAddressList(int user_id)
+	{
+		List<AddressDTO> list = new ArrayList<AddressDTO>();
+		
+		String sql = "SELECT int, address FROM addresslist WHERE user_id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, user_id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next())
+			{
+				AddressDTO dto = new AddressDTO();
+				dto.setAddress(resultSet.getString("address"));
+				dto.setId(resultSet.getInt("id")));
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+}

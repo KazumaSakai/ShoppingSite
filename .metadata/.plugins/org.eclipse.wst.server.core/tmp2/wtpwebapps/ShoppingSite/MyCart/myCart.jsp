@@ -45,8 +45,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="5">
-						<form class="center" name="BuyCartItemAction" action="/ShoppingSite/BuyCartItemAction.action" method="post" class="form">
+					<td colspan="5" class="text-center form">
+						<form action="GoBuyAction" >
 							<input type="submit" value="購入する" style="padding: 5px 30px" />
 						</form>
 					</td>

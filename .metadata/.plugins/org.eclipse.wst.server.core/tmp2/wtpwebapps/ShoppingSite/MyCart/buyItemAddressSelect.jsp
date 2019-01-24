@@ -20,7 +20,7 @@
 					<th style="width: 100px">商品価格</th>
 					<th style="width: 100px">購入数</th>
 				</tr>
-				<s:iterator value="buyItemList">
+				<s:iterator value="myCartItemList">
 					<tr>
 						<td>
 							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
@@ -39,27 +39,33 @@
 					</td>
 				</tr>
 			</table>
-			<form style="margin: 10px">
-				<table class="center" >
+			<form action="BuyCartItemAction" style="margin: 10px">
+				<table class="center table"  border="1">
 					<tr>
 						<td>配達先</td>
 						<td>
-							<s:if test="addressList.size == 0">
-								<a href='<s:url action="GoHomeAction"/>'>配達先を追加する</a>
-								
-							</s:if>
-							<s:if test="addressList.size != 0">
+							<select name="address" style="width:100px">
 								<s:iterator value="addressList">
-									<option value="${name }"><c:out value="${name }" /></option>
+									<option value="${id }"><c:out value="${address }" /></option>
 								</s:iterator>
-							</s:if>
+							</select>
+						</td>
+						<td>
+							<a href='<s:url action="GoAddAddressAction"/>?goBuy=true'>配達先を追加する</a>
 						</td>
 					</tr>
 					<tr>
 						<td>配達予定日</td>
-						<td>
-							<input type="date" name="request_date">
+						<td colspan="2">
+							<input type="datetime-local" name="request_date" required="required" step="3600" min="${min }" max="${max }">
 						</td>
+					</tr>
+					<tr>
+						<td>電話番号</td>
+						<td colspan="2"><input type="tel" name="phoneNumber" required="required" /></td>
+					</tr>
+					<tr>
+						<td colspan="3" class="text-center"  style="width: 430px"><input type="submit" value="購入" /></td>
 					</tr>
 				</table>
 			</form>
