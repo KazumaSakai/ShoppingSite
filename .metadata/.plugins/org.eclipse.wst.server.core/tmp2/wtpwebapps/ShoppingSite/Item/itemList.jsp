@@ -71,6 +71,14 @@
 						</s:if>
 					</tr>
 				</s:iterator>
+					<tr>
+						<s:if test="session.isLogin == true && session.isAdmin != true">
+							<td colspan="5"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
+						</s:if>
+						<s:if test="session.isLogin == true && session.isAdmin == true">
+							<td colspan="7"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
+						</s:if>
+					</tr>
 			</table>
 			<s:if test="session.isAdmin == true">
 				<div class="center" style="border: solid 1px black; margin: 20px 10px">

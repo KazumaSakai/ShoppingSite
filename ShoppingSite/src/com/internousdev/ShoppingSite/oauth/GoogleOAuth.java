@@ -30,13 +30,20 @@ public class GoogleOAuth {
 	{
 		String s = GoogleOAuth.GMailInfo(token, userId);
 		GoogleOAuthGMailInfo gMailInfo = null;
-		try {
+		try
+		{
 			gMailInfo = new ObjectMapper().readValue(GoogleOAuth.Get(s), GoogleOAuthGMailInfo.class);
-		} catch (JsonParseException e) {
+		}
+		catch (JsonParseException e)
+		{
 			e.printStackTrace();
-		} catch (JsonMappingException e) {
+		}
+		catch (JsonMappingException e)
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		return gMailInfo;
@@ -71,9 +78,12 @@ public class GoogleOAuth {
 		String url = GoogleOAuth.TokenInfo(token);
 		String json = GoogleOAuth.Get(url);
 		GoogleOAuthTokenInfo tokenInfo = null;
-		try {
+		try
+		{
 			tokenInfo = new ObjectMapper().readValue(json, GoogleOAuthTokenInfo.class);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -118,12 +128,13 @@ public class GoogleOAuth {
 			while((line = reader.readLine()) != null)
 			xml += line;
 			reader.close();
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             System.err.println("Invalid URL format: " + urlString);
-            System.exit(-1);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.err.println("Can't connect to " + urlString);
-            System.exit(-1);
         }
         
 		
@@ -155,12 +166,14 @@ public class GoogleOAuth {
             	line += s;
             }
             reader.close();
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             System.err.println("Invalid URL format: " + urlString);
-            System.exit(-1);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             System.err.println("Can't connect to " + urlString);
-            System.exit(-1);
         }
         
         return line;

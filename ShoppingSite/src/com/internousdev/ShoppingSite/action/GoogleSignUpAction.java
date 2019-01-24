@@ -4,9 +4,12 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.ShoppingSite.dao.SignUpDAO;
 import com.internousdev.ShoppingSite.oauth.GoogleOAuth;
 import com.internousdev.ShoppingSite.oauth.GoogleOAuthGMailInfo;
 import com.internousdev.ShoppingSite.oauth.GoogleOAuthToken;
+import com.internousdev.ShoppingSite.oauth.GoogleOAuthTokenInfo;
+import com.internousdev.ShoppingSite.util.Passworder;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GoogleSignUpAction extends ActionSupport implements SessionAware
@@ -14,7 +17,6 @@ public class GoogleSignUpAction extends ActionSupport implements SessionAware
 	private String code;
 	private String state;
 	private String scope;
-	private String email;
 	
 	private Map<String, Object> session;
 	
@@ -22,23 +24,17 @@ public class GoogleSignUpAction extends ActionSupport implements SessionAware
 	{
 
 		GoogleOAuthToken token = GoogleOAuth.token(code,"http://localhost:8080/ShoppingSite/GoogleSignUpAction.action");
-		GoogleOAuthGMailInfo gMailInfo = GoogleOAuth.GetGMailInfo(token);
-		email = gMailInfo.emailAddress;
-		session.put("gmail", email);
-		session.put("googleToken", token);
-		session.put("isGoogleOAuth", true);
+		GoogleOAuthTokenInfo tokenInfo = GoogleOAuth.GetTokenInfo(token);
+		GoogleOAuthGMailInfo gMailInfo = GoogleOAuth.GetGMailInfo(token, tokenInfo.user_id);
+		String email = gMailInfo.emailAddress;
 		
-		return SUCCESS;
+		String pass = "AGgh_+" + tokenInfo.user_id;
+		String safePass = Passworder.getSafetyPassword(pass, email);
+		
+		boolean result = SignUpDAO.SignUp(email, email, safePass, email);
+		return result ? SUCCESS : ERROR;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 	public String getScope() {
 		return scope;
 	}
@@ -65,6 +61,5 @@ public class GoogleSignUpAction extends ActionSupport implements SessionAware
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
 }
+

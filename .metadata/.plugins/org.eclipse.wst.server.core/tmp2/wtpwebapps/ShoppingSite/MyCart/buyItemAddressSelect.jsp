@@ -44,7 +44,7 @@
 					<tr>
 						<td>配達先</td>
 						<td>
-							<select name="address" style="width:100px">
+							<select name="address" style="width:100px" required="required">
 								<s:iterator value="addressList">
 									<option value="${id }"><c:out value="${address }" /></option>
 								</s:iterator>
