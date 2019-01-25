@@ -407,22 +407,31 @@ text-align: left;
 
 
 /*
- *	ItemList
+ *	ItemListTable
  */
-.itemList
+.itemListTable
 {
-margin: 0 auto;
+	margin: 0px auto;
+	padding: 1px;
+	
+	border: 2px solid black;
 }
-.itemList th
+.itemListTable th
 {
-text-align: center;
-padding: 3px 5px;
+	text-align: center;
+	padding: 5px 10px;
+	border: 1px solid black;
 }
-.itemList td
+.itemListTable td
 {
-text-align: center;
-padding: 3px 5px;
+	text-align: center;
+	padding: 5px 10px;
+	border: 1px solid black;
 }
+
+
+
+
 
 /*
  *	Table

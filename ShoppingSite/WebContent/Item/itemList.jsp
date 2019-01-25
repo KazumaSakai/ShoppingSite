@@ -10,74 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>商品リスト</h1>
-			<table class="itemList" border="1">
-				<tr>
-					<th style="width: 100px">商品画像</th>
-					<th style="width: 100px">商品名</th>
-					<th style="width: 100px">商品価格</th>
-					<th style="width: 100px">残量</th>
-					<s:if test="session.isLogin == true">
-						<th>カート内の数</th>
-					</s:if>
-					<s:if test="session.isAdmin == true">
-						<th>商品の数を追加する</th>
-						<th>商品を削除する</th>
-					</s:if>
-				</tr>
-				<s:iterator value="itemList">
-					<tr>
-						<td>
-							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
-						</td>
-						<td>
-							<a href="/ShoppingSite/ItemPageAction.action?id=<c:out value="${item_id}" />"><s:property value="item_name" /></a>
-						</td>
-						<td><s:property value="item_price" />円</td>
-						<td><s:property value="item_count" />個</td>
-						<s:if test="session.isLogin == true">
-							<td class="center">
-								<s:if test="myCart_quantity == 0">
-									<form action="AddItemAction">
-										<input type="number" name="request_Quantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
-										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
-										<input type="submit" value="変更"/>
-									</form>
-								</s:if>
-								<s:if test="myCart_quantity != 0">
-									<form action="ChangeCartItemQuantityAction">
-										<input type="number" name="newQuantity" value='<c:out value="${myCart_quantity }" />' min="0" style="width:50px; text-align: right; padding:2px">個
-										<input type="hidden" name="item_id" value='<s:property value="item_id" />'>
-										<input type="submit" value="変更"/>
-									</form>
-								</s:if>
-							</td>
-						</s:if>
-						<s:if test="session.isAdmin == true">
-							<td>
-							 	<form class="center" name="AdminAddItemQuantityAction" action="/ShoppingSite/AdminAddItemQuantityAction.action" method="post" class="form">
-									<input type="number" name="quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
-									<input type="hidden" name="id" value='<s:property value="item_id" />'>
-									<input type="submit" value="追加" />
-							 	</form>
-							</td>
-							<td>
-							 	<form class="center" name="AdminDeleteItemAction" action="/ShoppingSite/AdminDeleteItemAction.action" method="post" class="form">
-									<input type="hidden" name="id" value='<s:property value="item_id" />'>
-									<input type="submit" value="削除" />
-							 	</form>
-							</td>
-						</s:if>
-					</tr>
-				</s:iterator>
-					<tr>
-						<s:if test="session.isLogin == true && session.isAdmin != true">
-							<td colspan="5"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
-						</s:if>
-						<s:if test="session.isLogin == true && session.isAdmin == true">
-							<td colspan="7"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
-						</s:if>
-					</tr>
-			</table>
+			<jsp:include page="./itemListTable.jsp" />
 			<s:if test="session.isAdmin == true">
 				<div class="center" style="border: solid 1px black; margin: 20px 10px">
 					<h2 class="text-center">管理者用 商品追加フォーム</h2>
@@ -105,7 +38,7 @@
 							</tr>
 							<tr>
 								<td style="text-align: left">説明</td>
-								<td style="text-align: left"><textarea name="description" style="width: 300px; height: 100px"/></textarea>
+								<td style="text-align: left"><textarea name="description" style="width: 300px; height: 100px"></textarea>
 							</tr>
 							<tr>
 								<td colspan="2" class="text-center" ><input type="submit" value="商品を追加する"/></td>
