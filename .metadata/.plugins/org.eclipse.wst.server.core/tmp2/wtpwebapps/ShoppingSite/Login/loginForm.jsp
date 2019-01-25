@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input class="googleButton" type="button" value="Googleでログイン" onClick="location.href='<s:url action='StartGoogleOAuthAction?url=GoogleLoginAction.action'/>'">
+				<input class="googleButton" type="button" value="Googleでログイン" onClick="location.href='<s:url action='StartGoogleOAuthAction?url=GoogleLoginAction.action'/>'" />
 			</td>
 		</tr>
 	</table>

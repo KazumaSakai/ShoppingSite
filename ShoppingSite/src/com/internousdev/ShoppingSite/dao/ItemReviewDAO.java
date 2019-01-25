@@ -79,8 +79,38 @@ public class ItemReviewDAO
 
 		return (returnLine == 1);
 	}
-
-	public List<ItemReviewDTO> getItem(int item_id)
+	public static ItemReviewDTO GetReview(int review_id)
+	{
+		String sql = "SELECT * FROM item_review WHERE id = ?";
+		ItemReviewDTO itemReviewDTO = new ItemReviewDTO();
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, review_id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next())
+			{
+				itemReviewDTO.setId(resultSet.getInt("id"));
+				itemReviewDTO.setItem_id(resultSet.getInt("item_id"));
+				itemReviewDTO.setUser_id(resultSet.getInt("user_id"));
+				itemReviewDTO.setUsername(UserDAO.GetUserName(itemReviewDTO.getUser_id()));
+				itemReviewDTO.setTitle(resultSet.getString("title"));
+				itemReviewDTO.setPoint(resultSet.getInt("point"));
+				itemReviewDTO.setComment(resultSet.getString("comment"));
+				itemReviewDTO.setInsert_date(resultSet.getString("insert_date"));
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return itemReviewDTO;
+	}
+	public static List<ItemReviewDTO> GetReviewList(int item_id)
 	{
 		 String sql = "SELECT * FROM item_review WHERE item_id = ?";
 		 List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();

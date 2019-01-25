@@ -47,27 +47,19 @@
 			</s:if>
 			<s:if test="session.isAdmin == true">
 				<td>
-					<form class="center" name="AdminAddItemQuantityAction" action="/ShoppingSite/AdminAddItemQuantityAction.action" method="post" class="form">
+					<form class="center" action="AdminAddItemQuantityAction">
 						<input type="number" name="quantity" value='<s:property value="1" />' style="width:50px; text-align: right; padding:2px">個
 						<input type="hidden" name="id" value='<s:property value="item_id" />'>
 						<input type="submit" value="追加" />
 					</form>
 				</td>
 				<td>
-					<form class="center" name="AdminDeleteItemAction" action="/ShoppingSite/AdminDeleteItemAction.action" method="post" class="form">
+					<form class="center" action="AdminDeleteItemAction">
 						<input type="hidden" name="id" value='<s:property value="item_id" />'>
-						<input type="submit" value="削除" />
+						<input type="submit" value="削除" class="delete" style="padding: 2px 10px; font-size: 20px" />
 					</form>
 				</td>
 			</s:if>
 		</tr>
 	</s:iterator>
-		<tr>
-			<s:if test="session.isLogin == true && session.isAdmin != true">
-				<td colspan="5"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
-			</s:if>
-			<s:if test="session.isLogin == true && session.isAdmin == true">
-				<td colspan="7"><a href='<s:url action="MyCartAction"/>'>マイカート</a></td>
-			</s:if>
-		</tr>
 </table>

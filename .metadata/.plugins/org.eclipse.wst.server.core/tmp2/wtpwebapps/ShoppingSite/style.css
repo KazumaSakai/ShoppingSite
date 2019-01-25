@@ -148,18 +148,18 @@ main #right ul
  */
 #main_menu
 {
-  margin: 25px 10px 5px 10px;
-
-  float: right;
-  list-style: none;
-  display: inline-block;
-  vertical-align: middle;
+	margin: 25px 10px 5px 10px;
+	
+	float: right;
+	list-style: none;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 #main_menu li
 {
-  float: left;
-  padding: 5px;
+	float: left;
+	padding: 5px;
 }
 
 
@@ -168,11 +168,11 @@ main #right ul
  */
 #site_title
 {
-  margin: 10px;
-  font-size: 30px;
-  font-weight: bold;
-
-  float: left;
+	margin: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	
+	float: left;
 }
 
 
@@ -297,6 +297,7 @@ text-align: left;
 	padding: 30px 60px;
 	border: 2px solid black;
 	border-radius: 5px;
+	font-weight:bold;
   	box-shadow: 0px 0px 5px 2px lightgray;
 }
 
@@ -403,7 +404,19 @@ text-align: left;
 {
 	background-color: lightblue;
 }
-
+.linkButton
+{
+	border: solid 1px #ccc;
+	padding: 10px 100px;
+	margin: 10px;
+	font-family: Arial,sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	background-color: #F7D358;
+	cursor: pointer;
+}
 
 
 /*
@@ -412,15 +425,18 @@ text-align: left;
 .itemListTable
 {
 	margin: 0px auto;
-	padding: 1px;
+	padding: 1px 1px 1px 1px;
+	font-weight:bold;
 	
-	border: 2px solid black;
+	background-color: black;
 }
+
 .itemListTable th
 {
 	text-align: center;
 	padding: 5px 10px;
 	border: 1px solid black;
+    background-color: #cccccc;
 }
 .itemListTable td
 {
@@ -428,55 +444,197 @@ text-align: left;
 	padding: 5px 10px;
 	border: 1px solid black;
 }
-
-
+.itemListTable tr
+{
+	background-color: white;
+}
+.itemListTable tr:nth-child(odd)
+{
+    background-color: #dddddd;
+}
 
 
 
 /*
  *	Table
  */
+.table
+{
+	width: 80%;
+	border: solid 1px black;
+	margin: 50px auto;
+	padding: 1px;
+	font-weight:bold;
+	background-color: black;
+}
+
+.table tr
+{
+	background: white
+}
+
+.table tr:nth-child(odd)
+{
+	background: #eee;
+}
+
+.table th
+{
+	min-width: 100px;
+	padding:10px;
+	
+	border: 1px solid black;
+	background: #ccc;
+}
 .table td
 {
-padding: 4px 10px;
-vertical-align: top;
+	min-width: 100px;
+	padding: 5px 10px;
+	
+	border: 1px solid black;
 }
+
+.table input
+{
+	padding: 2px 5px;
+}
+
+.table input[type="text"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 50px);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.table input[type="number"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 50px);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.table select
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 38px);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.table textarea
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 45px);
+	min-height: 150px;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.table input[type="submit"]
+{
+	border: solid 1px #ccc;
+	padding: 10px 100px;
+	margin: 10px;
+	font-family: Arial,sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	background-color: #F7D358;
+	cursor: pointer;
+}
+
+
+
+
+
+
 
 /*
- *	ReviewList
+ *	Review
  */
-.reviewList
+ .review
 {
-list-style: none;
-padding: 0;
-}
-.reviewList li
-{
-width: 80%;
-border: solid 1px black;
-margin: 10px auto;
-padding: 0px 10px;
+	width: 80%;
+	
+	border: solid 1px black;
+	margin: 10px auto;
+	padding: 1px;
+	background-color: black;
 }
 
-.reviewList .title
+.review td
 {
-font-size: 22px;
-font-weight: bold;
-
-border-bottom: solid 1px gray;
-
-margin: 0;
-padding: 10px 10px 0px 10px;
+	padding: 10px;
 }
-.reviewList .comment
+
+
+.review .title
 {
-margin: 0;
-padding: 15px;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 5px 5px 5px 20px;
+	
+	text-align: left;
+	background-color: #ddd;
+	margin: 0px;
 }
-.reviewList .username
+
+
+.review .comment
 {
-font-size: 15px;
-color: darkgray;
-text-align: right;
-margin: 0;
+	background-color: #fff;
+	
+	margin: 5px 0px;
+	padding: 30px 20px;
+}
+
+.review .username
+{
+	background-color: #eee;
+	
+	text-align: right;
+	
+	color: gray;
+}
+
+/*	Delete */
+.delete
+{
+	color: red;
+	font-weight: bold;
 }

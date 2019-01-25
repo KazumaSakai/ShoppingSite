@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
+import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
@@ -12,14 +13,18 @@ import com.opensymphony.xwork2.ActionSupport;
 public class DeleteItemReviewAction extends ActionSupport implements SessionAware
 {
 	private int id;
+	private ItemReviewDTO review;
+	
 	private Map<String, Object>session;
 
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session)) return "needLogin";
 
+		review = ItemReviewDAO.GetReview(id);
+		
 		int user_id = (int)session.get("user_id");
-		boolean isMineReview = ItemReviewDAO.GetUserId(id) == user_id;
+		boolean isMineReview = (ItemReviewDAO.GetUserId(id) == user_id);
 		if(isMineReview || CheckAdmin.IsAdmin(session))
 		{
 			return (ItemReviewDAO.DeleteReviwe(id)) ? SUCCESS : ERROR;
@@ -43,5 +48,13 @@ public class DeleteItemReviewAction extends ActionSupport implements SessionAwar
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public ItemReviewDTO getReview() {
+		return review;
+	}
+
+	public void setReview(ItemReviewDTO review) {
+		this.review = review;
 	}
 }

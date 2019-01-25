@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>マイカート</h1>
 			<s:if test="itemList.size != 0">
-			<table class="itemList" border="1">
+			<table class="itemListTable">
 				<tr>
 					<th style="width: 100px">商品画像</th>
 					<th style="width: 100px">商品名</th>
@@ -42,13 +42,13 @@
 						合計金額
 					</td>
 					<td colspan="3">
-						<c:out value="${totalPrice }" />円
+						<span style="color: red; font-weight:bold"><c:out value="${totalPrice }" />円</span>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="5" class="text-center form">
 						<form action="GoBuyAction" >
-							<input type="submit" value="購入する" style="padding: 5px 30px" />
+							<input class="linkButton" type="submit" value="購入する" />
 						</form>
 					</td>
 				</tr>

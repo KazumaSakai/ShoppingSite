@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input class="googleButton" type="button" value="Googleアカウントで登録する" onClick="location.href='<s:url action='StartGoogleOAuthAction?url=GoogleSignUpAction.action'/>'">
+				<input class="googleButton" type="button" value="Googleアカウントで登録する" onClick="location.href='<s:url action='StartGoogleOAuthAction?url=GoogleSignUpAction.action'/>'" />
 			</td>
 		</tr>
 		<tr>

@@ -9,7 +9,24 @@
 	<jsp:param value="true" name="showMain"/>
 	<jsp:param name="content">
 		<jsp:attribute name="value">
-			<p class="text-center errorMessage">レビューが削除されました</p>
+			<p class="text-center errorMessage">以下のレビューが削除されました</p>
+			<table class="review">
+				<tr>
+					<th class="title">
+						<s:property value="review.title" />
+					</th>
+				</tr>
+				<tr>
+					<td class="comment">
+						<s:property value="review.comment" />
+					</td>
+				</tr>
+				<tr>
+					<td class="username">
+						<s:property value="review.username" />
+					</td>
+				</tr>
+			</table>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

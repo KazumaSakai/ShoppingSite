@@ -10,19 +10,28 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>レビューが投稿されました</h1>
-			<ul class="reviewList">
-				<li>
-					<h3 class="title">
+			<table class="review">
+				<tr>
+					<th class="title">
 						<s:property value="title" />
-					</h3>
-					<p class="comment">
+					</th>
+				</tr>
+				<tr>
+					<td class="comment">
 						<s:property value="comment" />
-					</p>
-					<p class="username">
+					</td>
+				</tr>
+				<tr>
+					<td class="username">
 						<s:property value="username" />
-					</p>
-				</li>
-			</ul>
+						<s:if test="user_id == session.user_id || session.isAdmin == true">
+							<span style="color:red; margin-left:5px">
+								<a class="delete" href="/ShoppingSite/DeleteItemReviewAction.action?id=<s:property value="id" />">削除</a>
+							</span>
+						</s:if>
+					</td>
+				</tr>
+			</table>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>
