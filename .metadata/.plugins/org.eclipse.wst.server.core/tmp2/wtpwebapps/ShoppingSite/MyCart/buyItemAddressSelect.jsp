@@ -10,7 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>配達の設定</h1>
-			<table class="itemList" border="1">
+			<table class="itemListTable">
 				<tr>
 					<th colspan="4">購入する商品</th>
 				</tr>
@@ -35,7 +35,7 @@
 						合計金額
 					</td>
 					<td colspan="2">
-						<c:out value="${totalPrice }" />円
+						<span style="color:red; font-weight:bold"><c:out value="${totalPrice }" />円</span>
 					</td>
 				</tr>
 			</table>
@@ -44,7 +44,7 @@
 					<tr>
 						<td>配達先</td>
 						<td>
-							<select name="address" style="width:100px" required="required">
+							<select name="address" required="required">
 								<s:iterator value="addressList">
 									<option value="${id }"><c:out value="${address }" /></option>
 								</s:iterator>

@@ -531,6 +531,38 @@ text-align: left;
 	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
 	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
 }
+.table input[type="tel"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 50px);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.table input[type="datetime-local"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	width: calc(100% - 50px);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
 .table select
 {
 	border: 0;

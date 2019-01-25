@@ -10,7 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>ユーザーリスト</h1>
-			<table class="itemList" border="1">
+			<table class="itemListTable">
 				<tr>
 					<th style="width: 100px">ID</th>
 					<th style="width: 100px">ユーザー名</th>
@@ -24,7 +24,7 @@
 						<td style="width:200px"><c:out value="${user_name }" /></td>
 						<td style="width:200px">
 							<s:if test="admin == true">
-								管理者
+								<span style="color:red">管理者</span>
 							</s:if>
 							<s:if test="admin != true">
 								ユーザー
@@ -33,9 +33,9 @@
 						<td style="width:200px"><c:out value="${insert_date}" /></td>
 						<td>
 							<s:if test="admin != true">
-							 	<form name="AdminDeleteUserAction" action="/ShoppingSite/AdminDeleteUserAction.action" method="post" class="form">
+							 	<form class="text-center" action="AdminDeleteUserAction">
 									<input type="hidden" name="id" value='<s:property value="id" />'>
-									<input type="submit" value="削除" />
+									<input type="submit" value="削除" class="delete inputButton" style="padding: 2px 10px; font-size: 20px" />
 							 	</form>
 							</s:if>
 						</td>

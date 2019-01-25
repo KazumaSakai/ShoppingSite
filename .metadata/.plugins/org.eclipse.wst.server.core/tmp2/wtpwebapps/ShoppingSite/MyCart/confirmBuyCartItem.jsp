@@ -10,7 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>購入が完了しました</h1>
-			<table class="itemList" border="1">
+			<table class="itemListTable" border="1">
 				<tr>
 					<th colspan="4">ご購入された商品</th>
 				</tr>

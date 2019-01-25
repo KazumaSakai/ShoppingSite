@@ -11,19 +11,19 @@
 		<jsp:attribute name="value">
 			<h2 class="text-center">ユーザー情報</h2>
 			<s:if test="session.isLogin == true">
-				<table class="table center">
+				<table class="inputTable">
 					<tr>
 						<form action="ChangeUserNameAction">
 							<td>ユーザー名</td>
-							<td><input type="text" name="newUserName" style="padding: 2px 10px" value='<c:out value="${session.user_name }"/>' /></td>
-							<td><input type="submit" value="変更" style="padding: 0px 10px"/></td>
+							<td><input type="text" name="newUserName"  value='<c:out value="${session.user_name }"/>' /></td>
+							<td><input type="submit" value="変更"  class="linkButton"/></td>
 						</form>
 					</tr>
 					<tr>
 						<form action="ChangeUserPasswordAction">
 							<td>パスワード</td>
-							<td><input type="password" name="newPassword" style="padding: 2px 10px"/><input type="hidden" /></td>
-							<td><input type="submit" value="変更" style="padding: 0px 10px"/></td>
+							<td><input type="password" name="newPassword" /></td>
+							<td><input type="submit" value="変更" class="linkButton"/></td>
 						</form>
 					</tr>
 				</table>

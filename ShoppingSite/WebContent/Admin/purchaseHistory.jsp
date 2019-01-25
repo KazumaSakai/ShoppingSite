@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>すべての購入履歴</h1>
 			<s:if test="purchaseHistoryList.size != 0">
-			<table class="purchaseHistoryList text-center center" border="1">
+			<table class="itemListTable" border="1">
 				<tr>
 					<th style="width: 100px">ユーザーID</th>
 					<th style="width: 100px">商品画像</th>
@@ -51,7 +51,7 @@
 						<td>
 							<form action="AdminPurchaseHistoryDeleteAction">
 								<input type="hidden" name="id" value="${id }" />
-								<input type="submit" value="削除" />
+								<input type="submit" value="削除" class="delete inputButton" style="padding: 2px 10px; font-size: 20px" />
 							</form>
 						</td>
 					</tr>
