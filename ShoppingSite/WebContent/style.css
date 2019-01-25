@@ -1,19 +1,22 @@
 @CHARSET "UTF-8";
 
 /*
-      Body
+ *	Body
  */
 body
 {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 
-  background-color: #fafafa;
+	width: 100%;
+	height: 100%;
+	
+	background-color: #fafafa;
 }
 
 
 /*
-      Header
+ *	Header
  */
 header
 {
@@ -38,7 +41,7 @@ header #main_menu a:visited
 }
 
 /*
-      Footer
+ *	Footer
  */
 footer
 {
@@ -53,60 +56,61 @@ footer
 
 
 /*
-      Main
+ *	Main
  */
-
 main
 {
-  width: 100%;
-  min-height: calc(100vh - 135px);
+	width: 100%;
+	height: 100%;
+	min-height: calc(100vh - 135px);
 
-  vertical-align: top;
+	vertical-align: top;
 
-  display: inline-block;
-
+	display: inline-block;
 }
 
 
 /*
-      Left
+ *	Left
  */
 main #left
 {
-  width: 70%;
-  min-height: calc(100% - 10px);
+	width: 70%;
+	height: 100%;
+	min-height: calc(100% - 10px);
 
-  box-sizing: border-box;
-  padding: 10px 5px 10px 10px;
-  float: left;
-
+	box-sizing: border-box;
+	padding: 10px 5px 10px 10px;
+	float: left;
 }
 
 /*
-      Left_Max
+ *	Left_Max
  */
 main #left_max
 {
-  width: 100%;
-  min-height: calc(100% - 10px);
+  	width: 100%;
+	height: 100%;
+	min-height: calc(100% - 10px);
 
-  box-sizing: border-box;
-  padding: 10px;
-  float: left;
+	box-sizing: border-box;
+	padding: 10px;
+	float: left;
 }
 
 /*
-      Right
+ *	Right
  */
 main #right
 {
-  width: 30%;
-  min-height: calc(100% - 10px);
+	width: 30%;
+	height: 100%;
 
-  box-sizing: border-box;
-  padding: 10px 10px 10px 5px;
-  float: left;
+	min-height: calc(100% - 10px);
 
+	box-sizing: border-box;
+	padding: 10px 10px 10px 5px;
+	float: left;
 }
 main #right h2
 {
@@ -122,23 +126,25 @@ main #right ul
 }
 
 /*
-      Box
+ *	Box
  */
 .boxarea
 {
-  min-height: calc(100vh - 180px);
+	width: calc(100% - 22px);
+	min-height: calc(100vh - 180px);
+	height: 100%;
 
-  padding: 10px;
+	padding: 10px;
 
-  border: solid 1px black;
-  border-radius: 3px;
-  background-color: white;
-  box-shadow: 0px 0px 5px 2px lightgray;
+	border: solid 1px black;
+	border-radius: 3px;
+	background-color: white;
+	box-shadow: 0px 0px 5px 2px lightgray;
 }
 
 
 /*
-    Main Menu
+ *	Main Menu
  */
 #main_menu
 {
@@ -158,7 +164,7 @@ main #right ul
 
 
 /*
-    Site Title
+ *	Site Title
  */
 #site_title
 {
@@ -171,7 +177,7 @@ main #right ul
 
 
 /*
-    Header Slider
+ *	Header Slider
  */
  #top_slider
 {
@@ -226,8 +232,13 @@ main #right ul
 
 
 /*
-    Article
+ *	Article
  */
+.article
+{
+	width: 100%;
+	height: 100%;
+}
 .article h1
 {
   padding: 1px 1px 1px 10px;
@@ -252,98 +263,211 @@ main #right ul
 /*
  *	ErrorMessage
  */
- .errorMessage
- {
-	color: red;
- }
-
- /*
- 	Center
-  */
-  .center
-  {
-  	margin: 0 auto;
-  }
-  .text-center
-  {
-  	text-align: center;
-  }
+.errorMessage
+{
+color: red;
+}
 
 /*
-		Form
+ *	Center
  */
- .form
- {
- 	text-align: left;
- }
- 
+.center
+{
+margin: 0 auto;
+}
+.text-center
+{
+text-align: center;
+}
+
 /*
-	ItemList
+ *	Form
+ */
+.form
+{
+text-align: left;
+}
+
+/*
+ *		Input Form
+ */
+.inputTable
+{
+	margin: 10px auto;
+	padding: 30px 60px;
+	border: 2px solid black;
+	border-radius: 5px;
+  	box-shadow: 0px 0px 5px 2px lightgray;
+}
+
+/*	Input Form Title	*/
+.inputTable th
+{
+	font-size: 25px;
+	padding: 5px;
+}
+
+.inputTable td
+{
+	padding: 5px;
+}
+
+.inputTable input
+{
+	padding: 2px 5px;
+}
+.inputTable input:focus {
+    border:solid 1px #EEA34A;
+}
+
+.inputTable input[type="text"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.inputTable input[type="password"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.inputTable input[type="email"]
+{
+	border: 0;
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	border: solid 1px #ccc;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.inputTable input[type="submit"]
+{
+	border: solid 1px #ccc;
+	padding: 5px 50px;
+	font-family: Arial,sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+	width: 100%;
+}
+.inputTable input[type="button"]
+{
+	border: solid 1px #ccc;
+	padding: 5px 50px;
+	font-family: Arial,sans-serif;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+	width: 100%;
+}
+
+.loginButton
+{
+	background-color: #F7D358;
+}
+.signupButton
+{
+	background-color: #F7D358;
+}
+.googleButton
+{
+	background-color: lightblue;
+}
+
+
+
+/*
+ *	ItemList
  */
 .itemList
 {
-	margin: 0 auto;
+margin: 0 auto;
 }
 .itemList th
 {
-	text-align: center;
-	padding: 3px 5px;
+text-align: center;
+padding: 3px 5px;
 }
 .itemList td
 {
-	text-align: center;
-	padding: 3px 5px;
+text-align: center;
+padding: 3px 5px;
 }
 
 /*
-		Table
+ *	Table
  */
 .table td
 {
-	padding: 4px 10px;
-	vertical-align: top;
-}.table td
-{
-	padding: 4px 10px;
-	vertical-align: top;
+padding: 4px 10px;
+vertical-align: top;
 }
 
-
 /*
-	ReviewList
+ *	ReviewList
  */
- .reviewList
- {
- 	list-style: none;
- 	padding: 0;
- }
- .reviewList li
- {
- 	width: 80%;
- 	border: solid 1px black;
- 	margin: 10px auto;
- 	padding: 0px 10px;
- }
+.reviewList
+{
+list-style: none;
+padding: 0;
+}
+.reviewList li
+{
+width: 80%;
+border: solid 1px black;
+margin: 10px auto;
+padding: 0px 10px;
+}
 
- .reviewList .title
- {
- 	font-size: 22px;
- 	font-weight: bold;
+.reviewList .title
+{
+font-size: 22px;
+font-weight: bold;
 
- 	border-bottom: solid 1px gray;
+border-bottom: solid 1px gray;
 
- 	margin: 0;
- 	padding: 10px 10px 0px 10px;
- }
- .reviewList .comment
- {
- 	margin: 0;
- 	padding: 15px;
- }
- .reviewList .username
- {
- 	font-size: 15px;
- 	color: darkgray;
- 	text-align: right;
- 	margin: 0;
- }
+margin: 0;
+padding: 10px 10px 0px 10px;
+}
+.reviewList .comment
+{
+margin: 0;
+padding: 15px;
+}
+.reviewList .username
+{
+font-size: 15px;
+color: darkgray;
+text-align: right;
+margin: 0;
+}

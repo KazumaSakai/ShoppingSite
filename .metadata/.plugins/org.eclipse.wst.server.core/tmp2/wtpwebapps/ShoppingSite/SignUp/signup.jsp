@@ -10,35 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>新規登録</h1>
-			<form name="SignUpAction" action="/ShoppingSite/SignUpAction.action" method="post" class="form">
-				<table class="center">
-					<tr>
-						<td>ユーザーID</td>
-						<td><input type="text" name="login_id" required="required"/></td>
-					</tr>
-					<tr>
-						<td>メールアドレス</td>
-						<td><input type="email" name="email" required="required"/></td>
-					</tr>
-					<tr>
-						<td>パスワードID</td>
-						<td><input type="password" name="login_pass" required="required"/></td>
-					</tr>
-					<tr>
-						<td>ユーザー名</td>
-						<td><input type="text" name="user_name" required="required"/></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="text-center"><input type="submit" value="登録" style="padding: 3px 30px" /></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="text-center"><a href='<s:url action="StartGoogleOAuthAction?url=GoogleSignUpAction.action"/>'>Googleアカウントで登録する</a></td>
-					</tr>
-				</table>
-			</form>
-			<p class="text-center">
-				ご登録されたパスワードは、PBKDF2にて暗号化され、管理されます。
-			</p>
+			<jsp:include page="./signupForm.jsp" />
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>
