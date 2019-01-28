@@ -181,7 +181,7 @@
 		</action>
 		
 		<action name="GoSalesDataAction" class="com.internousdev.ShoppingSite.action.GoSalesDataAction" method="execute">
-			<result name="success">./JavaScript/index.html</result>
+			<result name="success">./Admin/itemSalesData.jsp</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		

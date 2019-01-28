@@ -1,5 +1,9 @@
 package com.internousdev.ShoppingSite.action;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -7,6 +11,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.internousdev.ShoppingSite.dao.ItemSalesDAO;
+import com.internousdev.ShoppingSite.dto.ItemSalesDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,7 +28,37 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 		ObjectMapper mapper = new ObjectMapper();
 		try
 		{
-			resultData = mapper.writeValueAsString(ItemSalesDAO.GetItemSales(item_id));
+			LocalDateTime time = LocalDateTime.now();
+			List<ItemSalesDTO> list = new ArrayList<ItemSalesDTO>();
+			
+			List<ItemSalesDTO> getList = ItemSalesDAO.GetItemSales(item_id);
+			for(int i = 0; i < 12; i++)
+			{
+				int y = time.getYear();
+				int m = time.getMonthValue();
+				
+				boolean notAdd = true;
+				
+				for (ItemSalesDTO item : getList) {
+					if(item.getMonth() == m && item.getYear() == y)
+					{
+						list.add(item);
+						
+						notAdd = false;
+						break;
+					}
+				}
+				if(notAdd)
+				{
+					ItemSalesDTO dto = new ItemSalesDTO();
+					dto.setYear(y);
+					dto.setMonth(m);
+					list.add(dto);
+				}
+				time = time.minusMonths(1);
+			}
+			Collections.reverse(list);
+			resultData = mapper.writeValueAsString(list);
 		}
 		catch (JsonProcessingException e)
 		{

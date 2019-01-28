@@ -2,14 +2,15 @@
 
 async function asyncStart()
 {
-	var dataSet = ToJson(await d3.text("./ItemSalesAction.action?item_id=1"));
+	var dataSet = ToJson(await d3.text("./ItemSalesAction.action?item_id=" + item_id));
 	
 	//var dataSet = ToJson(await d3.text("./d3.json"));
 	var maxPrice = d3.max(dataSet, function (d) { return d.price; });
 	var maxQuantity = d3.max(dataSet, function (d) { return d.quantity; });
 	var length = dataSet.length;
-						 
-
+	
+	console.log(dataSet);
+	
 	//	define
     var height = 500;
     var width = 700;
@@ -29,7 +30,7 @@ async function asyncStart()
 		.range([0, graphWidth]);
 	
 	//	横軸メモリの文字
-    var axisX = d3.axisBottom(xScale).tickFormat(function (d, i) { return dataSet[d].year + "年/" + dataSet[d].month + "月"; });
+    var axisX = d3.axisBottom(xScale).tickValues([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]).tickFormat(function (d, i) { return dataSet[Math.floor(d)].year + "年/" + dataSet[Math.floor(d)].month + "月"; });
 	
 	//	横軸メモリ描画
     var xm = cv.append("g")
@@ -59,7 +60,7 @@ async function asyncStart()
 		.range([0, graphHeight]);
 	
 	//	縦軸メモリの文字
-	var axisY = d3.axisLeft(yScale).tickFormat(function (d,i) { return Math.floor(d / 10000) + "万円" });
+	var axisY = d3.axisLeft(yScale).tickFormat(function (d,i) { return d / 10000 + "万円" });
 	
 	//	縦軸メモリ描画
     cv.append("g")
@@ -76,7 +77,7 @@ async function asyncStart()
 	
 	
 	/*
-	 *		縦軸目盛　右　売上個数
+	 *		縦軸目盛 右 売上個数
 	 */
 	//	縦軸メモリサイズ
 	var yScale2 = d3.scaleLinear()

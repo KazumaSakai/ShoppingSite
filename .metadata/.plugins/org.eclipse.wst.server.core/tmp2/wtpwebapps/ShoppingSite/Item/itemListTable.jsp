@@ -14,6 +14,7 @@
 		</s:if>
 		<s:if test="session.isAdmin == true">
 			<th>商品の数を追加する</th>
+			<th>売上の統計</th>
 			<th>商品を削除する</th>
 		</s:if>
 	</tr>
@@ -52,6 +53,9 @@
 						<input type="hidden" name="id" value='<s:property value="item_id" />'>
 						<input type="submit" value="追加" />
 					</form>
+				</td>
+				<td>
+					<a href='GoSalesDataAction.action?item_id=${item_id }'>統計</a>
 				</td>
 				<td>
 					<form class="center" action="AdminDeleteItemAction">

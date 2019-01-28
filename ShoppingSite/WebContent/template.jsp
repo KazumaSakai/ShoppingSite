@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+		<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
     <script>
       $(document).ready(function(){
         $('#top_slider').bxSlider({
@@ -75,7 +76,7 @@
            <h2>制作物</h2>
            <ul class="side_menu">
           	<li><a href='<s:url action="GoMergeSortAction"/>'>MergeSort</a></li>
-          	<li><a href='<s:url action="GoSalesDataAction"/>'>SalesData</a></li>
+          	<li><a href='<s:url action="GoSalesDataAction?item_id=1"/>'>SalesData</a></li>
            </ul>
         </div>
       </div>
