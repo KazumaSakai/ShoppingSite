@@ -1,8 +1,0 @@
-package com.internousdev.ShoppingSite.util;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-public class CheckLogin implements SessionAware
-{
-
-}

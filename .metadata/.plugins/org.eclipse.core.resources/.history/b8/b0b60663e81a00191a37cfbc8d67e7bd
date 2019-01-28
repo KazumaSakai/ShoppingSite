@@ -1,9 +1,0 @@
-package com.internousdev.ShoppingSite.dao;
-
-public class AdminDeleteItemDAO
-{
-	public static void DeleteItem()
-	{
-
-	}
-}

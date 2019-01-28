@@ -1,14 +1,9 @@
 INDEX VERSION 1.3+C:\Users\internousdev\Desktop\workspace\workspace-Sakai\ShoppingSite\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3188810141.index
-1939961962.index
-3575105775.index
-2706287448.index
-2045622660.index
-3085143989.index
-255868326.index
-2064777038.index
-1201617848.index
-2514831827.index
-2925432758.index
-3648341189.index
 1728290012.index
+1939961962.index
+2706287448.index
+3483524942.index
+255868326.index
+2925432758.index
+2470908085.index
+3188810141.index

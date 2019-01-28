@@ -1,0 +1,14 @@
+package com.internousdev.ShoppingSite.dto;
+
+public class ItemSalesDTO
+{
+	private int price;
+
+	public int getPrice() {
+		return quantity;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+}

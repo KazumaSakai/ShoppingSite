@@ -1,0 +1,31 @@
+package com.internousdev.ShoppingSite.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.internousdev.ShoppingSite.dto.ItemSalesDTO;
+import com.internousdev.ShoppingSite.util.DBConnector;
+
+public class ItemSalesDAO
+{
+	public static List<ItemSalesDTO> GetItemSales(int item_id)
+	{
+		List<ItemSalesDTO> list = new ArrayList<ItemSalesDTO>();
+		
+		String sql = "SELECT quantity FROM sales WHERE item_id = ? ORDER BY ";
+		
+		try
+		{
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			preparedStatement.setInt(1, item_id);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+}

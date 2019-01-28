@@ -1,0 +1,9 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<button id="updateButton">データ更新</button><br/><br/>
+		<svg id="myGraph"></svg>
+		<script type="text/javascript" src="d3.js"></script>
+	</body>
+</html>

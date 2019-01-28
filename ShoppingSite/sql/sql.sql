@@ -92,3 +92,12 @@ create table addressList(
 	user_id int not null,
 	address VARCHAR(255) NOT NULL
 );
+
+drop table if exists sales;
+
+create table sales(
+	item_id int not null,
+	year int not null,
+	month int not null,
+	quantity int not null
+);

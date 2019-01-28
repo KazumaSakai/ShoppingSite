@@ -75,6 +75,7 @@
            <h2>制作物</h2>
            <ul class="side_menu">
           	<li><a href='<s:url action="GoMergeSortAction"/>'>MergeSort</a></li>
+          	<li><a href='<s:url action="GoSalesDataAction"/>'>SalesData</a></li>
            </ul>
         </div>
       </div>

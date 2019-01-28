@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.UserDAO"/>
-<fullyQualifiedTypeName name="javax.crypto.spec.PBEKeySpec"/>
-<fullyQualifiedTypeName name="javax.crypto.SecretKeyFactory"/>
-<fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
-<fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.model.annotation.RuntimeInlineAnnotationReader"/>
-<fullyQualifiedTypeName name="javax.crypto.SecretKey"/>
 <fullyQualifiedTypeName name="java.security.spec.InvalidKeySpecException"/>
 <fullyQualifiedTypeName name="javax.management.RuntimeErrorException"/>
 <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
@@ -22,7 +15,6 @@
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.action.ItemListAction"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.BuyItemDAO"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.PUBLIC_MEMBER"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.InstantiationError"/>
 <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.ReturnInstruction"/>
 <fullyQualifiedTypeName name="com.sun.tracing.dtrace.ProviderAttributes"/>
@@ -34,30 +26,38 @@
 <fullyQualifiedTypeName name="com.sun.scenario.effect.impl.prism.PrReflectionPeer"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.ItemDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.MyCartDAO"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.AddressDTO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.AddressDAO"/>
 <fullyQualifiedTypeName name="java.lang.InternalError"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.serialize.OutputFormat.DTD"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.oauth.GoogleOAuthTokenInfo"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.oauth.GoogleOAuth"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.Passworder"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.CheckLogin"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.DBConnector"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="sun.print.resources.serviceui"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.action.PurchaseHistoryDeleteAction"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.ItemReviewDTO"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.ItemReviewDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.UserDAO"/>
 <fullyQualifiedTypeName name="com.opensymphony.xwork2.ActionSupport"/>
 <fullyQualifiedTypeName name="org.apache.struts2.interceptor.SessionAware"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.CheckAdmin"/>
 <fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.CheckAdmin"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.DBConnector"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.ItemSalesDTO"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.action.ItemSalesAction"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.ItemSalesDAO"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

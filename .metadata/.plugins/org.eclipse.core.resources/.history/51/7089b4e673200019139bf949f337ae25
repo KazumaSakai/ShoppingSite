@@ -1,0 +1,20 @@
+<style>
+	svg{
+		width: 320px;
+		height: 240px;
+		border: 1px solid black;
+	}
+	#myGraph rect
+	{
+		stroke: rgb(160, 0, 0);
+		stroke-width: 1px;
+		fill: rgb(255, 0, 0);
+	}
+	.axis text
+	{
+	}
+</style>
+<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+<button id="updateButton">データ更新</button>
+<svg id="myGraph"></svg>
+<script type="text/javascript" src="d3.js"></script>
