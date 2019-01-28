@@ -1,0 +1,72 @@
+//	Load CSV
+
+async function asyncStart()
+{
+	var dataSet = ToJson(await d3.text("./ItemSalesAction.action?item_id=1"));
+
+	d3.select("#myGraph")
+		.selectAll("rect")
+		.data(dataSet)
+		.enter()
+		.append("rect")
+		.attr("x", 10)
+		.attr("y", function(d, i)
+			{
+				return (i * 10) + 2;
+			})
+		.on("click", function(){
+			d3.select(this)
+				.style("fill", "cyan")
+			})
+		.attr("height", "8px")
+		.attr("width", "0px")
+		.transition()
+		.delay(function(d, i)
+			{
+				return i * 500;
+			})
+		.duration(2500)
+		.attr("width", function(d, i)
+				{
+					return d.quantity + "px";
+				});
+
+    var height = 400;
+    var width = 800;
+    var margin = { "top": 50, "bottom": 60, "right": 60, "left": 60 };
+
+    var cv = d3.select("#myGraph").style("width", width).style("height", height);
+	
+	/*
+	 *		横メモリ
+	 */
+	//	横メモリサイズ
+	var xScale = d3.scaleLinear()
+		.domain([new Date(2014, 0, 1), new Date(2014, 12, 1)])
+		.range([0, width]);
+	
+    var axisX = d3.axisBottom(xScale).ticks(5).tickFormat(function (d, i) { return d; });
+	
+    cv.append("g")
+        .attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")")
+
+        .attr("transform","rotate(90)")
+        .call(axisX)
+        .append("text")
+        .attr("fill", "black")
+        .attr("x", (width - margin.left - margin.right) + margin.left + 40)
+        .attr("y", 7)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "10pt")
+        .attr("font-weight", "bold")
+        .text("日付");
+}
+
+asyncStart();
+
+
+function ToJson(str)
+{
+	str = str.split("&#034;").join("\"");
+	return JSON.parse(str);
+}

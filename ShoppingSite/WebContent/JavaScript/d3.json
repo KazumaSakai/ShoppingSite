@@ -2,4 +2,16 @@
 
 
 
-[{"item_id":1,"year":2019,"month":1,"quantity":524},{"item_id":1,"year":2019,"month":1,"quantity":354},{"item_id":1,"year":2019,"month":2,"quantity":140},{"item_id":1,"year":2019,"month":3,"quantity":456},{"item_id":1,"year":2019,"month":4,"quantity":727},{"item_id":1,"year":2019,"month":5,"quantity":578},{"item_id":1,"year":2019,"month":6,"quantity":575},{"item_id":1,"year":2019,"month":7,"quantity":257},{"item_id":1,"year":2019,"month":8,"quantity":275}]
+[{"item_id":1,"year":2019,"month":1,"quantity":524,"price":200},
+ {"item_id":1,"year":2019,"month":2,"quantity":140,"price":200},
+ {"item_id":1,"year":2019,"month":3,"quantity":456,"price":200},
+ {"item_id":1,"year":2019,"month":4,"quantity":727,"price":200},
+ {"item_id":1,"year":2019,"month":5,"quantity":578,"price":200},
+ {"item_id":1,"year":2019,"month":6,"quantity":575,"price":200},
+ {"item_id":1,"year":2019,"month":7,"quantity":257,"price":200},
+ {"item_id":1,"year":2019,"month":8,"quantity":275,"price":200},
+ {"item_id":1,"year":2019,"month":9,"quantity":275,"price":200},
+ {"item_id":1,"year":2019,"month":10,"quantity":275,"price":200},
+ {"item_id":1,"year":2019,"month":11,"quantity":275,"price":200},
+ {"item_id":1,"year":2019,"month":12,"quantity":275,"price":200}
+]

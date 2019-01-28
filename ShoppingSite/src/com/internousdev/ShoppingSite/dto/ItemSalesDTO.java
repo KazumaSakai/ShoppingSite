@@ -6,6 +6,7 @@ public class ItemSalesDTO
 	private int year;
 	private int month;
 	private int quantity;
+	private int price;
 
 	public int getQuantity() {
 		return quantity;
@@ -37,6 +38,14 @@ public class ItemSalesDTO
 
 	public void setMonth(int month) {
 		this.month = month;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }

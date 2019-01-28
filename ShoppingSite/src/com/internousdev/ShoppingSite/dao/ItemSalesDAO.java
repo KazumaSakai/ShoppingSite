@@ -22,6 +22,8 @@ public class ItemSalesDAO
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 			
+			int price = ItemDAO.GetItem(item_id).getItem_price();
+			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while (resultSet.next())
@@ -31,6 +33,7 @@ public class ItemSalesDAO
 				dto.setYear(resultSet.getInt("year"));
 				dto.setMonth(resultSet.getInt("month"));
 				dto.setQuantity(resultSet.getInt("quantity"));
+				dto.setPrice(dto.getQuantity() * price);
 				list.add(dto);
 			}
 		}

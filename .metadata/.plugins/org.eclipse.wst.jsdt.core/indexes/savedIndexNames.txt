@@ -4,6 +4,5 @@ INDEX VERSION 1.3+C:\Users\internousdev\Desktop\workspace\workspace-Sakai\Shoppi
 2706287448.index
 3483524942.index
 255868326.index
-2925432758.index
 2470908085.index
 3188810141.index
