@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <jsp:include page="../template.jsp">
-	<jsp:param value="レビューが投稿されました" name="title"  />
-	<jsp:param value="false" name="showSlider"/>
-	<jsp:param value="false" name="showSideMenu"/>
-	<jsp:param value="true" name="showMain"/>
+	<jsp:param value="レビューが投稿されました" name="title" />
+	<jsp:param value="false" name="showSlider" />
+	<jsp:param value="false" name="showSideMenu" />
+	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>レビューが投稿されました</h1>
@@ -24,9 +24,10 @@
 				<tr>
 					<td class="username">
 						<s:property value="username" />
-						<s:if test="user_id == session.user_id || session.isAdmin == true">
-							<span style="color:red; margin-left:5px">
-								<a class="delete" href="/ShoppingSite/DeleteItemReviewAction.action?id=<s:property value="id" />">削除</a>
+						<s:if test="user_id == #session.user_id || #session.isAdmin">
+							<span style="color: red; margin-left: 5px">
+								<a class="delete"
+								href="<s:url action='DeleteItemReviewAction?id=%{ id }' />">削除</a>
 							</span>
 						</s:if>
 					</td>

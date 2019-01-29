@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <jsp:include page="../template.jsp">
-	<jsp:param value="配達の設定" name="title"  />
-	<jsp:param value="false" name="showSlider"/>
-	<jsp:param value="false" name="showSideMenu"/>
-	<jsp:param value="true" name="showMain"/>
+	<jsp:param value="配達の設定" name="title" />
+	<jsp:param value="false" name="showSlider" />
+	<jsp:param value="false" name="showSideMenu" />
+	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>配達の設定</h1>
@@ -23,7 +23,8 @@
 				<s:iterator value="myCartItemList">
 					<tr>
 						<td>
-							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px"/>
+							<img src="./Images/ItemImages/${ item_id }/1.jpg"
+							style="width: 50px" />
 						</td>
 						<td><s:property value="item_name" /></td>
 						<td><s:property value="item_price" />円</td>
@@ -35,12 +36,13 @@
 						合計金額
 					</td>
 					<td colspan="2">
-						<span style="color:red; font-weight:bold"><c:out value="${totalPrice }" />円</span>
+						<span style="color: red; font-weight: bold"><s:property
+								value="totalPrice" />円</span>
 					</td>
 				</tr>
 			</table>
 			<form action="BuyCartItemAction" style="margin: 10px">
-				<table class="center table"  border="1">
+				<table class="center table" border="1">
 					<tr>
 						<td>配達先</td>
 						<td>
@@ -51,21 +53,24 @@
 							</select>
 						</td>
 						<td>
-							<a href='<s:url action="GoAddAddressAction"/>?goBuy=true'>配達先を追加する</a>
+							<a href='<s:url action="GoAddAddressAction?goBuy=true"/>'>配達先を追加する</a>
 						</td>
 					</tr>
 					<tr>
 						<td>配達予定日</td>
 						<td colspan="2">
-							<input type="datetime-local" name="request_date" required="required" step="3600" min="${min }" max="${max }">
+							<input type="datetime-local" name="request_date"
+							required="required" step="3600" min="${ min }" max="${ max }">
 						</td>
 					</tr>
 					<tr>
 						<td>電話番号</td>
-						<td colspan="2"><input type="tel" name="phoneNumber" required="required" /></td>
+						<td colspan="2"><input type="tel" name="phoneNumber"
+							required="required" /></td>
 					</tr>
 					<tr>
-						<td colspan="3" class="text-center"  style="width: 430px"><input type="submit" value="購入" /></td>
+						<td colspan="3" class="text-center" style="width: 430px"><input
+							type="submit" value="購入" /></td>
 					</tr>
 				</table>
 			</form>
