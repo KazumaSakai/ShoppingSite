@@ -12,12 +12,11 @@ import com.internousdev.ShoppingSite.util.DBConnector;
 public class ItemDAO {
 	public static List<ItemDTO> GetItemList(List<String> searchWordList, boolean ANDSearch)
 	{
-		String sql = "SELECT * FROM items WHERE item_name LIKE ?";
+		String sql = "SELECT * FROM items WHERE ";
 		List<ItemDTO> itemList = new ArrayList<ItemDTO>();
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
-
+			
 			StringBuilder sb = new StringBuilder();
 			
 			boolean isFirst = true;
@@ -27,16 +26,18 @@ public class ItemDAO {
 				if(isFirst)
 				{
 					isFirst = false;
-					sb.append("%").append(str).append("%");
+					sb.append("(item_name LIKE '%").append(str).append("%')");
 				}
 				else
 				{
-					sb.append(ANDSearch ? " AND %" : " OR %").append(str).append("%");
+					sb.append(ANDSearch ? " AND (item_name LIKE '%" : " OR item_name LIKE '%").append(str).append("%')");
 				}
 			}
 			
-			preparedStatement.setString(1, sb.toString());
+			sql += sb.toString();
 			
+			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
