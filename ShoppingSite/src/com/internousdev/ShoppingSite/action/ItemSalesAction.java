@@ -37,6 +37,7 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 				int y = time.getYear();
 				int m = time.getMonthValue();
 				
+				
 				boolean notAdd = true;
 				
 				for (ItemSalesDTO item : getList) {

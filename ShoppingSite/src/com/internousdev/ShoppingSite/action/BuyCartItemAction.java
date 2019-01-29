@@ -52,7 +52,7 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 				dto.setRequest_date(request_date);
 				
 				PurchaseHistoryDAO.AddPurchaseHistory(dto);
-				ItemSalesDAO.AddSalesData(dto.getItem_id(), dto.getQuantity());
+				ItemSalesDAO.AddSalesData(item.getItem_id(), item.getItem_count(), item.getItem_count() * item.getItem_price());
 			}
 		}
 

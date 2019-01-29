@@ -12,11 +12,11 @@ import com.internousdev.ShoppingSite.util.DBConnector;
 
 public class ItemSalesDAO
 {
-	public static boolean AddSalesData(int item_id, int quantity)
+	public static boolean AddSalesData(int item_id, int quantity, int price)
 	{
 		String select_sql = "SELECT COUNT(*) FROM sales WHERE item_id = ? AND year = ? AND month = ? FOR UPDATE";
-		String insert_sql = "INSERT INTO sales(item_id, year, month, quantity) VALUES(?, ?, ?, ?)";
-		String update_sql = "UPDATE sales SET quantity = quantity + ? WHERE item_id = ? AND year = ? AND month = ?";
+		String insert_sql = "INSERT INTO sales(item_id, year, month, quantity, price) VALUES(?, ?, ?, ?, ?)";
+		String update_sql = "UPDATE sales SET quantity = quantity + ?, price = price + ? WHERE item_id = ? AND year = ? AND month = ?";
 		String commit = "COMMIT";
 
 		int year = LocalDateTime.now().getYear();
@@ -30,18 +30,19 @@ public class ItemSalesDAO
 			p_select.setInt(3, month);
 			ResultSet resultSet = p_select.executeQuery();
 			
-
 			PreparedStatement p_update = DBConnector.connection().prepareStatement(update_sql);
 			p_update.setInt(1, quantity);
-			p_update.setInt(2, item_id);
-			p_update.setInt(3, year);
-			p_update.setInt(4, month);
+			p_update.setInt(2, price);
+			p_update.setInt(3, item_id);
+			p_update.setInt(4, year);
+			p_update.setInt(5, month);
 			
 			PreparedStatement p_insert = DBConnector.connection().prepareStatement(insert_sql);
 			p_insert.setInt(1, item_id);
 			p_insert.setInt(2, year);
 			p_insert.setInt(3, month);
 			p_insert.setInt(4, quantity);
+			p_insert.setInt(5, price);
 			
 			PreparedStatement p_commit = DBConnector.connection().prepareStatement(commit);
 			
@@ -74,7 +75,7 @@ public class ItemSalesDAO
 	{
 		List<ItemSalesDTO> list = new ArrayList<ItemSalesDTO>();
 		
-		String sql = "SELECT * FROM sales WHERE item_id = ? ORDER BY year, month DESC LIMIT 0, 12";
+		String sql = "SELECT * FROM sales WHERE item_id = ? ORDER BY year DESC, month DESC LIMIT 0, 12";
 		
 		try
 		{
@@ -92,7 +93,7 @@ public class ItemSalesDAO
 				dto.setYear(resultSet.getInt("year"));
 				dto.setMonth(resultSet.getInt("month"));
 				dto.setQuantity(resultSet.getInt("quantity"));
-				dto.setPrice(dto.getQuantity() * price);
+				dto.setPrice(resultSet.getInt("price"));
 				list.add(dto);
 			}
 		}
@@ -126,7 +127,7 @@ public class ItemSalesDAO
 			if (resultSet.next())
 			{
 				dto.setQuantity(resultSet.getInt("quantity"));
-				dto.setPrice(dto.getQuantity() * price);
+				dto.setPrice(resultSet.getInt("price"));
 			}
 		}
 		catch (SQLException e)

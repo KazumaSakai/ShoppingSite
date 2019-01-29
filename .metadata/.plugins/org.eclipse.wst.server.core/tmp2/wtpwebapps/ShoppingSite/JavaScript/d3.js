@@ -9,8 +9,6 @@ async function asyncStart()
 	var maxQuantity = d3.max(dataSet, function (d) { return d.quantity; });
 	var length = dataSet.length;
 	
-	console.log(dataSet);
-	
 	//	define
     var height = 500;
     var width = 700;
@@ -52,7 +50,7 @@ async function asyncStart()
         .text("日付");
 	
 	/*
-	 *		縦軸目盛 左　売上
+	 *		縦軸目盛 左 売上
 	 */
 	//	縦軸メモリサイズ
 	var yScale = d3.scaleLinear()
@@ -67,7 +65,7 @@ async function asyncStart()
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .call(axisY)
         .append("text")
-        .attr("fill", "black")
+        .attr("fill", "steelblue")
         .attr("text-anchor", "middle")
         .attr("x", -20)
         .attr("y", margin.top - 65)
@@ -92,7 +90,7 @@ async function asyncStart()
         .attr("transform", "translate(" + (width - margin.right) + "," + margin.top + ")")
         .call(axisY2)
         .append("text")
-        .attr("fill", "black")
+        .attr("fill", "red")
         .attr("text-anchor", "middle")
         .attr("x", 20)
         .attr("y", margin.top - 65)
@@ -123,6 +121,26 @@ async function asyncStart()
 
                 return origin - (graphHeight / maxPrice) * d.price;
             }));
+    
+    console.log(dataSet);
+    
+    cv.append("path")
+    .datum(dataSet)
+    .attr("fill", "none")
+    .attr("stroke", "red")
+    .attr("stroke-width", 2)
+    .attr("d", d3.line()  
+        .x(function (d, i)
+        {
+            var origin = margin.left;
+            return origin + (graphWidth / (length - 1)) * i + 1;
+        })
+        .y(function (d, i)
+        {
+            var origin = (height - margin.bottom);
+            return origin - (graphHeight / maxQuantity) * d.quantity;
+        }));
+    
 }
 
 asyncStart();

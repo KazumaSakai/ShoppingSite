@@ -29,14 +29,14 @@
 					<s:if test="myCart_quantity == 0">
 						<form action="AddItemAction">
 							<input type="number" name="request_Quantity" value='${ myCart_quantity }' min="0" style="width: 50px; text-align: right; padding: 2px">個
-							<input type="hidden" name="item_id" value='${ item_id }" />'>
+							<input type="hidden" name="item_id" value="${ item_id }">
 							<input type="submit" value="変更" />
 						</form>
 					</s:if>
 					<s:else>
 						<form action="ChangeCartItemQuantityAction">
 							<input type="number" name="newQuantity" value='${ myCart_quantity }' min="0" style="width: 50px; text-align: right; padding: 2px">個
-							<input type="hidden" name="item_id" value='${ item_id }" />'>
+							<input type="hidden" name="item_id" value="${ item_id }">
 							<input type="submit" value="変更" />
 						</form>
 					</s:else>
@@ -46,7 +46,7 @@
 				<td>
 					<form class="center" action="AdminAddItemQuantityAction">
 						<input type="number" name="quantity" value='1' style="width: 50px; text-align: right; padding: 2px">個
-						<input type="hidden" name="id" value='${ item_id }'>
+						<input type="hidden" name="id" value="${ item_id }">
 						<input type="submit" value="追加" />
 					</form>
 				</td>
