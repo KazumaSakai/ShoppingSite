@@ -9,84 +9,66 @@ import java.util.List;
 import com.internousdev.ShoppingSite.dto.AddressDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 
-public class AddressDAO
-{
-	public static String GetAddress(int id)
-	{
+public class AddressDAO {
+	public static String GetAddress(int id) {
 		String sql = "SELECT address FROM addressList WHERE id = ?";
-		
-		try
-		{
+
+		try {
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next())
-			{
+
+			if (resultSet.next()) {
 				return resultSet.getString("address");
 			}
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return "";
 	}
-	
-	public static boolean AddUserAddress(int user_id, String address)
-	{
+
+	public static boolean AddUserAddress(int user_id, String address) {
 		String sql = "INSERT INTO addressList(address, user_id) VALUES(?, ?)";
-		
-		try
-		{
+
+		try {
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setString(1, address);
 			preparedStatement.setInt(2, user_id);
 			int line = preparedStatement.executeUpdate();
-			if(line > 0)
-			{
+			if (line > 0) {
 				return true;
-			}
-			else
-			{
+			} else {
 				return false;
 			}
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
-	
-	public static List<AddressDTO> GetUserAddressList(int user_id)
-	{
+
+	public static List<AddressDTO> GetUserAddressList(int user_id) {
 		List<AddressDTO> list = new ArrayList<AddressDTO>();
-		
+
 		String sql = "SELECT id, address FROM addresslist WHERE user_id = ?";
-		
-		try
-		{
+
+		try {
 			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while (resultSet.next())
-			{
+			while (resultSet.next()) {
 				AddressDTO dto = new AddressDTO();
 				dto.setAddress(resultSet.getString("address"));
 				dto.setId(resultSet.getInt("id"));
 				dto.setUser_id(user_id);
 				list.add(dto);
 			}
-		}
-		catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 }

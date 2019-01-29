@@ -6,35 +6,30 @@ import java.sql.SQLException;
 
 import com.internousdev.ShoppingSite.util.DBConnector;
 
-public class BuyItemDAO
-{
-	public boolean buyItem(int item_id, int user_id, int request_quantity)
-	{
+public class BuyItemDAO {
+	public boolean buyItem(int item_id, int user_id, int request_quantity) {
 		String select = "SELECT item_count FROM items WHERE id = ? FOR UPDATE";
 		String update = "UPDATE items SET item_count = item_count - ? WHERE id = ?";
 		String commit = "COMMIT";
 
-		try
-		{
+		try {
 			PreparedStatement p_select = DBConnector.connection().prepareStatement(select);
 			p_select.setInt(1, item_id);
 
 			ResultSet resultSet = p_select.executeQuery();
-			if(resultSet.next())
-			{
+			if (resultSet.next()) {
 				int item_quantity = resultSet.getInt("item_count");
-				if(item_quantity < request_quantity)
-				{
+				if (item_quantity < request_quantity) {
 					request_quantity = item_quantity;
 				}
 
-				//	UPDATE
+				// UPDATE
 				PreparedStatement p_update = DBConnector.connection().prepareStatement(update);
 				p_update.setInt(1, request_quantity);
 				p_update.setInt(2, item_id);
 				p_update.executeUpdate();
 
-				//	COMMIT
+				// COMMIT
 				PreparedStatement p_commit = DBConnector.connection().prepareStatement(commit);
 				p_commit.executeUpdate();
 
@@ -42,9 +37,7 @@ public class BuyItemDAO
 
 				return true;
 			}
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 

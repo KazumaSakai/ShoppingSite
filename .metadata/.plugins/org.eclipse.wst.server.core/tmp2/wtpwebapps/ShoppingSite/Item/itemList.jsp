@@ -11,17 +11,19 @@
 		<jsp:attribute name="value">
 		
 			<h1>商品リスト</h1>
-			
+			<form action="ItemListAction">
+				<table class="inputTable" style="min-width: 500px">
+					<tr>
+						<td><input name="searchWords" type="text"/></td>
+						<td><input type="submit" value="検索" style="padding: 3px 20px" /></td>
+					</tr>
+				</table>
+			</form>
 			<jsp:include page="./itemListTable.jsp" />
 			
-			<s:if test="#session.isLogin == true">
+			<s:if test="#session.isLogin">
 				<p class="text-center">
-					<s:if test="#session.isAdmin != true">
-						<input class="linkButton" type="button" value="マイカート" onClick="location.href='<s:url action='MyCartAction'/>'">
-					</s:if>
-					<s:if test="#session.isAdmin == true">
-						<input class="linkButton" type="button" value="マイカート" onClick="location.href='<s:url action='MyCartAction'/>'">
-					</s:if>
+					<input class="linkButton" type="button" value="マイカート" onClick="location.href='<s:url action='MyCartAction'/>'">
 				</p>
 			</s:if>
 			

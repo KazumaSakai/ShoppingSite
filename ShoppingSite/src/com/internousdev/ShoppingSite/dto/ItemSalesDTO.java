@@ -1,7 +1,6 @@
 package com.internousdev.ShoppingSite.dto;
 
-public class ItemSalesDTO
-{
+public class ItemSalesDTO {
 	private int item_id;
 	private int year;
 	private int month;
