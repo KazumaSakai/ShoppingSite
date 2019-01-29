@@ -14,13 +14,11 @@
 			</tr>
 			<tr>
 				<td style="text-align: left">商品価格</td>
-				<td style="text-align: left"><input type="number" name="price" />
-					円</td>
+				<td style="text-align: left"><input type="number" name="price" /> 円</td>
 			</tr>
 			<tr>
 				<td style="text-align: left">販売個数</td>
-				<td style="text-align: left"><Finput type="number"
-					name="quantity" /> 個</td>
+				<td style="text-align: left"><input type="number" name="quantity" /> 個</td>
 			</tr>
 			<tr>
 				<td style="text-align: left">販売者ID</td>
@@ -28,16 +26,14 @@
 			</tr>
 			<tr>
 				<td style="text-align: left">画像数</td>
-				<td style="text-align: left"><input type="number"
-					name="image_num" /></td>
+				<td style="text-align: left"><input type="number" name="image_num" /></td>
 			</tr>
 			<tr>
 				<td style="text-align: left">説明</td>
 				<td style="text-align: left"><textarea name="description"></textarea>
 			</tr>
 			<tr>
-				<td colspan="2" class="text-center"><input type="submit"
-					value="商品を追加する" /></td>
+				<td colspan="2" class="text-center"><input type="submit" value="商品を追加する" /></td>
 			</tr>
 		</table>
 	</form>

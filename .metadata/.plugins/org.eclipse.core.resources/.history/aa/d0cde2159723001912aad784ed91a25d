@@ -33,7 +33,8 @@
 				<td style="text-align: left"><textarea name="description"></textarea>
 			</tr>
 			<tr>
-				<td colspan="2" class="text-center"><input type="submit" value="商品を追加する" /></td>
+				<td colspan="2" class="text-center"><input type="submit"
+					value="商品を追加する" /></td>
 			</tr>
 		</table>
 	</form>
