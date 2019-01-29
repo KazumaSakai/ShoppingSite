@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemListAction extends ActionSupport implements SessionAware
 {
+	private boolean andSearch;
 	private String searchWords;
 	private Map<String, Object> session;
 	private List<ItemDTO> itemList;
@@ -22,7 +23,6 @@ public class ItemListAction extends ActionSupport implements SessionAware
 	{
 		String result = SUCCESS;
 
-		
 		//	検索指定がある場合
 		if(searchWords != null && !searchWords.equals(""))
 		{
@@ -33,7 +33,7 @@ public class ItemListAction extends ActionSupport implements SessionAware
 			{
 				seachList.add(string);
 			}
-			itemList = ItemDAO.GetItemList(seachList, true);
+			itemList = ItemDAO.GetItemList(seachList, andSearch);
 		}
 		//	検索指定がなければ、条件を指定しない
 		else
@@ -78,4 +78,13 @@ public class ItemListAction extends ActionSupport implements SessionAware
 	public void setSearchWords(String searchWords) {
 		this.searchWords = searchWords;
 	}
+
+	public boolean getAndSearch() {
+		return andSearch;
+	}
+
+	public void setAndSearch(boolean andSearch) {
+		this.andSearch = andSearch;
+	}
+
 }
