@@ -1,6 +1,0 @@
-package com.internousdev.ShoppingSite.oauth;
-
-public class GoogleOAuthToken
-{
-	private String ccess_token;
-}
