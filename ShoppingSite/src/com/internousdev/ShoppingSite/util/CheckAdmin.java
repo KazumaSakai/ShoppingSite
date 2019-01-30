@@ -8,6 +8,6 @@ public class CheckAdmin
 	{
 		if(!CheckLogin.IsLogin(session)) return false;
 
-		return (boolean)session.get("isAdmin");
+		return SessionSafeGetter.getBoolean(session, "isAdmin");
 	}
 }

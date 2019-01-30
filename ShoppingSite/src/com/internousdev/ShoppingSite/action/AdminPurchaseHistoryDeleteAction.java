@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements SessionAware
@@ -15,6 +16,11 @@ public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements S
 	
 	public String execute()
 	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "AdminPurchaseHistoryAction");
+			return "needLogin";
+		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 		
 		boolean result= PurchaseHistoryDAO.DeletePurchaseHistory(id);

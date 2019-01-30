@@ -1,0 +1,16 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.util.Map;
+
+public class SessionSafeGetter
+{
+	public static <T> getString(Map<String, Object> session, String key)
+	{
+		Object valueObj = session.get(key);
+		
+		if(valueObj != null)
+		{
+			String string = (String)valueObj;
+		}
+	}
+}

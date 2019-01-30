@@ -17,7 +17,12 @@ public class MyPurchaseHistoryAction extends ActionSupport implements SessionAwa
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "MyPurchaseHistoryAction");
+			return "needLogin";
+		}
+		
 		int user_id = (int)session.get("user_id");
 		
 		purchaseHistoryList = PurchaseHistoryDAO.GetMyPurchaseHistory(user_id);

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GoSalesDataAction extends ActionSupport implements SessionAware
@@ -14,6 +15,11 @@ public class GoSalesDataAction extends ActionSupport implements SessionAware
 	
 	public String execute()
 	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoSalesDataAction");
+			return "needLogin";
+		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 		
 		return SUCCESS;

@@ -20,8 +20,6 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
 	private Map<String, Object> session;
 
-
-
 	public String execute()
 	{
 		itemDTO = ItemDAO.GetItem(id);

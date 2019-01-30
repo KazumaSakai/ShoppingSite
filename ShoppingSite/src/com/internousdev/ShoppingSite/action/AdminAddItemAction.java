@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemDAO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminAddItemAction extends ActionSupport implements SessionAware
@@ -21,6 +22,11 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "ItemListAction");
+			return "needLogin";
+		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 
 		ItemDAO.AddItem(quantity, price, name, description, seller, image_num);

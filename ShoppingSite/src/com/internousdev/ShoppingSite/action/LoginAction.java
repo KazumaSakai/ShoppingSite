@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.LoginDAO;
 import com.internousdev.ShoppingSite.dto.UserDTO;
+import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware
@@ -13,13 +14,14 @@ public class LoginAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private String login_user_id;
 	private String login_pass;
-	private String result;
 
+	private String redirectAction;
+	
 	public String execute()
 	{
 		UserDTO userDTO = new UserDTO();
 
-		result = ERROR;
+		String result = ERROR;
 		userDTO = LoginDAO.LoginAtUserId(login_user_id, login_pass);
 		session.put("login_user", userDTO);
 
@@ -33,7 +35,19 @@ public class LoginAction extends ActionSupport implements SessionAware
 			session.put("user_name", userDTO.getUser_name());
 			session.put("isLogin", true);
 		}
+		
+		login_user_id = null;
+		login_pass = null;
 
+		//	セッションにリダイレクト先のアクションが入っているならば、リダイレクトさせる;
+		redirectAction = SessionSafeGetter.getString(session, "LoginedRedirectAction");
+		if(!redirectAction.equals(""))
+		{
+			session.put("LoginedRedirectAction", "");
+			return "redirectAction";
+		}
+
+		
 		return result;
 	}
 
@@ -62,5 +76,15 @@ public class LoginAction extends ActionSupport implements SessionAware
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+
+	public String getRedirectAction() {
+		return redirectAction;
+	}
+
+
+	public void setRedirectAction(String redirectAction) {
+		this.redirectAction = redirectAction;
 	}
 }

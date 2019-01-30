@@ -25,8 +25,12 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "MyCartAction");
+			return "needLogin";
+		}
+		
 		int user_id = (int)session.get("user_id");
 		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
 

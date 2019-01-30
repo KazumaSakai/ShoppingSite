@@ -1,0 +1,18 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
+public class SessionSafeGetter
+{
+	public static <T> getString(Map<String, Object> session, String key, Type type)
+	{
+		Object valueObj = session.get(key);
+		
+		if(valueObj != null)
+		{
+			String string = (String)valueObj;
+		}
+	}
+}

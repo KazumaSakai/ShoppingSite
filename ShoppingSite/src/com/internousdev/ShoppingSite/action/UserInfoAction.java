@@ -13,7 +13,11 @@ public class UserInfoAction extends ActionSupport implements SessionAware
 	
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "UserInfoAction");
+			return "needLogin";
+		}
 		
 		return SUCCESS;
 	}

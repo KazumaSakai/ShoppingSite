@@ -15,7 +15,11 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 	
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "notLogin";
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			return "needLogin";
+		}
 		
 		UserDAO.ChangeUserPassword((int)session.get("user_id"),(String)session.get("login_user_id"), newPassword);
 		

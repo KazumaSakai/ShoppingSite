@@ -23,16 +23,13 @@
 				</tr>
 				<tr>
 					<td class="username">
-						<s:property value="username" />
-						<s:if test="user_id == #session.user_id || #session.isAdmin">
-							<span style="color: red; margin-left: 5px">
-								<a class="delete"
-								href="<s:url action='DeleteItemReviewAction?id=%{ id }' />">削除</a>
-							</span>
-						</s:if>
+						<s:property value="#session.user_name" />
 					</td>
 				</tr>
 			</table>
+			<div class="text-center">
+				<input type="button" class="linkButton" value="アイテムのページへ戻る" onclick="location.href='<s:url action='ItemPageAction?id=%{ item_id }'/>'" />
+			</div>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

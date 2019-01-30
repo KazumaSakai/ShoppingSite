@@ -17,8 +17,12 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "MyCartAction");
+			return "needLogin";
+		}
+		
 		int user_id = (int)session.get("user_id");
 		if(newQuantity <= 0) newQuantity = 0;
 

@@ -16,7 +16,12 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 	
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoAddAddressAction");
+			return "needLogin";
+		}
+		
 		
 		int user_id = (int)session.get("user_id");
 		

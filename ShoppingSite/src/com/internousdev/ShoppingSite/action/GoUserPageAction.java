@@ -13,8 +13,12 @@ public class GoUserPageAction  extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoUserPageAction");
+			return "needLogin";
+		}
+		
 		return SUCCESS;
 	}
 

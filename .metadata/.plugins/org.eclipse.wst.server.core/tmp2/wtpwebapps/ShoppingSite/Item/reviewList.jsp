@@ -12,13 +12,16 @@
 				<td class="comment"><s:property value="comment" /></td>
 			</tr>
 			<tr>
-				<td class="username"><s:property value="username" /> <s:if
-						test="user_id == #session.user_id || #session.isAdmin">
-						<span style="color: red; margin-left: 5px"> <a
-							class="delete"
-							href="<s:url action='DeleteItemReviewAction?id=%{ id }' />">削除</a>
+				<td class="username">
+					<s:property value="username" />
+					<s:if test="user_id == #session.user_id || #session.isAdmin">
+						<span style="color: red; margin-left: 5px">
+							<a class="delete" href="<s:url action='DeleteItemReviewAction?id=%{ id }' />">
+								削除
+							</a>
 						</span>
-					</s:if></td>
+					</s:if>
+				</td>
 			</tr>
 		</table>
 	</s:iterator>

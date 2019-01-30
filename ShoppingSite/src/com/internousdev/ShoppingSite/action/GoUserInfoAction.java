@@ -13,10 +13,11 @@ public class GoUserInfoAction  extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
-		session.put("confirmChangeUserName", false);
-		session.put("errorChangeUserName", false);
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			return "needLogin";
+		}
 		
 		return SUCCESS;
 	}

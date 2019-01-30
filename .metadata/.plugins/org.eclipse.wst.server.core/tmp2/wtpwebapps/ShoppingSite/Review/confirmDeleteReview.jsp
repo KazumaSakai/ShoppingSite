@@ -27,6 +27,9 @@
 					</td>
 				</tr>
 			</table>
+			<div class="text-center">
+				<input type="button" class="linkButton" value="アイテムのページへ戻る" onclick="location.href='<s:url action='ItemPageAction?id=%{ review.item_id }'/>'" />
+			</div>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

@@ -9,6 +9,7 @@ import com.internousdev.ShoppingSite.dao.AddressDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminPurchaseHistoryAction extends ActionSupport implements SessionAware
@@ -19,6 +20,11 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	
 	public String execute()
 	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "AdminPurchaseHistoryAction");
+			return "needLogin";
+		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 		
 		purchaseHistoryList = PurchaseHistoryDAO.GetAllPurchaseHistory(50 * page, 50);

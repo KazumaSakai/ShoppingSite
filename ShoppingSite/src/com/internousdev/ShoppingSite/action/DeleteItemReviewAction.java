@@ -19,9 +19,13 @@ public class DeleteItemReviewAction extends ActionSupport implements SessionAwar
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
 		review = ItemReviewDAO.GetReview(id);
+		
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "ItemPageAction?id=" + review.getItem_id());
+			return "needLogin";
+		}
 		
 		int user_id = (int)session.get("user_id");
 		boolean isMineReview = (ItemReviewDAO.GetUserId(id) == user_id);
@@ -29,7 +33,6 @@ public class DeleteItemReviewAction extends ActionSupport implements SessionAwar
 		{
 			return (ItemReviewDAO.DeleteReviwe(id)) ? SUCCESS : ERROR;
 		}
-
 		return ERROR;
 	}
 

@@ -25,8 +25,12 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "needLogin";
-
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoBuyAction");
+			return "needLogin";
+		}
+		
 		int user_id = (int)session.get("user_id");
 
 		myCartItemList = MyCartDAO.GetMyCart(user_id);

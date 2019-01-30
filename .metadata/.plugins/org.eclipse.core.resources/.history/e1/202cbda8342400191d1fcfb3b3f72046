@@ -1,0 +1,29 @@
+package com.internousdev.ShoppingSite.util;
+
+import java.util.Map;
+
+public class SessionSafeGetter
+{
+	public static String getString(Map<String, Object> session, String key)
+	{
+		Object valueObj = session.get(key);
+		String result = "";
+		
+		if(valueObj != null)
+		{
+			result = (String)valueObj;
+		}
+		
+		return result;
+	}
+
+	public static boolean getBoolean(Map<String, Object> session)
+	{
+		Object isLogin_obj = session.get("isLogin");
+		if(isLogin_obj == null)
+		{
+			return false;
+		}
+		return (boolean)isLogin_obj;
+	}
+}

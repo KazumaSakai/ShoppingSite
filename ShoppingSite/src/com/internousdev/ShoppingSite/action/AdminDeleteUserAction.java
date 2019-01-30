@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminDeleteUserAction extends ActionSupport implements SessionAware
@@ -15,6 +16,11 @@ public class AdminDeleteUserAction extends ActionSupport implements SessionAware
 
 	public String execute()
 	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "AdminUserListAction");
+			return "needLogin";
+		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 
 		UserDAO.DeleteUser(id);
