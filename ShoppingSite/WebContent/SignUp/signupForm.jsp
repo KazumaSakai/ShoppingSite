@@ -23,7 +23,7 @@
 			<td><input type="email" name="email" required="required" /></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input class="signupButton" type="submit"
+			<td colspan="2"><input class="loginButton" type="submit"
 				value="登録" style="padding: 3px 30px" /></td>
 		</tr>
 		<tr>

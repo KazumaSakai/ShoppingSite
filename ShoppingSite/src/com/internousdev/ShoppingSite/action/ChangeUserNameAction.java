@@ -15,11 +15,15 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 	
 	public String execute()
 	{
-		if(!CheckLogin.IsLogin(session)) return "notLogin";
+		if(!CheckLogin.IsLogin(session)) return "needLogin";
 		
 		int user_id = (int)session.get("user_id");
 		UserDAO.ChangeUserName(user_id, newUserName);
-		session.put("user_name", UserDAO.GetUserName(user_id)); 
+		
+		session.put("user_name", UserDAO.GetUserName(user_id));
+
+		session.put("confirmChangeUserName", true);
+		//session.put("errorChangeUserName", false);
 		
 		return SUCCESS;
 	}
@@ -40,6 +44,6 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	
+
 	
 }

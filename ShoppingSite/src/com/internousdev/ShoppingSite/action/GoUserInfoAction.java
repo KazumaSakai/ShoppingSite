@@ -15,6 +15,9 @@ public class GoUserInfoAction  extends ActionSupport implements SessionAware
 	{
 		if(!CheckLogin.IsLogin(session)) return "needLogin";
 
+		session.put("confirmChangeUserName", false);
+		session.put("errorChangeUserName", false);
+		
 		return SUCCESS;
 	}
 

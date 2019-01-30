@@ -17,7 +17,7 @@
 						<td>AND検索</td>
 						<td><input name="andSearch" type="radio" value="true"/></td>
 						<td><input name="searchWords" type="text"/></td>
-						<td><input type="submit" value="検索" style="padding: 3px 20px" /></td>
+						<td><input type="submit" value="検索" class="mini_linkButton" /></td>
 					</tr>
 				</table>
 			</form>
