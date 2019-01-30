@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 		
 			<h1>商品リスト</h1>
-			<form action="ItemListAction">
+			<form action="ItemListAction" method="post">
 				<table class="inputTable" style="min-width: 500px">
 					<tr>
 						<td>AND検索</td>

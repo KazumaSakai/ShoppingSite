@@ -15,7 +15,7 @@ public class SellerDAO
 		try
 		{
 			String sql = "SELECT * FROM sellers WHERE id = ?";
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 

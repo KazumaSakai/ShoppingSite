@@ -13,7 +13,7 @@ public class BuyItemDAO {
 		String commit = "COMMIT";
 
 		try {
-			PreparedStatement p_select = DBConnector.connection().prepareStatement(select);
+			PreparedStatement p_select = DBConnector.getConnection().prepareStatement(select);
 			p_select.setInt(1, item_id);
 
 			ResultSet resultSet = p_select.executeQuery();
@@ -24,13 +24,13 @@ public class BuyItemDAO {
 				}
 
 				// UPDATE
-				PreparedStatement p_update = DBConnector.connection().prepareStatement(update);
+				PreparedStatement p_update = DBConnector.getConnection().prepareStatement(update);
 				p_update.setInt(1, request_quantity);
 				p_update.setInt(2, item_id);
 				p_update.executeUpdate();
 
 				// COMMIT
-				PreparedStatement p_commit = DBConnector.connection().prepareStatement(commit);
+				PreparedStatement p_commit = DBConnector.getConnection().prepareStatement(commit);
 				p_commit.executeUpdate();
 
 				MyCartDAO.ChangeCartItemQuantity(item_id, user_id, 0);

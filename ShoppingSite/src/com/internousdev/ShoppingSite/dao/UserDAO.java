@@ -18,7 +18,7 @@ public class UserDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			
 			preparedStatement.setString(1, loginId);
 			preparedStatement.setString(2, email);
@@ -46,7 +46,7 @@ public class UserDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			
 			preparedStatement.setString(1, newPassword);
 			preparedStatement.setInt(2, id);
@@ -64,7 +64,7 @@ public class UserDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 
 			preparedStatement.setString(1, newName);
 			preparedStatement.setInt(2, id);
@@ -83,7 +83,7 @@ public class UserDAO
 		List<UserDTO> userList = new ArrayList<UserDTO>();
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);;
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);;
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next())
@@ -111,7 +111,7 @@ public class UserDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		}
@@ -127,7 +127,7 @@ public class UserDAO
 
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			 preparedStatement.setInt(1, user_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

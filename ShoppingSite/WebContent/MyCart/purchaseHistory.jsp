@@ -49,7 +49,9 @@
 							<s:elseif test="%{ shipmentState == 6 }">配達済</s:elseif>
 							<s:else>不明な配達状況</s:else>
 						</td>
-						<td style="padding: 5px"><s:property value="addressName" /></td>
+						<td style="padding: 5px">
+							<s:property value="addressName" />
+						</td>
 						<td style="padding: 5px">
 							<s:if test="%{ request_date == null }">指定なし</s:if>
 							<s:else>

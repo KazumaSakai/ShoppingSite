@@ -21,9 +21,11 @@
 	</tr>
 	<tr>
 		<td>販売会社</td>
-		<td><a
-			href="<s:url action='SellerAction?id=%{ itemDTO.seller.id }'/>"><s:property
-					value="itemDTO.seller.name" /></a></td>
+		<td>
+			<a href="<s:url action='SellerAction?id=%{ itemDTO.seller.id }'/>">
+				<s:property value="itemDTO.seller.name" />
+			</a>
+		</td>
 	</tr>
 	<tr>
 		<td>発売日</td>
@@ -32,12 +34,10 @@
 	<s:if test="#session.isLogin">
 		<tr>
 			<td class="text-center" colspan="2">
-				<form class="text-center" action="AddItemAction">
-					<input type="hidden" name="request_Quantity"
-						value='<s:property value="1" />' min="0"> <input
-						type="hidden" name="item_id"
-						value='<s:property value="itemDTO.item_id" />'> <input
-						type="submit" value="カートに追加する" />
+				<form class="text-center" action="AddItemAction" method="post">
+					<input type="hidden" name="request_Quantity" value='1' min="0">
+					<input type="hidden" name="item_id" value="${ itemDTO.item_id }">
+					<input type="submit" value="カートに追加する" />
 				</form>
 			</td>
 		</tr>

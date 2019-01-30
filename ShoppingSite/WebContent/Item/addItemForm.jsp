@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:if test="#session.isAdmin">
-	<form action="AdminAddItemAction">
+	<form action="AdminAddItemAction" method="post">
 		<table class="table">
 			<tr>
 				<th colspan="2">管理者用 商品追加フォーム</th>

@@ -17,7 +17,7 @@ public class MyCartDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, item_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -43,7 +43,7 @@ public class MyCartDAO
 			{
 				String delete = "DELETE FROM carts WHERE item_id = ? AND user_id = ?";
 
-				PreparedStatement p_delete = DBConnector.connection().prepareStatement(delete);
+				PreparedStatement p_delete = DBConnector.getConnection().prepareStatement(delete);
 				p_delete.setInt(1, item_id);
 				p_delete.setInt(2, user_id);
 				p_delete.executeUpdate();
@@ -52,7 +52,7 @@ public class MyCartDAO
 			{
 				String update = "UPDATE carts SET item_count = ? WHERE user_id = ? AND item_id = ?";
 
-				PreparedStatement p_update = DBConnector.connection().prepareStatement(update);
+				PreparedStatement p_update = DBConnector.getConnection().prepareStatement(update);
 				p_update.setInt(1, newCount);
 				p_update.setInt(2, user_id);
 				p_update.setInt(3, item_id);
@@ -73,7 +73,7 @@ public class MyCartDAO
 		try
 		{
 			String c_select = "SELECT COUNT(*) FROM carts WHERE user_id = ? AND item_id = ?";
-			PreparedStatement pc_select = DBConnector.connection().prepareStatement(c_select);
+			PreparedStatement pc_select = DBConnector.getConnection().prepareStatement(c_select);
 			pc_select.setInt(1, user_id);
 			pc_select.setInt(2, item_id);
 
@@ -81,7 +81,7 @@ public class MyCartDAO
 			if(!pc_result.next() || pc_result.getInt("COUNT(*)") == 0)
 			{
 				String c_insert = "INSERT INTO carts(user_id, item_id, item_count) VALUES(?, ?, ?)";
-				PreparedStatement pc_insert = DBConnector.connection().prepareStatement(c_insert);
+				PreparedStatement pc_insert = DBConnector.getConnection().prepareStatement(c_insert);
 				pc_insert.setInt(1, user_id);
 				pc_insert.setInt(2, item_id);
 				pc_insert.setInt(3, request_quantity);
@@ -91,7 +91,7 @@ public class MyCartDAO
 			else
 			{
 				String c_update = "UPDATE carts SET item_count = item_count + ? WHERE user_id = ? AND item_id = ?";
-				PreparedStatement pc_update = DBConnector.connection().prepareStatement(c_update);
+				PreparedStatement pc_update = DBConnector.getConnection().prepareStatement(c_update);
 				pc_update.setInt(1, request_quantity);
 				pc_update.setInt(2, user_id);
 				pc_update.setInt(3, item_id);
@@ -116,7 +116,7 @@ public class MyCartDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();

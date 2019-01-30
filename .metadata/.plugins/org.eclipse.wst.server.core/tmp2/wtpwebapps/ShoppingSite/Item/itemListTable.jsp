@@ -27,14 +27,14 @@
 			<s:if test="#session.isLogin">
 				<td class="center">
 					<s:if test="myCart_quantity == 0">
-						<form action="AddItemAction">
+						<form action="AddItemAction" method="post">
 							<input type="number" name="request_Quantity" value='${ myCart_quantity }' min="0" style="width: 50px; text-align: right; padding: 2px">個
 							<input type="hidden" name="item_id" value="${ item_id }">
 							<input type="submit" value="変更" />
 						</form>
 					</s:if>
 					<s:else>
-						<form action="ChangeCartItemQuantityAction">
+						<form action="ChangeCartItemQuantityAction" method="post">
 							<input type="number" name="newQuantity" value='${ myCart_quantity }' min="0" style="width: 50px; text-align: right; padding: 2px">個
 							<input type="hidden" name="item_id" value="${ item_id }">
 							<input type="submit" value="変更" />

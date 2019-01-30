@@ -23,8 +23,7 @@
 				<s:iterator value="myCartItemList">
 					<tr>
 						<td>
-							<img src="./Images/ItemImages/${ item_id }/1.jpg"
-							style="width: 50px" />
+							<img src="./Images/ItemImages/${ item_id }/1.jpg" style="width: 50px" />
 						</td>
 						<td><s:property value="item_name" /></td>
 						<td><s:property value="item_price" />円</td>
@@ -36,12 +35,13 @@
 						合計金額
 					</td>
 					<td colspan="2">
-						<span style="color: red; font-weight: bold"><s:property
-								value="totalPrice" />円</span>
+						<span style="color: red; font-weight: bold">
+							<s:property value="totalPrice" />円
+						</span>
 					</td>
 				</tr>
 			</table>
-			<form action="BuyCartItemAction" style="margin: 10px">
+			<s:form action="BuyCartItemAction" style="margin: 10px">
 				<table class="center table" border="1">
 					<tr>
 						<td>配達先</td>
@@ -59,21 +59,22 @@
 					<tr>
 						<td>配達予定日</td>
 						<td colspan="2">
-							<input type="datetime-local" name="request_date"
-							required="required" step="3600" min="${ min }" max="${ max }">
+							<input type="datetime-local" name="request_date" required="required" step="3600" min="${ min }" max="${ max }">
 						</td>
 					</tr>
 					<tr>
 						<td>電話番号</td>
-						<td colspan="2"><input type="tel" name="phoneNumber"
-							required="required" /></td>
+						<td colspan="2">
+							<input type="tel" name="phoneNumber" required="required" />
+						</td>
 					</tr>
 					<tr>
-						<td colspan="3" class="text-center" style="width: 430px"><input
-							type="submit" value="購入" /></td>
+						<td colspan="3" class="text-center" style="width: 430px">
+							<input type="submit" value="購入" />
+						</td>
 					</tr>
 				</table>
-			</form>
+			</s:form>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

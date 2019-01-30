@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<form action="PostItemReviewAction">
+<form action="PostItemReviewAction" method="post">
 	<input type="hidden" name="item_id"
 		value="<c:out value='${itemDTO.item_id }' />" />
 	<table class="table">

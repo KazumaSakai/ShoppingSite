@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminDeleteItemAction extends ActionSupport implements SessionAware
 {
-	private int id;
+	private int item_id;
 	private Map<String, Object> session;
 
 	public String execute()
@@ -23,17 +23,9 @@ public class AdminDeleteItemAction extends ActionSupport implements SessionAware
 		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 
-		ItemDAO.DeleteItem(id);
+		ItemDAO.DeleteItem(item_id);
 
 		return SUCCESS;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public Map<String, Object> getSession() {
@@ -42,6 +34,14 @@ public class AdminDeleteItemAction extends ActionSupport implements SessionAware
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public int getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
 	}
 
 

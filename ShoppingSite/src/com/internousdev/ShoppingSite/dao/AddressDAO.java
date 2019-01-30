@@ -14,7 +14,7 @@ public class AddressDAO {
 		String sql = "SELECT address FROM addressList WHERE id = ?";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -32,7 +32,7 @@ public class AddressDAO {
 		String sql = "INSERT INTO addressList(address, user_id) VALUES(?, ?)";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setString(1, address);
 			preparedStatement.setInt(2, user_id);
 			int line = preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class AddressDAO {
 		String sql = "SELECT id, address FROM addresslist WHERE user_id = ?";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 

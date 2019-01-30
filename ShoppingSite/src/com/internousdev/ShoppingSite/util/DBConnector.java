@@ -7,13 +7,13 @@ import com.mysql.jdbc.Connection;
 
 public class DBConnector
 {
-	private static String driverName = "com.mysql.jdbc.Driver";
-	private static String url = "jdbc:mysql://localhost/ShoppingSite";
+	private static final String driverName = "com.mysql.jdbc.Driver";
+	private static final String url = "jdbc:mysql://localhost/ShoppingSite";
 
-	private static String user = "root";
-	private static String password = "mysql";
+	private static final String user = "root";
+	private static final String password = "mysql";
 
-	public static Connection connection()
+	public static Connection getConnection()
 	{
 		Connection connection= null;
 

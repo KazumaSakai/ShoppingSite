@@ -25,19 +25,18 @@
 							<img src="./Images/ItemImages/${item_id }/1.jpg"
 								style="width: 50px" />
 						</td>
-						<td><a
-								href="<s:url action='ItemPageAction.action?id=%{ item_id }' />"><s:property
-										value="item_name" /></a></td>
+						<td>
+							<a href="<s:url action='ItemPageAction.action?id=%{ item_id }' />">
+								<s:property value="item_name" />
+							</a>
+						</td>
 						<td><s:property value="item_price" />円</td>
 						<td><s:property value="item_count" />個</td>
 						<td>
-							<form action="ChangeCartItemQuantityAction">
+							<form action="ChangeCartItemQuantityAction" method="post">
 								<input type="hidden" name="toCart" value="true" />
-								<input type="number" name="newQuantity"
-										value='<s:property value="item_count" />' min="0"
-										style="width: 50px; text-align: right; padding: 2px">個
-								<input type="hidden" name="item_id"
-										value='<s:property value="item_id" />'>
+								<input type="number" name="newQuantity" value='${ item_count }' min="0" style="width: 50px; text-align: right; padding: 2px">個
+								<input type="hidden" name="item_id" value='${ item_id }'>
 								<input type="submit" value="変更" />
 							</form>
 						</td>
@@ -54,8 +53,7 @@
 				</tr>
 				<tr>
 					<td colspan="5" class="text-center form">
-						<input class="linkButton" type="submit" value="購入する"
-							onclick="location.href='<s:url action='GoBuyAction' />'" />
+						<input class="linkButton" type="submit" value="購入する" onclick="location.href='<s:url action='GoBuyAction' />'" />
 					</td>
 				</tr>
 			</table>

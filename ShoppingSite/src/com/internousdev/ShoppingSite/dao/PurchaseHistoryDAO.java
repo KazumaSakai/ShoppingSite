@@ -17,7 +17,7 @@ public class PurchaseHistoryDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.setInt(2, user_id);
 			
@@ -45,7 +45,7 @@ public class PurchaseHistoryDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			
 			int line = preparedStatement.executeUpdate();
@@ -73,7 +73,7 @@ public class PurchaseHistoryDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, begin);
 			preparedStatement.setInt(2, length);
 			
@@ -126,7 +126,7 @@ public class PurchaseHistoryDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -181,7 +181,7 @@ public class PurchaseHistoryDAO
 			
 			try
 			{
-				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+				PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 				preparedStatement.setInt(1, purchasehistoryDTO.getQuantity());
 				preparedStatement.setInt(2, purchasehistoryDTO.getItem_id());
 				preparedStatement.setInt(3, purchasehistoryDTO.getUser_id());
@@ -207,7 +207,7 @@ public class PurchaseHistoryDAO
 			
 			try
 			{
-				PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+				PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 				preparedStatement.setInt(1, purchasehistoryDTO.getItem_id());
 				preparedStatement.setInt(2, purchasehistoryDTO.getUser_id());
 				preparedStatement.setInt(3, purchasehistoryDTO.getQuantity());
@@ -241,7 +241,7 @@ public class PurchaseHistoryDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
 			preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
 			preparedStatement.setInt(3, preparedForShipmentDTO.getAddress());

@@ -21,27 +21,27 @@ public class ItemSalesDAO {
 		int month = LocalDateTime.now().getMonth().getValue();
 
 		try {
-			PreparedStatement p_select = DBConnector.connection().prepareStatement(select_sql);
+			PreparedStatement p_select = DBConnector.getConnection().prepareStatement(select_sql);
 			p_select.setInt(1, item_id);
 			p_select.setInt(2, year);
 			p_select.setInt(3, month);
 			ResultSet resultSet = p_select.executeQuery();
 
-			PreparedStatement p_update = DBConnector.connection().prepareStatement(update_sql);
+			PreparedStatement p_update = DBConnector.getConnection().prepareStatement(update_sql);
 			p_update.setInt(1, quantity);
 			p_update.setInt(2, price);
 			p_update.setInt(3, item_id);
 			p_update.setInt(4, year);
 			p_update.setInt(5, month);
 
-			PreparedStatement p_insert = DBConnector.connection().prepareStatement(insert_sql);
+			PreparedStatement p_insert = DBConnector.getConnection().prepareStatement(insert_sql);
 			p_insert.setInt(1, item_id);
 			p_insert.setInt(2, year);
 			p_insert.setInt(3, month);
 			p_insert.setInt(4, quantity);
 			p_insert.setInt(5, price);
 
-			PreparedStatement p_commit = DBConnector.connection().prepareStatement(commit);
+			PreparedStatement p_commit = DBConnector.getConnection().prepareStatement(commit);
 
 			if (resultSet.next()) {
 				int i = resultSet.getInt(1);
@@ -68,7 +68,7 @@ public class ItemSalesDAO {
 		String sql = "SELECT * FROM sales WHERE item_id = ? ORDER BY year DESC, month DESC LIMIT 0, 12";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 
 			int price = ItemDAO.GetItem(item_id).getItem_price();
@@ -97,7 +97,7 @@ public class ItemSalesDAO {
 		String sql = "SELECT quantity FROM sales WHERE item_id = ? AND year = ? AND month = ?";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 			preparedStatement.setInt(2, year);
 			preparedStatement.setInt(3, month);

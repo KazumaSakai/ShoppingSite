@@ -19,7 +19,7 @@ public class ItemReviewDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 
 			returnLine = preparedStatement.executeUpdate();
@@ -37,7 +37,7 @@ public class ItemReviewDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -63,7 +63,7 @@ public class ItemReviewDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 			preparedStatement.setInt(2, user_id);
 			preparedStatement.setString(3, title);
@@ -86,7 +86,7 @@ public class ItemReviewDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -117,7 +117,7 @@ public class ItemReviewDAO
 
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			 preparedStatement.setInt(1, item_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

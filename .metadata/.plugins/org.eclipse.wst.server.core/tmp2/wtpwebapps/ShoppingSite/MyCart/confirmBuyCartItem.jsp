@@ -23,8 +23,7 @@
 				<s:iterator value="buyItemList">
 					<tr>
 						<td>
-							<img src="./Images/ItemImages/${item_id }/1.jpg"
-							style="width: 50px" />
+							<img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px" />
 						</td>
 						<td><s:property value="item_name" /></td>
 						<td><s:property value="item_price" />円</td>
@@ -36,7 +35,7 @@
 						合計金額
 					</td>
 					<td colspan="2">
-						<c:out value="${totalPrice }" />円
+						<s:property value="totalPrice" />円
 					</td>
 				</tr>
 			</table>

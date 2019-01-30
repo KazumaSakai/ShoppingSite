@@ -36,7 +36,7 @@ public class ItemDAO {
 			
 			sql += sb.toString();
 			
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -73,7 +73,7 @@ public class ItemDAO {
 		List<ItemDTO> itemList = new ArrayList<ItemDTO>();
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -109,7 +109,7 @@ public class ItemDAO {
 		String sql = "INSERT INTO items(item_name, item_price, item_count, description, seller, image_num) VALUES(?, ?, ?, ?, ?, ?)";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setString(1, name);
 			preparedStatement.setInt(2, price);
 			preparedStatement.setInt(3, quantity);
@@ -127,7 +127,7 @@ public class ItemDAO {
 		String sql = "UPDATE items SET item_count = item_count + ? WHERE id = ?";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, quantity);
 			preparedStatement.setInt(2, id);
 
@@ -141,7 +141,7 @@ public class ItemDAO {
 		String sql = "DELETE FROM items WHERE id = ?";
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -154,7 +154,7 @@ public class ItemDAO {
 		ItemDTO itemDTO = new ItemDTO();
 
 		try {
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();

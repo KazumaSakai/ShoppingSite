@@ -10,7 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>住所を追加</h1>
-			<form action="AddAddressAction" class="inputTable">
+			<form action="AddAddressAction" class="inputTable" method="post">
 				<input type="hidden" name="goBuy" value="<s:property value='goBuy'/>" />
 				<table class="center">
 					<tr>

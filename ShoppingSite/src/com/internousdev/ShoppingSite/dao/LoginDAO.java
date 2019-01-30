@@ -17,7 +17,7 @@ public class LoginDAO
 
 	 	try
 	 	{
-			PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			preparedStatement.setString(1, email);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -60,7 +60,7 @@ public class LoginDAO
 		 UserDTO userDTO = new UserDTO();
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			 preparedStatement.setString(1, login_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

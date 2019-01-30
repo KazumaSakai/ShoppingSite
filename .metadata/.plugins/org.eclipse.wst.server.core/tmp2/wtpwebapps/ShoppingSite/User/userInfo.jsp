@@ -18,14 +18,14 @@
 			<s:if test="#session.isLogin">
 				<table class="inputTable">
 					<tr>
-						<form action="ChangeUserNameAction">
+						<form action="ChangeUserNameAction" method="post">
 							<td>ユーザー名</td>
 							<td><input type="text" name="newUserName" value='<s:property value="#session.user_name"/>' /></td>
 							<td><input type="submit" value="変更" class="mini_linkButton" /></td>
 						</form>
 					</tr>
 					<tr>
-						<form action="ChangeUserPasswordAction">
+						<form action="ChangeUserPasswordAction" method="post">
 							<td>パスワード</td>
 							<td><input type="password" name="newPassword" /></td>
 							<td><input type="submit" value="変更" class="mini_linkButton" /></td>

@@ -20,7 +20,7 @@ public class SignUpDAO
 		 try
 		 {
 			 
-			 PreparedStatement preparedStatement = DBConnector.connection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
 			 preparedStatement.setString(1, login_id);
 			 preparedStatement.setString(2, email);
 			 preparedStatement.setString(3, Passworder.getSafetyPassword(login_pass, login_id));
