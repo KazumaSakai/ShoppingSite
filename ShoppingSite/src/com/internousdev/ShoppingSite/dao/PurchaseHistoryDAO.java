@@ -8,16 +8,31 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
 
 public class PurchaseHistoryDAO
 {
+	private Connection connection;
+	public PurchaseHistoryDAO()
+	{
+		this.connection = DBConnector.getConnection();
+	}
+
+	public boolean deletePurchaseHistory(int id, int user_id)
+	{
+		return DeletePurchaseHistory(connection, id, user_id);
+	}
 	public static boolean DeletePurchaseHistory(int id, int user_id)
+	{
+		return DeletePurchaseHistory(DBConnector.getConnection(), id, user_id);
+	}
+	public static boolean DeletePurchaseHistory(Connection connection, int id, int user_id)
 	{
 		String sql = "DELETE FROM purchasehistorys WHERE id = ? AND user_id = ?";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			preparedStatement.setInt(2, user_id);
 			
@@ -39,13 +54,21 @@ public class PurchaseHistoryDAO
 		return false;
 	}
 	
+	public boolean deletePurchaseHistory(int id)
+	{
+		return DeletePurchaseHistory(connection, id);
+	}
 	public static boolean DeletePurchaseHistory(int id)
+	{
+		return DeletePurchaseHistory(DBConnector.getConnection(), id);
+	}
+	public static boolean DeletePurchaseHistory(Connection connection,int id)
 	{
 		String sql = "DELETE FROM purchasehistorys WHERE id = ?";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			
 			int line = preparedStatement.executeUpdate();
@@ -66,47 +89,41 @@ public class PurchaseHistoryDAO
 		return false;
 	}
 	
+	public List<PurchaseHistoryDTO> getAllPurchaseHistory(int begin, int length)
+	{
+		return GetAllPurchaseHistory(connection, begin, length);
+	}
 	public static List<PurchaseHistoryDTO> GetAllPurchaseHistory(int begin, int length)
+	{
+		return GetAllPurchaseHistory(DBConnector.getConnection(), begin, length);
+	}
+	public static List<PurchaseHistoryDTO> GetAllPurchaseHistory(Connection connection,int begin, int length)
 	{
 		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id ORDER BY insert_date DESC LIMIT ?, ? ";
 		List<PurchaseHistoryDTO> list = new ArrayList<PurchaseHistoryDTO>();
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, begin);
 			preparedStatement.setInt(2, length);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next())
 			{
-				int get_id = resultSet.getInt("id");
-				int get_item_id = resultSet.getInt("item_id");
-				int get_quantity = resultSet.getInt("quantity");
-				int get_user_id = resultSet.getInt("user_id");
-				int get_shipmentState = resultSet.getInt("shipmentState");
-				int get_addres = resultSet.getInt("address");
-				String get_phoneNumber = resultSet.getString("phoneNumber");
-				String get_insert_date = resultSet.getString("insert_date");
-				String get_request_date = resultSet.getString("request_date");
-				
-				String get_item_name = resultSet.getString("item_name");
-				int get_item_price = resultSet.getInt("item_price");
-
 				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
 				
-				dto.setId(get_id);
-				dto.setItem_id(get_item_id);
-				dto.setQuantity(get_quantity);
-				dto.setUser_id(get_user_id);
-				dto.setAddress(get_addres);
-				dto.setPhoneNumber(get_phoneNumber);
-				dto.setShipmentState(get_shipmentState);
-				dto.setInsert_date(get_insert_date);
-				dto.setRequest_date(get_request_date);
-				
-				dto.setItem_name(get_item_name);
-				dto.setItem_price(get_item_price);
+				dto.setId(resultSet.getInt("id"));
+				dto.setItem_id(resultSet.getInt("item_id"));
+				dto.setQuantity(resultSet.getInt("quantity"));
+				dto.setUser_id(resultSet.getInt("user_id"));
+				dto.setAddress(resultSet.getInt("address"));
+				dto.setPhoneNumber(resultSet.getString("phoneNumber"));
+				dto.setShipmentState(resultSet.getInt("shipmentState"));
+				dto.setInsert_date(resultSet.getString("insert_date"));
+				dto.setRequest_date(resultSet.getString("request_date"));
+				dto.setItem_name(resultSet.getString("item_name"));
+				dto.setItem_price(resultSet.getInt("item_price"));
 				
 				list.add(dto);
 			}
@@ -118,47 +135,41 @@ public class PurchaseHistoryDAO
 		
 		return list;
 	}
-	
-	public static List<PurchaseHistoryDTO>  GetMyPurchaseHistory(int user_id)
+
+	public List<PurchaseHistoryDTO> getMyPurchaseHistory(int user_id)
+	{
+		return GetMyPurchaseHistory(connection, user_id);
+	}
+	public static List<PurchaseHistoryDTO> GetMyPurchaseHistory(int user_id)
+	{
+		return GetMyPurchaseHistory(DBConnector.getConnection(), user_id);
+	}
+	public static List<PurchaseHistoryDTO> GetMyPurchaseHistory(Connection connection, int user_id)
 	{
 		String sql = "SELECT  PH.*, I.item_name, I.item_price FROM purchasehistorys AS PH LEFT JOIN items AS I ON PH.item_id = I.id WHERE PH.user_id = ? ORDER BY insert_date DESC";
 		List<PurchaseHistoryDTO> list = new ArrayList<PurchaseHistoryDTO>();
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next())
 			{
-				int get_id = resultSet.getInt("id");
-				int get_item_id = resultSet.getInt("item_id");
-				int get_quantity = resultSet.getInt("quantity");
-				int get_user_id = resultSet.getInt("user_id");
-				int get_shipmentState = resultSet.getInt("shipmentState");
-				int get_addres = resultSet.getInt("address");
-				String get_phoneNumber = resultSet.getString("phoneNumber");
-				String get_insert_date = resultSet.getString("insert_date");
-				String get_request_date = resultSet.getString("request_date");
-				
-				String get_item_name = resultSet.getString("item_name");
-				int get_item_price = resultSet.getInt("item_price");
-
 				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
-				
-				dto.setId(get_id);
-				dto.setItem_id(get_item_id);
-				dto.setQuantity(get_quantity);
-				dto.setUser_id(get_user_id);
-				dto.setAddress(get_addres);
-				dto.setPhoneNumber(get_phoneNumber);
-				dto.setShipmentState(get_shipmentState);
-				dto.setInsert_date(get_insert_date);
-				dto.setRequest_date(get_request_date);
-				
-				dto.setItem_name(get_item_name);
-				dto.setItem_price(get_item_price);
+
+				dto.setId(resultSet.getInt("id"));
+				dto.setItem_id(resultSet.getInt("item_id"));
+				dto.setQuantity(resultSet.getInt("quantity"));
+				dto.setUser_id(resultSet.getInt("user_id"));
+				dto.setAddress(resultSet.getInt("address"));
+				dto.setPhoneNumber(resultSet.getString("phoneNumber"));
+				dto.setShipmentState(resultSet.getInt("shipmentState"));
+				dto.setInsert_date(resultSet.getString("insert_date"));
+				dto.setRequest_date(resultSet.getString("request_date"));
+				dto.setItem_name(resultSet.getString("item_name"));
+				dto.setItem_price(resultSet.getInt("item_price"));
 				
 				list.add(dto);
 			}
@@ -170,8 +181,16 @@ public class PurchaseHistoryDAO
 		
 		return list;
 	}
-	
+
+	public boolean addPurchaseHistory(PurchaseHistoryDTO purchasehistoryDTO)
+	{
+		return AddPurchaseHistory(connection, purchasehistoryDTO);
+	}
 	public static boolean AddPurchaseHistory(PurchaseHistoryDTO purchasehistoryDTO)
+	{
+		return AddPurchaseHistory(DBConnector.getConnection(), purchasehistoryDTO);
+	}
+	public static boolean AddPurchaseHistory(Connection connection, PurchaseHistoryDTO purchasehistoryDTO)
 	{
 		boolean exists = ExistsPurchaseHistory(purchasehistoryDTO);
 		
@@ -181,7 +200,7 @@ public class PurchaseHistoryDAO
 			
 			try
 			{
-				PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, purchasehistoryDTO.getQuantity());
 				preparedStatement.setInt(2, purchasehistoryDTO.getItem_id());
 				preparedStatement.setInt(3, purchasehistoryDTO.getUser_id());
@@ -207,7 +226,7 @@ public class PurchaseHistoryDAO
 			
 			try
 			{
-				PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, purchasehistoryDTO.getItem_id());
 				preparedStatement.setInt(2, purchasehistoryDTO.getUser_id());
 				preparedStatement.setInt(3, purchasehistoryDTO.getQuantity());
@@ -234,14 +253,22 @@ public class PurchaseHistoryDAO
 		}
 		return false;
 	}
-	
+
+	public boolean existsPurchaseHistory(PurchaseHistoryDTO preparedForShipmentDTO)
+	{
+		return ExistsPurchaseHistory(connection, preparedForShipmentDTO);
+	}
 	public static boolean ExistsPurchaseHistory(PurchaseHistoryDTO preparedForShipmentDTO)
+	{
+		return ExistsPurchaseHistory(DBConnector.getConnection(), preparedForShipmentDTO);
+	}
+	public static boolean ExistsPurchaseHistory(Connection connection, PurchaseHistoryDTO preparedForShipmentDTO)
 	{
 		String sql = "SELECT COUNT(*) FROM purchasehistorys WHERE item_id = ? AND user_id = ? AND address = ? AND shipmentState = 0";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, preparedForShipmentDTO.getItem_id());
 			preparedStatement.setInt(2, preparedForShipmentDTO.getUser_id());
 			preparedStatement.setInt(3, preparedForShipmentDTO.getAddress());

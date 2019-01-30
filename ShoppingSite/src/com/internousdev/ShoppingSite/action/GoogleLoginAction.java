@@ -29,7 +29,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		String email = gMailInfo.emailAddress;
 		String pass = "AGgh_+" + tokenInfo.user_id;
 		String safePass = Passworder.getSafetyPassword(pass, email);
-
+		
 		UserDTO userDTO = new UserDTO();
 		userDTO = LoginDAO.LoginAtEmail(email, safePass);
 		if(userDTO.getOauthUser())
@@ -38,7 +38,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		}
 		
 		session.put("login_user", userDTO);
-
+		
 		if(((UserDTO)session.get("login_user")).getLoginFlg())
 		{
 			session.put("isAdmin", userDTO.getAdmin());

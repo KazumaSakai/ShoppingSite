@@ -9,16 +9,31 @@ import java.util.List;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.internousdev.ShoppingSite.util.Passworder;
+import com.mysql.jdbc.Connection;
 
 public class UserDAO
 {
+	private Connection connection;
+	public UserDAO()
+	{
+		this.connection = DBConnector.getConnection();
+	}
+	
+	public boolean exist(String email, String loginId)
+	{
+		return Exist(connection, email, loginId);
+	}
 	public static boolean Exist(String email, String loginId)
+	{
+		return Exist(DBConnector.getConnection(), email, loginId);
+	}
+	public static boolean Exist(Connection connection, String email, String loginId)
 	{
 		String sql = "SELECT COUNT(*) FROM `users` WHERE email = ? OR login_id = ?";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			
 			preparedStatement.setString(1, loginId);
 			preparedStatement.setString(2, email);
@@ -38,7 +53,15 @@ public class UserDAO
 		return true;
 	}
 	
-	public static void ChangeUserPassword(int id, String login_id, String newPassword)
+	public boolean changeUserPassword(int id, String login_id, String newPassword)
+	{
+		return ChangeUserPassword(connection, id, login_id, newPassword);
+	}
+	public static boolean ChangeUserPassword(int id, String login_id, String newPassword)
+	{
+		return ChangeUserPassword(DBConnector.getConnection(), id, login_id, newPassword);
+	}
+	public static boolean ChangeUserPassword(Connection connection, int id, String login_id, String newPassword)
 	{
 		newPassword = Passworder.getSafetyPassword(newPassword, login_id);
 		
@@ -46,46 +69,75 @@ public class UserDAO
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			
 			preparedStatement.setString(1, newPassword);
 			preparedStatement.setInt(2, id);
-			preparedStatement.executeUpdate();
+			int line = preparedStatement.executeUpdate();
+			
+			if(line > 0)
+			{
+				return true;
+			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 	
-	public static void ChangeUserName(int id, String newName)
+	public boolean changeUserName(int id, String newName)
+	{
+		return ChangeUserName(connection, id, newName);
+	}
+	public static boolean ChangeUserName(int id, String newName)
+	{
+		return ChangeUserName(DBConnector.getConnection(), id, newName);
+	}
+	public static boolean ChangeUserName(Connection connection, int id, String newName)
 	{
 		String sql = "UPDATE users SET user_name = ? WHERE id = ?";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
-
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, newName);
 			preparedStatement.setInt(2, id);
-			preparedStatement.executeUpdate();
+			
+			int line = preparedStatement.executeUpdate();
+			if(line > 0)
+			{
+				return true;
+			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
 	
+	public List<UserDTO> getUserList()
+	{
+		return GetUserList(connection);
+	}
 	public static List<UserDTO> GetUserList()
+	{
+		return GetUserList(DBConnector.getConnection());
+	}
+	public static List<UserDTO> GetUserList(Connection connection)
 	{
 		String sql = "SELECT id, admin, user_name, insert_date FROM users";
 
 		List<UserDTO> userList = new ArrayList<UserDTO>();
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);;
-
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
+			
 			while (resultSet.next())
 			{
 				UserDTO userDTO = new UserDTO();
@@ -104,30 +156,53 @@ public class UserDAO
 
 		return userList;
 	}
-
-	public static void DeleteUser(int id)
+	
+	public boolean deleteUser(int id)
+	{
+		return DeleteUser(connection, id);
+	}
+	public static boolean DeleteUser(int id)
+	{
+		return DeleteUser(DBConnector.getConnection(), id);
+	}
+	public static boolean DeleteUser(Connection connection, int id)
 	{
 		String sql ="DELETE FROM users WHERE id = ?";
-
+		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			preparedStatement.executeUpdate();
+			int line = preparedStatement.executeUpdate();
+			
+			if(line > 0)
+			{
+				return true;
+			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
+		
+		return false;
 	}
-
+	
+	public String getUserName(int user_id)
+	{
+		return GetUserName(connection, user_id);
+	}
 	public static String GetUserName(int user_id)
+	{
+		return GetUserName(DBConnector.getConnection(), user_id);
+	}
+	public static String GetUserName(Connection connection, int user_id)
 	{
 		 String sql = "SELECT user_name FROM users WHERE id = ?";
 
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			 preparedStatement.setInt(1, user_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

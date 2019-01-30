@@ -7,17 +7,32 @@ import java.sql.SQLException;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.internousdev.ShoppingSite.util.Passworder;
+import com.mysql.jdbc.Connection;
 
 public class LoginDAO
 {
+	private Connection connection;
+	public LoginDAO()
+	{
+		this.connection = DBConnector.getConnection();
+	}
+
+	public UserDTO loginAtEmail(String email, String login_pass)
+	{
+		return LoginAtEmail(connection, email, login_pass);
+	}
 	public static UserDTO LoginAtEmail(String email, String login_pass)
+	{
+		return LoginAtEmail(DBConnector.getConnection(), email, login_pass);
+	}
+	public static UserDTO LoginAtEmail(Connection connection, String email, String login_pass)
 	{
 		String sql = "SELECT * FROM users WHERE email = ?";
 	 	UserDTO userDTO = new UserDTO();
 
 	 	try
 	 	{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, email);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -53,14 +68,22 @@ public class LoginDAO
 		 
 		 return userDTO;
 	}
-	
+
+	public UserDTO loginAtUserId(String login_id, String login_pass)
+	{
+		return LoginAtUserId(connection, login_id, login_pass);
+	}
 	public static UserDTO LoginAtUserId(String login_id, String login_pass)
+	{
+		return LoginAtUserId(DBConnector.getConnection(), login_id, login_pass);
+	}
+	public static UserDTO LoginAtUserId(Connection connection, String login_id, String login_pass)
 	{
 		 String sql = "SELECT * FROM users WHERE login_id = ?";
 		 UserDTO userDTO = new UserDTO();
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			 preparedStatement.setString(1, login_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

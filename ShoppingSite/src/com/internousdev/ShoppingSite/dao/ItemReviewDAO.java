@@ -8,10 +8,25 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
 
 public class ItemReviewDAO
 {
+	private Connection connection;
+	public ItemReviewDAO()
+	{
+		this.connection = DBConnector.getConnection();
+	}
+	
+	public boolean deleteReviwe(int review_id)
+	{
+		return DeleteReviwe(connection, review_id);
+	}
 	public static boolean DeleteReviwe(int review_id)
+	{
+		return DeleteReviwe(DBConnector.getConnection(), review_id);
+	}
+	public static boolean DeleteReviwe(Connection connection, int review_id)
 	{
 		String sql = "DELETE FROM item_review WHERE id = ?";
 
@@ -19,7 +34,7 @@ public class ItemReviewDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 
 			returnLine = preparedStatement.executeUpdate();
@@ -31,13 +46,22 @@ public class ItemReviewDAO
 
 		return (returnLine == 1);
 	}
+	
+	public int getUserId(int review_id)
+	{
+		return GetUserId(connection, review_id);
+	}
 	public static int GetUserId(int review_id)
+	{
+		return GetUserId(DBConnector.getConnection(), review_id);
+	}
+	public static int GetUserId(Connection connection, int review_id)
 	{
 		String sql = "SELECT user_id FROM item_review WHERE id = ?";
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -54,7 +78,16 @@ public class ItemReviewDAO
 
 		return 0;
 	}
+	
+	public boolean insertReview(int item_id, int user_id, String title, int point, String comment)
+	{
+		return InsertReview(connection, item_id, user_id, title, point, comment);
+	}
 	public static boolean InsertReview(int item_id, int user_id, String title, int point, String comment)
+	{
+		return InsertReview(DBConnector.getConnection(), item_id, user_id, title, point, comment);
+	}
+	public static boolean InsertReview(Connection connection, int item_id, int user_id, String title, int point, String comment)
 	{
 		String sql = "INSERT INTO item_review(item_id, user_id, title, point, comment) "
 				+ "VALUES(?, ?, ?, ?, ?)";
@@ -63,7 +96,7 @@ public class ItemReviewDAO
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 			preparedStatement.setInt(2, user_id);
 			preparedStatement.setString(3, title);
@@ -79,14 +112,23 @@ public class ItemReviewDAO
 
 		return (returnLine == 1);
 	}
+	
+	public ItemReviewDTO getReview(int review_id)
+	{
+		return GetReview(connection, review_id);
+	}
 	public static ItemReviewDTO GetReview(int review_id)
+	{
+		return GetReview(DBConnector.getConnection(), review_id);
+	}
+	public static ItemReviewDTO GetReview(Connection connection, int review_id)
 	{
 		String sql = "SELECT * FROM item_review WHERE id = ?";
 		ItemReviewDTO itemReviewDTO = new ItemReviewDTO();
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -110,14 +152,23 @@ public class ItemReviewDAO
 		
 		return itemReviewDTO;
 	}
+
+	public List<ItemReviewDTO> getReviewList(int item_id)
+	{
+		return GetReviewList(connection, item_id);
+	}
 	public static List<ItemReviewDTO> GetReviewList(int item_id)
+	{
+		return GetReviewList(DBConnector.getConnection(), item_id);
+	}
+	public static List<ItemReviewDTO> GetReviewList(Connection connection, int item_id)
 	{
 		 String sql = "SELECT * FROM item_review WHERE item_id = ?";
 		 List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();
 
 		 try
 		 {
-			 PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			 preparedStatement.setInt(1, item_id);
 
 			 ResultSet resultSet = preparedStatement.executeQuery();

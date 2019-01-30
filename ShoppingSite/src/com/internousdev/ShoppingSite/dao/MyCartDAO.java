@@ -8,16 +8,31 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.mysql.jdbc.Connection;
 
 public class MyCartDAO
 {
+	private Connection connection;
+	public MyCartDAO()
+	{
+		this.connection = DBConnector.getConnection();
+	}
+	
+	public int myCartItemQuantity(int user_id, int item_id)
+	{
+		return MyCartItemQuantity(connection, user_id, item_id);
+	}
 	public static int MyCartItemQuantity(int user_id, int item_id)
+	{
+		return MyCartItemQuantity(DBConnector.getConnection(), user_id, item_id);
+	}
+	public static int MyCartItemQuantity(Connection connection, int user_id, int item_id)
 	{
 		String sql = "SELECT item_count FROM carts WHERE user_id = ? AND item_id = ?";
 		
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, item_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -35,7 +50,15 @@ public class MyCartDAO
 		return 0;
 	}
 	
+	public boolean changeCartItemQuantity(int item_id, int user_id, int newCount)
+	{
+		return ChangeCartItemQuantity(connection, item_id, user_id, newCount);
+	}
 	public static boolean ChangeCartItemQuantity(int item_id, int user_id, int newCount)
+	{
+		return ChangeCartItemQuantity(DBConnector.getConnection(), item_id, user_id, newCount);
+	}
+	public static boolean ChangeCartItemQuantity(Connection connection, int item_id, int user_id, int newCount)
 	{
 		try
 		{
@@ -43,7 +66,7 @@ public class MyCartDAO
 			{
 				String delete = "DELETE FROM carts WHERE item_id = ? AND user_id = ?";
 
-				PreparedStatement p_delete = DBConnector.getConnection().prepareStatement(delete);
+				PreparedStatement p_delete = connection.prepareStatement(delete);
 				p_delete.setInt(1, item_id);
 				p_delete.setInt(2, user_id);
 				p_delete.executeUpdate();
@@ -52,7 +75,7 @@ public class MyCartDAO
 			{
 				String update = "UPDATE carts SET item_count = ? WHERE user_id = ? AND item_id = ?";
 
-				PreparedStatement p_update = DBConnector.getConnection().prepareStatement(update);
+				PreparedStatement p_update = connection.prepareStatement(update);
 				p_update.setInt(1, newCount);
 				p_update.setInt(2, user_id);
 				p_update.setInt(3, item_id);
@@ -68,12 +91,20 @@ public class MyCartDAO
 		return false;
 	}
 
+	public boolean addItemToCart(int item_id, int user_id, int request_quantity)
+	{
+		return AddItemToCart(connection, item_id, user_id, request_quantity);
+	}
 	public static boolean AddItemToCart(int item_id, int user_id, int request_quantity)
+	{
+		return AddItemToCart(DBConnector.getConnection(), item_id, user_id, request_quantity);
+	}
+	public static boolean AddItemToCart(Connection connection, int item_id, int user_id, int request_quantity)
 	{
 		try
 		{
 			String c_select = "SELECT COUNT(*) FROM carts WHERE user_id = ? AND item_id = ?";
-			PreparedStatement pc_select = DBConnector.getConnection().prepareStatement(c_select);
+			PreparedStatement pc_select = connection.prepareStatement(c_select);
 			pc_select.setInt(1, user_id);
 			pc_select.setInt(2, item_id);
 
@@ -81,7 +112,7 @@ public class MyCartDAO
 			if(!pc_result.next() || pc_result.getInt("COUNT(*)") == 0)
 			{
 				String c_insert = "INSERT INTO carts(user_id, item_id, item_count) VALUES(?, ?, ?)";
-				PreparedStatement pc_insert = DBConnector.getConnection().prepareStatement(c_insert);
+				PreparedStatement pc_insert = connection.prepareStatement(c_insert);
 				pc_insert.setInt(1, user_id);
 				pc_insert.setInt(2, item_id);
 				pc_insert.setInt(3, request_quantity);
@@ -91,7 +122,7 @@ public class MyCartDAO
 			else
 			{
 				String c_update = "UPDATE carts SET item_count = item_count + ? WHERE user_id = ? AND item_id = ?";
-				PreparedStatement pc_update = DBConnector.getConnection().prepareStatement(c_update);
+				PreparedStatement pc_update = connection.prepareStatement(c_update);
 				pc_update.setInt(1, request_quantity);
 				pc_update.setInt(2, user_id);
 				pc_update.setInt(3, item_id);
@@ -109,14 +140,22 @@ public class MyCartDAO
 		return false;
 	}
 
+	public List<ItemDTO> getMyCart(int user_id)
+	{
+		return GetMyCart(connection, user_id);
+	}
 	public static List<ItemDTO> GetMyCart(int user_id)
+	{
+		return GetMyCart(DBConnector.getConnection(), user_id);
+	}
+	public static List<ItemDTO> GetMyCart(Connection connection, int user_id)
 	{
 		String sql = "SELECT * FROM carts WHERE user_id = ?";
 		List<ItemDTO> myCartItemList = new ArrayList<ItemDTO>();
 
 		try
 		{
-			PreparedStatement preparedStatement = DBConnector.getConnection().prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
