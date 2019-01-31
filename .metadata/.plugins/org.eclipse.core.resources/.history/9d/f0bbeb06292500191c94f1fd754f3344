@@ -1,0 +1,13 @@
+package com.internousdev.ShoppingSite.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class GoLoginAction  extends ActionSupport
+{
+	private String errorMsg;
+	
+	public String execute()
+	{
+		return SUCCESS;
+	}
+}

@@ -244,4 +244,4 @@ create table users(
 	user_name varchar(60) not null,
 	insert_date datetime DEFAULT CURRENT_TIMESTAMP
 );
-insert into users(admin, oauthUser, login_id, login_pass, email, user_name) VALUES(1, 0, "admin","2e7d01869cd65058cb884c7c039b804bc76d2a259f6143e84a86980e7cdfe23a", "admin@internousdev.com", "管理者");
+insert into users(admin, oauthUser, login_id, login_pass, email, user_name) VALUES(1, 0, "admin","3f74691ad7292c5f0ee29cc8fba0b03463e3b1c4a1d368838dbe11b925d244c4", "admin@internousdev.com", "管理者");

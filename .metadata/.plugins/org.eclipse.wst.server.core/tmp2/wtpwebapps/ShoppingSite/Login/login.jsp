@@ -10,6 +10,14 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>ログイン</h1>
+			
+			<s:if test="errorMsg != null">
+				<div class="errorBox">
+					<p>エラーメッセージ</p>
+					<s:property value="errorMsg" />
+				</div>
+			</s:if>
+			
 			<jsp:include page="./loginForm.jsp" />
 		</jsp:attribute>
 	</jsp:param>
