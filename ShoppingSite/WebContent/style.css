@@ -26,24 +26,31 @@ header {
 /*
  *	Main Menu
  */
-header #main_menu {
+header #main_menu
+{
 	margin: 0px;
 	padding: 0px;
+	
 	float: right;
+	
 	list-style: none;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-header #main_menu a {
+header #main_menu a
+{
 	display: block;
 	color: white;
 	text-decoration: none;
 }
 
-header #main_menu li {
+header #main_menu li
+{
 	float: left;
-	width: 100px;
+	
+	overflow: hidden;
+	width: 200px;
 	
 	line-height: 65px;
 	text-align: center;
@@ -51,7 +58,8 @@ header #main_menu li {
 	transition: all 200ms 0s ease;
 }
 
-header #main_menu li:hover {
+header #main_menu li:hover
+{
 	background-color: #99cc00;
 	transition: all 200ms 0s ease;
 }
@@ -65,8 +73,6 @@ header #main_menu li:hover {
 	position: absolute;
 	list-style: none;
 	
-	width: 100px;
-	
 	margin: 0;
 	padding: 0;
 }
@@ -75,21 +81,20 @@ header #main_menu li:hover {
 .dropDownMenu li
 {
 	position: relative;
-		
+	
 	height: 0;
-	width: 100px;
 	
 	margin: 0;
 	padding: 0;
-
+	
 	overflow: hidden;
 	background-color: black;
 }
 
 /* 一つ目の<li>は可視化 */
-.dropDownMenu li:nth-child(1) {
-	height: 100%;
-	width: 100px;
+.dropDownMenu li:nth-child(1)
+{
+	height: 65px;
 	
 	overflow: visible;
 }
@@ -97,8 +102,7 @@ header #main_menu li:hover {
 /* <ul>がhoverなら、すべての<li>を可視化 */
 .dropDownMenu:hover > li
 {
-	height: 100%;
-	width: 100px;
+	height: 65px;
 	
 	overflow: visible;
 	z-index: 1;
@@ -365,6 +369,7 @@ footer {
 
 .loginButton {
 	margin: 0px 5px;
+	padding: 5px 0px;
 	width: calc(100% - 10px);
 	
 	box-shadow: 0 0 4px #777;
@@ -383,6 +388,7 @@ footer {
 
 .googleButton {
 	margin: 0px 5px;
+	padding: 5px 0px;
 	width: calc(100% - 10px);
 	
 	box-shadow: 0 0 4px #777;
@@ -628,4 +634,46 @@ footer {
 .delete {
 	color: red;
 	font-weight: bold;
+}
+
+
+.itemUL
+{
+	display: inline-block;
+	
+	margin: 0 auto;
+	padding: 0;
+	
+	list-style:none;
+	text-align: center;
+	width: 100%;
+}
+.itemUL li
+{
+	float: left;
+	
+	margin: 10px 10px;
+	padding: 10px 0px;
+	
+	width: calc(calc(100% / 3) - 36px);
+	
+	border: 1px solid black;
+	box-shadow: 0 0 2px #777;
+	cursor: pointer;
+	
+	transition: all 200ms 0s ease;
+}
+.itemUL li:hover
+{
+	margin: 10px 5px;
+	padding: 10px 5px;
+	box-shadow: 0 0 8px black;
+	
+	transition: all 200ms 0s ease;
+}
+.itemUL li img
+{
+	margin: 5px;
+	width: 100px;
+	height: 100px;
 }

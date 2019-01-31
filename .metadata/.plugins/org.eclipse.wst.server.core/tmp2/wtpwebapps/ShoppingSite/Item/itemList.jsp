@@ -9,10 +9,11 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
-		
+			
 			<h1>商品リスト</h1>
+			
 			<form action="ItemListAction" method="post">
-				<table class="inputTable" style="min-width: 500px">
+				<table class="inputTable">
 					<tr>
 						<td>AND検索</td>
 						<td><input name="andSearch" type="radio" value="true"/></td>
@@ -21,6 +22,7 @@
 					</tr>
 				</table>
 			</form>
+			
 			<jsp:include page="./itemListTable.jsp" />
 			
 			<s:if test="#session.isLogin">
