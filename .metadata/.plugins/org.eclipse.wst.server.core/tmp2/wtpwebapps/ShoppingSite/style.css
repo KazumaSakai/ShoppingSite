@@ -43,8 +43,7 @@ header #main_menu a {
 
 header #main_menu li {
 	float: left;
-	min-width: 80px;
-	padding: 0px 10px;
+	width: 100px;
 	
 	line-height: 65px;
 	text-align: center;
@@ -56,6 +55,56 @@ header #main_menu li:hover {
 	background-color: #99cc00;
 	transition: all 200ms 0s ease;
 }
+
+/*
+ *		DropDownMenu
+ */
+/* <ul> */
+.dropDownMenu
+{
+	position: absolute;
+	list-style: none;
+	
+	width: 100px;
+	
+	margin: 0;
+	padding: 0;
+}
+
+/* すべての<li>を非表示に */
+.dropDownMenu li
+{
+	position: relative;
+		
+	height: 0;
+	width: 100px;
+	
+	margin: 0;
+	padding: 0;
+
+	overflow: hidden;
+	background-color: black;
+}
+
+/* 一つ目の<li>は可視化 */
+.dropDownMenu li:nth-child(1) {
+	height: 100%;
+	width: 100px;
+	
+	overflow: visible;
+}
+
+/* <ul>がhoverなら、すべての<li>を可視化 */
+.dropDownMenu:hover > li
+{
+	height: 100%;
+	width: 100px;
+	
+	overflow: visible;
+	z-index: 1;
+}
+
+
 
 /*
  *	Footer

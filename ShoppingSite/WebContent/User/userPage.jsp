@@ -13,6 +13,7 @@
 			<ul style="margin: 20px; padding: 0; list-style: none">
 				<li><a href='<s:url action="GoUserInfoAction"/>'>ユーザー情報 変更・確認</a></li>
 				<li><a href='<s:url action="MyPurchaseHistoryAction"/>'>購入履歴</a></li>
+				<li><a href='<s:url action="GoAddAddressAction?goBuy=true"/>'>配達先を追加する</a></li>
 			</ul>
 			<ul style="margin: 20px; padding: 0; list-style: none">
 				<s:if test="#session.isAdmin">

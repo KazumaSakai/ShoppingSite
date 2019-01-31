@@ -39,13 +39,21 @@
 			<li><a href='<s:url action="GoHomeAction"/>'>ホーム</a></li>
 			<li><a href='<s:url action="ItemListAction"/>'>商品リスト</a></li>
 			<s:if test="#session.isLogin">
-				<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
-				<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
-				<li><a href='<s:url action="GoUserPageAction"/>'><s:property value="#session.user_name" /></a></li>
+				<li>
+					<ul class="dropDownMenu">
+						<li><a href='<s:url action="GoUserPageAction"/>'><s:property value="#session.user_name" /></a></li>
+						<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
+						<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
+					</ul>
+				</li>
 			</s:if>
 			<s:else>
-				<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
-				<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a></li>
+				<li>
+					<ul class="dropDownMenu">
+						<li><a href='/ShoppingSite/GoLoginAction.action'>ログイン</a></li>
+						<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
+					</ul>
+				</li>
 			</s:else>
 		</ul>
 	</header>

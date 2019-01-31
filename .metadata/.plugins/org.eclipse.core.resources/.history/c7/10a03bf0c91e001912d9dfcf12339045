@@ -1,9 +1,0 @@
-package com.internousdev.ShoppingSite.dto;
-
-public class PreparedForShipmentDTO
-{
-	private int id;
-	private int item_idl
-	private int quantity;
-	private int user_id;
-}
