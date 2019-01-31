@@ -7,6 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.ShoppingSite.dao.LoginDAO;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware
@@ -22,20 +23,41 @@ public class LoginAction extends ActionSupport implements SessionAware
 	public String execute()
 	{
 		boolean result = false;
-		
+
 		//	入力値チェック
+		errorMsg = "";
+
+		//	パスワードチェック
 		if(login_pass == null || login_pass.length() < 8)
 		{
-			errorMsg = "パスワードは8文字以上でなければなりません。";
-			return ERROR;
+			errorMsg += "パスワードは8文字以上でなければなりません。<br />";
 		}
+		if(login_pass.length() > 60)
+		{
+			errorMsg += "パスワードは60文字以下でなければなりません。<br />";
+		}
+		if(!StringChecker.IsOnlyAlphabet_Number(login_pass))
+		{
+			errorMsg += "パスワードは半角英数字のみ使用できます。<br/>";
+		}
+
+		//	ログインチェック
 		if(login_user_id == null || login_user_id.length() < 4)
 		{
-			errorMsg = "ログインIDは4文字以上でなければなりません。";
-			return ERROR;
+			errorMsg += "ログインIDは4文字以上でなければなりません。<br />";
+		}
+		if(login_user_id.length() > 60)
+		{
+			errorMsg += "ログインIDは60文字以下でなければなりません。<br />";
+		}
+		if(!StringChecker.IsOnlyAlphabet_Number(login_user_id))
+		{
+			errorMsg += "ログインIDは半角英数字のみ使用できます。<br/>";
 		}
 		
-		//	ユーザーゲット
+		if(!errorMsg.equals("")) return ERROR;
+		
+		//	ユーザー情報を取得
 		UserDTO userDTO = LoginDAO.LoginAtUserId(login_user_id, login_pass);
 		session.put("login_user", userDTO);
 		

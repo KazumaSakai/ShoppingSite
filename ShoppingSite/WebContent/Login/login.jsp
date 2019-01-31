@@ -14,7 +14,7 @@
 			<s:if test="errorMsg != null">
 				<div class="errorBox">
 					<p>エラーメッセージ</p>
-					<s:property value="errorMsg" />
+					<s:property value="errorMsg" escape="false" />
 				</div>
 			</s:if>
 			

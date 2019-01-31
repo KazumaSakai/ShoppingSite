@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.SignUpDAO;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SignUpAction extends ActionSupport implements SessionAware
@@ -20,26 +21,60 @@ public class SignUpAction extends ActionSupport implements SessionAware
 	public String execute()
 	{
 		//	入力値チェック
+		errorMsg = "";
+
+		//	パスワードチェック
 		if(login_pass == null || login_pass.length() < 8)
 		{
-			errorMsg = "パスワードは8文字以上でなければなりません。";
-			return ERROR;
+			errorMsg += "パスワードは8文字以上でなければなりません。<br />";
 		}
+		if(login_pass.length() > 60)
+		{
+			errorMsg += "パスワードは60文字以下でなければなりません。<br />";
+		}
+		if(!StringChecker.IsOnlyAlphabet_Number(login_pass))
+		{
+			errorMsg += "パスワードは半角英数字のみ使用できます。<br/>";
+		}
+
+		//	ログインIDチェック
 		if(login_id == null || login_id.length() < 4)
 		{
-			errorMsg = "ログインIDは4文字以上でなければなりません。";
-			return ERROR;
+			errorMsg += "ログインIDは4文字以上でなければなりません。<br />";
 		}
-		if(user_name == null || user_name.length() < 4)
+		if(login_id.length() > 60)
 		{
-			errorMsg = "ユーザ名は4文字以上でなければなりません。";
-			return ERROR;
+			errorMsg += "ログインIDは60文字以下でなければなりません。<br />";
 		}
-		if(email == null || !email.contains("@"))
+		if(!StringChecker.IsOnlyAlphabet_Number(login_id))
 		{
-			errorMsg = "メールアドレスが不正です。";
-			return ERROR;
+			errorMsg += "ログインIDは半角英数字のみ使用できます。<br/>";
 		}
+		
+		//	ユーザー名チェック
+		if(user_name == null || login_id.length() < 4)
+		{
+			errorMsg += "ユーザー名は4文字以上でなければなりません。<br />";
+		}
+		if(user_name.length() > 60)
+		{
+			errorMsg += "ユーザー名は60文字以下でなければなりません。<br />";
+		}
+		if(!StringChecker.IsSafeString(user_name))
+		{
+			errorMsg += "ユーザー名に不正な文字が含まれています。<br/>";
+		}
+		
+		if(email.getBytes().length > 255)
+		{
+			errorMsg += "メールアドレスは255バイト以下でなければなりません。<br/>";
+		}
+		if(!StringChecker.IsMailAddress(email))
+		{
+			errorMsg += "メールアドレスの値が不正です。";
+		}
+		
+		if(!errorMsg.equals("")) return ERROR;
 		
 		boolean result = SignUpDAO.SignUp(login_id, email, login_pass, user_name, false);
 
@@ -49,7 +84,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		}
 		else
 		{
-			errorMsg = "ユーザーの登録に失敗しました。IDまたはメールアドレスが既に使用されています。";
+			errorMsg = "ユーザーの登録に失敗しました。<br/>IDまたはメールアドレスが既に使用されています。";
 			return ERROR;
 		}
 	}
