@@ -31,7 +31,7 @@
 				</p>
 			</s:if>
 			
-			<jsp:include page="./addItemForm.jsp" />
+			<jsp:include page="../Admin/addItemForm.jsp" />
 			
 		</jsp:attribute>
 	</jsp:param>

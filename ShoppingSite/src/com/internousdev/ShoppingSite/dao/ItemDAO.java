@@ -18,6 +18,43 @@ public class ItemDAO
 		connection = DBConnector.getConnection();
 	}
 	
+	public boolean updateItem(int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
+	{
+		return UpdateItem(connection, id, item_name, item_price, item_quantity, description, seller, image_num);
+	}
+	public static boolean UpdateItem(int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
+	{
+		return UpdateItem(DBConnector.getConnection(), id, item_name, item_price, item_quantity, description, seller, image_num);
+	}
+	public static boolean UpdateItem(Connection connection, int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
+	{
+		String sql = "UPDATE items SET item_name=?, item_price=?, item_count=item_count + ?, description=?, seller=?, image_num=? WHERE id = ?";
+		
+		try
+		{
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, item_name);
+			preparedStatement.setInt(2, item_price);
+			preparedStatement.setInt(3, item_quantity);
+			preparedStatement.setString(4, description);
+			preparedStatement.setInt(5, seller);
+			preparedStatement.setInt(6, image_num);
+			preparedStatement.setInt(7, id);
+			
+			int line = preparedStatement.executeUpdate();
+			if(line > 0)
+			{
+				return true;
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public boolean addItem(int quantity, int price, String name, String description, int seller, int image_num)
 	{
 		return AddItem(connection, quantity, price, name, description, seller, image_num);

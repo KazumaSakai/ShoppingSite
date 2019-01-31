@@ -142,50 +142,70 @@
 		
 		<action name="GoAdminAction" class="com.internousdev.ShoppingSite.action.GoAdminAction" method="execute">
 			<result name="success">./Admin/admin.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminAddItemAction" class="com.internousdev.ShoppingSite.action.AdminAddItemAction" method="execute">
 			<result name="success" type="chain">ItemListAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
 		<action name="AdminAddItemQuantityAction" class="com.internousdev.ShoppingSite.action.AdminAddItemQuantityAction" method="execute">
 			<result name="success" type="chain">ItemListAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminUserListAction" class="com.internousdev.ShoppingSite.action.AdminUserListAction" method="execute">
 			<result name="success">./User/userList.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminDeleteItemAction" class="com.internousdev.ShoppingSite.action.AdminDeleteItemAction" method="execute">
 			<result name="success" type="chain">ItemListAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminDeleteUserAction" class="com.internousdev.ShoppingSite.action.AdminDeleteUserAction" method="execute">
 			<result name="success" type="chain">AdminUserListAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.AdminPurchaseHistoryAction" method="execute">
 			<result name="success">./Admin/purchaseHistory.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
 		<action name="AdminPurchaseHistoryDeleteAction" class="com.internousdev.ShoppingSite.action.AdminPurchaseHistoryDeleteAction" method="execute">
 			<result name="success" type="chain">AdminPurchaseHistoryAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 			<result name="error" type="chain">AdminPurchaseHistoryAction</result>
 		</action>
 		
 		<action name="GoSalesDataAction" class="com.internousdev.ShoppingSite.action.GoSalesDataAction" method="execute">
 			<result name="success">./Admin/itemSalesData.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
+		<action name="AdminUpdateItemAction" class="com.internousdev.ShoppingSite.action.AdminUpdateItemAction" method="execute">
+			<result name="success" type="chain">ItemPageAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+		</action>
+		
+		<action name="GoAdminAddItemAction" class="com.internousdev.ShoppingSite.action.GoAdminAddItemAction" method="execute">
+			<result name="success">./Admin/adminAddItem.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+		</action>
 		
 		
 		

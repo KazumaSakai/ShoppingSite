@@ -20,6 +20,7 @@
 					<li>管理者用</li>
 					<li><a href='<s:url action="AdminUserListAction"/>'>ユーザーリスト</a></li>
 					<li><a href='<s:url action="ItemListAction"/>'>商品リスト</a></li>
+					<li><a href='<s:url action="GoAdminAddItemAction"/>'>商品追加画面</a></li>
 					<li><a href='<s:url action="AdminPurchaseHistoryAction"/>'>すべての購入履歴</a></li>
 				</s:if>
 			</ul>

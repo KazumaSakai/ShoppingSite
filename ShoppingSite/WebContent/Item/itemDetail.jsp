@@ -31,24 +31,4 @@
 		<td>発売日</td>
 		<td><s:property value="itemDTO.insert_date" /></td>
 	</tr>
-	<s:if test="#session.isLogin">
-		<tr>
-			<td class="text-center" colspan="2">
-				<form class="text-center" action="AddItemAction" method="post">
-					<input type="hidden" name="request_Quantity" value='1' min="0">
-					<input type="hidden" name="item_id" value="${ itemDTO.item_id }">
-					<input type="submit" value="カートに追加する" />
-				</form>
-			</td>
-		</tr>
-	</s:if>
-	<s:else>
-		<tr>
-			<td class="text-center" colspan="2">
-				<p>
-					商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
-				</p>
-			</td>
-		</tr>
-	</s:else>
 </table>

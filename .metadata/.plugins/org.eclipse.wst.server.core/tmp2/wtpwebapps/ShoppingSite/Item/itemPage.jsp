@@ -15,14 +15,31 @@
 			<div id="item_slider">
 				<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
 					<div>
-						<img
-							src="./Images/ItemImages/${ itemDTO.item_id }/${ st.count }.jpg" />
+						<img src="./Images/ItemImages/${ itemDTO.item_id }/${ st.count }.jpg" />
 					</div>
 				</s:iterator>
 			</div>
 			
+			
+			<s:if test="#session.isLogin">
+				<form class="text-center" action="AddItemAction" method="post">
+					<input type="hidden" name="request_Quantity" value='1' min="0">
+					<input type="hidden" name="item_id" value="${ itemDTO.item_id }">
+					<input class="linkButton" type="submit" value="カートに追加する" />
+				</form>
+			</s:if>
+			<s:else>
+				<p class="text-center">
+					商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
+				</p>
+			</s:else>
+			
+			<s:if test="#session.isAdmin">
+				<jsp:include page="../Admin/itemUpdateForm.jsp" />
+			</s:if>
 			<jsp:include page="./itemDetail.jsp" />
 			
+	
 			<p style="text-align: center; font-size: 23px; font-weight: bold">
 				レビュー
 			</p>

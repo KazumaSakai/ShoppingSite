@@ -1,0 +1,20 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.ItemDAO;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AdminUpdateItemAction extends ActionSupport implements SessionAware
+{
+	private int id;
+	private String item_name;
+	private Map<String, Object> session;
+	
+	public String execute()
+	{
+		return ItemDAO.UpdateItem(id, item_name, item_price, item_quantity, description, seller, image_num);
+	}
+}
