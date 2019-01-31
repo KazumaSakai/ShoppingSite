@@ -1376,3 +1376,15 @@
 0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:42:32 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 9210
 0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:42:35 +0900] "GET /ShoppingSite/ItemPageAction.action?id=3 HTTP/1.1" 200 6310
 0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:42:36 +0900] "GET /ShoppingSite/ItemListAction.action HTTP/1.1" 200 9210
+127.0.0.1 - - [31/Jan/2019:14:47:27 +0900] "GET / HTTP/1.1" 404 1019
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:48:02 +0900] "GET /ShoppingSite/index.jsp HTTP/1.1" 200 2285
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:17 +0900] "GET /ShoppingSite/index.jsp HTTP/1.1" 403 1167
+127.0.0.1 - - [31/Jan/2019:14:49:17 +0900] "GET / HTTP/1.1" 404 1019
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:24 +0900] "GET /ShoppingSite/ HTTP/1.1" 200 3425
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:37 +0900] "GET /ShoppingSite HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:37 +0900] "GET /ShoppingSite/ HTTP/1.1" 200 3425
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:51 +0900] "GET /ShoppingSite/GoHomeAction.action HTTP/1.1" 200 2285
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:49:52 +0900] "GET /ShoppingSite/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:50:09 +0900] "GET /ShoppingSite/ HTTP/1.1" 200 2285
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:50:12 +0900] "GET /ShoppingSite/ HTTP/1.1" 200 2285
+0:0:0:0:0:0:0:1 - - [31/Jan/2019:14:50:13 +0900] "GET /ShoppingSite/GoHomeAction.action HTTP/1.1" 200 2285
