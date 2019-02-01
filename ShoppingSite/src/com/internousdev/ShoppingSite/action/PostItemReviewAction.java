@@ -53,7 +53,7 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "レビューコメントは、2000文字以下でなければなりません。<br/>";
 		}
-		if(StringChecker.IsSafeString(comment))
+		if(!StringChecker.IsSafeString(comment))
 		{
 			errorMsg += "レビューコメントに、不正な文字列が含まれています。<br/>";
 		}
@@ -67,13 +67,13 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "レビュータイトルは、60文字以下でなければなりません。<br/>";
 		}
-		if(StringChecker.IsSafeString(title))
+		if(!StringChecker.IsSafeString(title))
 		{
 			errorMsg += "レビュータイトルに、不正な文字列が含まれています。<br/>";
 		}
 		
 		//	エラーがあればリターン
-		if(errorMsg.equals(""))
+		if(!errorMsg.equals(""))
 		{
 			return ERROR;
 		}

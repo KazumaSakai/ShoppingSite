@@ -41,7 +41,7 @@
 			<s:if test="#session.isLogin">
 				<li>
 					<ul class="dropDownMenu">
-						<li><a href='<s:url action="GoUserPageAction"/>'><s:property value="#session.user_name" /></a></li>
+						<li><a href='<s:url action="GoUserPageAction"/>'><s:property value="#session.user_name" escape="false" /></a></li>
 						<li><a href='<s:url action="GoUserPageAction"/>'>ユーザーページ</a></li>
 						<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
 						<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>

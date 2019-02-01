@@ -9,9 +9,13 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
+		
 			<h2 class="text-center" style="font-size: 30px">
 				<s:property value="itemDTO.item_name" />
 			</h2>
+			
+			<jsp:include page="../errorMsg.jsp" />
+			
 			<div id="item_slider">
 				<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
 					<div>
@@ -39,7 +43,7 @@
 			</s:if>
 			<jsp:include page="./itemDetail.jsp" />
 			
-	
+			
 			<p style="text-align: center; font-size: 23px; font-weight: bold">
 				レビュー
 			</p>

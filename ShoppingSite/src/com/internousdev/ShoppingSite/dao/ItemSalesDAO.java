@@ -30,8 +30,9 @@ public class ItemSalesDAO
 	public static boolean AddSalesData(Connection connection, int item_id, int quantity, int price)
 	{
 		String select_sql = "SELECT COUNT(*) FROM sales WHERE item_id = ? AND year = ? AND month = ? FOR UPDATE";
-		String insert_sql = "INSERT INTO sales(item_id, year, month, quantity, price) VALUES(?, ?, ?, ?, ?); COMMIT";
-		String update_sql = "UPDATE sales SET quantity = quantity + ?, price = price + ? WHERE item_id = ? AND year = ? AND month = ?; COMMIT";
+		String insert_sql = "INSERT INTO sales(item_id, year, month, quantity, price) VALUES(?, ?, ?, ?, ?)";
+		String update_sql = "UPDATE sales SET quantity = quantity + ?, price = price + ? WHERE item_id = ? AND year = ? AND month = ?";
+		String commit_sql = "COMMIT";
 
 		int year = LocalDateTime.now().getYear();
 		int month = LocalDateTime.now().getMonth().getValue();
@@ -59,6 +60,8 @@ public class ItemSalesDAO
 			p_insert.setInt(3, month);
 			p_insert.setInt(4, quantity);
 			p_insert.setInt(5, price);
+			
+			PreparedStatement p_commit = connection.prepareStatement(commit_sql);
 
 			//	IF EXIST
 			ResultSet resultSet = p_select.executeQuery();
@@ -70,12 +73,14 @@ public class ItemSalesDAO
 				if (count > 0)
 				{
 					p_update.executeUpdate();
+					p_commit.executeUpdate();
 					return true;
 				}
 			}
 
 			//	INSERT
 			p_insert.executeUpdate();
+			p_commit.executeUpdate();
 			
 			return false;
 		}

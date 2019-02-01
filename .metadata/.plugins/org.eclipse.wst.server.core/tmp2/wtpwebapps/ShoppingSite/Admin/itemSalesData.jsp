@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <jsp:include page="../template.jsp">
-	<jsp:param value="統計" name="title" />
+	<jsp:param value="商品統計情報ページ" name="title" />
 	<jsp:param value="false" name="showSlider" />
 	<jsp:param value="false" name="showSideMenu" />
 	<jsp:param value="true" name="showMain" />

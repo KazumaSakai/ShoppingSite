@@ -14,9 +14,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemPageAction extends ActionSupport implements SessionAware
 {
-	private boolean reviewExists;
 	private int id;
+	private boolean reviewExists;
 	private ItemDTO itemDTO;
+	
 	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
 	
 	private String errorMsg;

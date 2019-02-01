@@ -3,8 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <form action="PostItemReviewAction" method="post">
-	<input type="hidden" name="item_id"
-		value="<c:out value='${itemDTO.item_id }' />" />
+	<input type="hidden" name="id" value="<c:out value='${itemDTO.item_id }' />" />
 	<table class="table">
 		<tr>
 			<th colspan="2" style="font-size: 23px">レビューを投稿する</th>
@@ -24,13 +23,11 @@
 			</select></td>
 		</tr>
 		<tr>
-			<td colspan="2">コメント <textarea name="comment"
-					required="required"></textarea>
+			<td colspan="2">コメント <textarea name="comment" required="required"></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" class="text-center"><input type="submit"
-				value="送信" /></td>
+			<td colspan="2" class="text-center"><input type="submit" value="送信" /></td>
 		</tr>
 	</table>
 </form>

@@ -28,7 +28,7 @@
 				</tr>
 			</table>
 			<div class="text-center">
-				<input type="button" class="linkButton" value="アイテムのページへ戻る" onclick="location.href='<s:url action='ItemPageAction?id=%{ item_id }'/>'" />
+				<input type="button" class="linkButton" value="アイテムのページへ戻る" onclick="location.href='<s:url action='ItemPageAction?id=%{ id }'/>'" />
 			</div>
 		</jsp:attribute>
 	</jsp:param>

@@ -9,16 +9,12 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
+		
 			<h1>新規登録</h1>
 			
-			<s:if test="errorMsg != null">
-				<div class="errorBox">
-					<p>エラーメッセージ</p>
-					<s:property value="errorMsg" escape="false" />
-				</div>
-			</s:if>
-			
+			<jsp:include page="../errorMsg.jsp" />
 			<jsp:include page="./signupForm.jsp" />
+			
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>
