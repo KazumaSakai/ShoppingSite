@@ -10,18 +10,22 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>住所を追加</h1>
+
+			<jsp:include page="../errorMsg.jsp" />
+			
 			<form action="AddAddressAction" class="inputTable" method="post">
 				<input type="hidden" name="goBuy" value="<s:property value='goBuy'/>" />
 				<table class="center">
 					<tr>
 						<td>住所</td>
-						<td><input type="text" name="address" /></td>
+						<td><input type="text" name="address" required="required" min="10" max="100" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" class="text-center"><input class="linkButton" value="住所を登録" type="submit" /></td>
 					</tr>
 				</table>
 			</form>
+			
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

@@ -9,13 +9,13 @@
 		<tr>
 			<td>ユーザーID</td>
 			<td>
-				<input class="inputText" type="text" name="login_user_id" required="required" />
+				<input class="inputText" type="text" name="login_user_id" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<td>パスワードID</td>
+			<td>パスワード</td>
 			<td>
-				<input class="inputText" type="password" name="login_pass" required="required" />
+				<input class="inputText" type="password" name="login_pass" required="required" min="8" max="60" />
 			</td>
 		</tr>
 		<tr>

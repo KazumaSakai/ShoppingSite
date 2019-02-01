@@ -9,25 +9,25 @@
 		<tr>
 			<td>ユーザーID</td>
 			<td>
-				<input type="text" name="login_id" required="required" />
+				<input type="text" name="login_id" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
 			<td>ユーザー名</td>
 			<td>
-				<input type="text" name="user_name" required="required" />
+				<input type="text" name="user_name" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
 			<td>パスワードID</td>
 			<td>
-				<input type="password" name="login_pass" required="required" />
+				<input type="password" name="login_pass" required="required" min="8" max="60" />
 			</td>
 		</tr>
 		<tr>
 			<td>メールアドレス</td>
 			<td>
-				<input type="email" name="email" required="required" />
+				<input type="email" name="email" required="required" max="255" />
 			</td>
 		</tr>
 		<tr>

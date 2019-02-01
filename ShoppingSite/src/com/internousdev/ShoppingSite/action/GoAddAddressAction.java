@@ -10,6 +10,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GoAddAddressAction extends ActionSupport implements SessionAware
 {
 	private boolean goBuy;
+	
+	private String errorMsg;
+	
 	private Map<String, Object> session;
 	
 	public String execute()
@@ -40,6 +43,14 @@ public class GoAddAddressAction extends ActionSupport implements SessionAware
 
 	public void setGoBuy(boolean goBuy) {
 		this.goBuy = goBuy;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 	
 	

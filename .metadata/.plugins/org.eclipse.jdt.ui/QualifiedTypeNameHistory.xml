@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.apache.struts2.util.FastByteArrayOutputStream"/>
 <fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonSubTypes.Type"/>
 <fullyQualifiedTypeName name="freemarker.template.utility.RichObjectWrapper"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.action.DeleteItemReviewAction"/>
 <fullyQualifiedTypeName name="com.sun.prism.Texture"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.AddressDAO"/>
@@ -37,8 +35,6 @@
 <fullyQualifiedTypeName name="com.mysql.jdbc.Connection"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.ItemDTO"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.TernaryNode"/>
-<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="com.sun.jndi.url.dns.dnsURLContext"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
@@ -58,6 +54,10 @@
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.SessionSafeGetter"/>
 <fullyQualifiedTypeName name="org.apache.catalina.valves.CometConnectionManagerValve"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.StringChecker"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLService"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.StringChecker"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 </qualifiedTypeNameHistroy>

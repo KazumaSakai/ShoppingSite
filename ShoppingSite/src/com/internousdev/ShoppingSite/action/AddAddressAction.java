@@ -6,12 +6,16 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.AddressDAO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddAddressAction extends ActionSupport implements SessionAware
 {
 	private boolean goBuy;
 	private String address;
+	
+	private String errorMsg;
+	
 	private Map<String, Object> session;
 	
 	public String execute()
@@ -22,6 +26,25 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 		
+		errorMsg = "";
+		
+		if(address == null || address.length() < 10)
+		{
+			errorMsg += "住所は10文字以上でなければなりません。<br/>";
+		}
+		else if(address.length() > 100)
+		{
+			errorMsg += "住所は100文字以下でなければなりません。<br/>";
+		}
+		if(!StringChecker.IsSafeString(address))
+		{
+			errorMsg += "住所に不正な文字列が含まれています。<br/>";
+		}
+		
+		if(!errorMsg.equals(""))
+		{
+			return ERROR;
+		}
 		
 		int user_id = (int)session.get("user_id");
 		
@@ -31,6 +54,7 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 		}
 		else
 		{
+			errorMsg += "住所の登録に失敗しました。<br/>";
 			return ERROR;
 		}
 	}
@@ -58,6 +82,14 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 
 	public void setGoBuy(boolean goBuy) {
 		this.goBuy = goBuy;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 }

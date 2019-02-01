@@ -45,6 +45,10 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "商品名は、60文字以下でなければなりません。<br/>";
 		}
+		if(!StringChecker.IsSafeString(name))
+		{
+			errorMsg += "商品名に、不正な文字列が含まれています。<br/>";
+		}
 		
 		//	商品価格
 		if(quantity < 10)

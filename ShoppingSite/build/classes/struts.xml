@@ -133,6 +133,7 @@
 			<result name="goBuy" type="chain">GoBuyAction</result>
 			<result name="success">./User/addAddress.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
+			<result name="error" type="chain">GoAddAddressAction</result>
 		</action>
 		
 		
