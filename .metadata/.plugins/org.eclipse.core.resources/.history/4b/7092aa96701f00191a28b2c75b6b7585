@@ -1,8 +1,0 @@
-package com.internousdev.ShoppingSite.dto;
-
-public class AddressDTO
-{
-	private int user_id;
-	private int id;
-	private String address;
-}

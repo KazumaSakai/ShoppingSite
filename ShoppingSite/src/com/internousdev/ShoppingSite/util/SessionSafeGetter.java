@@ -32,7 +32,7 @@ public class SessionSafeGetter
 	
 	public static int getInt(Map<String, Object> session, String key)
 	{
-		int result = 0;
+		int result = -1;
 		
 		//	キーがあるかチェック
 		if(session.containsKey(key))

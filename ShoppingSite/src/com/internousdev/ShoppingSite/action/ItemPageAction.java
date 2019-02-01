@@ -18,6 +18,9 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	private int id;
 	private ItemDTO itemDTO;
 	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
+	
+	private String errorMsg;
+	
 	private Map<String, Object> session;
 
 	public String execute()
@@ -74,5 +77,13 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }

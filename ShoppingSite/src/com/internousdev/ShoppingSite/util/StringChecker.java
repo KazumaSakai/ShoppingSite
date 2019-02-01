@@ -27,8 +27,6 @@ public class StringChecker
 		if(str.contains("'")) return false;
 		if(str.contains("\"")) return false;
 		if(str.contains("\\")) return false;
-		if(str.contains("|")) return false;
-		if(str.contains("*")) return false;
 		
 		return true;
 	}
