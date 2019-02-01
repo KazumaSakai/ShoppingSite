@@ -9,7 +9,10 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
+		
+			<jsp:include page="../errorMsg.jsp" />
 			<jsp:include page="./addItemForm.jsp" />
+			
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

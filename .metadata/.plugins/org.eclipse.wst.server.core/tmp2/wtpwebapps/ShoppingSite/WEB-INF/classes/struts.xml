@@ -149,12 +149,6 @@
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 		
-		<action name="AdminAddItemAction" class="com.internousdev.ShoppingSite.action.AdminAddItemAction" method="execute">
-			<result name="success" type="chain">ItemListAction</result>
-			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
-		</action>
-
 		<action name="AdminAddItemQuantityAction" class="com.internousdev.ShoppingSite.action.AdminAddItemQuantityAction" method="execute">
 			<result name="success" type="chain">ItemListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
@@ -209,6 +203,14 @@
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
+		
+		<action name="AdminAddItemAction" class="com.internousdev.ShoppingSite.action.AdminAddItemAction" method="execute">
+			<result name="success" type="chain">ItemListAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="error" type="chain">GoAdminAddItemAction</result>
+		</action>
+		
 		
 		
 		
