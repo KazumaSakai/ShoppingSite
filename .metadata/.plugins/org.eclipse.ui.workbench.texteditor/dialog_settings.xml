@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Error" key="selection"/>
+		<item value="Address" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Address"/>
 			<item value="error"/>
 			<item value="cursor"/>
 			<item value="img"/>
@@ -15,7 +16,6 @@
 			<item value="Change"/>
 			<item value="link"/>
 			<item value="sales"/>
-			<item value="ntd"/>
 		</list>
 		<list key="replacehistory">
 			<item value="."/>
@@ -23,9 +23,9 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="361" key="DIALOG_WIDTH"/>
-		<item value="1|Yu Gothic UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Yu Gothic UI" key="DIALOG_FONT_NAME"/>
-		<item value="444" key="DIALOG_HEIGHT"/>
+		<item value="377" key="DIALOG_WIDTH"/>
+		<item value="1|メイリオ|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|メイリオ" key="DIALOG_FONT_NAME"/>
+		<item value="411" key="DIALOG_HEIGHT"/>
 		<item value="607" key="DIALOG_X_ORIGIN"/>
 		<item value="413" key="DIALOG_Y_ORIGIN"/>
 	</section>

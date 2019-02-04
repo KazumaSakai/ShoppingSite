@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.apache.struts2.util.FastByteArrayOutputStream"/>
 <fullyQualifiedTypeName name="com.sun.javafx.collections.MappingChange.Map"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonSubTypes.Type"/>
 <fullyQualifiedTypeName name="freemarker.template.utility.RichObjectWrapper"/>
@@ -18,10 +15,8 @@
 <fullyQualifiedTypeName name="com.sun.java.swing.plaf.motif.resources.motif"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.ItemSalesDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.ItemSalesDTO"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.UserDAO"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.ws.encoding.fastinfoset.FastInfosetStreamReaderFactory"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.UserDTO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.action.ChangeUserNameAction"/>
 <fullyQualifiedTypeName name="com.sun.java.swing.plaf.windows.WindowsBorders.InternalFrameLineBorder"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
@@ -30,9 +25,7 @@
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO"/>
 <fullyQualifiedTypeName name="com.sun.jndi.url.corbaname.corbanameURLContextFactory"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.LoginDAO"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.SellerDAO"/>
-<fullyQualifiedTypeName name="com.mysql.jdbc.Connection"/>
 <fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.ItemDTO"/>
 <fullyQualifiedTypeName name="jdk.nashorn.internal.ir.TernaryNode"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
@@ -52,12 +45,19 @@
 <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="com.sun.corba.se.spi.monitoring.StatisticsAccumulator"/>
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.SessionSafeGetter"/>
 <fullyQualifiedTypeName name="org.apache.catalina.valves.CometConnectionManagerValve"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.model.wsdl.editable.EditableWSDLService"/>
-<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.StringChecker"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.StringChecker"/>
+<fullyQualifiedTypeName name="sun.util.logging.resources.logging"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dto.UserDTO"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.Connection"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.SessionSafeGetter"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.util.Passworder"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.UserDAO"/>
+<fullyQualifiedTypeName name="com.internousdev.ShoppingSite.dao.LoginDAO"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

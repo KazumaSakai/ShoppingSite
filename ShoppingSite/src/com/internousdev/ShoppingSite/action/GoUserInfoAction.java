@@ -9,6 +9,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GoUserInfoAction  extends ActionSupport implements SessionAware
 {
+	private String errorMsg;
+	private String successMsg;
+	
 	private Map<String, Object> session;
 
 	public String execute()
@@ -30,4 +33,21 @@ public class GoUserInfoAction  extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public String getSuccessMsg() {
+		return successMsg;
+	}
+
+	public void setSuccessMsg(String successMsg) {
+		this.successMsg = successMsg;
+	}
+
 }

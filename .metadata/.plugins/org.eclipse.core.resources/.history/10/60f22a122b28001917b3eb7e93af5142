@@ -1,0 +1,83 @@
+package com.internousdev.ShoppingSite.action;
+
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.internousdev.ShoppingSite.dao.UserDAO;
+import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class ChangeUserPasswordAction extends ActionSupport implements SessionAware
+{
+	private Map<String, Object> session;
+	private String nowPassword;
+	private String newPassword;
+	private String newPassword2;
+	
+	private String errorMsg;
+	
+	public String execute()
+	{
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			return "needLogin";
+		}
+		
+		//	入力値チェック
+		errorMsg = "";
+		
+		if(!newPassword.equals(newPassword2))
+		{
+			errorMsg += "パスワードが一致しません。<br/>";
+		}
+		
+		
+		
+		if(!errorMsg.isEmpty())
+		{
+			return ERROR;
+		}
+		
+		
+		UserDAO.ChangeUserPassword((int)session.get("user_id"),(String)session.get("login_user_id"), newPassword);
+		
+		return SUCCESS;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public String getNowPassword() {
+		return nowPassword;
+	}
+
+	public void setNowPassword(String nowPassword) {
+		this.nowPassword = nowPassword;
+	}
+
+	public String getNewPassword2() {
+		return newPassword2;
+	}
+
+	public void setNewPassword2(String newPassword2) {
+		this.newPassword2 = newPassword2;
+	}
+	
+	
+}

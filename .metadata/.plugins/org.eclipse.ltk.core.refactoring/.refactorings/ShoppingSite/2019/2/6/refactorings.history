@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;errorMsg.jsp&apos; to &apos;errorMsg.jsp&apos;&#x0D;&#x0A;- 元のプロジェクト: &apos;ShoppingSite&apos;&#x0D;&#x0A;- 宛先要素: &apos;errorMsg.jsp&apos;&#x0D;&#x0A;- オリジナル要素: &apos;errorMsg.jsp&apos;" description="ファイルをコピー" element1="WebContent/errorMsg.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1549250694902" target="/ShoppingSite/WebContent/errorMsg.jsp" units="0" version="1.0"/>
+</session>

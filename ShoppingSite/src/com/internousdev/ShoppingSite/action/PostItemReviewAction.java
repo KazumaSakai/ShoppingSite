@@ -73,7 +73,7 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		}
 		
 		//	エラーがあればリターン
-		if(!errorMsg.equals(""))
+		if(!errorMsg.isEmpty())
 		{
 			return ERROR;
 		}

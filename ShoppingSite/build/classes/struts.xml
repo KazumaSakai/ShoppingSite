@@ -116,11 +116,13 @@
 		
 		<action name="ChangeUserNameAction" class="com.internousdev.ShoppingSite.action.ChangeUserNameAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
+			<result name="error" type="chain">GoUserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		
 		<action name="ChangeUserPasswordAction" class="com.internousdev.ShoppingSite.action.ChangeUserPasswordAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
+			<result name="error" type="chain">GoUserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 		

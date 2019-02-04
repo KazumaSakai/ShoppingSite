@@ -371,6 +371,8 @@ footer {
 	font-size: 1.1em;
 	font-family: Arial, sans-serif;
 	
+	padding: 1px 5px;
+	
 	border: solid 1px black;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

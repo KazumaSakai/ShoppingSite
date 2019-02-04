@@ -52,6 +52,7 @@ public class LoginDAO
 				 {
 					 userDTO.setAdmin(get_isAdmin);
 					 userDTO.setId(get_id);
+					 userDTO.setLogin_pass(get_login_pass);
 					 userDTO.setLogin_id(get_login_id);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setUser_name(get_user_name);
@@ -104,6 +105,7 @@ public class LoginDAO
 					 userDTO.setAdmin(get_isAdmin);
 					 userDTO.setId(get_id);
 					 userDTO.setLogin_id(get_login_id);
+					 userDTO.setLogin_pass(get_login_pass);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setUser_name(get_user_name);
 					 userDTO.setInsert_date(get_insert_date);
