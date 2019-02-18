@@ -299,7 +299,7 @@ footer {
  *	ErrorMessage
  */
 .errorMessage {
-	color: red;
+	color: rgb(250, 5, 5);
 }
 .errorBox
 {
@@ -307,7 +307,7 @@ footer {
 	padding: 20px 10px;
 	text-align: center;
 	
-	background-color: rgba(255, 0, 0, 0.2);
+	background-color: rgba(250, 5, 5, 0.2);
 	
 	border: 1px solid red;
 }
@@ -317,11 +317,41 @@ footer {
 	margin-bottom: 30px;
 	padding: 0px;
 	
+	font-size: 1.1em;
 	font-weight: bold;
 	
-	border-bottom: 1px solid red;
+	border-bottom: 1px solid rgb(250, 5, 5);
 	
-	color: red;
+	color: rgb(5, 5, 5);
+}
+/*
+ *	SuccessMessage
+ */
+.successMessage {
+	color: rgb(5, 250, 5);
+}
+.successBox
+{
+	margin: 10px;
+	padding: 20px 10px;
+	text-align: center;
+	
+	background-color: rgba(5, 250, 5, 0.2);
+	
+	border: 1px solid rgb(5, 250, 5);
+}
+.successBox p
+{
+	margin: 0px;
+	margin-bottom: 30px;
+	padding: 0px;
+	
+	font-size: 1.1em;
+	font-weight: bold;
+	
+	border-bottom: 2px solid rgb(5, 250, 5);
+	
+	color: rgb(5, 5, 5);
 }
 
 /*
@@ -346,8 +376,12 @@ footer {
  *		Input Form
  */
 .inputTable {
+	max-width: 100%;
+	
 	margin: 10px auto;
 	padding: 30px 60px;
+	box-sizing: border-box;
+	
 	border: 2px solid black;
 	border-radius: 5px;
 	font-weight: bold;
@@ -367,6 +401,7 @@ footer {
 .inputTable input[type="text"],
 .inputTable input[type="password"],
 .inputTable input[type="email"] {
+	width: 100%;
 	
 	font-size: 1.1em;
 	font-family: Arial, sans-serif;
@@ -374,12 +409,8 @@ footer {
 	padding: 1px 5px;
 	
 	border: solid 1px black;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
 	border-radius: 3px;
 	
-	-moz-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
-	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
 	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
 	
 	transition: all 200ms 0s ease;
@@ -680,7 +711,8 @@ footer {
 
 .itemUL
 {
-	display: inline-block;
+    display:flex;
+    flex-wrap:wrap;
 	
 	margin: 0 auto;
 	padding: 0;

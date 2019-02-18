@@ -149,8 +149,6 @@ public class ItemSalesDAO
 			preparedStatement.setInt(2, year);
 			preparedStatement.setInt(3, month);
 
-			int price = ItemDAO.GetItem(item_id).getItem_price();
-
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			dto.setItem_id(item_id);

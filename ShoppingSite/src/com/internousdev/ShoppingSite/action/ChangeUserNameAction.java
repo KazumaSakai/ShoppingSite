@@ -28,6 +28,7 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 		
 		//	入力値チェック
 		errorMsg = "";
+		successMsg = "";
 		
 		if(newUserName == null || newUserName.length() < 4)
 		{

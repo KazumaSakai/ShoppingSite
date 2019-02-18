@@ -35,6 +35,7 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 		
 		//	入力値チェック
 		errorMsg = "";
+		successMsg = "";
 
 		String safe_nowpassword = Passworder.getSafetyPassword(nowPassword, login_user_id);
 		String pass = LoginDAO.LoginAtUserId(login_user_id, nowPassword).getLogin_pass();

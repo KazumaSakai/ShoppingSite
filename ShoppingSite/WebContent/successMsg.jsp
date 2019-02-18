@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:if test="successMsg != null && !successMsg.isEmpty()">
-	<div class="sucessBox">
+	<div class="successBox">
 		<p>メッセージ</p>
 		<s:property value="successMsg" escape="false" />
 	</div>
