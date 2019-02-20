@@ -15,6 +15,7 @@ function StartCanvas()
 	cv.parentElement.insertBefore(DOMLibrary.CreateSelect(algorithm, function (i)
 	{ 
 		rect.sortMode = algorithm[i];
+		rect.initialize();
 	}), cv);
 	
 	cv.addEventListener("click", function ()

@@ -1,0 +1,50 @@
+/*
+ *	Header
+ */
+header {
+	width: 100%;
+	min-height: 70px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: black;
+	color: white;
+}
+
+/*
+ *	Main Menu
+ */
+header #main_menu
+{
+	margin: 0px 5px;
+	padding: 0px;
+	
+	float: right;
+	
+	list-style: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+header #main_menu li
+{
+	float: left;
+	
+	overflow: hidden;
+	width: 200px;
+	
+	line-height: 70px;
+	text-align: center;
+	
+	transition: all 200ms 0s ease;
+}
+header #main_menu li:hover
+{
+	background-color: #99cc00;
+}
+
+header #main_menu li a
+{
+	display: block;
+	color: white;
+	text-decoration: none;
+}

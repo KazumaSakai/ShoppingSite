@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>すべての購入履歴</h1>
 			<s:if test="%{ !purchaseHistoryList.isEmpty() }">
-			<table class="itemListTable" border="1">
+			<table class="table" border="1">
 				<tr>
 					<th style="width: 100px">ユーザーID</th>
 					<th style="width: 100px">商品画像</th>

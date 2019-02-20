@@ -10,7 +10,7 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>ユーザーリスト</h1>
-			<table class="itemListTable">
+			<table class="table">
 				<tr>
 					<th style="width: 100px">ID</th>
 					<th style="width: 100px">ユーザー名</th>

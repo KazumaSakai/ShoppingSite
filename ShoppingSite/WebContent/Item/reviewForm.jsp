@@ -14,20 +14,22 @@
 		</tr>
 		<tr>
 			<td>評価</td>
-			<td><select name="point" required="required">
+			<td>
+				<select name="point" required="required">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5" selected>5</option>
-			</select></td>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">コメント <textarea name="comment" required="required"></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" class="text-center"><input type="submit" value="送信" /></td>
+			<td colspan="2" class="text-center"><input class="linkButton"  type="submit" value="送信"/></td>
 		</tr>
 	</table>
 </form>

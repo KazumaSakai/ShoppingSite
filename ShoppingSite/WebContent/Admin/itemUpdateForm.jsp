@@ -35,7 +35,7 @@
 			<tr>
 				<td colspan="2" class="text-center">
 					<input type="hidden" name="id" value="${ itemDTO.item_id }" />
-					<input type="submit" value="商品情報を更新する" />
+					<input class="linkButton" type="submit" value="商品情報を更新する" />
 				</td>
 			</tr>
 		</table>

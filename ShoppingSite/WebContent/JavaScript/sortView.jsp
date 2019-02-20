@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>MergeSort</h1>
 			<div class="text-center" >
-				<canvas id="cv" width="1000" height="500" style="border: 1px solid black">
+				<canvas id="cv" width="1000" height="480" style="border: 1px solid black">
 				</canvas>
 				<p>
 					JavaScriptのCanvasでソートを可視化しました。

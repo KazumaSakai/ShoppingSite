@@ -1,0 +1,66 @@
+/*
+ *		Input Form
+ */
+.inputTable {
+	max-width: 100%;
+	
+	margin: 10px auto;
+	padding: 30px 60px;
+	box-sizing: border-box;
+	
+	border: 2px solid black;
+	border-radius: 5px;
+	font-weight: bold;
+	box-shadow: 0px 0px 5px 2px lightgray;
+}
+
+/*	Input Form Title */
+.inputTable th {
+	font-size: 25px;
+	padding: 5px;
+}
+
+.inputTable td {
+	padding: 5px;
+}
+
+.inputTable input[type="text"],
+.inputTable input[type="password"],
+.inputTable input[type="email"] {
+	width: 100%;
+	
+	font-size: 1.1em;
+	font-family: Arial, sans-serif;
+	
+	padding: 1px 5px;
+	
+	border: solid 1px black;
+	border-radius: 3px;
+	
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+	
+	transition: all 200ms 0s ease;
+}
+
+.inputTable input[type="text"]:hover,
+.inputTable input[type="password"]:hover,
+.inputTable input[type="email"]:hover {
+	background-color: #FFE266;
+	transition: all 200ms 0s ease;
+	box-shadow: 0 0 10px #FFE266;
+}
+
+.inputTable input[type="submit"],
+.inputTable input[type="button"] {
+	
+	font-family: Arial, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: uppercase;
+	
+	border: solid 1px black;
+	
+	cursor: pointer;
+	
+	transition: all 200ms 0s ease;
+}

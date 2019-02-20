@@ -245,8 +245,14 @@ class Sorter {
 
 				Sorter.SwitchAry(ary, leftIndex, rightIndex);
 
+				ary[leftIndex].color = "blue";
+				ary[rightIndex].color = "blue";
+				
 				var obj = {};
 				yield obj;
+				
+				ary[leftIndex].color = "rgb(70, 70, 70)";
+				ary[rightIndex].color = "rgb(70, 70, 70)";
 
 				leftIndex++;
 				rightIndex--;

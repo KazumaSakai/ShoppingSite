@@ -11,7 +11,7 @@
 		<jsp:attribute name="value">
 			<h1>マイカート</h1>
 			<s:if test="itemList.size != 0">
-			<table class="itemListTable">
+			<table class="table">
 				<tr>
 					<th style="width: 100px">商品画像</th>
 					<th style="width: 100px">商品名</th>

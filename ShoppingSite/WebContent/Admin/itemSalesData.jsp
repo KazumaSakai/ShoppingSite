@@ -38,6 +38,7 @@
 		
 		<div class="text-center">
 			<svg id="myGraph"></svg>
+			<p>JavaScript d3.jsで作成しました。</p>
 		</div>
 		<script type="text/javascript" src="./JavaScript/d3.js"></script>
 		</jsp:attribute>

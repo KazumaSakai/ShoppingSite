@@ -1,0 +1,30 @@
+/*
+ *	ItemListTable
+ */
+.itemListTable {
+	margin: 0px auto;
+	padding: 1px 1px 1px 1px;
+	font-weight: bold;
+	background-color: black;
+}
+
+.itemListTable th {
+	text-align: center;
+	padding: 5px 10px;
+	border: 1px solid black;
+	background-color: #cccccc;
+}
+
+.itemListTable td {
+	text-align: center;
+	padding: 5px 10px;
+	border: 1px solid black;
+}
+
+.itemListTable tr {
+	background-color: white;
+}
+
+.itemListTable tr:nth-child(odd) {
+	background-color: #dddddd;
+}
