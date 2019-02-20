@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <jsp:include page="../template.jsp">
-	<jsp:param value="MergeSort" name="title"  />
+	<jsp:param value="Sort可視化" name="title"  />
 	<jsp:param value="false" name="showSlider"/>
 	<jsp:param value="false" name="showSideMenu"/>
 	<jsp:param value="true" name="showMain"/>
@@ -14,7 +14,10 @@
 				<canvas id="cv" width="700" height="490" style="border: 1px solid black">
 				</canvas>
 			</div>
-			<script type="text/javascript" src="./JavaScript/mergeSortView.js"></script>					
+			<p>
+				JavaScriptのCanvasでソートを可視化しました。
+			</p>
+			<script type="text/javascript" src="./JavaScript/sortView.js"></script>
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

@@ -93,7 +93,7 @@
 					<div class="boxarea">
 						<h2>制作物</h2>
 						<ul class="side_menu">
-							<li><a href='<s:url action="GoMergeSortAction"/>'>MergeSort</a></li>
+							<li><a href='<s:url action="GoSortAction"/>'>ソート可視化 JavaScript DOM</a></li>
 						</ul>
 					</div>
 				</div>

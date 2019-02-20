@@ -16,8 +16,8 @@
 			<result name="success">./index.jsp</result>
 		</action>
 		
-		<action name="GoMergeSortAction" class="com.internousdev.ShoppingSite.action.GoMergeSortAction" method="execute">
-			<result name="success">./JavaScript/mergeSort.jsp</result>
+		<action name="GoSortAction" class="com.internousdev.ShoppingSite.action.GoSortAction" method="execute">
+			<result name="success">./JavaScript/sortView.jsp</result>
 		</action>
 		
 		

@@ -1,31 +1,6 @@
-class SorterViewObject {
-	constructor() {
-		this.value;
-		this.isMove = true;
-		this.y = 0;
-		this.index = 0;
-		this.color = "rgb(70, 70, 70)";
-	}
-
-	render(context, w, h) {
-		context.beginPath();
-		context.fillStyle = this.color;
-		context.rect(1 + (this.index * 11), h - this.value - (this.y * 10),
-			10, this.value);
-		context.fill();
-	}
-
-	static CraeteArray(length) {
-		var ary = new Array(length);
-		for (var i = 0; i < length; i++) {
-			ary[i] = new SorterViewObject();
-		}
-		return ary;
-	}
-
-}
-
+//	Sorter
 class Sorter {
+	//	マージソート
 	static MargeSort(ary, begin, end) {
 		var length = (end - begin);
 		if (length == 1) return;
@@ -81,6 +56,7 @@ class Sorter {
 		Sorter.ReplaceAry(ary, tmpAry, begin, end);
 	}
 
+	//	クイックソート
 	static QuickSort(ary, begin, end) {
 		var length = end - begin;
 		if (begin > end) return;
@@ -106,6 +82,7 @@ class Sorter {
 		Sorter.QuickSort(ary, ++rightIndex, end);
 	}
 
+	//	ランダムな配列を作成
 	static CreateRandomArray(aryLength, height) {
 		var ary = new Array(aryLength);
 
@@ -116,6 +93,7 @@ class Sorter {
 		return ary;
 	}
 
+	//	配列の中身をスイッチ
 	static SwitchAry(ary, a, b) {
 		var tmp = ary[a];
 		ary[a] = ary[b];
@@ -124,6 +102,7 @@ class Sorter {
 		return ary;
 	}
 
+	//	配列を置き換え
 	static ReplaceAry(baseAry, newAry, begin, end) {
 		for (var i = begin; i < end; i++) {
 			baseAry[i] = newAry[i - begin];
@@ -142,15 +121,11 @@ class Sorter {
 			//	長さが２なら入れ替えて終了
 			if (length == 2) {
 				//	左側のほうが小さければなにもしない
-				if (ary[begin] < ary[begin + 1]) return;
+				if (ary[begin].value < ary[begin + 1].value) return;
 
 				Sorter.SwitchAry(ary, begin, begin + 1);
 
 				var obj = {};
-				obj.isSwitch = true;
-				obj.from = begin;
-				obj.to = begin + 1;
-
 				yield obj;
 				return;
 			}
@@ -189,12 +164,17 @@ class Sorter {
 			//	その配列に次に追加する場所
 			var index = 0;
 
+			//	色変更
+			for (var i = begin; i < end; i++) {
+				ary[i].color = "red";
+			}
+			
 			//	どちらも無くなるまで回す
 			while (leftLength > 0 || rightLength > 0) {
 				//	どちらもある場合
 				if (leftLength > 0 && rightLength > 0) {
 					//	左のほうが値が小さい場合
-					if (ary[leftIndex] < ary[rightIndex]) {
+					if (ary[leftIndex].value < ary[rightIndex].value) {
 						tmpAry[index] = ary[leftIndex];
 						index++;
 						leftIndex++;
@@ -227,41 +207,24 @@ class Sorter {
 				}
 			}
 
-			//	一時的に保存していた値を実際に代入する
-			Sorter.ReplaceAry(ary, tmpAry, begin, end);
-
-			//	色変更
-			for (var i = begin; i < end; i++) {
-				var obj_pivod = {};
-				obj_pivod.changeColor = true;
-				obj_pivod.color = "red";
-				obj_pivod.index = i;
-				yield obj_pivod;
-			}
 
 			//	一つ一つ、値を変更していく
 			for (var i = begin; i < end; i++) {
+				ary[i] = tmpAry[i - begin];
 				var obj = {};
-				obj.isSwitch = false;
-				obj.index = i;
-				obj.value = ary[i];
-
 				yield obj;
 			}
 
 			//	色変更
 			for (var i = begin; i < end; i++) {
-				var obj_pivod = {};
-				obj_pivod.changeColor = true;
-				obj_pivod.color = "rgb(70, 70, 70)";
-				obj_pivod.index = i;
-				yield obj_pivod;
+				ary[i].color = "rgb(70, 70, 70)";
 			}
 		}
 
 		return generator(ary, begin, end);
 	}
 
+	//	クイックソートをgeneretorでする
 	static GeneratorQuickSort(ary, begin, last) {
 		function* generator(ary, begin, last) {
 			var length = last - begin;
@@ -270,37 +233,26 @@ class Sorter {
 			var center = begin + Math.floor(length / 2);
 			var pivot = ary[center];
 
-			var obj_pivod = {};
-			obj_pivod.changeColor = true;
-			obj_pivod.color = "red";
-			obj_pivod.index = center;
-			yield obj_pivod;
+			pivot.color = "red";
 
 			var leftIndex = begin;
 			var rightIndex = last;
 
 			while (true) {
-				while (ary[leftIndex] < pivot) leftIndex++;
-				while (pivot < ary[rightIndex]) rightIndex--;
+				while (ary[leftIndex].value < pivot.value) leftIndex++;
+				while (pivot.value < ary[rightIndex].value) rightIndex--;
 				if (leftIndex >= rightIndex) break;
 
-				ary = Sorter.SwitchAry(ary, leftIndex, rightIndex);
+				Sorter.SwitchAry(ary, leftIndex, rightIndex);
 
 				var obj = {};
-				obj.isSwitch = true;
-				obj.from = leftIndex;
-				obj.to = rightIndex;
 				yield obj;
 
 				leftIndex++;
 				rightIndex--;
 			}
 
-			var obj_pivod = {};
-			obj_pivod.changeColor = true;
-			obj_pivod.color = "rgb(70, 70, 70)";
-			obj_pivod.index = center;
-			yield obj_pivod;
+			pivot.color = "rgb(70, 70, 70)";
 
 			//	左側をクイックソート
 			var g1 = Sorter.GeneratorQuickSort(ary, begin, --leftIndex);
@@ -321,114 +273,4 @@ class Sorter {
 		}
 		return generator(ary, begin, last);
 	}
-
 }
-
-class ArrayRect {
-	constructor() {
-		this.valueAry = Sorter.CreateRandomArray(60, 400);
-		this.renderAry = SorterViewObject.CraeteArray(60);
-
-		this.generator = Sorter.GeneratorMergeSort(this.valueAry, 0, this.valueAry.length);
-		for (var i = 0; i < this.valueAry.length; i++) {
-			this.renderAry[i].value = this.valueAry[i];
-			this.renderAry[i].index = i;
-		}
-
-		this.inAction = false;
-		this.done = false;
-	}
-
-	update() {
-		if (!this.done && this.inAction) {
-			this.sort();
-		}
-	}
-
-	render(context, w, h) {
-		for (var i = 0; i < this.valueAry.length; i++) {
-			this.renderAry[i].render(context, w, h);
-		}
-	}
-
-	sort() {
-		var r = this.generator.next();
-		if (r.done) {
-			this.done = r.done
-			return;
-		}
-		var v = r.value;
-
-		if (r.value.changeColor) {
-			this.renderAry[r.value.index].color = r.value.color;
-			return;
-		}
-		if (v.isSwitch) {
-			var tmp = this.renderAry[v.from].value;
-			this.renderAry[v.from].value = this.renderAry[v.to].value;
-			this.renderAry[v.to].value = tmp;
-		} else {
-			this.renderAry[v.index].value = v.value;
-		}
-	}
-
-	toggleAction() {
-		if (this.inAction) {
-			this.start();
-		} else {
-			this.start();
-		}
-	}
-
-	start() {
-		if (this.done) {
-			this.reflesh();
-		}
-		this.inAction = true;
-	}
-
-	stop() {
-		this.inAction = false;
-	}
-
-	reflesh() {
-		this.valueAry = Sorter.CreateRandomArray(60, 400);
-		this.renderAry = SorterViewObject.CraeteArray(60);
-
-		this.generator = Sorter.GeneratorQuickSort(this.valueAry, 0, this.valueAry.length - 1);
-		for (var i = 0; i < this.valueAry.length; i++) {
-			this.renderAry[i].value = this.valueAry[i];
-			this.renderAry[i].index = i;
-		}
-		this.done = false;
-	}
-}
-
-function StartCanvas() {
-	/* Canvas要素の定義など */
-	var cs = document.getElementById('cv');
-	var ctx = cs.getContext('2d');
-	var w = cs.width;
-	var h = cs.height;
-
-	var rect = new ArrayRect();
-	cs.addEventListener('click', function () {
-		rect.toggleAction();
-	}, false);
-
-	var objects = [];
-	objects.push(rect);
-
-	/* 描画フロー */
-	function Render(timestamp) {
-		// Canvas全体をクリア
-		ctx.clearRect(0, 0, w, h);
-
-		objects.forEach((obj) => obj.update());
-		objects.forEach((obj) => obj.render(ctx, w, h));
-
-		window.requestAnimationFrame((ts) => Render(ts));
-	}
-	window.requestAnimationFrame((ts) => Render(ts));
-}
-StartCanvas();
