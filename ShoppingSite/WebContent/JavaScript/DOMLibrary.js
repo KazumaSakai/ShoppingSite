@@ -18,7 +18,10 @@ class DOMLibrary
 			option.insertAdjacentHTML("afterbegin", text);
 			select.appendChild(option);
 		});
+
+		var p = document.createElement("p");
+		p.appendChild(select);
 		
-		return select;
+		return p;
 	}
 }

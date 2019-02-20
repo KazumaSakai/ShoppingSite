@@ -41,7 +41,7 @@
 			<s:if test="#session.isLogin">
 				<li>
 					<ul class="dropDownMenu">
-						<li><a href='<s:url action="GoUserPageAction"/>'><s:property value="#session.user_name" escape="false" /></a></li>
+						<li><s:property value="#session.user_name" escape="false" /></li>
 						<li><a href='<s:url action="GoUserPageAction"/>'>ユーザーページ</a></li>
 						<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
 						<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
@@ -51,6 +51,7 @@
 			<s:else>
 				<li>
 					<ul class="dropDownMenu">
+						<li>ログイン</li>
 						<li><a href='/ShoppingSite/GoLoginAction.action'>ログイン</a></li>
 						<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
 					</ul>
@@ -93,7 +94,7 @@
 					<div class="boxarea">
 						<h2>制作物</h2>
 						<ul class="side_menu">
-							<li><a href='<s:url action="GoSortAction"/>'>ソート可視化 JavaScript DOM</a></li>
+							<li><a href='<s:url action="GoSortAction"/>'>ソート可視化 JavaScript Canvas</a></li>
 						</ul>
 					</div>
 				</div>

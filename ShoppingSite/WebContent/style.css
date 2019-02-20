@@ -28,7 +28,7 @@ header {
  */
 header #main_menu
 {
-	margin: 0px;
+	margin: 0px 5px;
 	padding: 0px;
 	
 	float: right;
@@ -36,13 +36,6 @@ header #main_menu
 	list-style: none;
 	display: inline-block;
 	vertical-align: middle;
-}
-
-header #main_menu a
-{
-	display: block;
-	color: white;
-	text-decoration: none;
 }
 
 header #main_menu li
@@ -57,11 +50,16 @@ header #main_menu li
 	
 	transition: all 200ms 0s ease;
 }
-
 header #main_menu li:hover
 {
 	background-color: #99cc00;
-	transition: all 200ms 0s ease;
+}
+
+header #main_menu li a
+{
+	display: block;
+	color: white;
+	text-decoration: none;
 }
 
 /*
@@ -89,21 +87,35 @@ header #main_menu li:hover
 	
 	overflow: hidden;
 	background-color: black;
+	
+    transition: all 500ms ease;
 }
-
 /* 一つ目の<li>は可視化 */
 .dropDownMenu li:nth-child(1)
 {
+	position: relative;
+	
 	height: 65px;
 	
 	overflow: visible;
+	
+    transition: all 500ms ease;
 }
-.dropDownMenu li:nth-child(1) a:before
+.dropDownMenu li:nth-child(1):hover
 {
-    content: '';
+	background-color: black !important;
+}
+/*	一つ目の<li>に矢印を追加 */
+.dropDownMenu li:nth-child(1):after
+{
+	position: absolute;
+	top: calc(100% - 22px);
+	left: calc(50% - 8px);
+	
+    content: ' ';
     display: inline-block;
     
-    width: 8px;
+    width: 8px; 
     height: 8px;
     
     margin: 0px 15px 0px 0px;
@@ -111,11 +123,21 @@ header #main_menu li:hover
     border-right: 1px solid white;
     border-bottom: 1px solid white;
     
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg) translateY(-5px);
+    transition: all 500ms ease;
+    transform: rotate(45deg);
 }
-
+/* <ul>がhoverなら、矢印を一回点させる */
+.dropDownMenu:hover > li:nth-child(1):after
+{
+	top: calc(50% - 8px);
+    transform: rotate(405deg);
+}
+/* 二つ目以降をずらす */
+.dropDownMenu li:nth-child(n + 2)
+{
+	position: relative;
+	top: 5px;
+}
 /* <ul>がhoverなら、すべての<li>を可視化 */
 .dropDownMenu:hover > li
 {
@@ -123,6 +145,11 @@ header #main_menu li:hover
 	
 	overflow: visible;
 	z-index: 1;
+}
+/* <ul>がhoverなら、ひとつめのchildを非表示に */
+.dropDownMenu:hover > li:nth-child(1)
+{
+	color: rgba(0, 0, 0, 0);
 }
 
 
