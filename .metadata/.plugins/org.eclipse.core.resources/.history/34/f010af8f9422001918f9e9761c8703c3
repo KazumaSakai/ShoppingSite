@@ -1,9 +1,0 @@
-package com.internousdev.ShoppingSite.action;
-
-import org.apache.struts2.interceptor.SessionAware;
-
-public class GoSalesDataAction extends ActionSupport implements SessionAware
-
-{
-	
-}

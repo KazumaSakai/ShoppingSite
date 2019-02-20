@@ -1,6 +1,0 @@
-package com.internousdev.ShoppingSite.dto;
-
-public class ItemSalesDTO
-{
-	private int price;
-}
