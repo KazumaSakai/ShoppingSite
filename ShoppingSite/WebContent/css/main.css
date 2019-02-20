@@ -15,54 +15,67 @@ body {
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #fafafa;
+	background-image: url("../Images/jQuery_image1.jpg");
 }
 
 /*
  *	Main
  */
-#main {
+#main
+{
+	margin: 0;
+	padding: 0;
+	
 	width: 100%;
-	height: 100%;
-	min-height: calc(100vh - 135px);
-	vertical-align: top;
+	min-height: calc(100vh - 140px);
+	
 	display: inline-block;
+	vertical-align: top;
 }
 
 /*
  *	Left
  */
-#main #left {
+#main #left
+{
+	padding: 10px 5px 10px 10px;
+	
+	float: left;
+	
 	width: 70%;
 	height: 100%;
-	min-height: calc(100% - 10px);
+	
 	box-sizing: border-box;
-	padding: 10px 5px 10px 10px;
-	float: left;
 }
 
 /*
  *	Left_Max
  */
-#main #left_max {
+#main #left_max
+{
+	padding: 10px;
+	
+	float: left;
+	
 	width: 100%;
 	height: 100%;
-	min-height: calc(100% - 10px);
+	
 	box-sizing: border-box;
-	padding: 10px;
-	float: left;
 }
 
 /*
  *	Right
  */
-#main #right {
+#main #right
+{
+	padding: 10px 10px 10px 5px;
+	
+	float: left;
+	
 	width: 30%;
 	height: 100%;
-	min-height: calc(100% - 10px);
+	
 	box-sizing: border-box;
-	padding: 10px 10px 10px 5px;
-	float: left;
 }
 
 #main #right h2 {
@@ -79,13 +92,18 @@ body {
 /*
  *	Box
  */
-.boxarea {
-	width: calc(100% - 22px);
-	min-height: calc(100vh - 180px);
-	height: 100%;
+.boxarea
+{
 	padding: 10px;
+	
+	width: 100%;
+	height: 100%;
+	min-height: calc(100vh - 160px);
+	box-sizing: border-box;
+	
 	border: solid 1px black;
 	border-radius: 3px;
+	
 	background-color: white;
 	box-shadow: 0px 0px 5px 2px lightgray;
 }

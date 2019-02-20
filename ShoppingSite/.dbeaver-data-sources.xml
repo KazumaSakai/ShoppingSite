@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="mysql3-1690aed39be-49b515a08605c0b4" provider="mysql" driver="mysql3" name="MySQL 3.x - ShoppingSite" save-password="true" show-system-objects="true" read-only="false">
+		<connection host="localhost" port="3306" server="" database="ShoppingSite" url="jdbc:mysql://localhost:3306/ShoppingSite" user="root" password="Hh0VMU0jpQ==" home="C:\xampp\mysql" type="dev">
+			<provider-property name="@dbeaver-serverTimezone@" value="Japan"/>
+		</connection>
+	</data-source>
+	<filters/>
+</data-sources>

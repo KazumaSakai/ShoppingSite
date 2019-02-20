@@ -16,6 +16,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+	<script src="./JavaScript/main.js" charset="utf-8"></script>
 	<script>
 		$(document).ready(function() {
 			$('#top_slider').bxSlider({

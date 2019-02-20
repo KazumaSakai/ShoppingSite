@@ -3,11 +3,14 @@
  */
 header {
 	width: 100%;
-	min-height: 70px;
+	
 	display: inline-block;
 	vertical-align: top;
-	background-color: black;
-	color: white;
+	
+	background-color: rgb(5, 5, 5, 0.8);
+	color: rgb(250, 250, 250);
+	
+	z-index: 1;
 }
 
 /*
@@ -15,25 +18,26 @@ header {
  */
 header #main_menu
 {
-	margin: 0px 5px;
+	margin: 0px 10px;
 	padding: 0px;
 	
 	float: right;
+	display: inline-block;
 	
 	list-style: none;
-	display: inline-block;
+	user-select: none;
 	vertical-align: middle;
 }
 
 header #main_menu li
 {
-	float: left;
-	
-	overflow: hidden;
 	width: 200px;
+	
+	float: left;
 	
 	line-height: 70px;
 	text-align: center;
+	overflow: hidden;
 	
 	transition: all 200ms 0s ease;
 }
@@ -45,6 +49,6 @@ header #main_menu li:hover
 header #main_menu li a
 {
 	display: block;
-	color: white;
+	color: rgb(250, 250, 250);
 	text-decoration: none;
 }
