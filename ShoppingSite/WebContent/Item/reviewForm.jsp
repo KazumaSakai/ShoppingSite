@@ -6,14 +6,11 @@
 	<input type="hidden" name="id" value="<c:out value='${itemDTO.item_id }' />" />
 	<table class="table">
 		<tr>
-			<th colspan="2" style="font-size: 23px">レビューを投稿する</th>
-		</tr>
-		<tr>
-			<td>タイトル</td>
+			<th>タイトル</<th>
 			<td><input name="title" type="text" required="required" /></td>
 		</tr>
 		<tr>
-			<td>評価</td>
+			<th>評価</<th>
 			<td>
 				<select name="point" required="required">
 					<option value="1">1</option>
@@ -25,11 +22,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">コメント <textarea name="comment" required="required"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" class="text-center"><input class="linkButton"  type="submit" value="送信"/></td>
+			<th>コメント</th>
+			<td><textarea name="comment" required="required"></textarea></td>
 		</tr>
 	</table>
 </form>
+<div class="text-center">
+	<input class="linkButton"  type="submit" value="送信"/>
+</div>

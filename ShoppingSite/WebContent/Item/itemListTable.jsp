@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<ul class="itemUL">
+<ul class="itemList">
 	<s:iterator value="itemList">
 		<li onclick="location.href = '<s:url action='ItemPageAction?id=%{ item_id }' />'">
 			<img src="./Images/ItemImages/${ item_id }/1.jpg" />

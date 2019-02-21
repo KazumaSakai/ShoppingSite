@@ -16,54 +16,57 @@
 				</p>
 			</s:if>
 			<s:else>
-			<table class="table">
-				<tr>
-					<th style="width: 100px">商品画像</th>
-					<th style="width: 100px">商品名</th>
-					<th style="width: 100px">商品金額</th>
-					<th style="width: 100px">数量</th>
-					<th style="width: 100px">合計金額</th>
-					<th style="width: 100px">配送状況</th>
-					<th style="width: 100px">配達先</th>
-					<th style="width: 100px">配達時刻</th>
-					<th style="width: 100px">変更</th>
-				</tr>
-				<s:iterator value="purchaseHistoryList">
-					<tr>
-						<td style="padding: 5px"><img src="./Images/ItemImages/${item_id }/1.jpg" style="width: 50px" /></td>
-						<td style="padding: 5px">
-							<a href="<s:url action='ItemPageAction.action?id=%{ item_id }' />">
-								<s:property value="item_name" />
-							</a>
-						</td>
-						<td style="padding: 5px"><s:property value="item_price" />円</td>
-						<td style="padding: 5px"><s:property value="quantity" />個</td>
-						<td style="padding: 5px"><s:property value="%{ item_price * quantity }" />円</td>
-						<td style="padding: 5px">
-							<s:if test="%{ shipmentState == 0 }">保留中</s:if>
-							<s:elseif test="%{ shipmentState == 1 }">未出荷</s:elseif>
-							<s:elseif test="%{ shipmentState == 2 }">出荷準備中</s:elseif>
-							<s:elseif test="%{ shipmentState == 3 }">キャンセル済み</s:elseif>
-							<s:elseif test="%{ shipmentState == 4 }">配送中</s:elseif>
-							<s:elseif test="%{ shipmentState == 5 }">配達中</s:elseif>
-							<s:elseif test="%{ shipmentState == 6 }">配達済</s:elseif>
-							<s:else>不明な配達状況</s:else>
-						</td>
-						<td style="padding: 5px">
-							<s:property value="addressName" />
-						</td>
-						<td style="padding: 5px">
-							<s:if test="%{ request_date == null }">指定なし</s:if>
-							<s:else>
-								<s:property value="request_date" />
-							</s:else>
-						</td>
-						<td>
-							<a class="delete" href="<s:url action='PurchaseHistoryDeleteAction?id=%{ id }'/>">削除</a>
-						</td>
-					</tr>
-				</s:iterator>
-			</table>
+				<ul class="verticalItemList">
+					<s:iterator value="purchaseHistoryList">
+						<li>
+							<div class="left">
+								<div>
+									<img src="./Images/ItemImages/${item_id }/1.jpg" />
+									<p style="margin: 0px; padding: 0px">
+										<a href="<s:url action='ItemPageAction.action?id=%{ item_id }' />">
+											<s:property value="item_name" />
+										</a>
+									</p>
+								</div>
+							</div>
+							
+							<div class="right">
+								<div>
+									<ul>
+										<li>
+											購入個数 : <s:property value="quantity" />個
+										</li>
+										<li>
+											<s:property value="%{ item_price * quantity }" />円
+										</li>
+										<li>
+											<s:if test="%{ shipmentState == 0 }">保留中</s:if>
+											<s:elseif test="%{ shipmentState == 1 }">未出荷</s:elseif>
+											<s:elseif test="%{ shipmentState == 2 }">出荷準備中</s:elseif>
+											<s:elseif test="%{ shipmentState == 3 }">キャンセル済み</s:elseif>
+											<s:elseif test="%{ shipmentState == 4 }">配送中</s:elseif>
+											<s:elseif test="%{ shipmentState == 5 }">配達中</s:elseif>
+											<s:elseif test="%{ shipmentState == 6 }">配達済</s:elseif>
+											<s:else>不明な配達状況</s:else>
+										</li>
+										<li>
+											<s:property value="addressName" />
+										</li>
+										<li>
+											<s:if test="%{ request_date == null }">指定なし</s:if>
+											<s:else>
+												<s:property value="request_date" />
+											</s:else>
+										</li>
+										<li>
+											<a class="delete" href="<s:url action='PurchaseHistoryDeleteAction?id=%{ id }'/>">削除</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</s:iterator>
+				</ul>
 			</s:else>
 		</jsp:attribute>
 	</jsp:param>

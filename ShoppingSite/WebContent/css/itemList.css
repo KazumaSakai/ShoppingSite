@@ -1,0 +1,86 @@
+/*
+ *		ItemList
+ */
+.itemList
+{
+	margin: 0 auto;
+	padding: 0;
+	
+	width: 100%;
+	
+    display:flex;
+    flex-wrap:wrap;
+    
+	list-style:none;
+	text-align: center;
+}
+.itemList > li
+{
+	float: left;
+	
+	margin: 10px 5px;
+	padding: 10px 0px;
+	
+	width: calc(calc(100% / 4) - 10px);
+	box-sizing: border-box;
+	
+	border: 1px solid black;
+	box-shadow: 0 0 2px #777;
+	cursor: pointer;
+	
+	transition: all 200ms 0s ease;
+}
+
+
+.itemList > li:hover
+{
+	width: calc(100% / 4);
+	
+	margin: 10px 0px;
+	padding: 10px 5px;
+	
+	box-shadow: 0 0 8px black;
+}
+
+@media screen and (max-width:1150px) 
+{
+	.itemList > li
+	{
+		width: calc(calc(100% / 3) - 10px);
+	}
+	.itemList > li:hover
+	{
+		width: calc(100% / 3);
+	}
+}
+
+@media screen and (max-width:850px) 
+{
+	.itemList > li
+	{
+		width: calc(calc(100% / 2) - 10px);
+	}
+	.itemList > li:hover
+	{
+		width: calc(100% / 2);
+	}
+}
+
+@media screen and (max-width:550px) 
+{
+	.itemList > li
+	{
+		width: calc(calc(100%) - 10px);
+	}
+	.itemList > li:hover
+	{
+		width: calc(100%);
+	}
+}
+
+.itemList > li > img
+{
+	margin: 5px;
+	max-width: 100px;
+	width: calc(100% - 10px);
+}

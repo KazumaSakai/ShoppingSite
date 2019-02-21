@@ -14,15 +14,15 @@
 			</h1>
 			<table class="center table" border="1">
 				<tr>
-					<td style="width: 100px">販売者名</td>
+					<th style="width: 100px">販売者名</th>
 					<td style="width: 300px"><s:property value="sellerDTO.name" /></td>
 				</tr>
 				<tr>
-					<td>住所</td>
+					<th>住所</th>
 					<td><s:property value="sellerDTO.address" /></td>
 				</tr>
-				<tr>
-					<td>詳細</td>
+				<tr> 
+					<th>詳細</th>
 					<td><s:property value="sellerDTO.description" /></td>
 				</tr>
 			</table>

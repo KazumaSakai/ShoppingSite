@@ -6,38 +6,33 @@
 	<form action="AdminUpdateItemAction" method="post">
 		<table class="table">
 			<tr>
-				<th colspan="2" style="color: red">管理者用 商品情報変更フォーム</th>
+				<th>商品名</th>
+				<td><input type="text" name="item_name" value="${ itemDTO.item_name }" required="required" /></td>
 			</tr>
 			<tr>
-				<td style="text-align: left">商品名</td>
-				<td style="text-align: left"><input type="text" name="item_name" value="${ itemDTO.item_name }" required="required" /></td>
+				<th>商品価格</th>
+				<td><input type="number" name="item_price" value="${ itemDTO.item_price }"  required="required"/> 円</td>
 			</tr>
 			<tr>
-				<td style="text-align: left">商品価格</td>
-				<td style="text-align: left"><input type="number" name="item_price" value="${ itemDTO.item_price }"  required="required"/> 円</td>
+				<th>販売個数</th>
+				<td> ＋ <input type="number" name="item_quantity" value="0" required="required"/></td>
 			</tr>
 			<tr>
-				<td style="text-align: left">販売個数</td>
-				<td style="text-align: left"> ＋ <input type="number" name="item_quantity" value="0" required="required"/></td>
+				<th>販売者ID</th>
+				<td><input type="number" name="seller" value="${ itemDTO.seller.id }" required="required" /></td>
 			</tr>
 			<tr>
-				<td style="text-align: left">販売者ID</td>
-				<td style="text-align: left"><input type="number" name="seller" value="${ itemDTO.seller.id }" required="required" /></td>
+				<th>画像数</th>
+				<td><input type="number" name="image_num" value="${ itemDTO.image_num }" required="required" /></td>
 			</tr>
 			<tr>
-				<td style="text-align: left">画像数</td>
-				<td style="text-align: left"><input type="number" name="image_num" value="${ itemDTO.image_num }" required="required" /></td>
-			</tr>
-			<tr>
-				<td style="text-align: left">説明</td>
-				<td style="text-align: left"><textarea name="description" required="required">${ itemDTO.description }</textarea>
-			</tr>
-			<tr>
-				<td colspan="2" class="text-center">
-					<input type="hidden" name="id" value="${ itemDTO.item_id }" />
-					<input class="linkButton" type="submit" value="商品情報を更新する" />
-				</td>
+				<th>説明</th>
+				<td><textarea name="description" required="required">${ itemDTO.description }</textarea>
 			</tr>
 		</table>
+		<div class="text-center">
+			<input type="hidden" name="id" value="${ itemDTO.item_id }" />
+			<input class="linkButton" type="submit" value="商品情報を更新する" />
+		</div>
 	</form>
 </s:if>

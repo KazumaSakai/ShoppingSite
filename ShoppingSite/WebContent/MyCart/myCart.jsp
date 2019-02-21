@@ -10,53 +10,51 @@
 	<jsp:param name="content">
 		<jsp:attribute name="value">
 			<h1>マイカート</h1>
-			<s:if test="itemList.size != 0">
-			<table class="table">
-				<tr>
-					<th style="width: 100px">商品画像</th>
-					<th style="width: 100px">商品名</th>
-					<th style="width: 100px">商品価格</th>
-					<th style="width: 100px">数量</th>
-					<th>数を変更</th>
-				</tr>
-				<s:iterator value="itemList">
+			<s:if test="!itemList.isEmpty()">
+				<table class="table text-center">
 					<tr>
-						<td>
-							<img src="./Images/ItemImages/${item_id }/1.jpg"
-								style="width: 50px" />
-						</td>
-						<td>
-							<a href="<s:url action='ItemPageAction.action?id=%{ item_id }' />">
-								<s:property value="item_name" />
-							</a>
-						</td>
-						<td><s:property value="item_price" />円</td>
-						<td><s:property value="item_count" />個</td>
-						<td>
-							<form action="ChangeCartItemQuantityAction" method="post">
-								<input type="hidden" name="toCart" value="true" />
-								<input type="number" name="newQuantity" value='${ item_count }' min="0" style="width: 50px; text-align: right; padding: 2px">個
-								<input type="hidden" name="item_id" value='${ item_id }'>
-								<input type="submit" value="変更" />
-							</form>
+						<th>商品名</th>
+						<th>商品画像</th>
+						<th>商品価格</th>
+						<th>数量</th>
+						<th>数を変更</th>
+					</tr>
+					<s:iterator value="itemList">
+						<tr>
+							<th>
+								<a href="<s:url action='ItemPageAction.action?id=%{ item_id }' />">
+									<s:property value="item_name" />
+								</a>
+							</th>
+							<td>
+								<img src="./Images/ItemImages/${item_id }/1.jpg"
+									style="width: 50px" />
+							</td>
+							<td><s:property value="item_price" />円</td>
+							<td><s:property value="item_count" />個</td>
+							<td>
+								<form action="ChangeCartItemQuantityAction" method="post">
+									<input type="hidden" name="toCart" value="true" />
+									<input type="number" name="newQuantity" value='${ item_count }' min="0" style="width: 50px; text-align: right; padding: 2px">個
+									<input type="hidden" name="item_id" value='${ item_id }'>
+									<input type="submit" value="変更" />
+								</form>
+							</td>
+						</tr>
+					</s:iterator>
+					<tr>
+						<th colspan="1">
+							合計金額
+						</th>
+						<td colspan="4">
+							<span style="color: red; font-weight: bold"><c:out
+										value="${totalPrice }" />円</span>
 						</td>
 					</tr>
-				</s:iterator>
-				<tr>
-					<td colspan="2">
-						合計金額
-					</td>
-					<td colspan="3">
-						<span style="color: red; font-weight: bold"><c:out
-									value="${totalPrice }" />円</span>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5" class="text-center form">
-						<input class="linkButton" type="submit" value="購入する" onclick="location.href='<s:url action='GoBuyAction' />'" />
-					</td>
-				</tr>
-			</table>
+				</table>
+				<div class="text-center">
+					<input class="linkButton" type="submit" value="購入する" onclick="location.href='<s:url action='GoBuyAction' />'" />
+				</div>
 			</s:if>
 			<s:else>
 				<p class="errorMessage text-center">

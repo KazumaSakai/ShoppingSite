@@ -14,43 +14,56 @@
 				<s:property value="itemDTO.item_name" />
 			</h2>
 			
-			<jsp:include page="../errorMsg.jsp" />
-			
-			<div id="item_slider">
-				<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
-					<div>
-						<img src="./Images/ItemImages/${ itemDTO.item_id }/${ st.count }.jpg" />
-					</div>
-				</s:iterator>
+			<div style="margin: 0px 20px 40px 20px">
+				<jsp:include page="../errorMsg.jsp" />
+				
+				<div id="item_slider">
+					<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
+						<div>
+							<img src="./Images/ItemImages/${ itemDTO.item_id }/${ st.count }.jpg" />
+						</div>
+					</s:iterator>
+				</div>
+				
+				
+				<s:if test="#session.isLogin">
+					<form class="text-center" action="AddItemAction" method="post">
+						<input type="hidden" name="request_Quantity" value='1' min="0">
+						<input type="hidden" name="item_id" value="${ itemDTO.item_id }">
+						<input class="linkButton" type="submit" value="カートに追加する" />
+					</form>
+				</s:if>
+				<s:else>
+					<p class="text-center">
+						商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
+					</p>
+				</s:else>
 			</div>
 			
 			
-			<s:if test="#session.isLogin">
-				<form class="text-center" action="AddItemAction" method="post">
-					<input type="hidden" name="request_Quantity" value='1' min="0">
-					<input type="hidden" name="item_id" value="${ itemDTO.item_id }">
-					<input class="linkButton" type="submit" value="カートに追加する" />
-				</form>
-			</s:if>
-			<s:else>
-				<p class="text-center">
-					商品を購入するには、ログインが必要です。ログインは<a href='<s:url action="GoLoginAction"/>'>こちら</a>からできます。
-				</p>
-			</s:else>
+			<div style="margin: 0px 20px 40px 20px">
+				<div class="tab" index="0">
+					<div name="詳細">
+						<jsp:include page="./itemDetail.jsp" />
+					</div>
+					<s:if test="#session.isAdmin">
+						<div name="詳細変更">
+							<jsp:include page="../Admin/itemUpdateForm.jsp" />
+						</div>
+					</s:if>
+				</div>
+			</div>
 			
-			<s:if test="#session.isAdmin">
-				<jsp:include page="../Admin/itemUpdateForm.jsp" />
-			</s:if>
-			<jsp:include page="./itemDetail.jsp" />
-			
-			
-			<p style="text-align: center; font-size: 23px; font-weight: bold">
-				レビュー
-			</p>
-			
-			<jsp:include page="./reviewList.jsp" />
-			<jsp:include page="./reviewForm.jsp" />
-			
+			<div style="margin: 0px 20px 40px 20px">
+				<div class="tab" index="0">
+					<div name="レビュー" class="tabBox">
+						<jsp:include page="./reviewList.jsp" />
+					</div>
+					<div name="レビュー投稿">
+						<jsp:include page="./reviewForm.jsp" />
+					</div>
+				</div>
+			</div>
 			
 		</jsp:attribute>
 	</jsp:param>
