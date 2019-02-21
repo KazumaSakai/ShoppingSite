@@ -5,7 +5,7 @@
 <jsp:include page="../template.jsp">
 	<jsp:param value="商品リスト" name="title" />
 	<jsp:param value="false" name="showSlider" />
-	<jsp:param value="true" name="showSideMenu" />
+	<jsp:param value="false" name="showSideMenu" />
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
@@ -24,12 +24,6 @@
 			</form>
 			
 			<jsp:include page="./itemListTable.jsp" />
-			
-			<s:if test="#session.isLogin">
-				<p class="text-center">
-					<input class="linkButton" type="button" value="マイカート" onClick="location.href='<s:url action='MyCartAction'/>'">
-				</p>
-			</s:if>
 			
 		</jsp:attribute>
 	</jsp:param>

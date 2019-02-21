@@ -1,7 +1,8 @@
 /*
  *		Input Form
  */
-.inputTable {
+.inputTable
+{
 	max-width: 100%;
 	
 	margin: 10px auto;
@@ -15,18 +16,21 @@
 }
 
 /*	Input Form Title */
-.inputTable th {
+.inputTable th
+{
 	font-size: 25px;
 	padding: 5px;
 }
 
-.inputTable td {
+.inputTable td
+{
 	padding: 5px;
 }
 
 .inputTable input[type="text"],
 .inputTable input[type="password"],
-.inputTable input[type="email"] {
+.inputTable input[type="email"]
+{
 	width: 100%;
 	
 	font-size: 1.1em;
@@ -44,14 +48,16 @@
 
 .inputTable input[type="text"]:hover,
 .inputTable input[type="password"]:hover,
-.inputTable input[type="email"]:hover {
+.inputTable input[type="email"]:hover
+{
 	background-color: #FFE266;
 	transition: all 200ms 0s ease;
 	box-shadow: 0 0 10px #FFE266;
 }
 
 .inputTable input[type="submit"],
-.inputTable input[type="button"] {
+.inputTable input[type="button"]
+{
 	
 	font-family: Arial, sans-serif;
 	font-size: 1.2em;

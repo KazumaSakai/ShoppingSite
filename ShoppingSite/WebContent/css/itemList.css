@@ -18,37 +18,54 @@
 {
 	float: left;
 	
-	margin: 10px 5px;
-	padding: 10px 0px;
+	padding: 20px;
 	
-	width: calc(calc(100% / 4) - 10px);
+	width: calc(100% / 4);
 	box-sizing: border-box;
-	
-	border: 1px solid black;
-	box-shadow: 0 0 2px #777;
-	cursor: pointer;
 	
 	transition: all 200ms 0s ease;
 }
 
-
-.itemList > li:hover
+/*
+ *		ImageBox
+ */
+.itemList > li > .imageBox
 {
-	width: calc(100% / 4);
+	margin: 5px auto 15px auto;
+	padding: 20px;
 	
-	margin: 10px 0px;
-	padding: 10px 5px;
+	max-width: 200px;
+	width: calc(100% - 20px);
+	box-sizing: border-box;
 	
-	box-shadow: 0 0 8px black;
+	transition: all 200ms ease;
+}
+.itemList > li > .imageBox:hover
+{
+	margin: 0px auto 10px auto;
+	
+	max-width: 210px;
+	width: calc(100% - 10px);
+	
+	box-shadow: 0px 0px 50px rgb(198, 255, 188);
+}
+.itemList > li > .imageBox > img
+{
+	width: 100%;
 }
 
+.itemList > li p
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+/*
+ *		MediaQuery
+ */
 @media screen and (max-width:1150px) 
 {
 	.itemList > li
-	{
-		width: calc(calc(100% / 3) - 10px);
-	}
-	.itemList > li:hover
 	{
 		width: calc(100% / 3);
 	}
@@ -58,10 +75,6 @@
 {
 	.itemList > li
 	{
-		width: calc(calc(100% / 2) - 10px);
-	}
-	.itemList > li:hover
-	{
 		width: calc(100% / 2);
 	}
 }
@@ -70,17 +83,6 @@
 {
 	.itemList > li
 	{
-		width: calc(calc(100%) - 10px);
+		width: 100%;
 	}
-	.itemList > li:hover
-	{
-		width: calc(100%);
-	}
-}
-
-.itemList > li > img
-{
-	margin: 5px;
-	max-width: 100px;
-	width: calc(100% - 10px);
 }
