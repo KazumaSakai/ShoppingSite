@@ -9,12 +9,12 @@ public class StartGoogleOAuthAction extends ActionSupport
 
 	public String execute()
 	{
-		if(url == null) url = "loginSuccess.jsp";
-		setUrl(GoogleOAuth.RequestToken(GoogleOAuth.gmailTokenURL + "%20" + GoogleOAuth.userTokenURL, "http://localhost:8080/ShoppingSite/" + url));
-		
+		if(url == null || url.isEmpty()) url = "loginSuccess.jsp";
+		url = GoogleOAuth.RequestToken(GoogleOAuth.gmailTokenURL + "%20" + GoogleOAuth.userTokenURL, "http://localhost:8080/ShoppingSite/" + url);
+
 		return "redirect";
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}
@@ -22,6 +22,6 @@ public class StartGoogleOAuthAction extends ActionSupport
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
+
+
 }

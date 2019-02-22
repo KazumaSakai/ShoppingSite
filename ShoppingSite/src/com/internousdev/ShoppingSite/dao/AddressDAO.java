@@ -10,21 +10,27 @@ import com.internousdev.ShoppingSite.dto.AddressDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class AddressDAO
+public class AddressDAO extends DAO
 {
-	private Connection connection;
-	public AddressDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-
 	public String getAddress(int id)
 	{
 		return GetAddress(connection, id);
 	}
 	public static String GetAddress(int id)
 	{
-		return GetAddress(DBConnector.getConnection(), id);
+		Connection connection = DBConnector.getConnection();
+		String result = GetAddress(connection, id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static String GetAddress(Connection connection, int id)
 	{
@@ -44,18 +50,39 @@ public class AddressDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return "";
 	}
 
-	public boolean addUserAddress(int user_id, String address) 
+	public boolean addUserAddress(int user_id, String address)
 	{
 		return AddUserAddress(connection, user_id, address);
 	}
-	public static boolean AddUserAddress(int user_id, String address) 
+	public static boolean AddUserAddress(int user_id, String address)
 	{
-		return AddUserAddress(DBConnector.getConnection(), user_id, address);
+		Connection connection = DBConnector.getConnection();
+		boolean result = AddUserAddress(connection, user_id, address);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean AddUserAddress(Connection connection, int user_id, String address)
 	{
@@ -66,7 +93,7 @@ public class AddressDAO
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, address);
 			preparedStatement.setInt(2, user_id);
-			
+
 			int line = preparedStatement.executeUpdate();
 			if (line > 0)
 			{
@@ -80,6 +107,15 @@ public class AddressDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return false;
@@ -91,7 +127,19 @@ public class AddressDAO
 	}
 	public static List<AddressDTO> GetUserAddressList(int user_id)
 	{
-		return GetUserAddressList(DBConnector.getConnection(), user_id);
+		Connection connection = DBConnector.getConnection();
+		List<AddressDTO> result = GetUserAddressList(connection, user_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<AddressDTO> GetUserAddressList(Connection connection, int user_id)
 	{
@@ -117,6 +165,15 @@ public class AddressDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return list;

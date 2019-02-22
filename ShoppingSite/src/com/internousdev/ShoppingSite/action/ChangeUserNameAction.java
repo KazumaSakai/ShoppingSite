@@ -12,12 +12,12 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ChangeUserNameAction extends ActionSupport implements SessionAware
 {
 	private String newUserName;
-	
+
 	private Map<String, Object> session;
-	
+
 	private String errorMsg;
 	private String successMsg;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -25,11 +25,11 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "GoUserInfoAction");
 			return "needLogin";
 		}
-		
+
 		//	入力値チェック
 		errorMsg = "";
 		successMsg = "";
-		
+
 		if(newUserName == null || newUserName.length() < 4)
 		{
 			errorMsg += "ユーザー名は4文字以上でなければなりません。<br/>";
@@ -38,16 +38,15 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "ユーザー名は60文字以下でなければなりません。<br/>";
 		}
-		
+
 		if(!errorMsg.isEmpty())
 		{
 			return ERROR;
 		}
-		
+
 		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		boolean result = UserDAO.ChangeUserName(user_id, newUserName);
-		
-		if(result)
+
+		if(UserDAO.ChangeUserName(user_id, newUserName))
 		{
 			successMsg += "ユーザー名の変更に成功しました。<br/>";
 			session.put("user_name", UserDAO.GetUserName(user_id));
@@ -94,5 +93,5 @@ public class ChangeUserNameAction extends ActionSupport implements SessionAware
 		this.successMsg = successMsg;
 	}
 
-	
+
 }

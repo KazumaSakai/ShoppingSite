@@ -15,7 +15,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 	private String login_pass;
 	private String user_name;
 	private String email;
-	
+
 	private String errorMsg;
 
 	public String execute()
@@ -50,7 +50,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "ログインIDは半角英数字のみ使用できます。<br/>";
 		}
-		
+
 		//	ユーザー名チェック
 		if(user_name == null || login_id.length() < 4)
 		{
@@ -64,7 +64,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "ユーザー名に不正な文字が含まれています。<br/>";
 		}
-		
+
 		if(email.getBytes().length > 255)
 		{
 			errorMsg += "メールアドレスは255バイト以下でなければなりません。<br/>";
@@ -73,12 +73,10 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "メールアドレスの値が不正です。";
 		}
-		
-		if(!errorMsg.isEmpty()) return ERROR;
-		
-		boolean result = SignUpDAO.SignUp(login_id, email, login_pass, user_name, false);
 
-		if(result)
+		if(!errorMsg.isEmpty()) return ERROR;
+
+		if(SignUpDAO.SignUp(login_id, email, login_pass, user_name, false))
 		{
 			return SUCCESS;
 		}

@@ -14,20 +14,20 @@ public class DeleteItemReviewAction extends ActionSupport implements SessionAwar
 {
 	private int id;
 	private ItemReviewDTO review;
-	
+
 	private Map<String, Object>session;
 
 	public String execute()
 	{
 		review = ItemReviewDAO.GetReview(id);
-		
+
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "ItemPageAction?id=" + review.getItem_id());
 			return "needLogin";
 		}
-		
-		int user_id = (int)session.get("user_id");
+
+		int user_id = (int) session.get("user_id");
 		boolean isMineReview = (ItemReviewDAO.GetUserId(id) == user_id);
 		if(isMineReview || CheckAdmin.IsAdmin(session))
 		{

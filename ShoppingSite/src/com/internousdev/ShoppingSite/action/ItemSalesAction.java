@@ -20,31 +20,31 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 	private int item_id;
 	private String resultData;
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try
 		{
 			LocalDateTime time = LocalDateTime.now();
 			List<ItemSalesDTO> list = new ArrayList<ItemSalesDTO>();
-			
+
 			List<ItemSalesDTO> getList = ItemSalesDAO.GetItemSales(item_id);
 			for(int i = 0; i < 12; i++)
 			{
 				int y = time.getYear();
 				int m = time.getMonthValue();
-				
-				
+
+
 				boolean notAdd = true;
-				
+
 				for (ItemSalesDTO item : getList) {
 					if(item.getMonth() == m && item.getYear() == y)
 					{
 						list.add(item);
-						
+
 						notAdd = false;
 						break;
 					}
@@ -65,7 +65,7 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 		{
 			e.printStackTrace();
 		}
-		
+
 		return SUCCESS;
 	}
 

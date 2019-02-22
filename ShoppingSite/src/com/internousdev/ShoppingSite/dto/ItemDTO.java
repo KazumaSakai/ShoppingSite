@@ -9,6 +9,9 @@ public class ItemDTO {
 	private SellerDTO seller;
 	private int image_num;
 	private int myCart_quantity;
+	private String insert_date;
+	private String last_add_date;
+	private String last_sell_date;
 
 	public String getDescription() {
 		return description;
@@ -33,10 +36,6 @@ public class ItemDTO {
 	public void setImage_num(int image_num) {
 		this.image_num = image_num;
 	}
-
-	private String insert_date;
-	private String last_add_date;
-	private String last_sell_date;
 
 	public int getItem_count() {
 		return item_count;
@@ -75,7 +74,14 @@ public class ItemDTO {
 	}
 
 	public void setInsert_date(String insert_date) {
-		this.insert_date = insert_date;
+		String[] date_seconds = insert_date.split(" ");
+		String[] dates = date_seconds[0].split("-");
+		String[] seconds = date_seconds[1].split(":");
+
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder.append(dates[0]).append("年").append(dates[1]).append("月").append(dates[2]).append("日 ").append(seconds[0]).append("時");
+
+		this.insert_date = sBuilder.toString();
 	}
 
 	public String getLast_add_date() {

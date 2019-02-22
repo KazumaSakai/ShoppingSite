@@ -13,7 +13,7 @@ public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements S
 {
 	private int id;
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -22,10 +22,8 @@ public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements S
 			return "needLogin";
 		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
-		
-		boolean result= PurchaseHistoryDAO.DeletePurchaseHistory(id);
-		
-		return result ? SUCCESS : ERROR;
+
+		return PurchaseHistoryDAO.DeletePurchaseHistory(id) ? SUCCESS : ERROR;
 	}
 
 	public int getId() {

@@ -2,26 +2,33 @@ package com.internousdev.ShoppingSite.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.internousdev.ShoppingSite.dto.SellerDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class SellerDAO
+public class SellerDAO extends DAO
 {
-	private Connection connection;
-	public SellerDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-	
 	public SellerDTO getSeller(int id)
 	{
 		return GetSeller(connection, id);
 	}
 	public static SellerDTO GetSeller(int id)
 	{
-		return GetSeller(DBConnector.getConnection(), id);
+		Connection connection = DBConnector.getConnection();
+		SellerDTO result = GetSeller(connection, id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static SellerDTO GetSeller(Connection connection, int id)
 	{
@@ -42,9 +49,18 @@ public class SellerDAO
 				sellerDTO.setDescription(resultSet.getString("description"));
 			}
 		}
-		catch (Exception e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return sellerDTO;

@@ -10,26 +10,32 @@ import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class ItemDAO
+public class ItemDAO extends DAO
 {
-	private Connection connection;
-	public ItemDAO()
-	{
-		connection = DBConnector.getConnection();
-	}
-	
 	public boolean updateItem(int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
 	{
 		return UpdateItem(connection, id, item_name, item_price, item_quantity, description, seller, image_num);
 	}
 	public static boolean UpdateItem(int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
 	{
-		return UpdateItem(DBConnector.getConnection(), id, item_name, item_price, item_quantity, description, seller, image_num);
+		Connection connection = DBConnector.getConnection();
+		boolean result = UpdateItem(connection, id, item_name, item_price, item_quantity, description, seller, image_num);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean UpdateItem(Connection connection, int id, String item_name, int item_price, int item_quantity, String description, int seller, int image_num)
 	{
 		String sql = "UPDATE items SET item_name=?, item_price=?, item_count=item_count + ?, description=?, seller=?, image_num=? WHERE id = ?";
-		
+
 		try
 		{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -40,28 +46,49 @@ public class ItemDAO
 			preparedStatement.setInt(5, seller);
 			preparedStatement.setInt(6, image_num);
 			preparedStatement.setInt(7, id);
-			
+
 			int line = preparedStatement.executeUpdate();
 			if(line > 0)
 			{
 				return true;
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean addItem(int quantity, int price, String name, String description, int seller, int image_num)
 	{
 		return AddItem(connection, quantity, price, name, description, seller, image_num);
 	}
 	public static boolean AddItem(int quantity, int price, String name, String description, int seller, int image_num)
 	{
-		return AddItem(DBConnector.getConnection(), quantity, price, name, description, seller, image_num);
+		Connection connection = DBConnector.getConnection();
+		boolean result = AddItem(connection, quantity, price, name, description, seller, image_num);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean AddItem(Connection connection, int quantity, int price, String name, String description, int seller, int image_num)
 	{
@@ -86,8 +113,17 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return false;
 	}
 
@@ -97,7 +133,19 @@ public class ItemDAO
 	}
 	public static boolean AddItemQuantity(int id, int quantity)
 	{
-		return AddItemQuantity(DBConnector.getConnection(), id, quantity);
+		Connection connection = DBConnector.getConnection();
+		boolean result = AddItemQuantity(connection, id, quantity);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean AddItemQuantity(Connection connection, int id, int quantity)
 	{
@@ -118,8 +166,17 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return false;
 	}
 
@@ -129,7 +186,19 @@ public class ItemDAO
 	}
 	public static boolean DeleteItem(int id)
 	{
-		return DeleteItem(DBConnector.getConnection(), id);
+		Connection connection = DBConnector.getConnection();
+		boolean result = DeleteItem(connection, id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean DeleteItem(Connection connection, int id)
 	{
@@ -140,7 +209,7 @@ public class ItemDAO
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
 			int line = preparedStatement.executeUpdate();
-			
+
 			if(line > 0)
 			{
 				return true;
@@ -149,8 +218,17 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return false;
 	}
 
@@ -160,7 +238,19 @@ public class ItemDAO
 	}
 	public static ItemDTO GetItem(int item_id)
 	{
-		return GetItem(DBConnector.getConnection(), item_id);
+		Connection connection = DBConnector.getConnection();
+		ItemDTO result = GetItem(connection, item_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static ItemDTO GetItem(Connection connection, int item_id)
 	{
@@ -190,6 +280,15 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return itemDTO;
@@ -201,7 +300,19 @@ public class ItemDAO
 	}
 	public static List<ItemDTO> GetItemList(List<String> searchWordList, boolean ANDSearch)
 	{
-		return GetItemList(DBConnector.getConnection(), searchWordList, ANDSearch);
+		Connection connection = DBConnector.getConnection();
+		List<ItemDTO> result = GetItemList(connection, searchWordList, ANDSearch);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<ItemDTO> GetItemList(Connection connection, List<String> searchWordList, boolean ANDSearch)
 	{
@@ -211,9 +322,9 @@ public class ItemDAO
 		try
 		{
 			StringBuilder sb = new StringBuilder();
-			
+
 			boolean isFirst = true;
-			
+
 			for(String str : searchWordList)
 			{
 				if(isFirst)
@@ -226,9 +337,9 @@ public class ItemDAO
 					sb.append(ANDSearch ? " AND (item_name LIKE '%" : " OR (item_name LIKE '%").append(str).append("%')");
 				}
 			}
-			
+
 			sql += sb.toString();
-			
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -255,6 +366,15 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return itemList;
@@ -266,7 +386,19 @@ public class ItemDAO
 	}
 	public static List<ItemDTO> GetItemList()
 	{
-		return GetItemList(DBConnector.getConnection());
+		Connection connection = DBConnector.getConnection();
+		List<ItemDTO> result = GetItemList(connection);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<ItemDTO> GetItemList(Connection connection)
 	{
@@ -301,6 +433,15 @@ public class ItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return itemList;

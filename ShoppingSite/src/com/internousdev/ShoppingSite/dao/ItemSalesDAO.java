@@ -11,21 +11,36 @@ import com.internousdev.ShoppingSite.dto.ItemSalesDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class ItemSalesDAO
+public class ItemSalesDAO extends DAO
 {
-	private Connection connection;
-	public ItemSalesDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-
 	public boolean addSalesData(int item_id, int quantity, int price)
 	{
 		return AddSalesData(connection, item_id, quantity, price);
 	}
 	public static boolean AddSalesData(int item_id, int quantity, int price)
 	{
-		return AddSalesData(DBConnector.getConnection(), item_id, quantity, price);
+		Connection connection = DBConnector.getConnection();
+		boolean result = AddSalesData(connection, item_id, quantity, price);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 	public static boolean AddSalesData(Connection connection, int item_id, int quantity, int price)
 	{
@@ -44,7 +59,7 @@ public class ItemSalesDAO
 			p_select.setInt(1, item_id);
 			p_select.setInt(2, year);
 			p_select.setInt(3, month);
-			
+
 			//	UPDATE
 			PreparedStatement p_update = connection.prepareStatement(update_sql);
 			p_update.setInt(1, quantity);
@@ -52,7 +67,7 @@ public class ItemSalesDAO
 			p_update.setInt(3, item_id);
 			p_update.setInt(4, year);
 			p_update.setInt(5, month);
-			
+
 			//	INSERT
 			PreparedStatement p_insert = connection.prepareStatement(insert_sql);
 			p_insert.setInt(1, item_id);
@@ -60,7 +75,7 @@ public class ItemSalesDAO
 			p_insert.setInt(3, month);
 			p_insert.setInt(4, quantity);
 			p_insert.setInt(5, price);
-			
+
 			PreparedStatement p_commit = connection.prepareStatement(commit_sql);
 
 			//	IF EXIST
@@ -81,12 +96,21 @@ public class ItemSalesDAO
 			//	INSERT
 			p_insert.executeUpdate();
 			p_commit.executeUpdate();
-			
+
 			return false;
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return false;
@@ -98,7 +122,19 @@ public class ItemSalesDAO
 	}
 	public static List<ItemSalesDTO> GetItemSales(int item_id)
 	{
-		return GetItemSales(DBConnector.getConnection(), item_id);
+		Connection connection = DBConnector.getConnection();
+		List<ItemSalesDTO> result = GetItemSales(connection, item_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<ItemSalesDTO> GetItemSales(Connection connection, int item_id)
 	{
@@ -106,12 +142,13 @@ public class ItemSalesDAO
 
 		String sql = "SELECT * FROM sales WHERE item_id = ? ORDER BY year DESC, month DESC LIMIT 0, 12";
 
-		try {
+		try
+		{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				ItemSalesDTO dto = new ItemSalesDTO();
 				dto.setItem_id(resultSet.getInt("item_id"));
@@ -125,6 +162,15 @@ public class ItemSalesDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return list;
@@ -136,14 +182,37 @@ public class ItemSalesDAO
 	}
 	public static ItemSalesDTO GetItemSales(int item_id, int year, int month)
 	{
-		return GetItemSales(DBConnector.getConnection(), item_id, year, month);
+		Connection connection = DBConnector.getConnection();
+		ItemSalesDTO result = GetItemSales(connection, item_id, year, month);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+
+		return result;
 	}
-	public static ItemSalesDTO GetItemSales(Connection connection, int item_id, int year, int month) {
+	public static ItemSalesDTO GetItemSales(Connection connection, int item_id, int year, int month)
+	{
 		ItemSalesDTO dto = new ItemSalesDTO();
 
 		String sql = "SELECT quantity FROM sales WHERE item_id = ? AND year = ? AND month = ?";
 
-		try {
+		try
+		{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, item_id);
 			preparedStatement.setInt(2, year);
@@ -158,8 +227,19 @@ public class ItemSalesDAO
 				dto.setQuantity(resultSet.getInt("quantity"));
 				dto.setPrice(resultSet.getInt("price"));
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return dto;

@@ -9,14 +9,14 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
-		
+
 			<h2 class="text-center" style="font-size: 30px">
 				<s:property value="itemDTO.item_name" />
 			</h2>
-			
+
 			<div style="margin: 0px 20px 40px 20px">
 				<jsp:include page="../errorMsg.jsp" />
-				
+
 				<div id="item_slider">
 					<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
 						<div>
@@ -24,8 +24,8 @@
 						</div>
 					</s:iterator>
 				</div>
-				
-				
+
+
 				<s:if test="#session.isLogin">
 					<form class="text-center" action="AddItemAction" method="post">
 						<input type="hidden" name="request_Quantity" value='1' min="0">
@@ -39,8 +39,8 @@
 					</p>
 				</s:else>
 			</div>
-			
-			
+
+
 			<div style="margin: 0px 20px 40px 20px">
 				<div class="tab" index="0">
 					<div name="詳細">
@@ -53,7 +53,7 @@
 					</s:if>
 				</div>
 			</div>
-			
+
 			<div style="margin: 0px 20px 40px 20px">
 				<div class="tab" index="0">
 					<div name="レビュー" class="tabBox">
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>

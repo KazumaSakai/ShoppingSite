@@ -10,21 +10,27 @@ import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class ItemReviewDAO
+public class ItemReviewDAO extends DAO
 {
-	private Connection connection;
-	public ItemReviewDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-	
 	public boolean deleteReviwe(int review_id)
 	{
 		return DeleteReviwe(connection, review_id);
 	}
 	public static boolean DeleteReviwe(int review_id)
 	{
-		return DeleteReviwe(DBConnector.getConnection(), review_id);
+		Connection connection = DBConnector.getConnection();
+		boolean result = DeleteReviwe(connection, review_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean DeleteReviwe(Connection connection, int review_id)
 	{
@@ -39,21 +45,42 @@ public class ItemReviewDAO
 
 			returnLine = preparedStatement.executeUpdate();
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return (returnLine == 1);
 	}
-	
+
 	public int getUserId(int review_id)
 	{
 		return GetUserId(connection, review_id);
 	}
 	public static int GetUserId(int review_id)
 	{
-		return GetUserId(DBConnector.getConnection(), review_id);
+		Connection connection = DBConnector.getConnection();
+		int result = GetUserId(connection, review_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static int GetUserId(Connection connection, int review_id)
 	{
@@ -71,21 +98,42 @@ public class ItemReviewDAO
 			}
 			return 0;
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return 0;
 	}
-	
+
 	public boolean insertReview(int item_id, int user_id, String title, int point, String comment)
 	{
 		return InsertReview(connection, item_id, user_id, title, point, comment);
 	}
 	public static boolean InsertReview(int item_id, int user_id, String title, int point, String comment)
 	{
-		return InsertReview(DBConnector.getConnection(), item_id, user_id, title, point, comment);
+		Connection connection = DBConnector.getConnection();
+		boolean result = InsertReview(connection, item_id, user_id, title, point, comment);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean InsertReview(Connection connection, int item_id, int user_id, String title, int point, String comment)
 	{
@@ -105,34 +153,55 @@ public class ItemReviewDAO
 
 			returnLine = preparedStatement.executeUpdate();
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return (returnLine == 1);
 	}
-	
+
 	public ItemReviewDTO getReview(int review_id)
 	{
 		return GetReview(connection, review_id);
 	}
 	public static ItemReviewDTO GetReview(int review_id)
 	{
-		return GetReview(DBConnector.getConnection(), review_id);
+		Connection connection = DBConnector.getConnection();
+		ItemReviewDTO result = GetReview(connection, review_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static ItemReviewDTO GetReview(Connection connection, int review_id)
 	{
 		String sql = "SELECT * FROM item_review WHERE id = ?";
 		ItemReviewDTO itemReviewDTO = new ItemReviewDTO();
-		
+
 		try
 		{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, review_id);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next())
 			{
 				itemReviewDTO.setId(resultSet.getInt("id"));
@@ -145,11 +214,20 @@ public class ItemReviewDAO
 				itemReviewDTO.setInsert_date(resultSet.getString("insert_date"));
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return itemReviewDTO;
 	}
 
@@ -159,41 +237,61 @@ public class ItemReviewDAO
 	}
 	public static List<ItemReviewDTO> GetReviewList(int item_id)
 	{
-		return GetReviewList(DBConnector.getConnection(), item_id);
+		Connection connection = DBConnector.getConnection();
+		List<ItemReviewDTO> result = GetReviewList(connection, item_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<ItemReviewDTO> GetReviewList(Connection connection, int item_id)
 	{
-		 String sql = "SELECT * FROM item_review WHERE item_id = ?";
-		 List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();
+		String sql = "SELECT * FROM item_review WHERE item_id = ?";
+		List<ItemReviewDTO> itemReviewDTOList = new ArrayList<ItemReviewDTO>();
 
-		 try
-		 {
-			 PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			 preparedStatement.setInt(1, item_id);
+		try
+		{
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, item_id);
 
-			 ResultSet resultSet = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-			 while (resultSet.next())
-			 {
-				 ItemReviewDTO itemReviewDTO = new ItemReviewDTO();
+			while (resultSet.next())
+			{
+				ItemReviewDTO itemReviewDTO = new ItemReviewDTO();
 
-				 itemReviewDTO.setId(resultSet.getInt("id"));
-				 itemReviewDTO.setItem_id(resultSet.getInt("item_id"));
-				 itemReviewDTO.setUser_id(resultSet.getInt("user_id"));
-				 itemReviewDTO.setPoint(resultSet.getInt("point"));
-				 itemReviewDTO.setComment(resultSet.getString("comment"));
-				 itemReviewDTO.setTitle(resultSet.getString("title"));
-				 itemReviewDTO.setInsert_date(resultSet.getString("insert_date"));
-				 itemReviewDTO.setUsername(UserDAO.GetUserName(itemReviewDTO.getUser_id()));
+				itemReviewDTO.setId(resultSet.getInt("id"));
+				itemReviewDTO.setItem_id(resultSet.getInt("item_id"));
+				itemReviewDTO.setUser_id(resultSet.getInt("user_id"));
+				itemReviewDTO.setPoint(resultSet.getInt("point"));
+				itemReviewDTO.setComment(resultSet.getString("comment"));
+				itemReviewDTO.setTitle(resultSet.getString("title"));
+				itemReviewDTO.setInsert_date(resultSet.getString("insert_date"));
+				itemReviewDTO.setUsername(UserDAO.GetUserName(itemReviewDTO.getUser_id()));
 
-				 itemReviewDTOList.add(itemReviewDTO);
-			 }
-		 }
-		 catch(SQLException e)
-		 {
-			 e.printStackTrace();
-		 }
+				itemReviewDTOList.add(itemReviewDTO);
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
 
-		 return itemReviewDTOList;
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+		return itemReviewDTOList;
 	}
 }

@@ -5,8 +5,9 @@ window.onload = function()
 	{
 		var tab = tabs[i];
 		drawTab(tab);
-		
+
 	}
+	LoadScript("./JavaScript/DOMLibrary.js");
 }
 
 function drawTab(tab)
@@ -14,7 +15,7 @@ function drawTab(tab)
 	var header = document.createElement("div");
 	header.className = "header";
 	tab.parentElement.insertBefore(header, tab);
-	
+
 	var tabIndex = tab.getAttribute("index");
 	var tabChilds = tab.children;
 	for(let j = 0; j < tabChilds.length; j++)
@@ -28,7 +29,7 @@ function drawTab(tab)
 		{
 			tabChild.setAttribute("hidden", "");
 		}
-		
+
 		var headerTab = document.createElement("div");
 		if(j == tabIndex) headerTab.classList.add("activeHeaderTab");
 		headerTab.classList.add("headerTab");
@@ -42,4 +43,29 @@ function drawTab(tab)
 		});
 		header.appendChild(headerTab);
 	}
+}
+
+function dropMenu(element)
+{
+	var dropMenu = element.getElementsByClassName("dropMenu")[0];
+	dropMenu.removeAttribute("hidden");
+}
+
+//DOM操作で外部JavaScriptを読み込む
+function LoadScript(url, callback)
+{
+	//	<script>作成
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = url;
+
+	script.onload = callback;
+
+	//	<head>に追加
+	document.getElementsByTagName("head")[0].appendChild(script);
+
+	var callback = {};
+	callback.script = script;
+
+	return script;
 }

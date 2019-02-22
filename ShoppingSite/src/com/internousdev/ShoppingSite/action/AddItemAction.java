@@ -21,13 +21,11 @@ public class AddItemAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		
+
+		this.request_Quantity = Math.max(1, request_Quantity);
 		int user_id = (int)session.get("user_id");
-		if(request_Quantity <= 0) request_Quantity = 1;
 
-		boolean result = MyCartDAO.AddItemToCart(item_id, user_id, request_Quantity);
-
-		return result ? SUCCESS : ERROR;
+		return MyCartDAO.AddItemToCart(item_id, user_id, request_Quantity) ? SUCCESS : ERROR;
 	}
 
 	public int getItem_id() {

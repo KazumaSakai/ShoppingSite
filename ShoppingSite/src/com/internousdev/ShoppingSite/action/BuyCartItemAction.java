@@ -31,18 +31,20 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "MyCartAction");
 			return "needLogin";
 		}
-		
+
+		//	ユーザーID取得
 		int user_id = (int)session.get("user_id");
+
+		//	カート情報を取得
 		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
 
-		buyItemList = new ArrayList<ItemDTO>(itemListDTO.size());
-
+		//	購入処理
 		boolean AllSuccess = true;
-		
+		buyItemList = new ArrayList<ItemDTO>(itemListDTO.size());
 		BuyItemDAO buyItemDAO = new BuyItemDAO();
 		for (ItemDTO item : itemListDTO)
 		{
-			
+
 			if(!buyItemDAO.buyItem(item.getItem_id(), user_id, item.getItem_count()))
 			{
 				AllSuccess = false;
@@ -50,7 +52,7 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 			else
 			{
 				buyItemList.add(item);
-				
+
 				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
 				dto.setItem_id(item.getItem_id());
 				dto.setQuantity(item.getItem_count());
@@ -58,19 +60,20 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 				dto.setAddress(address);
 				dto.setPhoneNumber(phoneNumber);
 				dto.setRequest_date(request_date);
-				
+
 				PurchaseHistoryDAO.AddPurchaseHistory(dto);
 				ItemSalesDAO.AddSalesData(item.getItem_id(), item.getItem_count(), item.getItem_count() * item.getItem_price());
 			}
 		}
+		buyItemDAO.close();
 
+		//	合計金額
 		totalPrice = 0;
 		for (ItemDTO item : buyItemList)
 		{
 			totalPrice += item.getItem_price() * item.getItem_count();
 		}
 
-		
 		return AllSuccess ? SUCCESS : ERROR;
 	}
 

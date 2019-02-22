@@ -6,18 +6,18 @@ function StartCanvas()
 	var ctx = cv.getContext('2d');
 	var w = cv.width;
 	var h = cv.height;
-	
+
 	//	オブジェクト作成
 	var rect = new ArrayRect("quick");
-	
+
 	//	ソートアルゴリズム選択ボックス
 	var algorithm = ["quick", "merge"];
 	cv.parentElement.insertBefore(DOMLibrary.CreateSelect(algorithm, function (i)
-	{ 
+	{
 		rect.sortMode = algorithm[i];
 		rect.initialize();
 	}), cv);
-	
+
 	cv.addEventListener("click", function ()
 	{
 		rect.toggleAction();
@@ -25,7 +25,7 @@ function StartCanvas()
 
 	var objects = [];
 	objects.push(rect);
-	
+
 	//	描画フロー
 	function Render(timestamp)
 	{
@@ -38,7 +38,7 @@ function StartCanvas()
 		//	ループ
 		window.requestAnimationFrame((ts) => Render(ts));
 	}
-	
+
 	//	ループ開始
 	window.requestAnimationFrame((ts) => Render(ts));
 }
@@ -50,15 +50,15 @@ function LoadScript(url, callback)
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
-	
+
 	script.onload = callback;
 
 	//	<head>に追加
 	document.getElementsByTagName("head")[0].appendChild(script);
-	
+
 	var callback = {};
 	callback.script = script;
-	
+
 	return script;
 }
 

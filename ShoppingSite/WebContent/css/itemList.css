@@ -5,53 +5,40 @@
 {
 	margin: 0 auto;
 	padding: 0;
-	
+
 	width: 100%;
-	
+
     display:flex;
     flex-wrap:wrap;
-    
+
 	list-style:none;
 	text-align: center;
 }
 .itemList > li
 {
-	float: left;
-	
+	position: relative;
+
+	margin: 10px;
 	padding: 20px;
-	
-	width: calc(100% / 4);
-	box-sizing: border-box;
-	
+	float: left;
+
+	width: calc(100% / 5 - 62px);
+
+	border: 1px solid black;
+
 	transition: all 200ms 0s ease;
 }
+.itemList > li:hover
+{
+	margin: 8px;
+	padding: 22px;
 
-/*
- *		ImageBox
- */
-.itemList > li > .imageBox
-{
-	margin: 5px auto 15px auto;
-	padding: 20px;
-	
-	max-width: 200px;
-	width: calc(100% - 20px);
-	box-sizing: border-box;
-	
-	transition: all 200ms ease;
+	box-shadow: 0px 0px 20px rgb(50, 50, 50);
 }
-.itemList > li > .imageBox:hover
+
+.itemList > li img
 {
-	margin: 0px auto 10px auto;
-	
-	max-width: 210px;
-	width: calc(100% - 10px);
-	
-	box-shadow: 0px 0px 50px rgb(198, 255, 188);
-}
-.itemList > li > .imageBox > img
-{
-	width: 100%;
+	width: 50%;
 }
 
 .itemList > li p
@@ -61,28 +48,91 @@
 }
 
 /*
+ *		ItemButton
+ */
+.itemList > li .itemButton
+{
+	position: absolute;
+	top: -7px;
+	left: -7px;
+
+	width: 25px;
+	height: 25px;
+
+	display: inline-block;
+	border: 1px solid black;
+
+	background-color: rgb(230, 230, 230);
+
+	transition: all 200ms ease;
+}
+.itemList > li .itemButton:hover
+{
+	top: -8px;
+	right: -8px;
+
+	width: 28px;
+	height: 28px;
+
+	background-color: rgb(230, 180, 180);
+
+	box-shadow: 0px 0px 7px rgb(5, 5, 5);
+}
+.itemList > li .itemButton::before
+{
+	content: ' ';
+	position: absolute;
+	top: 6px;
+	left: 3px;
+
+	width: 19px;
+	height: 10px;
+
+	display: inline-block;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+
+	transition: all 500ms ease;
+}
+.itemList > li .itemButton:hover::before
+{
+	top: 7px;
+	left: 4px;
+	transform: rotate(360deg);
+}
+
+
+/*
  *		MediaQuery
  */
-@media screen and (max-width:1150px) 
+ @media screen and (max-width:1450px)
 {
 	.itemList > li
 	{
-		width: calc(100% / 3);
+		width: calc(100% / 4 - 62px);
 	}
 }
 
-@media screen and (max-width:850px) 
+@media screen and (max-width:1150px)
 {
 	.itemList > li
 	{
-		width: calc(100% / 2);
+		width: calc(100% / 3 - 62px);
 	}
 }
 
-@media screen and (max-width:550px) 
+@media screen and (max-width:850px)
 {
 	.itemList > li
 	{
-		width: 100%;
+		width: calc(100% / 2 - 62px);
+	}
+}
+
+@media screen and (max-width:550px)
+{
+	.itemList > li
+	{
+		width: calc(100% - 62px);
 	}
 }

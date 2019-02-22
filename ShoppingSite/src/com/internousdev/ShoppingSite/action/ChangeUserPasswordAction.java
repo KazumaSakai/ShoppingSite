@@ -18,10 +18,10 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 	private String nowPassword;
 	private String newPassword;
 	private String newPassword2;
-	
+
 	private String errorMsg;
 	private String successMsg;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -32,7 +32,7 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 
 		int user_id = SessionSafeGetter.getInt(session, "user_id");
 		String login_user_id = SessionSafeGetter.getString(session, "login_user_id");
-		
+
 		//	入力値チェック
 		errorMsg = "";
 		successMsg = "";
@@ -43,17 +43,17 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 		{
 			errorMsg += "パスワードが間違っています。<br/>";
 		}
-		
+
 		if(!newPassword.equals(newPassword2))
 		{
 			errorMsg += "パスワードが一致しません。<br/>";
 		}
-		
+
 		if(!StringChecker.IsOnlyAlphabet_Number(newPassword))
 		{
 			errorMsg += "パスワードは半角英数字のみ有効です。<br/>";
 		}
-		
+
 		if(newPassword.length() < 8)
 		{
 			errorMsg += "パスワードは8文字以上でなければなりません。<br/>";
@@ -62,15 +62,13 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 		{
 			errorMsg += "パスワードは60文字以下でなければなりません。<br/>";
 		}
-		
+
 		if(!errorMsg.isEmpty())
 		{
 			return ERROR;
 		}
-		
-		boolean result = UserDAO.ChangeUserPassword(user_id, login_user_id, newPassword);
-		
-		if(result)
+
+		if(UserDAO.ChangeUserPassword(user_id, login_user_id, newPassword))
 		{
 			successMsg += "パスワードの変更に成功しました。<br/>";
 			return SUCCESS;
@@ -130,6 +128,6 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 	public void setSuccessMsg(String successMsg) {
 		this.successMsg = successMsg;
 	}
-	
-	
+
+
 }

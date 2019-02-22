@@ -4,20 +4,24 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class UserInfoAction extends ActionSupport implements SessionAware
+public class AdminUpdateItemInfoAction extends ActionSupport implements SessionAware
 {
+	private int item_id;
+
 	private Map<String, Object> session;
 
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "UserInfoAction");
+			session.put("LoginedRedirectAction", "GoAdminUpdateItem");
 			return "needLogin";
 		}
+		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
 
 		return SUCCESS;
 	}
@@ -26,10 +30,15 @@ public class UserInfoAction extends ActionSupport implements SessionAware
 		return session;
 	}
 
-	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
 
+	public int getItem_id() {
+		return item_id;
+	}
 
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
 }

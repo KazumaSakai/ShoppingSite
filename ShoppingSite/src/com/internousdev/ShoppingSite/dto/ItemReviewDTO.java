@@ -77,6 +77,13 @@ public class ItemReviewDTO {
 	}
 
 	public void setInsert_date(String insert_date) {
-		this.insert_date = insert_date;
+		String[] date_seconds = insert_date.split(" ");
+		String[] dates = date_seconds[0].split("-");
+		String[] seconds = date_seconds[1].split(":");
+
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder.append(dates[0]).append("年").append(dates[1]).append("月").append(dates[2]).append("日 ").append(seconds[0]).append("時");
+
+		this.insert_date = sBuilder.toString();
 	}
 }

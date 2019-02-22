@@ -10,11 +10,11 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GoAddAddressAction extends ActionSupport implements SessionAware
 {
 	private boolean goBuy;
-	
+
 	private String errorMsg;
-	
+
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -22,7 +22,7 @@ public class GoAddAddressAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "GoAddAddressAction");
 			return "needLogin";
 		}
-		
+
 		return SUCCESS;
 	}
 
@@ -52,6 +52,6 @@ public class GoAddAddressAction extends ActionSupport implements SessionAware
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
-	
-	
+
+
 }

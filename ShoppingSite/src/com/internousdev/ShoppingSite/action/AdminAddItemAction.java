@@ -18,7 +18,7 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 	private int seller;
 	private String description;
 	private int image_num;
-	
+
 	private String errorMsg;
 
 	private Map<String, Object> session;
@@ -31,11 +31,11 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
-		
-		
+
+
 		//	入力値チェック
 		errorMsg = "";
-		
+
 		//	商品名
 		if(name.length() < 3)
 		{
@@ -49,13 +49,13 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "商品名に、不正な文字列が含まれています。<br/>";
 		}
-		
+
 		//	商品価格
 		if(quantity < 10)
 		{
 			errorMsg += "商品価格は、10円以上でなければなりません。<br/>";
 		}
-		
+
 		//	商品詳細
 		if(description.length() < 10)
 		{
@@ -69,13 +69,13 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "商品詳細に、不正な文字列が含まれています。<br />";
 		}
-		
+
 		//	商品数
 		if(quantity < 0)
 		{
 			quantity = 0;
 		}
-		
+
 		//	商品画像数
 		if(image_num < 0)
 		{
@@ -85,27 +85,26 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "商品画像数は、10枚以下でなければなりません。<br/>";
 		}
-		
+
 		//	エラーメッセージが存在するならリターン
 		if(!errorMsg.equals(""))
 		{
 			return ERROR;
 		}
-		
-		boolean result = ItemDAO.AddItem(quantity, price, name, description, seller, image_num);
-		if(result)
+
+		if(ItemDAO.AddItem(quantity, price, name, description, seller, image_num))
 		{
 			return SUCCESS;
 		}
-		else 
+		else
 		{
 			errorMsg += "商品の登録に失敗しました<br/>";
 			return ERROR;
 		}
 	}
-	
-	
-	
+
+
+
 	public int getSeller() {
 		return seller;
 	}
@@ -129,7 +128,7 @@ public class AdminAddItemAction extends ActionSupport implements SessionAware
 	public void setImage_num(int image_num) {
 		this.image_num = image_num;
 	}
-	
+
 	public int getPrice() {
 		return price;
 	}

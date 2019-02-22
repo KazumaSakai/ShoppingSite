@@ -22,22 +22,12 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 			session.put("LoginedRedirectAction", "MyCartAction");
 			return "needLogin";
 		}
-		
+
 		int user_id = (int)session.get("user_id");
-		if(newQuantity <= 0) newQuantity = 0;
 
-		boolean result = MyCartDAO.ChangeCartItemQuantity(item_id, user_id, newQuantity);
-
-		if(result)
+		if(MyCartDAO.ChangeCartItemQuantity(item_id, user_id, newQuantity))
 		{
-			if(toCart)
-			{
-				return "toCart";
-			}
-			else
-			{
-				return "toItemList";
-			}
+			return toCart ? "toCart" : "toItemList";
 		}
 		else
 		{
@@ -50,7 +40,7 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 	}
 
 	public void setNewQuantity(int newQuantity) {
-		this.newQuantity = newQuantity;
+		this.newQuantity = Math.max(0, newQuantity);
 	}
 
 	public int getItem_id() {

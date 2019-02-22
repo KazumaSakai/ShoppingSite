@@ -8,34 +8,52 @@ import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class BuyItemDAO
+public class BuyItemDAO extends DAO
 {
-	private Connection connection;
-	public BuyItemDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-	
 	public boolean buyItem(ItemDTO item, int user_id)
 	{
 		return BuyItemDAO.BuyItem(connection, item, user_id);
 	}
 	public static boolean BuyItem(ItemDTO item, int user_id)
 	{
-		return BuyItemDAO.BuyItem(DBConnector.getConnection(), item, user_id);
+		Connection connection = DBConnector.getConnection();
+		boolean result = BuyItemDAO.BuyItem(connection, item, user_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean BuyItem(Connection connection, ItemDTO item, int user_id)
 	{
 		return BuyItemDAO.BuyItem(connection, item.getItem_id(), user_id, item.getItem_count());
 	}
-	
+
 	public boolean buyItem(int item_id, int user_id, int request_quantity)
 	{
 		return BuyItem(connection, item_id, user_id, request_quantity);
 	}
 	public static boolean BuyItem(int item_id, int user_id, int request_quantity)
 	{
-		return BuyItem(DBConnector.getConnection(), item_id, user_id, request_quantity);
+		Connection connection = DBConnector.getConnection();
+		boolean result = BuyItem(connection, item_id, user_id, request_quantity);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean BuyItem(Connection connection, int item_id, int user_id, int request_quantity)
 	{
@@ -72,6 +90,15 @@ public class BuyItemDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return false;

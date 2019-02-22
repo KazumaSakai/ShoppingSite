@@ -18,9 +18,9 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	private String code;
 	private String state;
 	private String scope;
-	
+
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		GoogleOAuthToken token = GoogleOAuth.token(code,"http://localhost:8080/ShoppingSite/GoogleLoginAction.action");
@@ -29,16 +29,15 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		String email = gMailInfo.emailAddress;
 		String pass = "AGgh_+" + tokenInfo.user_id;
 		String safePass = Passworder.getSafetyPassword(pass, email);
-		
-		UserDTO userDTO = new UserDTO();
-		userDTO = LoginDAO.LoginAtEmail(email, safePass);
+
+		UserDTO userDTO = LoginDAO.LoginAtEmail(email, safePass);
 		if(userDTO.getOauthUser())
 		{
 			return ERROR;
 		}
-		
+
 		session.put("login_user", userDTO);
-		
+
 		if(((UserDTO)session.get("login_user")).getLoginFlg())
 		{
 			session.put("isAdmin", userDTO.getAdmin());
@@ -46,10 +45,10 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 			session.put("login_user_id", userDTO.getLogin_id());
 			session.put("user_name", userDTO.getUser_name());
 			session.put("isLogin", true);
-			
+
 			return SUCCESS;
 		}
-		
+
 		return ERROR;
 	}
 
@@ -79,6 +78,6 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+
+
 }

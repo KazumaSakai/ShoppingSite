@@ -14,10 +14,6 @@
 				<td><input type="number" name="item_price" value="${ itemDTO.item_price }"  required="required"/> 円</td>
 			</tr>
 			<tr>
-				<th>販売個数</th>
-				<td> ＋ <input type="number" name="item_quantity" value="0" required="required"/></td>
-			</tr>
-			<tr>
 				<th>販売者ID</th>
 				<td><input type="number" name="seller" value="${ itemDTO.seller.id }" required="required" /></td>
 			</tr>
@@ -31,6 +27,7 @@
 			</tr>
 		</table>
 		<div class="text-center">
+			<input type="hidden" name="item_quantity" value="0" />
 			<input type="hidden" name="id" value="${ itemDTO.item_id }" />
 			<input class="linkButton" type="submit" value="商品情報を更新する" />
 		</div>

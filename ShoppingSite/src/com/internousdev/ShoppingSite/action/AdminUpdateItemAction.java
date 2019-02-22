@@ -18,9 +18,9 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 	private String description;
 	private int seller;
 	private int image_num;
-	
+
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -32,9 +32,8 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 		{
 			return "notAdmin";
 		}
-		
-		boolean result = ItemDAO.UpdateItem(id, item_name, item_price, item_quantity, description, seller, image_num);
-		return result ? SUCCESS : ERROR;
+
+		return ItemDAO.UpdateItem(id, item_name, item_price, item_quantity, description, seller, image_num) ? SUCCESS : ERROR;
 	}
 
 	public int getId() {

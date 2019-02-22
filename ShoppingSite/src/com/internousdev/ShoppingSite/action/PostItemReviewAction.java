@@ -16,7 +16,7 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 	private int point;
 	private String comment;
 	private String title;
-	
+
 	private String errorMsg;
 
 	private Map<String, Object>session;
@@ -28,12 +28,12 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "ItemPageAction?id=" + id);
 			return "needLogin";
 		}
-		
+
 		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		
+
 		//	入力値チェック
 		errorMsg = "";
-		
+
 		//	ポイント
 		if(point < 0)
 		{
@@ -43,7 +43,7 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "レビューポイントは、5以下でなければなりません。<br/>";
 		}
-		
+
 		//	コメント
 		if(comment.length() < 6)
 		{
@@ -57,7 +57,7 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "レビューコメントに、不正な文字列が含まれています。<br/>";
 		}
-		
+
 		//	タイトル
 		if(title.length() < 4)
 		{
@@ -71,18 +71,14 @@ public class PostItemReviewAction extends ActionSupport implements SessionAware
 		{
 			errorMsg += "レビュータイトルに、不正な文字列が含まれています。<br/>";
 		}
-		
+
 		//	エラーがあればリターン
 		if(!errorMsg.isEmpty())
 		{
 			return ERROR;
 		}
-		
-		
-		
-		boolean result = ItemReviewDAO.InsertReview(id, user_id, title, point, comment);
-		
-		if(result)
+
+		if(ItemReviewDAO.InsertReview(id, user_id, title, point, comment))
 		{
 			return SUCCESS;
 		}

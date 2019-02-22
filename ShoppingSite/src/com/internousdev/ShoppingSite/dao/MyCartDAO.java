@@ -10,53 +10,80 @@ import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class MyCartDAO
+public class MyCartDAO extends DAO
 {
-	private Connection connection;
-	public MyCartDAO()
-	{
-		this.connection = DBConnector.getConnection();
-	}
-	
 	public int myCartItemQuantity(int user_id, int item_id)
 	{
 		return MyCartItemQuantity(connection, user_id, item_id);
 	}
 	public static int MyCartItemQuantity(int user_id, int item_id)
 	{
-		return MyCartItemQuantity(DBConnector.getConnection(), user_id, item_id);
+		Connection connection = DBConnector.getConnection();
+		int result = MyCartItemQuantity(connection, user_id, item_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static int MyCartItemQuantity(Connection connection, int user_id, int item_id)
 	{
 		String sql = "SELECT item_count FROM carts WHERE user_id = ? AND item_id = ?";
-		
+
 		try
 		{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, item_id);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next())
 			{
 				return resultSet.getInt("item_count");
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
-		
+
 		return 0;
 	}
-	
+
 	public boolean changeCartItemQuantity(int item_id, int user_id, int newCount)
 	{
 		return ChangeCartItemQuantity(connection, item_id, user_id, newCount);
 	}
 	public static boolean ChangeCartItemQuantity(int item_id, int user_id, int newCount)
 	{
-		return ChangeCartItemQuantity(DBConnector.getConnection(), item_id, user_id, newCount);
+		Connection connection = DBConnector.getConnection();
+		boolean result = ChangeCartItemQuantity(connection, item_id, user_id, newCount);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean ChangeCartItemQuantity(Connection connection, int item_id, int user_id, int newCount)
 	{
@@ -83,9 +110,18 @@ public class MyCartDAO
 			}
 			return true;
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return false;
@@ -97,7 +133,19 @@ public class MyCartDAO
 	}
 	public static boolean AddItemToCart(int item_id, int user_id, int request_quantity)
 	{
-		return AddItemToCart(DBConnector.getConnection(), item_id, user_id, request_quantity);
+		Connection connection = DBConnector.getConnection();
+		boolean result = AddItemToCart(connection, item_id, user_id, request_quantity);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static boolean AddItemToCart(Connection connection, int item_id, int user_id, int request_quantity)
 	{
@@ -132,9 +180,18 @@ public class MyCartDAO
 
 			return true;
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return false;
@@ -146,7 +203,19 @@ public class MyCartDAO
 	}
 	public static List<ItemDTO> GetMyCart(int user_id)
 	{
-		return GetMyCart(DBConnector.getConnection(), user_id);
+		Connection connection = DBConnector.getConnection();
+		List<ItemDTO> result = GetMyCart(connection, user_id);
+
+		try
+		{
+			connection.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	public static List<ItemDTO> GetMyCart(Connection connection, int user_id)
 	{
@@ -169,9 +238,18 @@ public class MyCartDAO
 				myCartItemList.add(itemDTO);
 			}
 		}
-		catch(SQLException e)
+		catch (SQLException e)
 		{
 			e.printStackTrace();
+
+			try
+			{
+				connection.close();
+			}
+			catch (SQLException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 
 		return myCartItemList;

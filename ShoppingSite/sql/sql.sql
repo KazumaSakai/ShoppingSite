@@ -23,9 +23,9 @@ create table addressList(
 
 /*
  * 		Carts
- * 
+ *
  * 	ユーザーのカートに入っている商品テーブル
- * 
+ *
  */
 drop table if exists carts;
 create table carts(
@@ -38,9 +38,9 @@ create table carts(
 
 /*
  * 		Items
- * 
+ *
  * 	現在販売中の商品テーブル
- * 
+ *
  */
 drop table if exists items;
 create table items(
@@ -59,17 +59,17 @@ insert into items(item_name, item_price, item_count, description, seller, image_
 	("鉛筆", 108, 5261, "すらすら書ける鉛筆", 1, 3),
 	("消しゴム", 108, 2485, "なんでもスラスラ消せる消しゴムです。", 2, 2),
 	("ノート", 216, 482, "さらさら書けるノートです！。", 1, 3),
-	("お茶", 128, 2128, "お茶です。", 3, 0),
-	("パソコン", 103145, 241, "パソコン", 4, 0),
-	("マウス", 3210, 513, "最新マウス", 4, 0);
+	("お茶", 128, 2128, "お茶です。", 3, 1),
+	("パソコン", 103145, 241, "パソコン", 4, 1),
+	("マウス", 3210, 513, "最新マウス", 4, 1);
 
 
 
 /*
  * 		Item_Review
- * 
+ *
  * 	商品のレビューテーブル
- * 
+ *
  */
 drop table if exists item_review;
 create table item_review(
@@ -86,9 +86,9 @@ create table item_review(
 
 /*
  * 		PurchaseHistorys
- * 
+ *
  * 	商品の購入履歴テーブル
- * 
+ *
  */
 drop table if exists purchaseHistorys;
 create table purchaseHistorys(
@@ -107,9 +107,9 @@ create table purchaseHistorys(
 
 /*
  * 		Sales
- * 
+ *
  * 	各アイテムの売り上げテーブル
- * 
+ *
  */
 drop table if exists sales;
 create table sales(
@@ -207,9 +207,9 @@ INSERT INTO sales(item_id, year, month, quantity, price) VALUES
 
 /*
  * 		Sellers
- * 
+ *
  * 	販売業者テーブル
- * 
+ *
  */
 drop table if exists sellers;
 create table sellers(
@@ -220,7 +220,7 @@ create table sellers(
 	phone VARCHAR(255) not null,
 	description VARCHAR(255) not null
 );
-INSERT INTO sellers(name, address, email, phone, description) VALUES 
+INSERT INTO sellers(name, address, email, phone, description) VALUES
 	("ABC通信販売", "東京都港区XXX1-1-1 YYYビル", "mail@abc.com", "0312345561", "ABC通信販売です。よろしくお願い致します。"),
 	("いろは文具", "東京都江東区XXX1-1-1 YYYビル", "mail@iroha.co.jp", "0316821682", "いろは文具です。文具を扱っています。"),
 	("大阪飲料販売", "大阪府大阪市XXX1-1-1 YYYビル", "mail@osakadrink.osaka.jp", "0313125931", "大阪飲料販売です。よろしくお願い致します。"),
@@ -229,9 +229,9 @@ INSERT INTO sellers(name, address, email, phone, description) VALUES
 
 /*
  * 		Users
- * 
+ *
  * 	ユーザーテーブル
- * 
+ *
  */
 drop table if exists users;
 create table users(

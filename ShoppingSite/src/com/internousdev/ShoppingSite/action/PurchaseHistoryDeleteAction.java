@@ -12,7 +12,7 @@ public class PurchaseHistoryDeleteAction extends ActionSupport implements Sessio
 {
 	private int id;
 	private Map<String, Object> session;
-	
+
 	public String execute()
 	{
 		if(!CheckLogin.IsLogin(session))
@@ -20,12 +20,10 @@ public class PurchaseHistoryDeleteAction extends ActionSupport implements Sessio
 			session.put("LoginedRedirectAction", "MyPurchaseHistoryAction");
 			return "needLogin";
 		}
-		
+
 		int user_id = (int)session.get("user_id");
-		
-		boolean result= PurchaseHistoryDAO.DeletePurchaseHistory(id, user_id);
-		
-		return result ? SUCCESS : ERROR;
+
+		return PurchaseHistoryDAO.DeletePurchaseHistory(id, user_id) ? SUCCESS : ERROR;
 	}
 
 	public int getId() {

@@ -30,7 +30,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "GoBuyAction");
 			return "needLogin";
 		}
-		
+
 		int user_id = (int)session.get("user_id");
 
 		myCartItemList = MyCartDAO.GetMyCart(user_id);
@@ -38,7 +38,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat a = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         c.add(Calendar.DAY_OF_MONTH, 1);
         min = a.format(c.getTime()) + "T08:00";
         c.add(Calendar.DAY_OF_MONTH, 15);
@@ -51,7 +51,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 		}
 		return SUCCESS;
 	}
-	
+
 	public Map<String, Object> getSession() {
 		return session;
 	}
@@ -59,7 +59,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	
+
 
 	public List<AddressDTO> getAddressList() {
 		return addressList;
