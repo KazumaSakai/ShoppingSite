@@ -8,33 +8,34 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MyCartAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
-	private Map<String, Object> session;
+
+	//	Send
 	private List<ItemDTO> itemList;
 	private int totalPrice;
-
+	
+	//	Sesiion
+	private Map<String, Object> session;
+	
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "MyCartAction");
 			return "needLogin";
 		}
 		
-		int user_id = (int)session.get("user_id");
+		int user_id = SessionSafeGetter.getInt(session, "user_id");
 
 		itemList = MyCartDAO.GetMyCart(user_id);
-
-		totalPrice = 0;
-		for (ItemDTO item : itemList)
-		{
-			totalPrice += item.getItem_price() * item.getItem_count();
-		}
+		totalPrice = itemList.stream().mapToInt(i -> i.getItem_price() * i.getItem_count()).sum();
 
 		return SUCCESS;
 	}
