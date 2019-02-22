@@ -12,6 +12,15 @@
 		<jsp:attribute name="value">
 
 			<s:if test="#session.isAdmin">
+
+				<div id="item_slider">
+					<s:iterator begin="0" end="%{ itemDTO.image_num - 1 }" status="st">
+						<div>
+							<img src="./Images/ItemImages/${ itemDTO.item_id }/${ st.count }.jpg" />
+						</div>
+					</s:iterator>
+				</div>
+
 				<div style="margin: 0px auto; max-width: 800px">
 
 					<div class="tab" index="0">
@@ -19,13 +28,9 @@
 							<jsp:include page="../Admin/itemUpdateForm.jsp" />
 						</div>
 						<div name="商品画像">
-							<jsp:include page="../Admin/itemUpdateForm.jsp" />
 						</div>
 						<div name="商品在庫追加">
-							<jsp:include page="../Admin/itemUpdateForm.jsp" />
-						</div>
-						<div name="商品統計">
-							<jsp:include page="../Admin/itemUpdateForm.jsp" />
+							<jsp:include page="../Admin/adminAddItemQuantity.jsp" />
 						</div>
 					</div>
 

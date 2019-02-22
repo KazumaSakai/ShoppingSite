@@ -25,10 +25,6 @@
 				<td><input type="number" name="seller" required="required" min="-2147483647" max="2147483647" /></td>
 			</tr>
 			<tr>
-				<th>画像数</th>
-				<td><input type="number" name="image_num" required="required" min="0" max="10" /></td>
-			</tr>
-			<tr>
 				<th>説明</th>
 				<td><textarea name="description" required="required" min="10" max="3000" ></textarea>
 			</tr>

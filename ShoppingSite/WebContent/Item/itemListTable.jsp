@@ -18,7 +18,7 @@
 					<li><a href="<s:url action='AddItemAction?item_id=%{ item_id }'/>">カートに追加</a></li>
 					<s:if test="#session.isAdmin">
 						<li><a href="<s:url action='GoSalesDataAction?item_id=%{ item_id }'/>">統計</a></li>
-						<li><a href="<s:url action='AdminUpdateItemInfoAction?item_id=%{ item_id }'/>">変更</a></li>
+						<li><a href="<s:url action='AdminUpdateItemInfoAction?id=%{ item_id }'/>">変更</a></li>
 						<li><a href="<s:url action='AdminDeleteItemAction?item_id=%{ item_id }'/>" style="color: red">削除</a></li>
 					</s:if>
 				</ul>

@@ -9,9 +9,9 @@
 	<jsp:param value="true" name="showMain" />
 	<jsp:param name="content">
 		<jsp:attribute name="value">
-			
+
 			<h1>商品リスト</h1>
-			
+
 			<form action="ItemListAction" method="post">
 				<table class="inputTable">
 					<tr>
@@ -22,9 +22,9 @@
 					</tr>
 				</table>
 			</form>
-			
+
 			<jsp:include page="./itemListTable.jsp" />
-			
+
 		</jsp:attribute>
 	</jsp:param>
 </jsp:include>
