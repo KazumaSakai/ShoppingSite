@@ -4,13 +4,14 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+
+	<!-- DevMode -->
+
 	<constant name="struts.devMode" value="true" />
 
-	<package name="com.internousdev.ShoppingSite.action" extends="struts-default">
 
-	</package>
 
-	<!-- ============================================================================================= -->
+
 	<!-- Admin -->
 
 	<package name="com.internousdev.ShoppingSite.action.admin" extends="struts-default">
@@ -77,7 +78,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- Go -->
 
 	<package name="com.internousdev.ShoppingSite.action.go" extends="struts-default">
@@ -146,7 +146,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- Item -->
 
 	<package name="com.internousdev.ShoppingSite.action.item" extends="struts-default">
@@ -189,7 +188,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- Google -->
 
 	<package name="com.internousdev.ShoppingSite.action.google" extends="struts-default">
@@ -216,8 +214,7 @@
 
 
 
-	<!-- ============================================================================================= -->
-	<!-- Cart -->""
+	<!-- Cart -->
 
 	<package name="com.internousdev.ShoppingSite.action.cart" extends="struts-default">
 
@@ -244,7 +241,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- User -->
 
 	<package name="com.internousdev.ShoppingSite.action.user" extends="struts-default">
@@ -261,7 +257,6 @@
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
-
 		<action name="AddAddressAction" class="com.internousdev.ShoppingSite.action.user.AddAddressAction" method="execute">
 			<result name="goBuy" type="chain">GoBuyAction</result>
 			<result name="success">./User/addAddress.jsp</result>
@@ -275,8 +270,7 @@
 
 
 
-	<!-- ============================================================================================= -->
-	<!-- User Login -->"
+	<!-- User Login -->
 
 	<package name="com.internousdev.ShoppingSite.action.user.login" extends="struts-default">
 
@@ -296,7 +290,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- User SignUp -->
 
 	<package name="com.internousdev.ShoppingSite.action.user.signup" extends="struts-default">
@@ -312,7 +305,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- PurchaseHistory -->
 
 	<package name="com.internousdev.ShoppingSite.action.purchaseHistory" extends="struts-default">
@@ -334,7 +326,6 @@
 
 
 
-	<!-- ============================================================================================= -->
 	<!-- Seller -->
 
 	<package name="com.internousdev.ShoppingSite.action.seller" extends="struts-default">
@@ -344,9 +335,5 @@
 		</action>
 
 	</package>
-
-
-
-
 
 </struts>
