@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MyCartAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private Map<String, Object> session;
 	private List<ItemDTO> itemList;
 	private int totalPrice;

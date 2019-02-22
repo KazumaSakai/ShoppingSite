@@ -11,6 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangeUserNameAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String newUserName;
 
 	private Map<String, Object> session;

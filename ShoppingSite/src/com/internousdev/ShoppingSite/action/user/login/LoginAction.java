@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String login_user_id;
 	private String login_pass;
 

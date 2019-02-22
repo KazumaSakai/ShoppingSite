@@ -14,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminUserListAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private List<UserDTO> userList = new ArrayList<UserDTO>();
 	private Map<String, Object> session;
 

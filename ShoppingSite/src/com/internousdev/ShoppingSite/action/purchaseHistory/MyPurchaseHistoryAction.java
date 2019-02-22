@@ -13,6 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPurchaseHistoryAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private Map<String, Object> session;
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
 	public String execute()

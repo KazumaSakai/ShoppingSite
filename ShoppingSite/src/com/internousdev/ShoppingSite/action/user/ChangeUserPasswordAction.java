@@ -14,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangeUserPasswordAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private Map<String, Object> session;
 	private String nowPassword;
 	private String newPassword;

@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PostItemReviewAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private int point;
 	private String comment;

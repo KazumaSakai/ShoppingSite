@@ -14,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemPageAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private boolean reviewExists;
 	private ItemDTO itemDTO;

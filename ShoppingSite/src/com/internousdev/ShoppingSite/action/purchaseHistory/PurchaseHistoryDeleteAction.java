@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PurchaseHistoryDeleteAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private Map<String, Object> session;
 

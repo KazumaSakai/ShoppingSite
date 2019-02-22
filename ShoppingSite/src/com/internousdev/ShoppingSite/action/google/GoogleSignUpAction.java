@@ -14,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GoogleSignUpAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String code;
 	private String state;
 	private String scope;

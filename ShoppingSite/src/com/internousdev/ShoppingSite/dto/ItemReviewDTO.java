@@ -9,7 +9,6 @@ public class ItemReviewDTO {
 	private String title;
 	private int point;
 	private String comment;
-	private String comment_html;
 	private String insert_date;
 
 	public int getId() {

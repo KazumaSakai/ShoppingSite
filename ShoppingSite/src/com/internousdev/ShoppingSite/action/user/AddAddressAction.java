@@ -11,6 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AddAddressAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private boolean goBuy;
 	private String address;
 

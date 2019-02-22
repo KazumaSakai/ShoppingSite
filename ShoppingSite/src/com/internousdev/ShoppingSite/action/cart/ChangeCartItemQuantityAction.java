@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ChangeCartItemQuantityAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int item_id;
 	private int newQuantity;
 	private Map<String, Object> session;

@@ -11,6 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminDeleteItemAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int item_id;
 	private Map<String, Object> session;
 

@@ -14,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemListAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private boolean andSearch;
 	private String searchWords;
 	private Map<String, Object> session;

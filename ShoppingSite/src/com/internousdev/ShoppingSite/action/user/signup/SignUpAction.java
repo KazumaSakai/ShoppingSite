@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class SignUpAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private Map<String, Object> session;
 	private String login_id;
 	private String login_pass;

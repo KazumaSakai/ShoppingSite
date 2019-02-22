@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AddItemAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int item_id;
 	private int request_Quantity;
 	private Map<String, Object> session;

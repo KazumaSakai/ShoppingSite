@@ -17,6 +17,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemSalesAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private int item_id;
 	private String resultData;
 	private Map<String, Object> session;

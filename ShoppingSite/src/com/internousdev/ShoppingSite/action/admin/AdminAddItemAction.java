@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminAddItemAction extends ActionSupport implements SessionAware
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
 	private int quantity;
 	private int price;
