@@ -12,25 +12,34 @@ public class GoAdminAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Session
 	private Map<String, Object> session;
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "GoAdminAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		return SUCCESS;
+	}
+
+	//	Getter Setter
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
 	}
 }

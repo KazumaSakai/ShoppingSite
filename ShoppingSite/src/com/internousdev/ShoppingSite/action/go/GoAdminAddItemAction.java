@@ -1,5 +1,6 @@
 package com.internousdev.ShoppingSite.action.go;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -12,35 +13,47 @@ public class GoAdminAddItemAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
-	private String errorMsg;
+	//	Receive + Send
+	private List<String> errorMsgList;
 
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "GoAdminAddItemAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		return SUCCESS;
 	}
 
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
-
-	public Map<String, Object> getSession() {
+	//	Getter Setter
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
+	}
 
-	public void setSession(Map<String, Object> session) {
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
+	}
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 }

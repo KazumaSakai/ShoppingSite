@@ -6,18 +6,22 @@ public class GoLoginAction  extends ActionSupport
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive + Send
 	private String errorMsg;
 	
+	//	Execute
 	public String execute()
 	{
 		return SUCCESS;
 	}
 
-	public String getErrorMsg() {
+	//	Getter Setter
+	public String getErrorMsg()
+	{
 		return errorMsg;
 	}
-
-	public void setErrorMsg(String errorMsg) {
+	public void setErrorMsg(String errorMsg)
+	{
 		this.errorMsg = errorMsg;
 	}
 }
