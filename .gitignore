@@ -5,3 +5,5 @@ Servers/
 RemoteSystemsTempFiles/
 ShoppingSite/.classpath
 ShoppingSite/.settings/
+ShoppingSite/build/
+ShoppingSite/.dbeaver-date-sources.xml
