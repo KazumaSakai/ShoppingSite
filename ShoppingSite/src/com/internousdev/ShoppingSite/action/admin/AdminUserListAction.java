@@ -1,6 +1,5 @@
 package com.internousdev.ShoppingSite.action.admin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,27 +15,36 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
-	private List<UserDTO> userList = new ArrayList<UserDTO>();
+	//	Send
+	private List<UserDTO> userList;
+	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminUserListAction");
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		 userList = UserDAO.GetUserList();
 
 		return SUCCESS;
 	}
 
+	//	Getter Setter
 	public List<UserDTO> getUserList() {
 		return userList;
 	}
-
 	public void setUserList(List<UserDTO> userList) {
 		this.userList = userList;
 	}
@@ -44,7 +52,7 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 	public Map<String, Object> getSession() {
 		return session;
 	}
-
+	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

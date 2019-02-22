@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.AddressDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
@@ -15,50 +14,63 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminPurchaseHistoryAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
-	private Map<String, Object> session;
+
+	//	Receive
 	private int page;
+
+	//	Send
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
 	
+	//	Session
+	private Map<String, Object> session;
+	
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminPurchaseHistoryAction");
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
-		
-		purchaseHistoryList = PurchaseHistoryDAO.GetAllPurchaseHistory(50 * page, 50);
-
-		for (PurchaseHistoryDTO dto : purchaseHistoryList)
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
 		{
-			dto.setAddressName(AddressDAO.GetAddress(dto.getAddress()));
+			return "notAdmin";
 		}
+
+		purchaseHistoryList = PurchaseHistoryDAO.GetAllPurchaseHistory(50 * page, 50);
+		
 		return SUCCESS;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	public int getPage() {
+	//	Getter Setter
+	public int getPage()
+	{
 		return page;
 	}
-
-	public void setPage(int page) {
+	public void setPage(int page)
+	{
 		this.page = page;
 	}
 
-	public List<PurchaseHistoryDTO> getPurchaseHistoryList() {
+	public List<PurchaseHistoryDTO> getPurchaseHistoryList()
+	{
 		return purchaseHistoryList;
 	}
-
-	public void setPurchaseHistoryList(List<PurchaseHistoryDTO> purchaseHistoryList) {
+	public void setPurchaseHistoryList(List<PurchaseHistoryDTO> purchaseHistoryList)
+	{
 		this.purchaseHistoryList = purchaseHistoryList;
 	}
+	
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+	}
+
 }

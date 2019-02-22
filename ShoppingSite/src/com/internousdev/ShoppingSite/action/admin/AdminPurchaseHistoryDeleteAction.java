@@ -13,25 +13,35 @@ public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements S
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
+	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminPurchaseHistoryAction");
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		return PurchaseHistoryDAO.DeletePurchaseHistory(id) ? SUCCESS : ERROR;
 	}
 
+	
+	//	Getter Setter
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -39,7 +49,7 @@ public class AdminPurchaseHistoryDeleteAction extends ActionSupport implements S
 	public Map<String, Object> getSession() {
 		return session;
 	}
-
+	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

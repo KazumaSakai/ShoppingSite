@@ -13,17 +13,26 @@ public class AdminDeleteUserAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
+	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminUserListAction");
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		UserDAO.DeleteUser(id);
 
@@ -31,20 +40,20 @@ public class AdminDeleteUserAction extends ActionSupport implements SessionAware
 	}
 
 
+	//	Getter Setter
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public Map<String, Object> getSession() {
 		return session;
 	}
-
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 }

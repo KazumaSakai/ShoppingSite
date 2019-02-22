@@ -13,38 +13,45 @@ public class AdminDeleteItemAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int item_id;
+	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
 
 		ItemDAO.DeleteItem(item_id);
 
 		return SUCCESS;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
+	//	Getter Setter
 	public int getItem_id() {
 		return item_id;
 	}
-
 	public void setItem_id(int item_id) {
 		this.item_id = item_id;
 	}
-
-
+	
+	public Map<String, Object> getSession() {
+		return session;
+	}
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
 }

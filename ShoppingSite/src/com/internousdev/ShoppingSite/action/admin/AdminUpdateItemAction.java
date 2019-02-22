@@ -13,6 +13,7 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
 	private String item_name;
 	private int item_price;
@@ -21,15 +22,19 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 	private int seller;
 	private int image_num;
 
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemPageAction?id=" + id);
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
+		//	管理者チェック
 		if(!CheckAdmin.IsAdmin(session))
 		{
 			return "notAdmin";
@@ -38,67 +43,76 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 		return ItemDAO.UpdateItem(id, item_name, item_price, item_quantity, description, seller, image_num) ? SUCCESS : ERROR;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public String getItem_name() {
+	public String getItem_name()
+	{
 		return item_name;
 	}
-
-	public void setItem_name(String item_name) {
+	public void setItem_name(String item_name)
+	{
 		this.item_name = item_name;
 	}
 
-	public int getItem_price() {
+	public int getItem_price()
+	{
 		return item_price;
 	}
-
-	public void setItem_price(int item_price) {
+	public void setItem_price(int item_price)
+	{
 		this.item_price = item_price;
 	}
 
-	public int getItem_quantity() {
+	public int getItem_quantity()
+	{
 		return item_quantity;
 	}
-
-	public void setItem_quantity(int item_quantity) {
+	public void setItem_quantity(int item_quantity)
+	{
 		this.item_quantity = item_quantity;
 	}
-
-	public String getDescription() {
+	
+	public String getDescription()
+	{
 		return description;
 	}
-
-	public void setDescription(String description) {
+	public void setDescription(String description)
+	{
 		this.description = description;
 	}
 
-	public int getSeller() {
+	public int getSeller()
+	{
 		return seller;
 	}
-
-	public void setSeller(int seller) {
+	public void setSeller(int seller)
+	{
 		this.seller = seller;
 	}
 
-	public int getImage_num() {
+	public int getImage_num()
+	{
 		return image_num;
 	}
-
-	public void setImage_num(int image_num) {
+	public void setImage_num(int image_num)
+	{
 		this.image_num = image_num;
 	}
 
-	public Map<String, Object> getSession() {
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
-
-	public void setSession(Map<String, Object> session) {
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 }
