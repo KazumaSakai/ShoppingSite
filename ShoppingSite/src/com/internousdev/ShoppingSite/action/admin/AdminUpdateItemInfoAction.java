@@ -29,7 +29,7 @@ public class AdminUpdateItemInfoAction extends ActionSupport implements SessionA
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemListAction");
+			session.put("LoginedRedirectAction", "AdminUpdateItemInfoAction");
 			return "needLogin";
 		}
 		//	管理者チェック

@@ -27,7 +27,7 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemListAction");
+			session.put("LoginedRedirectAction", "AdminUserListAction");
 			return "needLogin";
 		}
 		//	管理者チェック

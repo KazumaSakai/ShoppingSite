@@ -30,7 +30,7 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemListAction");
+			session.put("LoginedRedirectAction", "AdminPurchaseHistoryAction");
 			return "needLogin";
 		}
 		//	管理者チェック
