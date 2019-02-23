@@ -1,13 +1,14 @@
 package com.internousdev.ShoppingSite.action.user;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.LoginDAO;
 import com.internousdev.ShoppingSite.dao.UserDAO;
+import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.CheckLogin;
-import com.internousdev.ShoppingSite.util.Passworder;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,16 +17,21 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 {
 	private static final long serialVersionUID = 1L;
 	
-	private Map<String, Object> session;
 	private String nowPassword;
 	private String newPassword;
 	private String newPassword2;
 
-	private String errorMsg;
-	private String successMsg;
+	//	Send
+	private List<String> errorMsgList;
+	private List<String> successMsgList;
 
+	//	Session
+	private Map<String, Object> session;
+	
+	//	Execute
 	public String execute()
 	{
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "GoUserInfoAction");
@@ -36,100 +42,82 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 		String login_user_id = SessionSafeGetter.getString(session, "login_user_id");
 
 		//	入力値チェック
-		errorMsg = "";
-		successMsg = "";
-
-		String safe_nowpassword = Passworder.getSafetyPassword(nowPassword, login_user_id);
-		String pass = LoginDAO.LoginAtUserId(login_user_id, nowPassword).getLogin_pass();
-		if(!safe_nowpassword.equals(pass))
+		if(!LoginDAO.CheckPassword(login_user_id, nowPassword))
 		{
-			errorMsg += "パスワードが間違っています。<br/>";
+			errorMsgList.add("パスワードが間違っています。");
 		}
-
-		if(!newPassword.equals(newPassword2))
-		{
-			errorMsg += "パスワードが一致しません。<br/>";
-		}
-
-		if(!StringChecker.IsOnlyAlphabet_Number(newPassword))
-		{
-			errorMsg += "パスワードは半角英数字のみ有効です。<br/>";
-		}
-
-		if(newPassword.length() < 8)
-		{
-			errorMsg += "パスワードは8文字以上でなければなりません。<br/>";
-		}
-		else if(newPassword.length() > 60)
-		{
-			errorMsg += "パスワードは60文字以下でなければなりません。<br/>";
-		}
-
-		if(!errorMsg.isEmpty())
+		errorMsgList.addAll(StringChecker.CheckEqual(newPassword, newPassword2, "新しいパスワード", "新しいパスワード（確認）"));
+		errorMsgList.addAll(StringChecker.Check(newPassword, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
+		if(!errorMsgList.isEmpty())
 		{
 			return ERROR;
 		}
 
 		if(UserDAO.ChangeUserPassword(user_id, login_user_id, newPassword))
 		{
-			successMsg += "パスワードの変更に成功しました。<br/>";
+			successMsgList.add("パスワードの変更に成功しました。");
 			return SUCCESS;
 		}
 		else
 		{
-			errorMsg += "パスワードの変更に失敗しました。<br/>";
+			errorMsgList.add("パスワードの変更に失敗しました。");
 			return ERROR;
 		}
 	}
 
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	public String getNowPassword() {
+	//	Getter Setter
+	public String getNowPassword()
+	{
 		return nowPassword;
 	}
-
-	public void setNowPassword(String nowPassword) {
+	public void setNowPassword(String nowPassword)
+	{
 		this.nowPassword = nowPassword;
 	}
-
-	public String getNewPassword2() {
+	
+	public String getNewPassword()
+	{
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword)
+	{
+		this.newPassword = newPassword;
+	}
+	
+	public String getNewPassword2()
+	{
 		return newPassword2;
 	}
-
-	public void setNewPassword2(String newPassword2) {
+	public void setNewPassword2(String newPassword2)
+	{
 		this.newPassword2 = newPassword2;
 	}
-
-	public String getErrorMsg() {
-		return errorMsg;
+	
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
 	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
 	}
-
-	public String getSuccessMsg() {
-		return successMsg;
+	
+	public List<String> getSuccessMsgList()
+	{
+		return successMsgList;
 	}
-
-	public void setSuccessMsg(String successMsg) {
-		this.successMsg = successMsg;
+	public void setSuccessMsgList(List<String> successMsgList)
+	{
+		this.successMsgList = successMsgList;
 	}
-
-
+	
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+	}
 }

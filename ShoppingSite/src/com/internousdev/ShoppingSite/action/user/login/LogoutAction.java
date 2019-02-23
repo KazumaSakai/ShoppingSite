@@ -10,27 +10,29 @@ public class LogoutAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
-		String result = SUCCESS;
-
 		session.put("user_id", "");
 		session.put("login_user_id", "");
 		session.put("user_name", "");
 		session.put("isLogin", false);
 		session.put("isAdmin", false);
 
-		return result;
+		return SUCCESS;
 	}
 
-	public Map<String, Object> getSession() {
+	//	Getter Setter
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
-
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 
