@@ -8,9 +8,13 @@ public class SellerAction extends ActionSupport
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
+	
+	//	Send
 	private SellerDTO sellerDTO;
 
+	//	Execute
 	public String execute()
 	{
 		sellerDTO = SellerDAO.GetSeller(id);
@@ -18,19 +22,22 @@ public class SellerAction extends ActionSupport
 		return SUCCESS;
 	}
 
-	public int getId() {
+	//	Getter Setter
+	public int getId()
+	{
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public SellerDTO getSellerDTO() {
+	public SellerDTO getSellerDTO()
+	{
 		return sellerDTO;
 	}
-
-	public void setSellerDTO(SellerDTO sellerDTO) {
+	public void setSellerDTO(SellerDTO sellerDTO)
+	{
 		this.sellerDTO = sellerDTO;
 	}
 
