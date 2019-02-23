@@ -13,20 +13,37 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.internousdev.ShoppingSite.dao.ItemSalesDAO;
 import com.internousdev.ShoppingSite.dto.ItemSalesDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
+import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemSalesAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int item_id;
+	
+	//	Send
 	private String resultData;
+	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
-		if(!CheckAdmin.IsAdmin(session)) return "notAdmin";
-
+		//	ログインチェック
+		if(!CheckLogin.IsLogin(session))
+		{
+			session.put("LoginedRedirectAction", "ItemListAction");
+			return "needLogin";
+		}
+		//	管理者チェック
+		if(!CheckAdmin.IsAdmin(session))
+		{
+			return "notAdmin";
+		}
+		
 		ObjectMapper mapper = new ObjectMapper();
 		try
 		{
@@ -39,10 +56,10 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 				int y = time.getYear();
 				int m = time.getMonthValue();
 
-
 				boolean notAdd = true;
 
-				for (ItemSalesDTO item : getList) {
+				for (ItemSalesDTO item : getList)
+				{
 					if(item.getMonth() == m && item.getYear() == y)
 					{
 						list.add(item);
@@ -71,27 +88,31 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	public int getItem_id() {
+	//	Getter Setter
+	public int getItem_id()
+	{
 		return item_id;
 	}
-
-	public void setItem_id(int item_id) {
+	public void setItem_id(int item_id)
+	{
 		this.item_id = item_id;
 	}
 
-	public String getResultData() {
+	public String getResultData()
+	{
 		return resultData;
 	}
-
-	public void setResultData(String resultData) {
+	public void setResultData(String resultData)
+	{
 		this.resultData = resultData;
+	}
+	
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
 	}
 }

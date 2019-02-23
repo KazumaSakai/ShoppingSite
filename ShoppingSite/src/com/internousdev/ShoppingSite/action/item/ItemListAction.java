@@ -1,92 +1,101 @@
 package com.internousdev.ShoppingSite.action.item;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.ItemDAO;
-import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
-import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.CharType;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ItemListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private boolean andSearch;
 	private String searchWords;
-	private Map<String, Object> session;
+	
+	//	Send
 	private List<ItemDTO> itemList;
+	private List<String> errorMsgList;
+	
+	//	Session
+	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
-		String result = SUCCESS;
-
 		//	検索指定がある場合
-		if(searchWords != null && !searchWords.equals(""))
-		{
-			//	検索指定の文字列をリストにして、DAOからデータを得る
-			List<String> seachList = new ArrayList<String>();
-			searchWords = searchWords.replaceAll("　", " ");
-			for (String string : searchWords.split(" "))
-			{
-				seachList.add(string);
-			}
-			itemList = ItemDAO.GetItemList(seachList, andSearch);
-		}
-		//	検索指定がなければ、条件を指定しない
-		else
+		if(searchWords == null || searchWords.isEmpty())
 		{
 			itemList = ItemDAO.GetItemList();
-		}
-
-		//	ログインしているならば、カートに入っている量も得る
-		if(CheckLogin.IsLogin(session))
-		{
-			int user_id = (int)session.get("user_id");
-			for (ItemDTO itemDTO : itemList)
-			{
-				itemDTO.setMyCart_quantity(MyCartDAO.MyCartItemQuantity(user_id, itemDTO.getItem_id()));
-			}
+			return SUCCESS;
 		}
 		
-		return result;
+		//	検索ワードに記号が含まれていないかチェック
+		errorMsgList = StringChecker.Check(searchWords, "検索ワード", 0, 100, CharType.IgnoreSymbol);
+		if(!errorMsgList.isEmpty())
+		{
+			return ERROR;
+		}
+		
+		//	検索指定の文字列をリストにして、DBからデータを得る
+		List<String> seachList = Arrays.asList(searchWords.replaceAll("　", " ").split(" "));
+		itemList = ItemDAO.GetItemList(seachList, andSearch);
+
+		return SUCCESS;
 	}
 
-	public List<ItemDTO> getItemList() {
+	//	Getter Setter
+	public List<ItemDTO> getItemList()
+	{
 		return itemList;
 	}
-
-	public void setItemList(List<ItemDTO> itemList) {
+	public void setItemList(List<ItemDTO> itemList)
+	{
 		this.itemList = itemList;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	public String getSearchWords() {
+	public String getSearchWords()
+	{
 		return searchWords;
 	}
-
-	public void setSearchWords(String searchWords) {
+	public void setSearchWords(String searchWords)
+	{
 		this.searchWords = searchWords;
 	}
 
-	public boolean getAndSearch() {
+	public boolean getAndSearch()
+	{
 		return andSearch;
 	}
-
-	public void setAndSearch(boolean andSearch) {
+	public void setAndSearch(boolean andSearch)
+	{
 		this.andSearch = andSearch;
+	}
+
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
+	}
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
+	}
+	
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
 	}
 
 }

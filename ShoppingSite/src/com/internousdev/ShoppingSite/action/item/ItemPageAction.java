@@ -1,6 +1,5 @@
 package com.internousdev.ShoppingSite.action.item;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,77 +15,71 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
-	private boolean reviewExists;
+	
+	//	Send
 	private ItemDTO itemDTO;
-	
-	private List<ItemReviewDTO> itemReviewList = new ArrayList<ItemReviewDTO>();
-	
+	private List<ItemReviewDTO> itemReviewList;
 	private String errorMsg;
 	
+	//	Session
 	private Map<String, Object> session;
 
+	//	Execute
 	public String execute()
 	{
 		itemDTO = ItemDAO.GetItem(id);
-
 		itemReviewList = ItemReviewDAO.GetReviewList(id);
-
-		reviewExists = itemReviewList.size() > 0;
 
 		return SUCCESS;
 	}
 
-	public boolean isReviewExists() {
-		return reviewExists;
-	}
-
-	public void setReviewExists(boolean reviewExists) {
-		this.reviewExists = reviewExists;
-	}
-
-	public List<ItemReviewDTO> getItemReviewList() {
+	//	Getter Setter
+	public List<ItemReviewDTO> getItemReviewList()
+	{
 		return itemReviewList;
 	}
-
-	public void setItemReviewList(List<ItemReviewDTO> itemReviewList) {
+	public void setItemReviewList(List<ItemReviewDTO> itemReviewList)
+	{
 		this.itemReviewList = itemReviewList;
 	}
 
-	public ItemDTO getItemDTO() {
+	public ItemDTO getItemDTO()
+	{
 		return itemDTO;
 	}
-
-
-	public void setItemDTO(ItemDTO itemDTO) {
+	public void setItemDTO(ItemDTO itemDTO)
+	{
 		this.itemDTO = itemDTO;
 	}
 
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
-
-
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-
-	public Map<String, Object> getSession() {
+	public String getErrorMsg()
+	{
+		return errorMsg;
+	}
+	public void setErrorMsg(String errorMsg)
+	{
+		this.errorMsg = errorMsg;
+	}
+	
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
-
-
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
 }

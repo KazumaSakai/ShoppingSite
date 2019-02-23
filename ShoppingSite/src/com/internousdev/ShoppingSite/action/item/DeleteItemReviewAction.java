@@ -8,58 +8,71 @@ import com.internousdev.ShoppingSite.dao.ItemReviewDAO;
 import com.internousdev.ShoppingSite.dto.ItemReviewDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteItemReviewAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 	
+	//	Receive
 	private int id;
+	
+	//	Send
 	private ItemReviewDTO review;
 
+	//	Session
 	private Map<String, Object>session;
 
+	//	Execute
 	public String execute()
 	{
-		review = ItemReviewDAO.GetReview(id);
-
+		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
 			session.put("LoginedRedirectAction", "ItemPageAction?id=" + review.getItem_id());
 			return "needLogin";
 		}
 
-		int user_id = (int) session.get("user_id");
-		boolean isMineReview = (ItemReviewDAO.GetUserId(id) == user_id);
+		review = ItemReviewDAO.GetReview(id);
+
+		int user_id = SessionSafeGetter.getInt(session, "user_id");
+		boolean isMineReview = (review.getUser_id() == user_id);
+		
 		if(isMineReview || CheckAdmin.IsAdmin(session))
 		{
 			return (ItemReviewDAO.DeleteReviwe(id)) ? SUCCESS : ERROR;
 		}
+		
 		return ERROR;
 	}
 
-	public int getId() {
+	//	Getter Setter
+	public int getId()
+	{
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	public ItemReviewDTO getReview() {
+	public ItemReviewDTO getReview()
+	{
 		return review;
 	}
-
-	public void setReview(ItemReviewDTO review) {
+	public void setReview(ItemReviewDTO review)
+	{
 		this.review = review;
+	}
+	
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
 	}
 }
