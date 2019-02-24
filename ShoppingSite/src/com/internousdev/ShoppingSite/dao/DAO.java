@@ -11,7 +11,7 @@ public class DAO
 
 	public DAO()
 	{
-		this.connection = DBConnector.getConnection();
+		this.connection = DBConnector.createConnection();
 	}
 
 	public void close()

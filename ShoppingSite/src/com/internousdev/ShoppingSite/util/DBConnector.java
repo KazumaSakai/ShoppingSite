@@ -13,7 +13,7 @@ public class DBConnector
 	private static final String user = "root";
 	private static final String password = "mysql";
 
-	public static Connection getConnection()
+	public static Connection createConnection()
 	{
 		Connection connection= null;
 

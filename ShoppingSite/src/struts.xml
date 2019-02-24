@@ -152,6 +152,7 @@
 
 		<action name="ItemListAction" class="com.internousdev.ShoppingSite.action.item.ItemListAction" method="execute">
 			<result name="success">./Item/itemList.jsp</result>
+			<result name="error">./Item/itemList.jsp</result>
 		</action>
 
 		<action name="AddItemAction" class="com.internousdev.ShoppingSite.action.item.AddItemAction" method="execute">

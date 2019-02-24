@@ -30,7 +30,7 @@ public class ItemPageAction extends ActionSupport implements SessionAware
 	public String execute()
 	{
 		itemDTO = ItemDAO.GetItem(id);
-		itemReviewList = ItemReviewDAO.GetReviewList(id);
+		itemReviewList = ItemReviewDAO.GetReviewListByItemId(id);
 
 		return SUCCESS;
 	}

@@ -46,7 +46,7 @@ public class ItemListAction extends ActionSupport implements SessionAware
 		
 		//	検索指定の文字列をリストにして、DBからデータを得る
 		List<String> seachList = Arrays.asList(searchWords.replaceAll("　", " ").split(" "));
-		itemList = ItemDAO.GetItemList(seachList, andSearch);
+		itemList = ItemDAO.SearchItemList(seachList, andSearch);
 
 		return SUCCESS;
 	}

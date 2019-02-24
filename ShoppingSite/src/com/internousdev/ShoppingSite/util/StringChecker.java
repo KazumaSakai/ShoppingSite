@@ -71,10 +71,38 @@ public class StringChecker
 	{
 		if(str == null) return false;
 		
-		boolean notEmpty = !str.isEmpty();
-		boolean inRange = (minLength <= str.length() && str.length() <= maxLength);
+		int length = str.length();
+		return (minLength <= length && length <= maxLength);
+	}
+	
+	/**
+	 * 文字列が指定のバイト数であるか判定する
+	 * @param str
+	 * 	対象の文字列
+	 * @param minByte
+	 * 	最小バイト
+	 * @param maxByte
+	 * 	最大バイト
+	 * @return
+	 * 	<b>boolean</b><br/>
+	 * 	 - true : 指定の長さである<br/>
+	 *   - false : 指定の長さでない
+	 */
+	public static boolean CheckStringByte(String str, int minByte, int maxByte)
+	{
+		if(str == null) return false;
 		
-		return notEmpty && inRange;
+		try
+		{
+			int byteLength = str.getBytes("UTF-8").length;
+			return (minByte <= byteLength && byteLength <= maxByte);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 
 	/**
@@ -124,6 +152,81 @@ public class StringChecker
 		if(!CheckCharType(str, allowCharTypes))
 		{
 			errorMsgList.add(MessageFormat.format("{0}の文字種は、{1}でなければなりません。", columnName, CharType.GetName(allowCharTypes)));
+		}
+		
+		return errorMsgList;
+	}
+	
+	/**
+	 * 対象の文字列がメールアドレスかどうか検証し、エラーメッセージを返す
+	 * @param str
+	 * 	対象の文字列
+	 * @param columnName
+	 * 	カラム名
+	 * @return
+	 * 	エラーメッセージ
+	 */
+	public static List<String> CheckEmail(String str, String columnName)
+	{
+		List<String> errorMsgList = new ArrayList<String>();
+		
+		//	バイト数の長さ
+		if (!CheckStringByte(str, 3, 100))
+		{
+			errorMsgList.add(MessageFormat.format("{0}のバイト数は、{1}文字以上、{2}文字以下でなければなりません。", columnName, 3, 100));
+		}
+		
+		//	メールアドレスチェック
+		if(!IsMailAddress(str))
+		{
+			errorMsgList.add(MessageFormat.format("{0}はメールアドレスではありません。", columnName));
+		}
+		
+		return errorMsgList;
+	}
+	
+	/**
+	 * Nullも許容し、文字列の内容が同じが検証します
+	 * @param str
+	 * 	対象の文字列
+	 * @param str2
+	 * 	対象の文字列
+	 * @return
+	 * 	<b>boolean</b><br/>
+	 * 	 - true : 同じ<br/>
+	 *   - false : 同じでない
+	 */
+	public static boolean IsEqual(String str, String str2)
+	{
+		if(str == null || str2 == null)
+		{
+			if(str == null && str2 == null) return true;
+			return false;
+		}
+		
+		return str.equals(str2);
+	}
+	
+	/**
+	 * 	文字列の内容が同じが検証し、エラーメッセージを返します
+	 * @param str
+	 * 	対象の文字列
+	 * @param str2
+	 * 	対象の文字列
+	 * @param columnName
+	 * 	カラム名
+	 * @param columnName2
+	 * 	カラム名
+	 * @return
+	 * 	エラーメッセージ
+	 */
+	public static List<String> CheckEqual(String str, String str2, String columnName, String columnName2)
+	{
+		List<String> errorMsgList = new ArrayList<String>();
+		
+		if(!IsEqual(str, str2))
+		{
+			errorMsgList.add(MessageFormat.format("{0}と{1}が一致しません。", columnName, columnName2));
 		}
 		
 		return errorMsgList;

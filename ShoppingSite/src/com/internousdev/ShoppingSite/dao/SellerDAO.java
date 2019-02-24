@@ -10,39 +10,23 @@ import com.mysql.jdbc.Connection;
 
 public class SellerDAO extends DAO
 {
-	public SellerDTO getSeller(int id)
-	{
-		return GetSeller(connection, id);
-	}
 	public static SellerDTO GetSeller(int id)
 	{
-		Connection connection = DBConnector.getConnection();
-		SellerDTO result = GetSeller(connection, id);
-
-		try
-		{
-			connection.close();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-	public static SellerDTO GetSeller(Connection connection, int id)
-	{
-		SellerDTO sellerDTO = new SellerDTO();
-
+		SellerDTO sellerDTO = null;
+		
+		Connection connection = DBConnector.createConnection();
+		
 		try
 		{
 			String sql = "SELECT * FROM sellers WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
+			
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next())
 			{
+				sellerDTO = new SellerDTO();
 				sellerDTO.setName(resultSet.getString("name"));
 				sellerDTO.setId(resultSet.getInt("id"));
 				sellerDTO.setAddress(resultSet.getString("address"));
@@ -52,14 +36,16 @@ public class SellerDAO extends DAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-
+		}
+		finally
+		{
 			try
 			{
-				connection.close();
+				if (connection != null) connection.close();
 			}
-			catch (SQLException e1)
+			catch (SQLException e)
 			{
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 

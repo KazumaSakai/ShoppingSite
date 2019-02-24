@@ -17,7 +17,6 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 	private int id;
 	private String item_name;
 	private int item_price;
-	private int item_quantity;
 	private String description;
 	private int seller;
 	private int image_num;
@@ -40,7 +39,7 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 			return "notAdmin";
 		}
 
-		return ItemDAO.UpdateItem(id, item_name, item_price, item_quantity, description, seller, image_num) ? SUCCESS : ERROR;
+		return ItemDAO.UpdateItem(id, item_name, item_price, description, seller, image_num) ? SUCCESS : ERROR;
 	}
 
 	public int getId()
@@ -70,15 +69,6 @@ public class AdminUpdateItemAction extends ActionSupport implements SessionAware
 		this.item_price = item_price;
 	}
 
-	public int getItem_quantity()
-	{
-		return item_quantity;
-	}
-	public void setItem_quantity(int item_quantity)
-	{
-		this.item_quantity = item_quantity;
-	}
-	
 	public String getDescription()
 	{
 		return description;

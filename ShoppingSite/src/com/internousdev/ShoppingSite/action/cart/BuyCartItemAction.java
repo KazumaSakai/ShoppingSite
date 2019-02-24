@@ -40,85 +40,90 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 
 		int user_id = SessionSafeGetter.getInt(session, "user_id");
 		
-		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
 
 		//	購入処理
+		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
 		buyItemList = new ArrayList<ItemDTO>(itemListDTO.size());
-		BuyItemDAO buyItemDAO = new BuyItemDAO();
-		ItemSalesDAO itemSalesDAO = new ItemSalesDAO();
-		PurchaseHistoryDAO purchaseHistoryDAO = new PurchaseHistoryDAO();
 		
 		for (ItemDTO item : itemListDTO)
 		{
-			if(buyItemDAO.buyItem(item.getItem_id(), user_id, item.getItem_count()))
+			int buyQuantity = BuyItemDAO.BuyItem(item);
+			if(buyQuantity > 0)
 			{
 				buyItemList.add(item);
 
 				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
 				dto.setItem_id(item.getItem_id());
-				dto.setQuantity(item.getItem_count());
+				dto.setQuantity(buyQuantity);
 				dto.setUser_id(user_id);
 				dto.setAddress(address);
 				dto.setPhoneNumber(phoneNumber);
 				dto.setRequest_date(request_date);
 
-				purchaseHistoryDAO.addPurchaseHistory(dto);
-				itemSalesDAO.addSalesData(item.getItem_id(), item.getItem_count(), item.getItem_count() * item.getItem_price());
+				//TODO: カートから購入した商品を削除
+				PurchaseHistoryDAO.AddPurchaseHistory(dto);
+				ItemSalesDAO.AddSalesData(item.getItem_id(), item.getItem_count(), item.getItem_count() * item.getItem_price());
 			}
 		}
 		
-		buyItemDAO.close();
-		itemSalesDAO.close();
-		purchaseHistoryDAO.close();
-		
-		//TODO: カートから購入した商品を削除
-
 		totalPrice = buyItemList.stream().mapToInt(i -> i.getItem_price() * i.getItem_count()).sum();
 
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public int getTotalPrice() {
+	public int getTotalPrice()
+	{
 		return totalPrice;
 	}
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(int totalPrice)
+	{
 		this.totalPrice = totalPrice;
 	}
 
-	public List<ItemDTO> getBuyItemList() {
+	public List<ItemDTO> getBuyItemList()
+	{
 		return buyItemList;
 	}
-	public void setBuyItemList(List<ItemDTO> buyItemList) {
+	public void setBuyItemList(List<ItemDTO> buyItemList)
+	{
 		this.buyItemList = buyItemList;
 	}
 
-	public int getAddress() {
+	public int getAddress()
+	{
 		return address;
 	}
-	public void setAddress(int address) {
+	public void setAddress(int address)
+	{
 		this.address = address;
 	}
 
-	public String getPhoneNumber() {
+	public String getPhoneNumber()
+	{
 		return phoneNumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber)
+	{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getRequest_date() {
+	public String getRequest_date()
+	{
 		return request_date;
 	}
-	public void setRequest_date(String request_date) {
+	public void setRequest_date(String request_date)
+	{
 		this.request_date = request_date;
 	}
 	
-	public Map<String, Object> getSession() {
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 }

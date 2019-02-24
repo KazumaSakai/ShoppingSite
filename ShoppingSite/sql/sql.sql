@@ -1,247 +1,191 @@
-set names utf8;
-set foreign_key_checks = 0;
+SET names utf8;
+SET foreign_key_checks = 0;
 
-drop database if exists ShoppingSite;
-create database if not exists ShoppingSite;
-use ShoppingSite;
+DROP DATABASE IF EXISTS ShoppingSite;
+CREATE DATABASE IF NOT EXISTS ShoppingSite;
+USE ShoppingSite;
+
+/*
+ *		DestinationTable
+ *
+ *		宛先テーブル
+ *
+ */
+DROP TABLE IF EXISTS DestinationTable;
+CREATE TABLE DestinationTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '宛先ID',
+	userId INT NOT NULL COMMENT 'ユーザーID',
+	familyName VARCHAR(255) NOT NULL COMMENT '姓',
+	firstName VARCHAR(255) NOT NULL COMMENT '名',
+	gender INT NOT NULL COMMENT '性別 (0: 男性, 1: 女性, 2: その他)',
+	postalCode VARCHAR(8) NOT NULL COMMENT '郵便番号',
+	address TEXT NOT NULL COMMENT '住所',
+	email VARCHAR(255) NOT NULL COMMENT 'メールアドレス',
+	phoneNumber VARCHAR(16) NOT NULL COMMENT '電話番号',
+	registeredDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時'
+) COMMENT '宛先テーブル';
+INSERT INTO DestinationTable(userId, familyName, firstName, gender, postalCode, address, email, phoneNumber) VALUES
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@internousdev.com", "81---08000010001"),
+	(2, "土地所有者姓2", "土地所有者名2", 0, "160-0022", "東京都 新宿区新宿 0-0-00 xxxxxxxx 101", "mail@aaa.com", "81---00300010002"),
+	(3, "土地所有者姓3", "土地所有者名3", 0, "102-0075", "東京都 千代田区三番町 0-0-00 xxxxxxxx", "mail@bbb.com", "81---00300010003"),
+	(4, "土地所有者姓4", "土地所有者名4", 0, "100-0001", "東京都 千代田区千代田  0-0-00 xxxxxxxx", "mail@ccc.com", "81---00300010004"),
+	(5, "土地所有者姓5", "土地所有者名5", 0, "100-0001", "東京都 千代田区千代田  0-0-00 xxxxxxxx", "mail@ddd.com", "81---00300010005"),
+	(6, "土地所有者姓6", "土地所有者名6", 0, "100-0001", "東京都 千代田区千代田  0-0-00 xxxxxxxx", "mail@eee.com", "81---00300010006"),
+	(7, "土地所有者姓7", "土地所有者名7", 0, "100-0001", "東京都 千代田区千代田  0-0-00 xxxxxxxx", "mail@fff.com", "81---00300010007");
+
+
+/*
+ * 		CartTable
+ *
+ * 		カートテーブル
+ *
+ */
+DROP TABLE IF EXISTS CartTable;
+CREATE TABLE CartTable
+(
+	userId INT NOT NULL COMMENT 'ユーザーID',
+	productId INT NOT NULL COMMENT '商品ID',
+	productQuantity INT NOT NULL COMMENT '商品数',
+	PRIMARY KEY(userId, productId)
+) COMMENT 'カートテーブル';
 
 
 
 /*
- *		AddressList
+ * 		ProductTable
  *
- *	ユーザーの登録住所テーブル
- *
- */
-drop table if exists addressList;
-create table addressList(
-	id int not null primary key auto_increment,
-	user_id int not null,
-	address VARCHAR(255) NOT NULL
-);
-
-
-/*
- * 		Carts
- *
- * 	ユーザーのカートに入っている商品テーブル
+ * 		商品情報テーブル
  *
  */
-drop table if exists carts;
-create table carts(
-	user_id int not null,
-	item_id int not null,
-	item_count int not null
-);
-
-
-
-/*
- * 		Items
- *
- * 	現在販売中の商品テーブル
- *
- */
-drop table if exists items;
-create table items(
-	id int not null primary key auto_increment,
-	item_name varchar(255),
-	item_price int,
-	item_count int,
-	description text,
-	seller int not null,
-	image_num int not null DEFAULT 0,
-	insert_date datetime DEFAULT CURRENT_TIMESTAMP,
-	last_add_date datetime DEFAULT CURRENT_TIMESTAMP,
-	last_sell_date datetime
-);
-insert into items(item_name, item_price, item_count, description, seller, image_num) VALUES
-	("鉛筆", 108, 5261, "すらすら書ける鉛筆", 1, 3),
-	("消しゴム", 108, 2485, "なんでもスラスラ消せる消しゴムです。", 2, 2),
-	("ノート", 216, 482, "さらさら書けるノートです！。", 1, 3),
-	("お茶", 128, 2128, "お茶です。", 3, 1),
-	("パソコン", 103145, 241, "パソコン", 4, 1),
-	("マウス", 3210, 513, "最新マウス", 4, 1);
+DROP TABLE IF EXISTS ProductTable;
+CREATE TABLE ProductTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '商品ID',
+	productName VARCHAR(255) COMMENT '商品名',
+	productPrice INT NOT NULL COMMENT '商品価格',
+	productQuantity INT NOT NULL COMMENT '商品個数',
+	productDescription TEXT COMMENT '商品詳細',
+	salesCompanyId INT NOT NULL COMMENT '販売会社',
+	productionCompanyId INT NOT NULL COMMENT '製造会社',
+	imageQuantity INT NOT NULL DEFAULT 1 COMMENT '画像数',
+	releasedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '販売開始日時',
+	lastEditDate DATETIME COMMENT '最終編集日時',
+	lastReplenishmentDate DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '最終在庫補充日時',
+	lastSalesDate DATETIME COMMENT '最終販売日時'
+) COMMENT '商品情報テーブル';
+INSERT INTO ProductTable(productName, productPrice, productQuantity, productDescription, salesCompanyId, productionCompanyId, imageQuantity) VALUES
+		("鉛筆", 108, 5261, "すらすら書ける鉛筆", 1, 5, 3),
+		("消しゴム", 108, 2485, "なんでもスラスラ消せる消しゴムです。", 2, 5, 2),
+		("ノート", 216, 482, "さらさら書けるノートです！。", 1, 5, 3),
+		("お茶", 128, 2128, "お茶です。", 3, 6, 1),
+		("パソコン", 103145, 241, "パソコン", 4, 7, 1),
+		("マウス", 3210, 513, "最新マウス", 4, 7, 1);
 
 
 
 /*
- * 		Item_Review
+ * 		ProductReviewTable
  *
- * 	商品のレビューテーブル
+ * 		商品レビューテーブル
  *
  */
-drop table if exists item_review;
-create table item_review(
-	id int not null primary key auto_increment,
-	item_id int not null,
-	user_id int not null,
-	title VARCHAR(255) not null,
-	point int not null,
-	comment text,
-	insert_date datetime DEFAULT CURRENT_TIMESTAMP
-);
+DROP TABLE IF EXISTS ProductReviewTable;
+CREATE TABLE ProductReviewTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '商品レビューID',
+	productId INT NOT NULL COMMENT '商品ID',
+	userId INT NOT NULL COMMENT 'ユーザーID',
+	reviewTitle VARCHAR(255) NOT NULL COMMENT 'レビュータイトル',
+	reviewPoint INT NOT NULL COMMENT 'レビューポイント',
+	reviewComment TEXT COMMENT 'レビューコメント',
+	postedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '投稿日時',
+	lastEditDate DATETIME COMMENT '最終編集日時'
+) COMMENT '商品レビューテーブル';
 
 
 
 /*
- * 		PurchaseHistorys
+ * 		PurchaseHistoryTable
  *
- * 	商品の購入履歴テーブル
+ * 		商品購入履歴テーブル
  *
  */
-drop table if exists purchaseHistorys;
-create table purchaseHistorys(
-	id int not null primary key auto_increment,
-	item_id int not null,
-	quantity int not null,
-	user_id int not null,
-	address VARCHAR(255) NOT NULL,
-	phoneNumber VARCHAR(255) NOT NULL,
-	shipmentState int NOT NULL,
-	insert_date datetime DEFAULT CURRENT_TIMESTAMP,
-	request_date datetime
-);
+DROP TABLE IF EXISTS purchaseHistoryTable;
+CREATE TABLE purchaseHistoryTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '商品購入履歴ID',
+	productId INT NOT NULL COMMENT '商品ID',
+	productQuantity INT NOT NULL COMMENT '商品購入個数',
+	userId INT NOT NULL COMMENT 'ユーザーID',
+	destinationId INT NOT NULL COMMENT '宛先ID',
+	shipmentState INT NOT NULL COMMENT '配達状況',
+	purchasedDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '商品購入日時',
+	requestDeliveryDate DATETIME COMMENT '要求配達日時'
+) COMMENT '商品購入履歴テーブル';
 
 
 
 /*
- * 		Sales
+ * 		ProductSalesTable
  *
- * 	各アイテムの売り上げテーブル
+ * 		商品売り上げテーブル
  *
  */
-drop table if exists sales;
-create table sales(
-	item_id int not null,
-	year int not null,
-	month int not null,
-	quantity int not null,
-	price int not null
-);
-INSERT INTO sales(item_id, year, month, quantity, price) VALUES
-	(1, 2018, 1, 140, 14000),
-	(1, 2018, 2, 213, 21300),
-	(1, 2018, 3, 245, 24500),
-	(1, 2018, 4, 312, 33696),
-	(1, 2018, 5, 513, 60534),
-	(1, 2018, 6, 434, 46872),
-	(1, 2018, 7, 456, 49248),
-	(1, 2018, 8, 436, 47088),
-	(1, 2018, 9, 460, 49680),
-	(1, 2018, 10, 501, 54108),
-	(1, 2018, 11, 431, 46548),
-	(1, 2018, 12, 321, 34668),
-	(1, 2019, 1, 421, 45468),
-	(1, 2019, 2, 457, 49356),
-	(2, 2018, 1, 140, 15120),
-	(2, 2018, 2, 213, 23004),
-	(2, 2018, 3, 245, 26460),
-	(2, 2018, 4, 312, 33696),
-	(2, 2018, 5, 513, 60534),
-	(2, 2018, 6, 434, 46872),
-	(2, 2018, 7, 456, 49248),
-	(2, 2018, 8, 436, 47088),
-	(2, 2018, 9, 460, 49680),
-	(2, 2018, 10, 501, 54108),
-	(2, 2018, 11, 431, 46548),
-	(2, 2018, 12, 321, 34668),
-	(2, 2019, 1, 421, 45468),
-	(2, 2019, 2, 457, 49356),
-	(3, 2018, 1, 140, 15120),
-	(3, 2018, 2, 213, 23004),
-	(3, 2018, 3, 245, 26460),
-	(3, 2018, 4, 312, 33696),
-	(3, 2018, 5, 513, 60534),
-	(3, 2018, 6, 434, 46872),
-	(3, 2018, 7, 456, 49248),
-	(3, 2018, 8, 436, 47088),
-	(3, 2018, 9, 460, 49680),
-	(3, 2018, 10, 501, 108216),
-	(3, 2018, 11, 431, 93096),
-	(3, 2018, 12, 321, 69336),
-	(3, 2019, 1, 421, 90936),
-	(3, 2019, 2, 457, 98712),
-	(4, 2018, 1, 140, 15120),
-	(4, 2018, 2, 213, 23004),
-	(4, 2018, 3, 245, 26460),
-	(4, 2018, 4, 312, 33696),
-	(4, 2018, 5, 513, 60534),
-	(4, 2018, 6, 434, 46872),
-	(4, 2018, 7, 456, 49248),
-	(4, 2018, 8, 436, 47088),
-	(4, 2018, 9, 460, 49680),
-	(4, 2018, 10, 501, 54108),
-	(4, 2018, 11, 431, 46548),
-	(4, 2018, 12, 321, 34668),
-	(4, 2019, 1, 421, 45468),
-	(4, 2019, 2, 457, 49356),
-	(5, 2018, 1, 3, 309435),
-	(5, 2018, 2, 2, 206290),
-	(5, 2018, 3, 1, 103145 ),
-	(5, 2018, 4, 3, 309435),
-	(5, 2018, 5, 2, 206290),
-	(5, 2018, 6, 4, 412580),
-	(5, 2018, 7, 1, 103145 ),
-	(5, 2018, 8, 0, 0),
-	(5, 2018, 9, 1, 103145 ),
-	(5, 2018, 10, 3, 54108),
-	(5, 2018, 11, 0, 0),
-	(5, 2018, 12, 5, 515725),
-	(5, 2019, 1, 6, 618870),
-	(5, 2019, 2, 3, 309435),
-	(6, 2018, 1, 1, 3210),
-	(6, 2018, 2, 4, 12840),
-	(6, 2018, 3, 3, 9630 ),
-	(6, 2018, 4, 7, 22470),
-	(6, 2018, 5, 2, 6420),
-	(6, 2018, 6, 4, 12840),
-	(6, 2018, 7, 3, 9630 ),
-	(6, 2018, 8, 7, 22470),
-	(6, 2018, 9, 4, 12840 ),
-	(6, 2018, 10, 3, 9630),
-	(6, 2018, 11, 6, 19260),
-	(6, 2018, 12, 7, 22470),
-	(6, 2019, 1, 6, 19260),
-	(6, 2019, 2, 4, 12840);
+DROP TABLE IF EXISTS ProductSalesTable;
+CREATE TABLE ProductSalesTable
+(
+	productId INT NOT NULL COMMENT '商品ID',
+	salesQuantity INT NOT NULL COMMENT '売上個数',
+	totalSales INT NOT NULL COMMENT '売上高',
+	totalRevenue INT NOT NULL COMMENT '利益',
+	salesYear INT NOT NULL COMMENT '対象年',
+	salesMonth INT NOT NULL COMMENT '対象月'
+) COMMENT '商品売り上げテーブル';
+INSERT INTO ProductSalesTable(productId, salesQuantity, totalSales, totalRevenue, salesYear, salesMonth) VALUES
+		(1, 140, 14000, 3000, 2018, 1);
 
 /*
- * 		Sellers
+ * 		CompanyTable
  *
- * 	販売業者テーブル
+ * 		会社情報テーブル
  *
  */
-drop table if exists sellers;
-create table sellers(
-	id int not null primary key auto_increment,
-	name VARCHAR(255) not null,
-	address VARCHAR(255) not null,
-	email VARCHAR(255) not null,
-	phone VARCHAR(255) not null,
-	description VARCHAR(255) not null
-);
-INSERT INTO sellers(name, address, email, phone, description) VALUES
-	("ABC通信販売", "東京都港区XXX1-1-1 YYYビル", "mail@abc.com", "0312345561", "ABC通信販売です。よろしくお願い致します。"),
-	("いろは文具", "東京都江東区XXX1-1-1 YYYビル", "mail@iroha.co.jp", "0316821682", "いろは文具です。文具を扱っています。"),
-	("大阪飲料販売", "大阪府大阪市XXX1-1-1 YYYビル", "mail@osakadrink.osaka.jp", "0313125931", "大阪飲料販売です。よろしくお願い致します。"),
-	("Computer", "東京都港区XXX1-1-1 YYYビル", "mail@computer.com", "0331245678", "コンピューター関連の商品を取り扱っています");
+DROP TABLE IF EXISTS CompanyTable;
+CREATE TABLE CompanyTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '会社ID',
+	userId INT NOT NULL COMMENT 'ユーザーID',
+	destinationId INT NOT NULL COMMENT '宛先ID',
+	companyName VARCHAR(255) NOT NULL COMMENT '会社名',
+	companyDescription VARCHAR(255) NOT NULL COMMENT '会社詳細'
+) COMMENT '会社情報テーブル';
+INSERT INTO CompanyTable(userId, destinationId, companyName, companyDescription) VALUES
+	(2, 2, "ABC通信販売", "ABC通信販売です。よろしくお願い致します。"),
+	(3, 3, "いろは文具", "いろは文具です。文具を扱っています。"),
+	(4, 4, "大阪飲料販売", "大阪飲料販売です。よろしくお願い致します。"),
+	(5, 5, "Computer", "コンピューター関連の商品を取り扱っています");
 
 
 /*
- * 		Users
+ * 		UserTable
  *
- * 	ユーザーテーブル
+ * 		ユーザー情報テーブル
  *
  */
-drop table if exists users;
-create table users(
-	id int not null primary key auto_increment,
-	admin tinyint not null DEFAULT 0,
-	oauthUser tinyint not null DEFAULT 0,
-	login_id varchar(255) not null unique,
-	email varchar(255) not null unique,
-	login_pass varchar(255) not null,
-	user_name varchar(60) not null,
-	insert_date datetime DEFAULT CURRENT_TIMESTAMP
-);
-insert into users(admin, oauthUser, login_id, login_pass, email, user_name) VALUES(1, 0, "admin","3f74691ad7292c5f0ee29cc8fba0b03463e3b1c4a1d368838dbe11b925d244c4", "admin@internousdev.com", "管理者");
+DROP TABLE IF EXISTS UserTable;
+CREATE TABLE UserTable
+(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'ユーザーID',
+	isAdmin TINYINT NOT NULL DEFAULT 0 COMMENT '管理者フラグ',
+	isOauthUser TINYINT NOT NULL DEFAULT 0 COMMENT '認証登録ユーザー',
+	loginId VARCHAR(60) NOT NULL UNIQUE COMMENT 'ログインID',
+	loginPass VARCHAR(255) NOT NULL COMMENT 'ログインパスワード',
+	email VARCHAR(60) NOT NULL UNIQUE COMMENT 'メールアドレス',
+	userName VARCHAR(60) NOT NULL COMMENT 'ユーザー名',
+	destinationId INT NOT NULL COMMENT '宛先ID',
+	registeredDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
+	lastEditDate DATETIME COMMENT '最終編集日時'
+) COMMENT 'ユーザー情報テーブル';
+INSERT INTO UserTable(isAdmin, isOauthUser, loginId, loginPass, email, userName, destinationId) VALUES
+	(1, 0, "admin","3f74691ad7292c5f0ee29cc8fba0b03463e3b1c4a1d368838dbe11b925d244c4", "admin@internousdev.com", "管理者", 1);

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.AddressDAO;
+import com.internousdev.ShoppingSite.dao.DestinationDAO;
 import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
@@ -46,7 +46,7 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 		}
 
 		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		if(AddressDAO.AddUserAddress(user_id, address))
+		if(DestinationDAO.AddAddress(user_id, address))
 		{
 			return goBuy ? "goBuy" : SUCCESS;
 		}

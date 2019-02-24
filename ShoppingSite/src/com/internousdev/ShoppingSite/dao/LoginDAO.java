@@ -7,37 +7,29 @@ import java.sql.SQLException;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.internousdev.ShoppingSite.util.Passworder;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.mysql.jdbc.Connection;
 
 public class LoginDAO extends DAO
 {
-	public UserDTO loginAtEmail(String email, String login_pass)
+	/**
+	 * 	メールアドレスでログインする
+	 * @param email
+	 * 	メールアドレス
+	 * @param login_pass
+	 * 	ログインパスワード
+	 * @return
+	 * 	ユーザー情報
+	 */
+	public static UserDTO LoginByEmail(String email, String login_pass)
 	{
-		return LoginAtEmail(connection, email, login_pass);
-	}
-	public static UserDTO LoginAtEmail(String email, String login_pass)
-	{
-		Connection connection = DBConnector.getConnection();
-		UserDTO result = LoginAtEmail(connection, email, login_pass);
-
-		try
-		{
-			connection.close();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-	public static UserDTO LoginAtEmail(Connection connection, String email, String login_pass)
-	{
-		String sql = "SELECT * FROM users WHERE email = ?";
-	 	UserDTO userDTO = new UserDTO();
+	 	UserDTO userDTO = null;
+	 	
+	 	Connection connection = DBConnector.createConnection();
 
 	 	try
 	 	{
+			String sql = "SELECT * FROM users WHERE email = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, email);
 
@@ -56,6 +48,7 @@ public class LoginDAO extends DAO
 
 				 if(pass.equals(get_login_pass))
 				 {
+					 userDTO = new UserDTO();
 					 userDTO.setAdmin(get_isAdmin);
 					 userDTO.setId(get_id);
 					 userDTO.setLogin_pass(get_login_pass);
@@ -71,46 +64,40 @@ public class LoginDAO extends DAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-
+		}
+	 	finally
+	 	{
 			try
 			{
-				connection.close();
+				if (connection != null) connection.close();
 			}
-			catch (SQLException e1)
+			catch (SQLException e)
 			{
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
 		}
-
-		 return userDTO;
+	 	
+		return userDTO;
 	}
 
-	public UserDTO loginAtUserId(String login_id, String login_pass)
+	/**
+	 * 	ユーザーIDでログインする
+	 * @param login_id
+	 * 	ログインID
+	 * @param login_pass
+	 * 	パスワード
+	 * @return
+	 * 	ユーザー情報
+	 */
+	public static UserDTO LoginByUserId(String login_id, String login_pass)
 	{
-		return LoginAtUserId(connection, login_id, login_pass);
-	}
-	public static UserDTO LoginAtUserId(String login_id, String login_pass)
-	{
-		Connection connection = DBConnector.getConnection();
-		UserDTO result = LoginAtUserId(connection, login_id, login_pass);
-
+		UserDTO userDTO = null;
+		
+		Connection connection = DBConnector.createConnection();
+		
 		try
 		{
-			connection.close();
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-	public static UserDTO LoginAtUserId(Connection connection, String login_id, String login_pass)
-	{
-		String sql = "SELECT * FROM users WHERE login_id = ?";
-		UserDTO userDTO = new UserDTO();
-		try
-		{
+			String sql = "SELECT * FROM users WHERE login_id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, login_id);
 
@@ -129,6 +116,7 @@ public class LoginDAO extends DAO
 
 				if(pass.equals(get_login_pass))
 				{
+					userDTO = new UserDTO();
 					userDTO.setAdmin(get_isAdmin);
 					userDTO.setId(get_id);
 					userDTO.setLogin_id(get_login_id);
@@ -144,17 +132,68 @@ public class LoginDAO extends DAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-
+		}
+		finally
+		{
 			try
 			{
-				connection.close();
+				if (connection != null) connection.close();
 			}
-			catch (SQLException e1)
+			catch (SQLException e)
 			{
-				e1.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 
 		return userDTO;
+	}
+	
+	/**
+	 * パスワードを確認する
+	 * @param loginId
+	 * 	ログインID
+	 * @param password
+	 * 	パスワード
+	 * @return
+	 * 	結果
+	 */
+	public static boolean CheckPassword(String loginId, String password)
+	{
+		boolean success = false;
+		
+		Connection connection = DBConnector.createConnection();
+		
+		try
+		{
+			String sql = "SELECT login_pass FROM users WHERE login_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, loginId);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next())
+			{
+				String safePassword = Passworder.getSafetyPassword(password, loginId);
+				String getPassword = resultSet.getString("login_pass");
+				success = StringChecker.IsEqual(safePassword, getPassword);
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return success;
 	}
 }

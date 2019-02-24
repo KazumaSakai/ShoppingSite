@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.AddressDAO;
+import com.internousdev.ShoppingSite.dao.DestinationDAO;
 import com.internousdev.ShoppingSite.dao.MyCartDAO;
 import com.internousdev.ShoppingSite.dto.AddressDTO;
 import com.internousdev.ShoppingSite.dto.ItemDTO;
@@ -47,7 +47,7 @@ public class GoBuyAction extends ActionSupport implements SessionAware
         max = simpleDateFormat.format(calendar.getTime()) + "T22:00";
 
 		int user_id = (int)session.get("user_id");
-		addressList = AddressDAO.GetUserAddressList(user_id);
+		addressList = DestinationDAO.GetAddressListByUserId(user_id);
 		
 		myCartItemList = MyCartDAO.GetMyCart(user_id);
 		totalPrice = myCartItemList.stream().mapToInt(i -> i.getItem_price() * i.getItem_count()).sum();

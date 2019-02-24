@@ -36,7 +36,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		String pass = tokenInfo.user_id;
 		String safePass = Passworder.getSafetyPassword(pass, email);
 
-		UserDTO userDTO = LoginDAO.LoginAtEmail(email, safePass);
+		UserDTO userDTO = LoginDAO.LoginByEmail(email, safePass);
 		if(!userDTO.getOauthUser())
 		{
 			return ERROR;

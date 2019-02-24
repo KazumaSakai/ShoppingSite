@@ -41,7 +41,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 		}
 		
 		//	ユーザー情報を取得
-		UserDTO userDTO = LoginDAO.LoginAtUserId(login_user_id, login_pass);
+		UserDTO userDTO = LoginDAO.LoginByUserId(login_user_id, login_pass);
 		if(userDTO == null)
 		{
 			errorMsgList.add("ログインができませんでした、ログインIDまたはパスワードが間違っています。");
