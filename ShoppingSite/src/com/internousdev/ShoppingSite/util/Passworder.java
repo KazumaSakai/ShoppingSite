@@ -10,11 +10,11 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class Passworder {
 
-    /** パスワードを安全にするためのアルゴリズム */
+    // パスワードを安全にするためのアルゴリズム
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
-    /** ストレッチング回数 */
+    // ストレッチング回数
     private static final int ITERATION_COUNT = 10000;
-    /** 生成される鍵の長さ */
+    // 生成される鍵の長さ
     private static final int KEY_LENGTH = 256;
 
     /**
@@ -59,7 +59,7 @@ public class Passworder {
         }
         return sb.toString();
     }
-    
+
 
     /**
      * ソルトをハッシュ化して返却します
@@ -81,7 +81,7 @@ public class Passworder {
         messageDigest.update(salt.getBytes());
         return messageDigest.digest();
     }
-    
+
     public static String Random()
     {
     	byte[] ary = getHashedSalt(String.valueOf(Math.random()));
