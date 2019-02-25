@@ -140,7 +140,8 @@ CREATE TABLE ProductSalesTable
 	totalSales INT NOT NULL COMMENT '売上高',
 	totalRevenue INT NOT NULL COMMENT '利益',
 	salesYear INT NOT NULL COMMENT '対象年',
-	salesMonth INT NOT NULL COMMENT '対象月'
+	salesMonth INT NOT NULL COMMENT '対象月',
+	PRIMARY KEY(productId, salesYear, salesMonth)
 ) COMMENT '商品売り上げテーブル';
 INSERT INTO ProductSalesTable(productId, salesQuantity, totalSales, totalRevenue, salesYear, salesMonth) VALUES
 		(1, 140, 14000, 3000, 2018, 1);
