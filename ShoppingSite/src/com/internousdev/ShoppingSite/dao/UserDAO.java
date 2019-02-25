@@ -99,6 +99,11 @@ public class UserDAO
 	{
 		return UserDAO.Select("loginId = " + loginId);
 	}
+	
+	public static UserDTO SelectByEmail(String email)
+	{
+		return UserDAO.Select("email = " + email);
+	}
 
 	public static boolean Update(UserDTO userDTO)
 	{
@@ -236,6 +241,18 @@ public class UserDAO
 
 		String DBSafePassword = userDTO.getLoginPass();
 		String safePassword = Passworder.getSafetyPassword(planeLoginPass, loginId);
+
+		return DBSafePassword.equals(safePassword) ? userDTO : null;
+	}
+
+	public static UserDTO LoginByEmail(String email, String planeLoginPass)
+	{
+		UserDTO userDTO = UserDAO.SelectByEmail(email);
+
+		if (userDTO == null) return null;
+
+		String DBSafePassword = userDTO.getLoginPass();
+		String safePassword = Passworder.getSafetyPassword(planeLoginPass, email);
 
 		return DBSafePassword.equals(safePassword) ? userDTO : null;
 	}

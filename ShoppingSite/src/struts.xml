@@ -16,21 +16,21 @@
 
 	<package name="com.internousdev.ShoppingSite.action.admin" extends="struts-default">
 
-		<action name="AdminAddItemAction" class="com.internousdev.ShoppingSite.action.admin.AdminAddItemAction" method="execute">
-			<result name="success" type="chain">ItemListAction</result>
+		<action name="AdminInsertProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminInsertProductAction" method="execute">
+			<result name="success" type="chain">ProductListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
-			<result name="error" type="chain">GoAdminAddItemAction</result>
+			<result name="error" type="chain">GoAdminInsertProductAction</result>
 		</action>
 
-		<action name="AdminAddItemQuantityAction" class="com.internousdev.ShoppingSite.action.admin.AdminAddItemQuantityAction" method="execute">
-			<result name="success" type="chain">AdminUpdateItemInfoAction</result>
+		<action name="AdminIncrementProductQuantityAction" class="com.internousdev.ShoppingSite.action.admin.AdminIncrementProductQuantityAction" method="execute">
+			<!-- <result name="success" type="chain">AdminProductInfoAction</result>  -->
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
-		<action name="AdminDeleteItemAction" class="com.internousdev.ShoppingSite.action.admin.AdminDeleteItemAction" method="execute">
-			<result name="success" type="chain">ItemListAction</result>
+		<action name="AdminDeleteProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminDeleteProductAction" method="execute">
+			<result name="success" type="chain">ProductListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
@@ -54,17 +54,19 @@
 			<result name="error" type="chain">AdminPurchaseHistoryAction</result>
 		</action>
 
-		<action name="AdminUpdateItemAction" class="com.internousdev.ShoppingSite.action.admin.AdminUpdateItemAction" method="execute">
-			<result name="success" type="chain">ItemPageAction</result>
+		<action name="AdminUpdateProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminUpdateProductAction" method="execute">
+			<!-- <result name="success" type="chain">AdminProductInfoAction</result>  -->
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
-		<action name="AdminUpdateItemInfoAction" class="com.internousdev.ShoppingSite.action.admin.AdminUpdateItemInfoAction" method="execute">
-			<result name="success">./Admin/adminUpdateItem.jsp</result>
+		<!-- 
+		<action name="AdminProductInfoAction" class="com.internousdev.ShoppingSite.action.admin.AdminProductInfoAction" method="execute">
+			<result name="success">./Admin/adminProductInfo.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
+		-->
 
 		<action name="AdminUserListAction" class="com.internousdev.ShoppingSite.action.admin.AdminUserListAction" method="execute">
 			<result name="success">./User/userList.jsp</result>

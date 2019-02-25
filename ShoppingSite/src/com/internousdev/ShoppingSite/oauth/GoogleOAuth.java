@@ -13,49 +13,59 @@ public class GoogleOAuth
 	private static final String clientId = "34746352072-tv6neqgl7uhuqutiqm5e93e4sbhn43li.apps.googleusercontent.com";
 	private static final String clientSecret = "_H9AFED1Qxt4rcgYCgHaLtEp ";
 
-	public static GoogleOAuthGMailInfo GetGMailInfo(GoogleOAuthToken token)
+	/**
+	 * 	Gmailの情報を取得する
+	 * @param token
+	 * 	トークン
+	 * @return
+	 * 	Gmailの情報
+	 */
+	public static GoogleOAuthGMailInfo GetGmailInfo(GoogleOAuthToken token)
 	{
-		GoogleOAuthTokenInfo googleOAuthTokenInfo = GoogleOAuth.GetTokenInfo(token);
-		String userId = googleOAuthTokenInfo.user_id;
-		return GetGMailInfo(token, userId);
+		//	トークン情報からユーザーIDを取得する
+		GoogleOAuthTokenInfo googleOAuthTokenInfo = GoogleOAuth.FetchGoogleTokenInfo(token);
+		String googleTokenUserId = googleOAuthTokenInfo.user_id;
+		
+		return GoogleOAuth.GetGmailInfo(token, googleTokenUserId);
 	}
 
-	public static GoogleOAuthGMailInfo GetGMailInfo(GoogleOAuthToken token, String userId)
+	/**
+	 * 	Gmailの情報を取得する
+	 * @param token
+	 * 	トークン
+	 * @param googleTokenUserId
+	 * 	GoogleTokenInfoユーザーID
+	 * @return
+	 * 	Gmailの情報
+	 */
+	public static GoogleOAuthGMailInfo GetGmailInfo(GoogleOAuthToken token, String googleTokenUserId)
 	{
-		String s = GoogleOAuth.GMailInfo(token, userId);
+		//	Gmail情報取得用のURL
+		String urlForGmailInfo = GoogleOAuth.getGmailInfoURL(token, googleTokenUserId);
+		
+		//	Gmail情報のJSON
+		String json = HTTP.GET(urlForGmailInfo);
+		
+		//	JSONを変換
 		GoogleOAuthGMailInfo gMailInfo = null;
-		try {
-			gMailInfo = new ObjectMapper().readValue(GoogleOAuth.Get(s), GoogleOAuthGMailInfo.class);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		try
+		{
+			gMailInfo = new ObjectMapper().readValue(json, GoogleOAuthGMailInfo.class);
+		}
+		catch (JsonParseException e)
+		{
 			e.printStackTrace();
 		}
+		catch (JsonMappingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 		return gMailInfo;
-	}
-
-	public static String TokenInfo(GoogleOAuthToken token)
-	{
-		String URL = "https://www.googleapis.com/oauth2/v1/tokeninfo?" + "access_token=" + token.access_token;
-
-		return URL;
-	}
-
-	public static String GMailInfo(GoogleOAuthToken token, String userId)
-	{
-		String URL = "https://www.googleapis.com/gmail/v1/users/" + userId + "/profile?" + "access_token="
-				+ token.access_token;
-
-		return URL;
-	}
-
-	public static String UserInfo(GoogleOAuthToken token)
-	{
-		String URL = "https://www.googleapis.com/oauth2/v1/userinfo?" + "access_token=" + token.access_token;
-
-		return URL;
 	}
 
 	/**
@@ -65,9 +75,10 @@ public class GoogleOAuth
 	 * @return
 	 * 	トークン情報
 	 */
-	public static GoogleOAuthTokenInfo GetTokenInfo(GoogleOAuthToken token)
+	public static GoogleOAuthTokenInfo FetchGoogleTokenInfo(GoogleOAuthToken token)
 	{
-		String urlForTokenInfo = GoogleOAuth.TokenInfo(token);
+		//	トークン情報取得先のURL
+		String urlForTokenInfo = GoogleOAuth.getTokenInfoURL(token);
 
 		//	GETでトークン情報を取得
 		String tokenInfoJson = HTTP.GET(urlForTokenInfo);
@@ -95,7 +106,7 @@ public class GoogleOAuth
 	 * @return
 	 * 	トークン
 	 */
-	public static GoogleOAuthToken getGoogleToken(String code, String redirctURL)
+	public static GoogleOAuthToken FetchGoogleToken(String code, String redirctURL)
 	{
 		StringBuilder tokenURL = new StringBuilder();
 		tokenURL.append("https://accounts.google.com/o/oauth2/token?code=").append(code)
@@ -120,7 +131,6 @@ public class GoogleOAuth
 
 		return googleOAuthToken;
 	}
-
 
 	/**
 	 * 	トークンを得るためのURL先<br/>
@@ -158,5 +168,41 @@ public class GoogleOAuth
 		stringBuilder.append("&state=").append(Passworder.Random());
 
 		return stringBuilder.toString();
+	}
+
+	/**
+	 * UserInfoを得るためのURL
+	 * @return
+	 * 	URL
+	 */
+	public static String getUserInfoURL(GoogleOAuthToken token)
+	{
+		return "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + token.access_token;
+	}
+
+	/**
+	 * GmailInfoを得るためのURL
+	 * @param userId
+	 * 	ユーザーID
+	 * @return
+	 * 	URL
+	 */
+	public static String getGmailInfoURL(GoogleOAuthToken token, String userId)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("https://www.googleapis.com/gmail/v1/users/").append(userId)
+						.append("/profile?access_token=").append(token.access_token);
+
+		return stringBuilder.toString();
+	}
+
+	/**
+	 * 	TokenInfoを得るためのURL
+	 * @return
+	 * 	URL
+	 */
+	public static String getTokenInfoURL(GoogleOAuthToken token)
+	{
+		return "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=" + token.access_token;
 	}
 }
