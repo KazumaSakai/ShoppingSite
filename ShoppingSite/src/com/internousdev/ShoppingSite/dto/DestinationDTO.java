@@ -1,6 +1,8 @@
 package com.internousdev.ShoppingSite.dto;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DestinationDTO
 {
@@ -14,7 +16,22 @@ public class DestinationDTO
 	private String email;
 	private String phoneNumber;
 	private Date registeredDate;
-	
+
+	public DestinationDTO() {}
+	public DestinationDTO(ResultSet resultSet) throws SQLException
+	{
+		this.setId(resultSet.getInt("id"));
+		this.setUserId(resultSet.getInt("userId"));
+		this.setFamilyName(resultSet.getString("familyName"));
+		this.setFirstName(resultSet.getString("firstName"));
+		this.setGender(resultSet.getInt("gender"));
+		this.setPostalCode(resultSet.getString("postalCode"));
+		this.setAddress(resultSet.getString("address"));
+		this.setEmail(resultSet.getString("email"));
+		this.setPhoneNumber(resultSet.getString("phoneNumber"));
+		this.setRegisteredDate(resultSet.getDate("registeredDate"));
+	}
+
 	public int getId()
 	{
 		return id;
@@ -23,7 +40,7 @@ public class DestinationDTO
 	{
 		this.id = id;
 	}
-	
+
 	public int getUserId()
 	{
 		return userId;
@@ -32,7 +49,7 @@ public class DestinationDTO
 	{
 		this.userId = userId;
 	}
-	
+
 	public String getFamilyName()
 	{
 		return familyName;
@@ -41,7 +58,7 @@ public class DestinationDTO
 	{
 		this.familyName = familyName;
 	}
-	
+
 	public String getFirstName()
 	{
 		return firstName;
@@ -50,7 +67,7 @@ public class DestinationDTO
 	{
 		this.firstName = firstName;
 	}
-	
+
 	public int getGender()
 	{
 		return gender;
@@ -59,7 +76,7 @@ public class DestinationDTO
 	{
 		this.gender = gender;
 	}
-	
+
 	public String getPostalCode()
 	{
 		return postalCode;
@@ -68,7 +85,7 @@ public class DestinationDTO
 	{
 		this.postalCode = postalCode;
 	}
-	
+
 	public String getAddress()
 	{
 		return address;
@@ -77,7 +94,7 @@ public class DestinationDTO
 	{
 		this.address = address;
 	}
-	
+
 	public String getEmail()
 	{
 		return email;
@@ -86,7 +103,7 @@ public class DestinationDTO
 	{
 		this.email = email;
 	}
-	
+
 	public String getPhoneNumber()
 	{
 		return phoneNumber;
@@ -95,7 +112,7 @@ public class DestinationDTO
 	{
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	public Date getRegisteredDate()
 	{
 		return registeredDate;

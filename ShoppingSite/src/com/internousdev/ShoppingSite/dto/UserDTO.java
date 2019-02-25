@@ -1,92 +1,115 @@
 package com.internousdev.ShoppingSite.dto;
 
-public class UserDTO {
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UserDTO
+{
 	private int id;
-	private boolean admin;
-	private boolean oauthUser;
-	private String login_id;
+	private boolean isAdmin;
+	private boolean isOauthUser;
+	private String loginId;
+	private String loginPass;
 	private String email;
-	private String login_pass;
-	private String user_name;
-	private String insert_date;
-	private boolean loginFlg;
+	private String userName;
+	private int destinationId;
+	private Date registeredDate;
+	private Date lastEditDate;
 
-	public String getEmail() {
-		return email;
+	public UserDTO() {}
+	public UserDTO(ResultSet resultSet) throws SQLException
+	{
+		this.setId(resultSet.getInt("id"));
+		this.setAdmin(resultSet.getBoolean("isAdmin"));
+		this.setOauthUser(resultSet.getBoolean("isOauthUser"));
+		this.setLoginId(resultSet.getString("loginId"));
+		this.setLoginPass(resultSet.getString("loginPass"));
+		this.setEmail(resultSet.getString("email"));
+		this.setUserName(resultSet.getString("userName"));
+		this.setDestinationId(resultSet.getInt("destinationId"));
+		this.setRegisteredDate(resultSet.getDate("registeredDate"));
+		this.setLastEditDate(resultSet.getDate("lastEditDate"));
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public boolean getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
-	public boolean getLoginFlg() {
-		return loginFlg;
-	}
-
-	public void setLoginFlg(boolean loginFlg) {
-		this.loginFlg = loginFlg;
-	}
-
-	public int getId() {
+	public int getId()
+	{
 		return id;
 	}
-
-	public void setId(int id) {
+	public void setId(int id)
+	{
 		this.id = id;
 	}
-
-	public String getLogin_id() {
-		return login_id;
+	public boolean isAdmin()
+	{
+		return isAdmin;
 	}
-
-	public void setLogin_id(String login_id) {
-		this.login_id = login_id;
+	public void setAdmin(boolean isAdmin)
+	{
+		this.isAdmin = isAdmin;
 	}
-
-	public String getLogin_pass() {
-		return login_pass;
+	public boolean isOauthUser()
+	{
+		return isOauthUser;
 	}
-
-	public void setLogin_pass(String login_pass) {
-		this.login_pass = login_pass;
+	public void setOauthUser(boolean isOauthUser)
+	{
+		this.isOauthUser = isOauthUser;
 	}
-
-	public String getUser_name() {
-		return user_name;
+	public String getLoginId()
+	{
+		return loginId;
 	}
-
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setLoginId(String loginId)
+	{
+		this.loginId = loginId;
 	}
-
-	public String getInsert_date() {
-		return insert_date;
+	public String getLoginPass()
+	{
+		return loginPass;
 	}
-
-	public void setInsert_date(String insert_date) {
-		String[] date_seconds = insert_date.split(" ");
-		String[] dates = date_seconds[0].split("-");
-		String[] seconds = date_seconds[1].split(":");
-
-		StringBuilder sBuilder = new StringBuilder();
-		sBuilder.append(dates[0]).append("年").append(dates[1]).append("月").append(dates[2]).append("日 ").append(seconds[0]).append("時");
-
-		this.insert_date = sBuilder.toString();
+	public void setLoginPass(String loginPass)
+	{
+		this.loginPass = loginPass;
 	}
-
-	public boolean getOauthUser() {
-		return oauthUser;
+	public String getEmail()
+	{
+		return email;
 	}
-
-	public void setOauthUser(boolean oauthUser) {
-		this.oauthUser = oauthUser;
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+	public int getDestinationId()
+	{
+		return destinationId;
+	}
+	public void setDestinationId(int destinationId)
+	{
+		this.destinationId = destinationId;
+	}
+	public Date getRegisteredDate()
+	{
+		return registeredDate;
+	}
+	public void setRegisteredDate(Date registeredDate)
+	{
+		this.registeredDate = registeredDate;
+	}
+	public Date getLastEditDate()
+	{
+		return lastEditDate;
+	}
+	public void setLastEditDate(Date lastEditDate)
+	{
+		this.lastEditDate = lastEditDate;
 	}
 }

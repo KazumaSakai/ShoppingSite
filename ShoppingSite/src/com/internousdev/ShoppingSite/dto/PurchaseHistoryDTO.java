@@ -1,19 +1,32 @@
 package com.internousdev.ShoppingSite.dto;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class PurchaseHistoryDTO
 {
 	private int id;
-	private int item_id;
-	private int quantity;
-	private int user_id;
-	private String insert_date;
-	private String request_date;
-	private int address;
-	private String addressName;
-	private String phoneNumber;
+	private int productId;
+	private int productQuantity;
+	private int userId;
+	private int destinationId;
 	private int shipmentState;
-	private String item_name;
-	private int item_price;
+	private Date purchasedDate;
+	private Date requestDeliveryDate;
+
+	public PurchaseHistoryDTO() {}
+	public PurchaseHistoryDTO(ResultSet resultSet) throws SQLException
+	{
+		this.setId(resultSet.getInt("id"));
+		this.setProductId(resultSet.getInt("productId"));
+		this.setProductQuantity(resultSet.getInt("productQuantity"));
+		this.setUserId(resultSet.getInt("userId"));
+		this.setDestinationId(resultSet.getInt("destinationId"));
+		this.setShipmentState(resultSet.getInt("shipmentState"));
+		this.setPurchasedDate(resultSet.getDate("purchasedDate"));
+		this.setRequestDeliveryDate(resultSet.getDate("requestDeliveryDate"));
+	}
 
 	public int getId()
 	{
@@ -23,84 +36,38 @@ public class PurchaseHistoryDTO
 	{
 		this.id = id;
 	}
-
-	public int getItem_id()
+	public int getProductId()
 	{
-		return item_id;
+		return productId;
 	}
-	public void setItem_id(int item_id)
+	public void setProductId(int productId)
 	{
-		this.item_id = item_id;
+		this.productId = productId;
 	}
-
-	public int getQuantity()
+	public int getProductQuantity()
 	{
-		return quantity;
+		return productQuantity;
 	}
-	public void setQuantity(int quantity)
+	public void setProductQuantity(int productQuantity)
 	{
-		this.quantity = quantity;
+		this.productQuantity = productQuantity;
 	}
-
-	public int getUser_id()
+	public int getUserId()
 	{
-		return user_id;
+		return userId;
 	}
-	public void setUser_id(int user_id)
+	public void setUserId(int userId)
 	{
-		this.user_id = user_id;
+		this.userId = userId;
 	}
-
-	public String getInsert_date()
+	public int getDestinationId()
 	{
-		return insert_date;
+		return destinationId;
 	}
-	public void setInsert_date(String insert_date)
+	public void setDestinationId(int destinationId)
 	{
-		String[] date_seconds = insert_date.split(" ");
-		String[] dates = date_seconds[0].split("-");
-		String[] seconds = date_seconds[1].split(":");
-
-		StringBuilder sBuilder = new StringBuilder();
-		sBuilder.append(dates[0]).append("年").append(dates[1]).append("月").append(dates[2]).append("日 ").append(seconds[0]).append("時");
-
-		this.insert_date = sBuilder.toString();
+		this.destinationId = destinationId;
 	}
-
-	public String getRequest_date()
-	{
-		return request_date;
-	}
-	public void setRequest_date(String request_date)
-	{
-		String[] date_seconds = request_date.split(" ");
-		String[] dates = date_seconds[0].split("-");
-		String[] seconds = date_seconds[1].split(":");
-
-		StringBuilder sBuilder = new StringBuilder();
-		sBuilder.append(dates[0]).append("年").append(dates[1]).append("月").append(dates[2]).append("日 ").append(seconds[0]).append("時");
-
-		this.request_date = sBuilder.toString();
-	}
-
-	public int getAddress()
-	{
-		return address;
-	}
-	public void setAddress(int address)
-	{
-		this.address = address;
-	}
-
-	public String getPhoneNumber()
-	{
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber)
-	{
-		this.phoneNumber = phoneNumber;
-	}
-
 	public int getShipmentState()
 	{
 		return shipmentState;
@@ -109,32 +76,20 @@ public class PurchaseHistoryDTO
 	{
 		this.shipmentState = shipmentState;
 	}
-
-	public String getItem_name()
+	public Date getPurchasedDate()
 	{
-		return item_name;
+		return purchasedDate;
 	}
-	public void setItem_name(String item_name)
+	public void setPurchasedDate(Date purchasedDate)
 	{
-		this.item_name = item_name;
+		this.purchasedDate = purchasedDate;
 	}
-
-	public int getItem_price()
+	public Date getRequestDeliveryDate()
 	{
-		return item_price;
+		return requestDeliveryDate;
 	}
-	public void setItem_price(int item_price)
+	public void setRequestDeliveryDate(Date requestDeliveryDate)
 	{
-		this.item_price = item_price;
+		this.requestDeliveryDate = requestDeliveryDate;
 	}
-
-	public String getAddressName()
-	{
-		return addressName;
-	}
-	public void setAddressName(String addressName)
-	{
-		this.addressName = addressName;
-	}
-
 }
