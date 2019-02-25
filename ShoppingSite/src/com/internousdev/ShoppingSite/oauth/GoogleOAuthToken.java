@@ -1,6 +1,7 @@
 package com.internousdev.ShoppingSite.oauth;
 
-public class GoogleOAuthToken {
+public class GoogleOAuthToken
+{
 	public String access_token;
 	public String expires_in;
 	public String refresh_token;

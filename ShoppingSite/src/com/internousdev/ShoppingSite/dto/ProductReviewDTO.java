@@ -1,8 +1,10 @@
 package com.internousdev.ShoppingSite.dto;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class ProductReviewDTO
 {
@@ -12,9 +14,9 @@ public class ProductReviewDTO
 	private String reviewTitle;
 	private int reviewPoint;
 	private String reviewComment;
-	private Date postedDate;
-	private Date lastEditDate;
-	
+	private LocalDateTime postedDate;
+	private LocalDateTime lastEditDate;
+
 	public ProductReviewDTO() {}
 	public ProductReviewDTO(ResultSet resultSet) throws SQLException
 	{
@@ -24,10 +26,10 @@ public class ProductReviewDTO
 		this.setReviewTitle(resultSet.getString("reviewTitle"));
 		this.setReviewPoint(resultSet.getInt("reviewPoint"));
 		this.setReviewComment(resultSet.getString("reviewComment"));
-		this.setPostedDate(resultSet.getDate("postedDate"));
-		this.setLastEditDate(resultSet.getDate("lastEditDate"));
+		this.setPostedDate(resultSet.getString("postedDate"));
+		this.setLastEditDate(resultSet.getString("lastEditDate"));
 	}
-	
+
 	public int getId()
 	{
 		return id;
@@ -76,20 +78,28 @@ public class ProductReviewDTO
 	{
 		this.reviewComment = reviewComment;
 	}
-	public Date getPostedDate()
+	public LocalDateTime getPostedDate()
 	{
 		return postedDate;
 	}
-	public void setPostedDate(Date postedDate)
+	public void setPostedDate(LocalDateTime postedDate)
 	{
 		this.postedDate = postedDate;
 	}
-	public Date getLastEditDate()
+	public void setPostedDate(String postedDate)
+	{
+		this.postedDate = DateConverter.toLocalDateTime(postedDate);
+	}
+	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
 	}
-	public void setLastEditDate(Date lastEditDate)
+	public void setLastEditDate(LocalDateTime lastEditDate)
 	{
 		this.lastEditDate = lastEditDate;
+	}
+	public void setLastEditDate(String lastEditDate)
+	{
+		this.lastEditDate = DateConverter.toLocalDateTime(lastEditDate);
 	}
 }

@@ -11,11 +11,11 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GoUserInfoAction  extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive + Send
 	private List<String> errorMsg;
 	private List<String> successMsg;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -28,30 +28,36 @@ public class GoUserInfoAction  extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "GoUserInfoAction");
 			return "needLogin";
 		}
-		
+
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public List<String> getErrorMsg() {
+	public List<String> getErrorMsg()
+	{
 		return errorMsg;
 	}
-	public void setErrorMsg(List<String> errorMsg) {
+	public void setErrorMsg(List<String> errorMsg)
+	{
 		this.errorMsg = errorMsg;
 	}
 
-	public List<String> getSuccessMsg() {
+	public List<String> getSuccessMsg()
+	{
 		return successMsg;
 	}
-	public void setSuccessMsg(List<String> successMsg) {
+	public void setSuccessMsg(List<String> successMsg)
+	{
 		this.successMsg = successMsg;
 	}
-	
-	public Map<String, Object> getSession() {
+
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 

@@ -134,7 +134,7 @@ public class ProductSalesDAO
 
 		try
 		{
-			StringBuilder sql = new StringBuilder("SELECT * FROM ProductSalesTable WHERE ").append(where).append(" LIMIT ?, ?");
+			StringBuilder sql = new StringBuilder("SELECT * FROM ProductSalesTable WHERE ").append(where).append(" ORDER BY salesYear DESC, salesMonth DESC LIMIT ?, ?");
 			PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
 			preparedStatement.setInt(1, begin);
 			preparedStatement.setInt(2, length);

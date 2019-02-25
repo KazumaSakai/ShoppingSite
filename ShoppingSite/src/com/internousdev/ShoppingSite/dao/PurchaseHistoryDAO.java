@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
+import com.internousdev.ShoppingSite.util.DateConverter;
 import com.mysql.jdbc.Connection;
 
 public class PurchaseHistoryDAO
@@ -27,7 +28,7 @@ public class PurchaseHistoryDAO
 			preparedStatement.setInt(3, purchaseHistoryDTO.getUserId());
 			preparedStatement.setInt(4, purchaseHistoryDTO.getDestinationId());
 			preparedStatement.setInt(5, purchaseHistoryDTO.getShipmentState());
-			preparedStatement.setDate(6, purchaseHistoryDTO.getRequestDeliveryDate());
+			preparedStatement.setString(6, DateConverter.toString(purchaseHistoryDTO.getRequestDeliveryDate()));
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
@@ -114,7 +115,7 @@ public class PurchaseHistoryDAO
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, purchaseHistoryDTO.getDestinationId());
 			preparedStatement.setInt(2, purchaseHistoryDTO.getShipmentState());
-			preparedStatement.setDate(3, purchaseHistoryDTO.getRequestDeliveryDate());
+			preparedStatement.setString(3, DateConverter.toString(purchaseHistoryDTO.getRequestDeliveryDate()));
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);

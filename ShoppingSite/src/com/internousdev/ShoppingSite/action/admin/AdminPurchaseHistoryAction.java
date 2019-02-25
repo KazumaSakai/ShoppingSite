@@ -14,16 +14,17 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminPurchaseHistoryAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
+	private static final int pageLength = 50;
 
 	//	Receive
 	private int page;
 
 	//	Send
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
-	
+
 	//	Session
 	private Map<String, Object> session;
-	
+
 	//	Execute
 	public String execute()
 	{
@@ -39,8 +40,8 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 			return "notAdmin";
 		}
 
-		purchaseHistoryList = PurchaseHistoryDAO.GetAllPurchaseHistory(50 * page, 50);
-		
+		purchaseHistoryList = PurchaseHistoryDAO.SelectList(pageLength * page, pageLength);
+
 		return SUCCESS;
 	}
 
@@ -53,7 +54,6 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	{
 		this.page = page;
 	}
-
 	public List<PurchaseHistoryDTO> getPurchaseHistoryList()
 	{
 		return purchaseHistoryList;
@@ -62,7 +62,6 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	{
 		this.purchaseHistoryList = purchaseHistoryList;
 	}
-	
 	public Map<String, Object> getSession()
 	{
 		return session;

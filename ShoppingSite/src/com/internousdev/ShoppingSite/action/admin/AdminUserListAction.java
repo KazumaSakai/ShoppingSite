@@ -14,10 +14,14 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminUserListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+	private static final int pageLength = 50;
+
+	//	Receive
+	private int page;
+
 	//	Send
 	private List<UserDTO> userList;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -36,24 +40,35 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 			return "notAdmin";
 		}
 
-		 userList = UserDAO.GetUserList();
+		 userList = UserDAO.SelectList(pageLength * page, pageLength);
 
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public List<UserDTO> getUserList() {
+	public int getPage()
+	{
+		return page;
+	}
+	public void setPage(int page)
+	{
+		this.page = page;
+	}
+	public List<UserDTO> getUserList()
+	{
 		return userList;
 	}
-	public void setUserList(List<UserDTO> userList) {
+	public void setUserList(List<UserDTO> userList)
+	{
 		this.userList = userList;
 	}
-
-	public Map<String, Object> getSession() {
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 }

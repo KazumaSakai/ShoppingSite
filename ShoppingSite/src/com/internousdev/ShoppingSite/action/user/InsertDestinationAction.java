@@ -7,19 +7,28 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.DestinationDAO;
+import com.internousdev.ShoppingSite.dto.DestinationDTO;
 import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AddAddressAction extends ActionSupport implements SessionAware
+public class InsertDestinationAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
 	private boolean goBuy;
+
+	private String familyName;
+	private String firstName;
+	private int gender;
+	private String postalCode;
 	private String address;
+	private String email;
+	private String phoneNumber;
+	private String registeredDate;
 
 	//	Send
 	private List<String> errorMsgList;
@@ -45,8 +54,19 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 			return ERROR;
 		}
 
-		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		if(DestinationDAO.AddAddress(user_id, address))
+		int userId = SessionSafeGetter.getInt(session, "user_id");
+		DestinationDTO destinationDTO = new DestinationDTO();
+		destinationDTO.setUserId(userId);
+		destinationDTO.setFamilyName(familyName);
+		destinationDTO.setFirstName(firstName);
+		destinationDTO.setGender(gender);
+		destinationDTO.setPostalCode(postalCode);
+		destinationDTO.setAddress(address);
+		destinationDTO.setEmail(email);
+		destinationDTO.setPhoneNumber(phoneNumber);
+		destinationDTO.setRegisteredDate(registeredDate);
+
+		if(DestinationDAO.Insert(destinationDTO))
 		{
 			return goBuy ? "goBuy" : SUCCESS;
 		}
@@ -62,24 +82,97 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 	{
 		return goBuy;
 	}
+
 	public void setGoBuy(boolean goBuy)
 	{
 		this.goBuy = goBuy;
+	}
+
+	public String getFamilyName()
+	{
+		return familyName;
+	}
+
+	public void setFamilyName(String familyName)
+	{
+		this.familyName = familyName;
+	}
+
+	public String getFirstName()
+	{
+		return firstName;
+	}
+
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+
+	public int getGender()
+	{
+		return gender;
+	}
+
+	public void setGender(int gender)
+	{
+		this.gender = gender;
+	}
+
+	public String getPostalCode()
+	{
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode)
+	{
+		this.postalCode = postalCode;
 	}
 
 	public String getAddress()
 	{
 		return address;
 	}
+
 	public void setAddress(String address)
 	{
 		this.address = address;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public String getPhoneNumber()
+	{
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber)
+	{
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getRegisteredDate()
+	{
+		return registeredDate;
+	}
+
+	public void setRegisteredDate(String registeredDate)
+	{
+		this.registeredDate = registeredDate;
 	}
 
 	public List<String> getErrorMsgList()
 	{
 		return errorMsgList;
 	}
+
 	public void setErrorMsgList(List<String> errorMsgList)
 	{
 		this.errorMsgList = errorMsgList;
@@ -89,6 +182,7 @@ public class AddAddressAction extends ActionSupport implements SessionAware
 	{
 		return session;
 	}
+	@Override
 	public void setSession(Map<String, Object> session)
 	{
 		this.session = session;

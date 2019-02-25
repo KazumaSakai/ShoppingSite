@@ -1,31 +1,32 @@
-package com.internousdev.ShoppingSite.action.item;
+package com.internousdev.ShoppingSite.action.product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.internousdev.ShoppingSite.dao.ItemSalesDAO;
-import com.internousdev.ShoppingSite.dto.ItemSalesDTO;
+import com.internousdev.ShoppingSite.dao.ProductSalesDAO;
+import com.internousdev.ShoppingSite.dto.ProductSalesDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ItemSalesAction extends ActionSupport implements SessionAware
+public class ProductSalesAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private int item_id;
-	
+	private int productId;
+
 	//	Send
 	private String resultData;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -43,42 +44,32 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 		{
 			return "notAdmin";
 		}
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try
 		{
 			LocalDateTime time = LocalDateTime.now();
-			List<ItemSalesDTO> list = new ArrayList<ItemSalesDTO>();
+			List<ProductSalesDTO> fillProductSalesDTOList = new ArrayList<ProductSalesDTO>();
 
-			List<ItemSalesDTO> getList = ItemSalesDAO.GetItemSales(item_id);
+			//	直近12ヶ月間のデータを取得。DBに無い場合は空のものを作成
+			List<ProductSalesDTO> productSalesDTOList = ProductSalesDAO.SelectListByProductId(0, 12, productId);
 			for(int i = 0; i < 12; i++)
 			{
-				int y = time.getYear();
-				int m = time.getMonthValue();
+				int year = time.getYear();
+				int month = time.getMonthValue();
 
-				boolean notAdd = true;
+				Optional<ProductSalesDTO> optional = productSalesDTOList.stream().filter(j -> (j.getSalesMonth() == month && j.getSalesYear() == year)).findFirst();
+				ProductSalesDTO productSalesDTO = (optional.isPresent()) ? optional.get() : new ProductSalesDTO(year, month);
 
-				for (ItemSalesDTO item : getList)
-				{
-					if(item.getMonth() == m && item.getYear() == y)
-					{
-						list.add(item);
-
-						notAdd = false;
-						break;
-					}
-				}
-				if(notAdd)
-				{
-					ItemSalesDTO dto = new ItemSalesDTO();
-					dto.setYear(y);
-					dto.setMonth(m);
-					list.add(dto);
-				}
+				fillProductSalesDTOList.add(productSalesDTO);
 				time = time.minusMonths(1);
 			}
-			Collections.reverse(list);
-			resultData = mapper.writeValueAsString(list);
+
+			//	反転させる
+			Collections.reverse(fillProductSalesDTOList);
+
+			//	JSONに変換
+			this.resultData = mapper.writeValueAsString(fillProductSalesDTOList);
 		}
 		catch (JsonProcessingException e)
 		{
@@ -88,31 +79,34 @@ public class ItemSalesAction extends ActionSupport implements SessionAware
 		return SUCCESS;
 	}
 
-	//	Getter Setter
-	public int getItem_id()
+	public int getProductId()
 	{
-		return item_id;
+		return productId;
 	}
-	public void setItem_id(int item_id)
+
+	public void setProductId(int productId)
 	{
-		this.item_id = item_id;
+		this.productId = productId;
 	}
 
 	public String getResultData()
 	{
 		return resultData;
 	}
+
 	public void setResultData(String resultData)
 	{
 		this.resultData = resultData;
 	}
-	
+
 	public Map<String, Object> getSession()
 	{
 		return session;
 	}
+	@Override
 	public void setSession(Map<String, Object> session)
 	{
 		this.session = session;
 	}
+
 }

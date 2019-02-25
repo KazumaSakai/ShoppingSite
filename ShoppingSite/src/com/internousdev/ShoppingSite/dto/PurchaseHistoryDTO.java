@@ -1,8 +1,10 @@
 package com.internousdev.ShoppingSite.dto;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class PurchaseHistoryDTO
 {
@@ -12,8 +14,8 @@ public class PurchaseHistoryDTO
 	private int userId;
 	private int destinationId;
 	private int shipmentState;
-	private Date purchasedDate;
-	private Date requestDeliveryDate;
+	private LocalDateTime purchasedDate;
+	private LocalDateTime requestDeliveryDate;
 
 	public PurchaseHistoryDTO() {}
 	public PurchaseHistoryDTO(ResultSet resultSet) throws SQLException
@@ -24,8 +26,8 @@ public class PurchaseHistoryDTO
 		this.setUserId(resultSet.getInt("userId"));
 		this.setDestinationId(resultSet.getInt("destinationId"));
 		this.setShipmentState(resultSet.getInt("shipmentState"));
-		this.setPurchasedDate(resultSet.getDate("purchasedDate"));
-		this.setRequestDeliveryDate(resultSet.getDate("requestDeliveryDate"));
+		this.setPurchasedDate(resultSet.getString("purchasedDate"));
+		this.setRequestDeliveryDate(resultSet.getString("requestDeliveryDate"));
 	}
 
 	public int getId()
@@ -76,20 +78,28 @@ public class PurchaseHistoryDTO
 	{
 		this.shipmentState = shipmentState;
 	}
-	public Date getPurchasedDate()
+	public LocalDateTime getPurchasedDate()
 	{
 		return purchasedDate;
 	}
-	public void setPurchasedDate(Date purchasedDate)
+	public void setPurchasedDate(LocalDateTime purchasedDate)
 	{
 		this.purchasedDate = purchasedDate;
 	}
-	public Date getRequestDeliveryDate()
+	public void setPurchasedDate(String purchasedDate)
+	{
+		this.purchasedDate = DateConverter.toLocalDateTime(purchasedDate);
+	}
+	public LocalDateTime getRequestDeliveryDate()
 	{
 		return requestDeliveryDate;
 	}
-	public void setRequestDeliveryDate(Date requestDeliveryDate)
+	public void setRequestDeliveryDate(LocalDateTime requestDeliveryDate)
 	{
 		this.requestDeliveryDate = requestDeliveryDate;
+	}
+	public void setRequestDeliveryDate(String requestDeliveryDate)
+	{
+		this.requestDeliveryDate = DateConverter.toLocalDateTime(requestDeliveryDate);
 	}
 }

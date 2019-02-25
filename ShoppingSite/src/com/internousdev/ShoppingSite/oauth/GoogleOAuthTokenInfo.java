@@ -1,7 +1,7 @@
 package com.internousdev.ShoppingSite.oauth;
 
-public class GoogleOAuthTokenInfo {
-
+public class GoogleOAuthTokenInfo
+{
 	public String issued_to;
 	public String audience;
 	public String user_id;

@@ -9,16 +9,16 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LogoutAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
 	//	Execute
 	public String execute()
 	{
-		session.put("user_id", "");
-		session.put("login_user_id", "");
-		session.put("user_name", "");
+		session.put("userId", "");
+		session.put("loginUserId", "");
+		session.put("userName", "");
 		session.put("isLogin", false);
 		session.put("isAdmin", false);
 

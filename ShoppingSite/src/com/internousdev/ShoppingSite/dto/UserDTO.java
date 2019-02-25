@@ -1,8 +1,10 @@
 package com.internousdev.ShoppingSite.dto;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class UserDTO
 {
@@ -14,8 +16,8 @@ public class UserDTO
 	private String email;
 	private String userName;
 	private int destinationId;
-	private Date registeredDate;
-	private Date lastEditDate;
+	private LocalDateTime registeredDate;
+	private LocalDateTime lastEditDate;
 
 	public UserDTO() {}
 	public UserDTO(ResultSet resultSet) throws SQLException
@@ -28,8 +30,8 @@ public class UserDTO
 		this.setEmail(resultSet.getString("email"));
 		this.setUserName(resultSet.getString("userName"));
 		this.setDestinationId(resultSet.getInt("destinationId"));
-		this.setRegisteredDate(resultSet.getDate("registeredDate"));
-		this.setLastEditDate(resultSet.getDate("lastEditDate"));
+		this.setRegisteredDate(resultSet.getString("registeredDate"));
+		this.setLastEditDate(resultSet.getString("lastEditDate"));
 	}
 
 	public int getId()
@@ -96,20 +98,28 @@ public class UserDTO
 	{
 		this.destinationId = destinationId;
 	}
-	public Date getRegisteredDate()
+	public LocalDateTime getRegisteredDate()
 	{
 		return registeredDate;
 	}
-	public void setRegisteredDate(Date registeredDate)
+	public void setRegisteredDate(LocalDateTime registeredDate)
 	{
 		this.registeredDate = registeredDate;
 	}
-	public Date getLastEditDate()
+	public void setRegisteredDate(String registeredDate)
+	{
+		this.registeredDate = DateConverter.toLocalDateTime(registeredDate);
+	}
+	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
 	}
-	public void setLastEditDate(Date lastEditDate)
+	public void setLastEditDate(LocalDateTime lastEditDate)
 	{
 		this.lastEditDate = lastEditDate;
+	}
+	public void setLastEditDate(String lastEditDate)
+	{
+		this.lastEditDate = DateConverter.toLocalDateTime(lastEditDate);
 	}
 }

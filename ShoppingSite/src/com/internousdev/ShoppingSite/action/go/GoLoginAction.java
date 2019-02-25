@@ -1,14 +1,16 @@
 package com.internousdev.ShoppingSite.action.go;
 
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GoLoginAction  extends ActionSupport
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive + Send
-	private String errorMsg;
-	
+	private List<String> errorMsgList;
+
 	//	Execute
 	public String execute()
 	{
@@ -16,12 +18,12 @@ public class GoLoginAction  extends ActionSupport
 	}
 
 	//	Getter Setter
-	public String getErrorMsg()
+	public List<String> getErrorMsgList()
 	{
-		return errorMsg;
+		return errorMsgList;
 	}
-	public void setErrorMsg(String errorMsg)
+	public void setErrorMsgList(List<String> errorMsgList)
 	{
-		this.errorMsg = errorMsg;
+		this.errorMsgList = errorMsgList;
 	}
 }

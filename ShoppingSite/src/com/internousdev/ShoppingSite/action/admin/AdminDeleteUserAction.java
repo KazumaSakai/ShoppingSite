@@ -12,10 +12,10 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminDeleteUserAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private int id;
-	
+	private int userId;
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -34,26 +34,25 @@ public class AdminDeleteUserAction extends ActionSupport implements SessionAware
 			return "notAdmin";
 		}
 
-		UserDAO.DeleteUser(id);
-
-		return SUCCESS;
+		return UserDAO.DeleteById(userId) ? SUCCESS : ERROR;
 	}
-
 
 	//	Getter Setter
-	public int getId() {
-		return id;
+	public int getUserId()
+	{
+		return userId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId)
+	{
+		this.userId = userId;
 	}
-	
-	public Map<String, Object> getSession() {
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
-
 }

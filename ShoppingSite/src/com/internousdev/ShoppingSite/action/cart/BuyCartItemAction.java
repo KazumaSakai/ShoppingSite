@@ -1,32 +1,37 @@
 package com.internousdev.ShoppingSite.action.cart;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.BuyItemDAO;
-import com.internousdev.ShoppingSite.dao.ItemSalesDAO;
-import com.internousdev.ShoppingSite.dao.MyCartDAO;
+import com.internousdev.ShoppingSite.dao.CartDAO;
+import com.internousdev.ShoppingSite.dao.ProductDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
-import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dto.CartDTO;
+import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.DateConverter;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BuyCartItemAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private List<ItemDTO> buyItemList;
-	private Map<String, Object> session;
+	private int destinationId;
+	private String requestDeliveryDate;
+
+	//	Send
 	private int totalPrice;
-	private int address;
-	private String phoneNumber;
-	private String request_date;
+	private List<ProductDTO> purchasedProductList;
+
+	//	Session
+	private Map<String, Object> session;
 
 	//	Execute
 	public String execute()
@@ -38,40 +43,60 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 
-		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		
+		//	TODO : 入力値チェック
 
-		//	購入処理
-		List<ItemDTO> itemListDTO = MyCartDAO.GetMyCart(user_id);
-		buyItemList = new ArrayList<ItemDTO>(itemListDTO.size());
-		
-		for (ItemDTO item : itemListDTO)
+		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int shipmentState = 0;
+		LocalDateTime requestDeliveryDate = DateConverter.toLocalDateTime(this.requestDeliveryDate);
+
+		//	現在のカート情報を取得
+		List<CartDTO> cartDTOList = CartDAO.SelectListByUserId(0, Integer.MAX_VALUE, userId);
+		List<PurchaseHistoryDTO> purchaseHistoryDTOList = new ArrayList<PurchaseHistoryDTO>();
+		for (CartDTO cartDTO : cartDTOList)
 		{
-			int buyQuantity = BuyItemDAO.BuyItem(item);
-			if(buyQuantity > 0)
+			//	在庫を差し引く
+			if(ProductDAO.DecrementProductQuantity(cartDTO.getProductId(), cartDTO.getProductQuantity()))
 			{
-				buyItemList.add(item);
+				PurchaseHistoryDTO purchaseHistoryDTO = cartDTO.toPurchaseHistoryDTO(destinationId, shipmentState, requestDeliveryDate);
+				PurchaseHistoryDAO.Insert(purchaseHistoryDTO);
+				purchaseHistoryDTOList.add(purchaseHistoryDTO);
 
-				PurchaseHistoryDTO dto = new PurchaseHistoryDTO();
-				dto.setItem_id(item.getItem_id());
-				dto.setQuantity(buyQuantity);
-				dto.setUser_id(user_id);
-				dto.setAddress(address);
-				dto.setPhoneNumber(phoneNumber);
-				dto.setRequest_date(request_date);
-
-				//TODO: カートから購入した商品を削除
-				PurchaseHistoryDAO.AddPurchaseHistory(dto);
-				ItemSalesDAO.AddSalesData(item.getItem_id(), item.getItem_count(), item.getItem_count() * item.getItem_price());
+				CartDAO.Delete(cartDTO.getUserId(), cartDTO.getProductId());
 			}
 		}
-		
-		totalPrice = buyItemList.stream().mapToInt(i -> i.getItem_price() * i.getItem_count()).sum();
+
+		//	購入した商品の詳細情報を取得する
+		purchasedProductList = new ArrayList<ProductDTO>();
+		for (PurchaseHistoryDTO purchaseHistoryDTO : purchaseHistoryDTOList)
+		{
+			ProductDTO productDTO = ProductDAO.Select(purchaseHistoryDTO.getProductId());
+			productDTO.setProductQuantity(purchaseHistoryDTO.getProductQuantity());
+			purchasedProductList.add(productDTO);
+		}
+
+		//	合計金額
+		this.totalPrice = purchasedProductList.stream().mapToInt(i -> i.getProductPrice() * i.getProductQuantity()).sum();
 
 		return SUCCESS;
 	}
 
 	//	Getter Setter
+	public int getDestinationId()
+	{
+		return destinationId;
+	}
+	public void setDestinationId(int destinationId)
+	{
+		this.destinationId = destinationId;
+	}
+	public String getRequestDeliveryDate()
+	{
+		return requestDeliveryDate;
+	}
+	public void setRequestDeliveryDate(String requestDeliveryDate)
+	{
+		this.requestDeliveryDate = requestDeliveryDate;
+	}
 	public int getTotalPrice()
 	{
 		return totalPrice;
@@ -80,43 +105,14 @@ public class BuyCartItemAction extends ActionSupport implements SessionAware
 	{
 		this.totalPrice = totalPrice;
 	}
-
-	public List<ItemDTO> getBuyItemList()
+	public List<ProductDTO> getPurchasedProductList()
 	{
-		return buyItemList;
+		return purchasedProductList;
 	}
-	public void setBuyItemList(List<ItemDTO> buyItemList)
+	public void setPurchasedProductList(List<ProductDTO> purchasedProductList)
 	{
-		this.buyItemList = buyItemList;
+		this.purchasedProductList = purchasedProductList;
 	}
-
-	public int getAddress()
-	{
-		return address;
-	}
-	public void setAddress(int address)
-	{
-		this.address = address;
-	}
-
-	public String getPhoneNumber()
-	{
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber)
-	{
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getRequest_date()
-	{
-		return request_date;
-	}
-	public void setRequest_date(String request_date)
-	{
-		this.request_date = request_date;
-	}
-	
 	public Map<String, Object> getSession()
 	{
 		return session;

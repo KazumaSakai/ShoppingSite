@@ -28,7 +28,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	//	Execute
 	public String execute()
 	{
-		GoogleOAuthToken token = GoogleOAuth.token(code,"http://localhost:8080/ShoppingSite/GoogleLoginAction.action");
+		GoogleOAuthToken token = GoogleOAuth.getGoogleToken(code,"http://localhost:8080/ShoppingSite/GoogleLoginAction.action");
 		GoogleOAuthTokenInfo tokenInfo = GoogleOAuth.GetTokenInfo(token);
 		GoogleOAuthGMailInfo gMailInfo = GoogleOAuth.GetGMailInfo(token, tokenInfo.user_id);
 		

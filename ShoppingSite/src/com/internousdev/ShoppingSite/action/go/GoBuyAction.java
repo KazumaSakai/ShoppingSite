@@ -1,33 +1,39 @@
 package com.internousdev.ShoppingSite.action.go;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.ShoppingSite.dao.CartDAO;
 import com.internousdev.ShoppingSite.dao.DestinationDAO;
-import com.internousdev.ShoppingSite.dao.MyCartDAO;
-import com.internousdev.ShoppingSite.dto.AddressDTO;
-import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dto.DestinationDTO;
+import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.DateConverter;
+import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GoBuyAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+	private static final int pageLength = 50;
+
+	//	Receive
+	private int destinationPage;
+	private int productPage;
+
 	//	Send
-	private List<AddressDTO> addressList;
-	private List<ItemDTO> myCartItemList;
+	private List<DestinationDTO> destinationDTOList;
+	private List<ProductDTO> productDTOList;
 	private int totalPrice;
-	private String max;
-	private String min;
+	private String maxDateTime;
+	private String minDateTime;
 
 	//	Session
 	private Map<String, Object> session;
-	
+
 	//	Execute
 	public String execute()
 	{
@@ -39,76 +45,97 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 		}
 
 		//	現在の日付を取得
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        min = simpleDateFormat.format(calendar.getTime()) + "T08:00";
-        calendar.add(Calendar.DAY_OF_MONTH, 15);
-        max = simpleDateFormat.format(calendar.getTime()) + "T22:00";
+		LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
+		this.minDateTime = DateConverter.toString(localDateTime);
+		this.maxDateTime = DateConverter.toString(localDateTime.plusDays(30));
 
-		int user_id = (int)session.get("user_id");
-		addressList = DestinationDAO.GetAddressListByUserId(user_id);
-		
-		myCartItemList = MyCartDAO.GetMyCart(user_id);
-		totalPrice = myCartItemList.stream().mapToInt(i -> i.getItem_price() * i.getItem_count()).sum();
-		
+		int userId = SessionSafeGetter.getInt(session, "user_id");
+
+		this.destinationDTOList = DestinationDAO.SelectListByUserId(destinationPage * pageLength, pageLength, userId);
+		this.productDTOList = CartDAO.SelectProductListByUserId(productPage * pageLength, pageLength, userId);
+		this.totalPrice = productDTOList.stream().mapToInt(i -> i.getProductPrice() * i.getProductQuantity()).sum();
+
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public List<AddressDTO> getAddressList()
+	public int getDestinationPage()
 	{
-		return addressList;
-	}
-	public void setAddressList(List<AddressDTO> addressList)
-	{
-		this.addressList = addressList;
+		return destinationPage;
 	}
 
-	public List<ItemDTO> getMyCartItemList()
+	public void setDestinationPage(int destinationPage)
 	{
-		return myCartItemList;
-	}
-	public void setMyCartItemList(List<ItemDTO> myCartItemList)
-	{
-		this.myCartItemList = myCartItemList;
+		this.destinationPage = destinationPage;
 	}
 
-	public String getMax()
+	public int getProductPage()
 	{
-		return max;
-	}
-	public void setMax(String max)
-	{
-		this.max = max;
+		return productPage;
 	}
 
-	public String getMin()
+	public void setProductPage(int productPage)
 	{
-		return min;
+		this.productPage = productPage;
 	}
-	public void setMin(String min)
+
+	public List<DestinationDTO> getDestinationDTOList()
 	{
-		this.min = min;
+		return destinationDTOList;
+	}
+
+	public void setDestinationDTOList(List<DestinationDTO> destinationDTOList)
+	{
+		this.destinationDTOList = destinationDTOList;
+	}
+
+	public List<ProductDTO> getProductDTOList()
+	{
+		return productDTOList;
+	}
+
+	public void setProductDTOList(List<ProductDTO> productDTOList)
+	{
+		this.productDTOList = productDTOList;
 	}
 
 	public int getTotalPrice()
 	{
 		return totalPrice;
 	}
+
 	public void setTotalPrice(int totalPrice)
 	{
 		this.totalPrice = totalPrice;
 	}
-	
+
+	public String getMaxDateTime()
+	{
+		return maxDateTime;
+	}
+
+	public void setMaxDateTime(String maxDateTime)
+	{
+		this.maxDateTime = maxDateTime;
+	}
+
+	public String getMinDateTime()
+	{
+		return minDateTime;
+	}
+
+	public void setMinDateTime(String minDateTime)
+	{
+		this.minDateTime = minDateTime;
+	}
+
 	public Map<String, Object> getSession()
 	{
 		return session;
 	}
-	@Override
+
 	public void setSession(Map<String, Object> session)
 	{
 		this.session = session;
 	}
-
 }

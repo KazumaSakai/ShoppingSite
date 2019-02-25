@@ -4,21 +4,18 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.ItemDAO;
-import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dao.ProductDAO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AdminUpdateItemInfoAction extends ActionSupport implements SessionAware
+public class AdminIncrementProductQuantityAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private int id;
-	
-	//	Send
-	private ItemDTO itemDTO;
+	private int productId;
+	private int productQuantity;
 
 	//	Session
 	private Map<String, Object> session;
@@ -29,7 +26,7 @@ public class AdminUpdateItemInfoAction extends ActionSupport implements SessionA
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminUpdateItemInfoAction");
+			session.put("LoginedRedirectAction", "ItemListAction");
 			return "needLogin";
 		}
 		//	管理者チェック
@@ -38,30 +35,26 @@ public class AdminUpdateItemInfoAction extends ActionSupport implements SessionA
 			return "notAdmin";
 		}
 
-		itemDTO = ItemDAO.GetItem(id);
-
-		return SUCCESS;
+		return ProductDAO.IncrementProductQuantity(productId, productQuantity) ? SUCCESS : ERROR;
 	}
 
 	//	Getter Setter
-	public int getId()
+	public int getProductId()
 	{
-		return id;
+		return productId;
 	}
-	public void setId(int id)
+	public void setProductId(int productId)
 	{
-		this.id = id;
+		this.productId = productId;
 	}
-
-	public ItemDTO getItemDTO()
+	public int getProductQuantity()
 	{
-		return itemDTO;
+		return productQuantity;
 	}
-	public void setItemDTO(ItemDTO itemDTO)
+	public void setProductQuantity(int productQuantity)
 	{
-		this.itemDTO = itemDTO;
+		this.productQuantity = productQuantity;
 	}
-	
 	public Map<String, Object> getSession()
 	{
 		return session;

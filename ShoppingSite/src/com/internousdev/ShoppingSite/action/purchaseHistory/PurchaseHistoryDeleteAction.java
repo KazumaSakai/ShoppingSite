@@ -6,15 +6,16 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PurchaseHistoryDeleteAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private int id;
-	
+	private int purchaseHistoryId;
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -28,18 +29,19 @@ public class PurchaseHistoryDeleteAction extends ActionSupport implements Sessio
 			return "needLogin";
 		}
 
-		int user_id = (int)session.get("user_id");
-		return PurchaseHistoryDAO.DeletePurchaseHistory(id, user_id) ? SUCCESS : ERROR;
+		int userId = SessionSafeGetter.getInt(session, "user_id");
+		return PurchaseHistoryDAO.DeleteByIdAndUserId(purchaseHistoryId, userId) ? SUCCESS : ERROR;
 	}
 
 	//	Getter Setter
-	public int getId()
+	public int getPurchaseHistoryId()
 	{
-		return id;
+		return purchaseHistoryId;
 	}
-	public void setId(int id)
+
+	public void setPurchaseHistoryId(int purchaseHistoryId)
 	{
-		this.id = id;
+		this.purchaseHistoryId = purchaseHistoryId;
 	}
 
 	public Map<String, Object> getSession()

@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GoUserPageAction  extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -23,16 +23,18 @@ public class GoUserPageAction  extends ActionSupport implements SessionAware
 			session.put("LoginedRedirectAction", "GoUserPageAction");
 			return "needLogin";
 		}
-		
+
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public Map<String, Object> getSession() {
+	public Map<String, Object> getSession()
+	{
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session) {
+	public void setSession(Map<String, Object> session)
+	{
 		this.session = session;
 	}
 }

@@ -5,21 +5,22 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.LoginDAO;
 import com.internousdev.ShoppingSite.dao.UserDAO;
+import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.Passworder;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ChangeUserPasswordAction extends ActionSupport implements SessionAware
+public class UpdateUserPasswordAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
-	private String nowPassword;
-	private String newPassword;
-	private String newPassword2;
+
+	private String planePassword;
+	private String newPlanePassword;
+	private String newPlanePasswordConfirm;
 
 	//	Send
 	private List<String> errorMsgList;
@@ -27,7 +28,7 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 
 	//	Session
 	private Map<String, Object> session;
-	
+
 	//	Execute
 	public String execute()
 	{
@@ -38,22 +39,25 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 			return "needLogin";
 		}
 
-		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		String login_user_id = SessionSafeGetter.getString(session, "login_user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
+		String loginId = SessionSafeGetter.getString(session, "loginId");
 
 		//	入力値チェック
-		if(!LoginDAO.CheckPassword(login_user_id, nowPassword))
+		if(!UserDAO.LoginCheck(loginId, planePassword))
 		{
 			errorMsgList.add("パスワードが間違っています。");
 		}
-		errorMsgList.addAll(StringChecker.CheckEqual(newPassword, newPassword2, "新しいパスワード", "新しいパスワード（確認）"));
-		errorMsgList.addAll(StringChecker.Check(newPassword, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
+		errorMsgList.addAll(StringChecker.CheckEqual(newPlanePassword, newPlanePasswordConfirm, "新しいパスワード", "新しいパスワード（確認）"));
+		errorMsgList.addAll(StringChecker.Check(newPlanePassword, "新しいパスワード", 8, 60, CharType.Alphabet, CharType.Number));
+		errorMsgList.addAll(StringChecker.Check(newPlanePasswordConfirm, "新しいパスワード（確認）", 8, 60, CharType.Alphabet, CharType.Number));
 		if(!errorMsgList.isEmpty())
 		{
 			return ERROR;
 		}
 
-		if(UserDAO.ChangeUserPassword(user_id, login_user_id, newPassword))
+		UserDTO userDTO = UserDAO.SelectById(userId);
+		userDTO.setLoginPass(Passworder.getSafetyPassword(newPlanePassword, loginId));
+		if(UserDAO.Update(userDTO))
 		{
 			successMsgList.add("パスワードの変更に成功しました。");
 			return SUCCESS;
@@ -66,51 +70,56 @@ public class ChangeUserPasswordAction extends ActionSupport implements SessionAw
 	}
 
 	//	Getter Setter
-	public String getNowPassword()
+	public String getPlanePassword()
 	{
-		return nowPassword;
+		return planePassword;
 	}
-	public void setNowPassword(String nowPassword)
+
+	public void setPlanePassword(String planePassword)
 	{
-		this.nowPassword = nowPassword;
+		this.planePassword = planePassword;
 	}
-	
-	public String getNewPassword()
+
+	public String getNewPlanePassword()
 	{
-		return newPassword;
+		return newPlanePassword;
 	}
-	public void setNewPassword(String newPassword)
+
+	public void setNewPlanePassword(String newPlanePassword)
 	{
-		this.newPassword = newPassword;
+		this.newPlanePassword = newPlanePassword;
 	}
-	
-	public String getNewPassword2()
+
+	public String getNewPlanePasswordConfirm()
 	{
-		return newPassword2;
+		return newPlanePasswordConfirm;
 	}
-	public void setNewPassword2(String newPassword2)
+
+	public void setNewPlanePasswordConfirm(String newPlanePasswordConfirm)
 	{
-		this.newPassword2 = newPassword2;
+		this.newPlanePasswordConfirm = newPlanePasswordConfirm;
 	}
-	
+
 	public List<String> getErrorMsgList()
 	{
 		return errorMsgList;
 	}
+
 	public void setErrorMsgList(List<String> errorMsgList)
 	{
 		this.errorMsgList = errorMsgList;
 	}
-	
+
 	public List<String> getSuccessMsgList()
 	{
 		return successMsgList;
 	}
+
 	public void setSuccessMsgList(List<String> successMsgList)
 	{
 		this.successMsgList = successMsgList;
 	}
-	
+
 	public Map<String, Object> getSession()
 	{
 		return session;

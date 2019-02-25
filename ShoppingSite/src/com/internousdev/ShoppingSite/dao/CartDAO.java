@@ -265,4 +265,46 @@ public class CartDAO
 
 		return productDTOList;
 	}
+
+	public static int SumPrice(int userId)
+	{
+		int totalPrice = 0;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT SUM(PT.productPrice * CT.productQuantity) AS TotalPrice"
+						+ "FROM CartTable AS CT "
+						+ "LEFT JOIN ProductTable AS PT ON CT.productId = PT.id "
+						+ "WHERE userId = ?";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, userId);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next())
+			{
+				totalPrice = resultSet.getInt("TotalPrice");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return totalPrice;
+	}
 }

@@ -1,36 +1,33 @@
 package com.internousdev.ShoppingSite.action.google;
 
 import com.internousdev.ShoppingSite.oauth.GoogleOAuth;
+import com.internousdev.ShoppingSite.oauth.GoogleScope;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class StartGoogleOAuthAction extends ActionSupport
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive + Send
-	private String url;
+	private String redirectURL;
 
 	//	Execute
 	public String execute()
 	{
-		if(url == null || url.isEmpty()) url = "loginSuccess.jsp";
-		
-		String returnUrl = GoogleOAuth.RequestToken(GoogleOAuth.gmailTokenURL + "%20" + GoogleOAuth.userTokenURL, "http://localhost:8080/ShoppingSite/" + url);
+		if(redirectURL == null || redirectURL.isEmpty()) redirectURL = "loginSuccess.jsp";
 
-		url = returnUrl;
-		
+		this.redirectURL = GoogleOAuth.URLForRequestToken("http://localhost:8080/ShoppingSite/" + redirectURL, GoogleScope.UserToken, GoogleScope.GmailToken);
+
 		return "redirect";
 	}
 
 	//	Getter Setter
-	public String getUrl()
+	public String getRedirectURL()
 	{
-		return url;
+		return redirectURL;
 	}
-	public void setUrl(String url)
+	public void setRedirectURL(String redirectURL)
 	{
-		this.url = url;
+		this.redirectURL = redirectURL;
 	}
-
-
 }

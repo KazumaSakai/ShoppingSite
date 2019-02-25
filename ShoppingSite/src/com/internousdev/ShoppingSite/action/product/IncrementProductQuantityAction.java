@@ -1,4 +1,4 @@
-package com.internousdev.ShoppingSite.action.cart;
+package com.internousdev.ShoppingSite.action.product;
 
 import java.util.Map;
 
@@ -9,14 +9,13 @@ import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ChangeCartItemQuantityAction extends ActionSupport implements SessionAware
+public class IncrementProductQuantityAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 
 	//	Receive
 	private int productId;
 	private int productQuantity;
-	private boolean toCart;
 
 	//	Session
 	private Map<String, Object> session;
@@ -27,21 +26,14 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "MyCartAction");
+			session.put("LoginedRedirectAction", "IncrementProductQuantityAction");
 			return "needLogin";
 		}
 
+		productQuantity = Math.max(1, productQuantity);
 		int userId = SessionSafeGetter.getInt(session, "user_id");
 
-		//	カートの中にある商品の数を変更する
-		if(CartDAO.IncrementProductQuantity(userId, productId, productQuantity))
-		{
-			return toCart ? "toCart" : "toItemList";
-		}
-		else
-		{
-			return ERROR;
-		}
+		return CartDAO.IncrementProductQuantity(userId, productId, productQuantity) ? SUCCESS : ERROR;
 	}
 
 	//	Getter Setter
@@ -63,16 +55,6 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 	public void setProductQuantity(int productQuantity)
 	{
 		this.productQuantity = productQuantity;
-	}
-
-	public boolean isToCart()
-	{
-		return toCart;
-	}
-
-	public void setToCart(boolean toCart)
-	{
-		this.toCart = toCart;
 	}
 
 	public Map<String, Object> getSession()

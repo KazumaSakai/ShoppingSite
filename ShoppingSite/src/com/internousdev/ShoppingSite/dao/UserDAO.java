@@ -244,4 +244,38 @@ public class UserDAO
 	{
 		return (UserDAO.Login(loginId, planeLoginPass) != null);
 	}
+
+	public static boolean DeleteById(int id)
+	{
+		boolean success = false;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "DELETE FROM UserTable WHERE id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+
+			int line = preparedStatement.executeUpdate();
+			success = (line > 0);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return success;
+	}
 }

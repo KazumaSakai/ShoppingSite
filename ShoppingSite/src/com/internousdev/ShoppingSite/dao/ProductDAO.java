@@ -22,9 +22,9 @@ public class ProductDAO
 	public static boolean Insert(ProductDTO productDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "INSERT INTO ProductTable(productName, productPrice, productQuantity, productDescription, salesCompanyId, productionCompanyId, imageQuantity) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -56,7 +56,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -70,17 +70,17 @@ public class ProductDAO
 	public static ProductDTO Select(int id)
 	{
 		ProductDTO productDTO = null;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "SELECT * FROM ProductTable WHERE id = ?";
 			PreparedStatement preparedStatement = connection.clientPrepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next())
 			{
 				productDTO = new ProductDTO(resultSet);
@@ -101,10 +101,10 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return productDTO;
 	}
-	
+
 	/**
 	 * ProductTableの情報を更新します。（producQuantityは更新されません。）
 	 * @param productDTO
@@ -115,9 +115,9 @@ public class ProductDAO
 	public static boolean Update(ProductDTO productDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "UPDATE ProductTable SET productName = ?, productPrice = ?, productDescription = ?, salesCompanyId = ?, productionCompanyId = ?, imageQuantity = ?, lastEditDate = now() WHERE id = ?";
@@ -129,7 +129,7 @@ public class ProductDAO
 			preparedStatement.setInt(5, productDTO.getProductionCompanyId());
 			preparedStatement.setInt(6, productDTO.getImageQuantity());
 			preparedStatement.setInt(7, productDTO.getId());
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -148,7 +148,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -162,16 +162,16 @@ public class ProductDAO
 	public static boolean Delete(int id)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "DELETE FROM ProductTable WHERE id = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -190,7 +190,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -207,7 +207,7 @@ public class ProductDAO
 	{
 		return ProductDAO.SelectList(begin, length, "1");
 	}
-	
+
 	/**
 	 * 	商品情報のリストを、条件を指定して取得する
 	 * @param begin
@@ -222,19 +222,19 @@ public class ProductDAO
 	public static List<ProductDTO> SelectList(int begin, int length, String where)
 	{
 		List<ProductDTO> productDTOList = new ArrayList<ProductDTO>();
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			StringBuilder sql = new StringBuilder().append("SELECT * FROM ProductTable WHERE ").append(where).append(" LIMIT ?, ?");
-			
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
 			preparedStatement.setInt(1, begin);
 			preparedStatement.setInt(2, length);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next())
 			{
 				productDTOList.add(new ProductDTO(resultSet));
@@ -255,7 +255,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return productDTOList;
 	}
 
@@ -275,7 +275,7 @@ public class ProductDAO
 	public static List<ProductDTO> SearchListByProductName(int begin, int length, List<String> searchProductNameList, boolean andSearch)
 	{
 		StringBuilder where = new StringBuilder();
-		
+
 		boolean isFirst = true;
 		for(String str : searchProductNameList)
 		{
@@ -290,7 +290,7 @@ public class ProductDAO
 
 			where.append("(productName LIKE '%").append(str).append("%')");
 		}
-		
+
 		return ProductDAO.SelectList(begin, length, where.toString());
 	}
 
@@ -306,15 +306,15 @@ public class ProductDAO
 	public static boolean IncrementProductQuantity(int id, int quantity)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "UPDATE ProductTable SET productQuantity = productQuantity + ? WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, quantity);
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -333,7 +333,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -349,20 +349,20 @@ public class ProductDAO
 	public static boolean DecrementProductQuantity(int productId, int productQuantity)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
-			String sql = "UPDATE ProductTable SET productQuantity = productQuantity - " + 
-							"CASE WHEN productQuantity <= ? THEN 0 ELSE ? END " + 
+			String sql = "UPDATE ProductTable SET productQuantity = productQuantity - " +
+							"CASE WHEN productQuantity <= ? THEN 0 ELSE ? END " +
 							"WHERE id = ?";
-			
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, productQuantity);
 			preparedStatement.setInt(2, productQuantity);
 			preparedStatement.setInt(3, productId);
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -381,7 +381,7 @@ public class ProductDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 }

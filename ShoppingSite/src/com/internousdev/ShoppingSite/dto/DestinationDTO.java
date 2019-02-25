@@ -1,8 +1,10 @@
 package com.internousdev.ShoppingSite.dto;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class DestinationDTO
 {
@@ -15,7 +17,7 @@ public class DestinationDTO
 	private String address;
 	private String email;
 	private String phoneNumber;
-	private Date registeredDate;
+	private LocalDateTime registeredDate;
 
 	public DestinationDTO() {}
 	public DestinationDTO(ResultSet resultSet) throws SQLException
@@ -29,7 +31,7 @@ public class DestinationDTO
 		this.setAddress(resultSet.getString("address"));
 		this.setEmail(resultSet.getString("email"));
 		this.setPhoneNumber(resultSet.getString("phoneNumber"));
-		this.setRegisteredDate(resultSet.getDate("registeredDate"));
+		this.setRegisteredDate(resultSet.getString("registeredDate"));
 	}
 
 	public int getId()
@@ -113,12 +115,16 @@ public class DestinationDTO
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Date getRegisteredDate()
+	public LocalDateTime getRegisteredDate()
 	{
 		return registeredDate;
 	}
-	public void setRegisteredDate(Date registeredDate)
+	public void setRegisteredDate(LocalDateTime registeredDate)
 	{
 		this.registeredDate = registeredDate;
+	}
+	public void setRegisteredDate(String registeredDate)
+	{
+		this.registeredDate = DateConverter.toLocalDateTime(registeredDate);
 	}
 }

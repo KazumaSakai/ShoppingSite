@@ -1,24 +1,29 @@
 package com.internousdev.ShoppingSite.action.cart;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.CartDAO;
+import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ChangeCartItemQuantityAction extends ActionSupport implements SessionAware
+public class CartAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
+	private static final int pageLength = 50;
 
 	//	Receive
-	private int productId;
-	private int productQuantity;
-	private boolean toCart;
+	private int page;
 
-	//	Session
+	//	Send
+	private List<ProductDTO> productDTOList;
+	private int totalPrice;
+
+	//	Sesiion
 	private Map<String, Object> session;
 
 	//	Execute
@@ -33,48 +38,37 @@ public class ChangeCartItemQuantityAction extends ActionSupport implements Sessi
 
 		int userId = SessionSafeGetter.getInt(session, "user_id");
 
-		//	カートの中にある商品の数を変更する
-		if(CartDAO.IncrementProductQuantity(userId, productId, productQuantity))
-		{
-			return toCart ? "toCart" : "toItemList";
-		}
-		else
-		{
-			return ERROR;
-		}
+		this.productDTOList = CartDAO.SelectProductListByUserId(page * pageLength, pageLength, userId);
+		this.totalPrice = CartDAO.SumPrice(userId);
+
+		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public int getProductId()
+	public int getPage()
 	{
-		return productId;
+		return page;
 	}
-
-	public void setProductId(int productId)
+	public void setPage(int page)
 	{
-		this.productId = productId;
+		this.page = page;
 	}
-
-	public int getProductQuantity()
+	public List<ProductDTO> getProductDTOList()
 	{
-		return productQuantity;
+		return productDTOList;
 	}
-
-	public void setProductQuantity(int productQuantity)
+	public void setProductDTOList(List<ProductDTO> productDTOList)
 	{
-		this.productQuantity = productQuantity;
+		this.productDTOList = productDTOList;
 	}
-
-	public boolean isToCart()
+	public int getTotalPrice()
 	{
-		return toCart;
+		return totalPrice;
 	}
-
-	public void setToCart(boolean toCart)
+	public void setTotalPrice(int totalPrice)
 	{
-		this.toCart = toCart;
+		this.totalPrice = totalPrice;
 	}
-
 	public Map<String, Object> getSession()
 	{
 		return session;

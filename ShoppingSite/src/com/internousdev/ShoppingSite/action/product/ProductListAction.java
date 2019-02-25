@@ -1,4 +1,4 @@
-package com.internousdev.ShoppingSite.action.item;
+package com.internousdev.ShoppingSite.action.product;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,88 +6,104 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.ItemDAO;
-import com.internousdev.ShoppingSite.dto.ItemDTO;
+import com.internousdev.ShoppingSite.dao.ProductDAO;
+import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ItemListAction extends ActionSupport implements SessionAware
+public class ProductListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+	private static final int pageLength = 50;
+
 	//	Receive
 	private boolean andSearch;
 	private String searchWords;
-	
+	private int page;
+
 	//	Send
-	private List<ItemDTO> itemList;
+	private List<ProductDTO> productDTOList;
 	private List<String> errorMsgList;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
 	//	Execute
 	public String execute()
 	{
-		//	検索指定がある場合
+		//	検索指定がない場合
 		if(searchWords == null || searchWords.isEmpty())
 		{
-			itemList = ItemDAO.GetItemList();
+			this.productDTOList = ProductDAO.SelectList(page * pageLength, pageLength);
 			return SUCCESS;
 		}
-		
+
 		//	検索ワードに記号が含まれていないかチェック
-		errorMsgList = StringChecker.Check(searchWords, "検索ワード", 0, 100, CharType.IgnoreSymbol);
+		this.errorMsgList = StringChecker.Check(searchWords, "検索ワード", 0, 100, CharType.IgnoreSymbol);
 		if(!errorMsgList.isEmpty())
 		{
 			return ERROR;
 		}
-		
+
 		//	検索指定の文字列をリストにして、DBからデータを得る
 		List<String> seachList = Arrays.asList(searchWords.replaceAll("　", " ").split(" "));
-		itemList = ItemDAO.SearchItemList(seachList, andSearch);
+		this.productDTOList = ProductDAO.SearchListByProductName(page * pageLength, pageLength, seachList, andSearch);
 
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public List<ItemDTO> getItemList()
+	public boolean isAndSearch()
 	{
-		return itemList;
+		return andSearch;
 	}
-	public void setItemList(List<ItemDTO> itemList)
+
+	public void setAndSearch(boolean andSearch)
 	{
-		this.itemList = itemList;
+		this.andSearch = andSearch;
 	}
 
 	public String getSearchWords()
 	{
 		return searchWords;
 	}
+
 	public void setSearchWords(String searchWords)
 	{
 		this.searchWords = searchWords;
 	}
 
-	public boolean getAndSearch()
+	public int getPage()
 	{
-		return andSearch;
+		return page;
 	}
-	public void setAndSearch(boolean andSearch)
+
+	public void setPage(int page)
 	{
-		this.andSearch = andSearch;
+		this.page = page;
+	}
+
+	public List<ProductDTO> getProductDTOList()
+	{
+		return productDTOList;
+	}
+
+	public void setProductDTOList(List<ProductDTO> productDTOList)
+	{
+		this.productDTOList = productDTOList;
 	}
 
 	public List<String> getErrorMsgList()
 	{
 		return errorMsgList;
 	}
+
 	public void setErrorMsgList(List<String> errorMsgList)
 	{
 		this.errorMsgList = errorMsgList;
 	}
-	
+
 	public Map<String, Object> getSession()
 	{
 		return session;
@@ -97,5 +113,4 @@ public class ItemListAction extends ActionSupport implements SessionAware
 	{
 		this.session = session;
 	}
-
 }

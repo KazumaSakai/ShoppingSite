@@ -1,5 +1,6 @@
 package com.internousdev.ShoppingSite.action.go;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -8,23 +9,23 @@ import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class GoSalesDataAction extends ActionSupport implements SessionAware
+public class GoAdminInsertProductAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive + Send
-	private int item_id;
-	
+	private List<String> errorMsgList;
+
 	//	Session
 	private Map<String, Object> session;
-	
+
 	//	Execute
 	public String execute()
 	{
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoSalesDataAction");
+			session.put("LoginedRedirectAction", "GoAdminInsertProductAction");
 			return "needLogin";
 		}
 		//	管理者チェック
@@ -32,23 +33,23 @@ public class GoSalesDataAction extends ActionSupport implements SessionAware
 		{
 			return "notAdmin";
 		}
-		
+
 		return SUCCESS;
 	}
 
 	//	Getter Setter
-	public int getItem_id()
-	{
-		return item_id;
-	}
-	public void setItem_id(int item_id)
-	{
-		this.item_id = item_id;
-	}
-	
 	public Map<String, Object> getSession()
 	{
 		return session;
+	}
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
+	}
+
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
 	}
 	@Override
 	public void setSession(Map<String, Object> session)

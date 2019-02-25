@@ -11,16 +11,18 @@ import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class MyPurchaseHistoryAction extends ActionSupport implements SessionAware
+public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+	private static final int pageLength = 50;
+
 	//	Send
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
+	private int page;
 
 	//	Session
 	private Map<String, Object> session;
-	
+
 	//	Execute
 	public String execute()
 	{
@@ -30,13 +32,13 @@ public class MyPurchaseHistoryAction extends ActionSupport implements SessionAwa
 			session.put("LoginedRedirectAction", "MyPurchaseHistoryAction");
 			return "needLogin";
 		}
-			
-		int user_id = SessionSafeGetter.getInt(session, "user_id");
-		purchaseHistoryList = PurchaseHistoryDAO.GetMyPurchaseHistory(user_id, 0, 50);
-		
+
+		int userId = SessionSafeGetter.getInt(session, "user_id");
+		purchaseHistoryList = PurchaseHistoryDAO.SelectListByUserId(page * pageLength, pageLength, userId);
+
 		return SUCCESS;
 	}
-	
+
 	//	Getter Setter
 	public List<PurchaseHistoryDTO> getPurchaseHistoryList()
 	{

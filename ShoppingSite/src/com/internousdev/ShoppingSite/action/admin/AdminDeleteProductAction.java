@@ -4,19 +4,18 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.ShoppingSite.dao.ItemDAO;
+import com.internousdev.ShoppingSite.dao.ProductDAO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AdminAddItemQuantityAction extends ActionSupport implements SessionAware
+public class AdminDeleteProductAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
-	private int id;
-	private int quantity;
-	
+	private int productId;
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -35,37 +34,23 @@ public class AdminAddItemQuantityAction extends ActionSupport implements Session
 			return "notAdmin";
 		}
 
-		ItemDAO.AddItemQuantity(id, quantity);
-
-		return SUCCESS;
+		return ProductDAO.Delete(productId) ? SUCCESS : ERROR;
 	}
 
 	//	Getter Setter
-	public int getId()
+	public int getProductId()
 	{
-		return id;
+		return productId;
 	}
-	public void setId(int id)
+	public void setProductId(int productId)
 	{
-		this.id = id;
+		this.productId = productId;
 	}
-
-	public int getQuantity()
-	{
-		return quantity;
-	}
-	public void setQuantity(int quantity)
-	{
-		this.quantity = quantity;
-	}
-
-	public Map<String, Object> getSession()
-	{
+	public Map<String, Object> getSession() {
 		return session;
 	}
 	@Override
-	public void setSession(Map<String, Object> session)
-	{
+	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
 }

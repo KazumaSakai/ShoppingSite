@@ -13,6 +13,11 @@ public class ProductSalesDTO
 	private int salesMonth;
 
 	public ProductSalesDTO() {}
+	public ProductSalesDTO(int year, int month)
+	{
+		this.setSalesYear(year);
+		this.setSalesMonth(month);
+	}
 	public ProductSalesDTO(ResultSet resultSet) throws SQLException
 	{
 		this.setProductId(resultSet.getInt("productId"));

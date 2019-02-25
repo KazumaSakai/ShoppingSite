@@ -1,8 +1,10 @@
 package com.internousdev.ShoppingSite.dto;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class ProductDTO
 {
@@ -14,10 +16,10 @@ public class ProductDTO
 	private int salesCompanyId;
 	private int productionCompanyId;
 	private int imageQuantity;
-	private Date releasedDate;
-	private Date lastEditDate;
-	private Date lastReplenishmentDate;
-	private Date lastSalesDate;
+	private LocalDateTime releasedDate;
+	private LocalDateTime lastEditDate;
+	private LocalDateTime lastReplenishmentDate;
+	private LocalDateTime lastSalesDate;
 
 	public ProductDTO() {}
 	public ProductDTO(ResultSet resultSet) throws SQLException
@@ -30,11 +32,26 @@ public class ProductDTO
 		this.setSalesCompanyId(resultSet.getInt("salesCompanyId"));
 		this.setProductionCompanyId(resultSet.getInt("productionCompanyId"));
 		this.setImageQuantity(resultSet.getInt("imageQuantity"));
-		this.setReleasedDate(resultSet.getDate("releasedDate"));
-		this.setLastReplenishmentDate(resultSet.getDate("lastReplenishmentDate"));
-		this.setLastSalesDate(resultSet.getDate("lastSalesDate"));
+		this.setReleasedDate(resultSet.getString("releasedDate"));
+		this.setLastEditDate(resultSet.getString("lastEditDate"));
+		this.setLastReplenishmentDate(resultSet.getString("lastReplenishmentDate"));
+		this.setLastSalesDate(resultSet.getString("lastSalesDate"));
 	}
-	
+
+	public PurchaseHistoryDTO toPurchaseHistoryDTO(int userId, int destinationId, int shipmentState, LocalDateTime requestDeliveryDate)
+	{
+		PurchaseHistoryDTO purchaseHistoryDTO = new PurchaseHistoryDTO();
+
+		purchaseHistoryDTO.setProductId(id);
+		purchaseHistoryDTO.setProductQuantity(productQuantity);
+		purchaseHistoryDTO.setUserId(userId);
+		purchaseHistoryDTO.setDestinationId(destinationId);
+		purchaseHistoryDTO.setShipmentState(shipmentState);
+		purchaseHistoryDTO.setRequestDeliveryDate(requestDeliveryDate);
+
+		return purchaseHistoryDTO;
+	}
+
 	public int getId()
 	{
 		return id;
@@ -99,36 +116,52 @@ public class ProductDTO
 	{
 		this.imageQuantity = imageQuantity;
 	}
-	public Date getReleasedDate()
+	public LocalDateTime getReleasedDate()
 	{
 		return releasedDate;
 	}
-	public void setReleasedDate(Date releasedDate)
+	public void setReleasedDate(LocalDateTime releasedDate)
 	{
 		this.releasedDate = releasedDate;
 	}
-	public Date getLastEditDate()
+	public void setReleasedDate(String releasedDate)
+	{
+		this.releasedDate = DateConverter.toLocalDateTime(releasedDate);
+	}
+	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
 	}
-	public void setLastEditDate(Date lastEditDate)
+	public void setLastEditDate(LocalDateTime lastEditDate)
 	{
 		this.lastEditDate = lastEditDate;
 	}
-	public Date getLastReplenishmentDate()
+	public void setLastEditDate(String lastEditDate)
+	{
+		this.lastEditDate = DateConverter.toLocalDateTime(lastEditDate);
+	}
+	public LocalDateTime getLastReplenishmentDate()
 	{
 		return lastReplenishmentDate;
 	}
-	public void setLastReplenishmentDate(Date lastReplenishmentDate)
+	public void setLastReplenishmentDate(LocalDateTime lastReplenishmentDate)
 	{
 		this.lastReplenishmentDate = lastReplenishmentDate;
 	}
-	public Date getLastSalesDate()
+	public void setLastReplenishmentDate(String lastReplenishmentDate)
+	{
+		this.lastReplenishmentDate = DateConverter.toLocalDateTime(lastReplenishmentDate);
+	}
+	public LocalDateTime getLastSalesDate()
 	{
 		return lastSalesDate;
 	}
-	public void setLastSalesDate(Date lastSalesDate)
+	public void setLastSalesDate(LocalDateTime lastSalesDate)
 	{
 		this.lastSalesDate = lastSalesDate;
+	}
+	public void setLastSalesDate(String lastSalesDate)
+	{
+		this.lastSalesDate = DateConverter.toLocalDateTime(lastSalesDate);
 	}
 }
