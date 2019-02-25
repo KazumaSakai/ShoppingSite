@@ -11,27 +11,64 @@ import com.internousdev.ShoppingSite.util.DBConnector;
 import com.internousdev.ShoppingSite.util.Passworder;
 import com.mysql.jdbc.Connection;
 
-public class UserDAO extends DAO
+public class UserDAO
 {
-	public static boolean Exist(String email, String loginId)
+	public static boolean Insert(UserDTO userDTO)
 	{
-		boolean exist = false;
-		
+		boolean success = false;
+
 		Connection connection = DBConnector.createConnection();
 
 		try
 		{
-			String sql = "SELECT COUNT(*) FROM users WHERE email = ? OR login_id = ?";
+			String sql = "INSERT INTO UserTable(isAdmin, isOauthUser, loginId, loginPass, email, userName, destinationId) VALUES(?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setBoolean(1, userDTO.isAdmin());
+			preparedStatement.setBoolean(2, userDTO.isOauthUser());
+			preparedStatement.setString(3, userDTO.getLoginId());
+			preparedStatement.setString(4, userDTO.getLoginPass());
+			preparedStatement.setString(5, userDTO.getEmail());
+			preparedStatement.setString(6, userDTO.getUserName());
+			preparedStatement.setInt(7, userDTO.getDestinationId());
+			int line = preparedStatement.executeUpdate();
+			success = (line > 0);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
 
-			preparedStatement.setString(1, loginId);
-			preparedStatement.setString(2, email);
+		return success;
+	}
+
+	public static UserDTO Select(String where)
+	{
+		UserDTO userDTO = null;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT * FROM UserTable WHERE ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, where);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next())
 			{
-				exist = (resultSet.getInt(1) > 0);
+				userDTO = new UserDTO(resultSet);
 			}
 		}
 		catch (SQLException e)
@@ -50,23 +87,37 @@ public class UserDAO extends DAO
 			}
 		}
 
-		return exist;
+		return userDTO;
 	}
 
-	public static boolean ChangeUserPassword(int id, String login_id, String newPassword)
+	public static UserDTO SelectById(int id)
+	{
+		return UserDAO.Select("id = " + id);
+	}
+
+	public static UserDTO SelectByLoginId(String loginId)
+	{
+		return UserDAO.Select("loginId = " + loginId);
+	}
+
+	public static boolean Update(UserDTO userDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
 
 		try
 		{
-			String sql = "UPDATE users SET login_pass = ? WHERE id = ?";
+			String sql = "UPDATE UserTable SET isAdmin = ?, isOauthUser = ?, loginId = ?, loginPass = ?, email = ?, userName = ?, destinationId = ?, lastEditDate = now()) VALUES(?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setBoolean(1, userDTO.isAdmin());
+			preparedStatement.setBoolean(2, userDTO.isOauthUser());
+			preparedStatement.setString(3, userDTO.getLoginId());
+			preparedStatement.setString(4, userDTO.getLoginPass());
+			preparedStatement.setString(5, userDTO.getEmail());
+			preparedStatement.setString(6, userDTO.getUserName());
+			preparedStatement.setInt(7, userDTO.getDestinationId());
 
-			preparedStatement.setString(1, Passworder.getSafetyPassword(newPassword, login_id));
-			preparedStatement.setInt(2, id);
-			
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -89,63 +140,30 @@ public class UserDAO extends DAO
 		return success;
 	}
 
-	public static boolean ChangeUserName(int id, String newName)
+	public static List<UserDTO> SelectList(int begin, int length)
 	{
-		boolean success = false;
-		
-		Connection connection = DBConnector.createConnection();
-
-		try
-		{
-			String sql = "UPDATE users SET user_name = ? WHERE id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, newName);
-			preparedStatement.setInt(2, id);
-
-			int line = preparedStatement.executeUpdate();
-			success = (line > 0);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				if (connection != null) connection.close();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		return success;
+		return SelectList(begin, length, "1");
 	}
 
-	public static List<UserDTO> GetUserList()
+	public static List<UserDTO> SelectList(int begin, int length, String where)
 	{
-		List<UserDTO> userList = new ArrayList<UserDTO>();
-		
+		List<UserDTO> userDTOList = new ArrayList<UserDTO>();
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
-			String sql = "SELECT id, admin, user_name, insert_date FROM users";
+			String sql = "SELECT * FROM UserTable WHERE ? LIMIT ?, ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
+			preparedStatement.setString(1, where);
+			preparedStatement.setInt(2, begin);
+			preparedStatement.setInt(3, length);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next())
 			{
-				UserDTO userDTO = new UserDTO();
-				userDTO.setId(resultSet.getInt("id"));
-				userDTO.setAdmin(resultSet.getBoolean("admin"));
-				userDTO.setUser_name(resultSet.getString("user_name"));
-				userDTO.setInsert_date(resultSet.getString("insert_date"));
-
-				userList.add(userDTO);
+				userDTOList.add(new UserDTO(resultSet));
 			}
 		}
 		catch (SQLException e)
@@ -164,60 +182,26 @@ public class UserDAO extends DAO
 			}
 		}
 
-		return userList;
+		return userDTOList;
 	}
 
-	public static boolean DeleteUser(int id)
+	public static int Count(String where)
 	{
-		boolean success = false;
-		
+		int count = 0;
+
 		Connection connection = DBConnector.createConnection();
 
 		try
 		{
-			String sql ="DELETE FROM users WHERE id = ?";
+			String sql = "SELECT COUNT(*) FROM UserTable WHERE ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
-			
-			int line = preparedStatement.executeUpdate();
-			success = (line > 0);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				if (connection != null) connection.close();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		
-		return success;
-	}
+			preparedStatement.setString(1, where);
 
-	public static String GetUserName(int user_id)
-	{
-		String userName = "";
-		
-		Connection connection = DBConnector.createConnection();
-
-		try
-		{
-			String sql = "SELECT user_name FROM users WHERE id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user_id);
-			
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next())
 			{
-				userName = resultSet.getString("user_name");
+				count = resultSet.getInt("COUNT(*)");
 			}
 		}
 		catch (SQLException e)
@@ -235,7 +219,29 @@ public class UserDAO extends DAO
 				e.printStackTrace();
 			}
 		}
-		
-		return userName;
+
+		return count;
+	}
+
+	public static boolean ExistLoginId(String loginId)
+	{
+		return (UserDAO.Count("loginId = " + loginId) > 0);
+	}
+
+	public static UserDTO Login(String loginId, String planeLoginPass)
+	{
+		UserDTO userDTO = UserDAO.SelectByLoginId(loginId);
+
+		if (userDTO == null) return null;
+
+		String DBSafePassword = userDTO.getLoginPass();
+		String safePassword = Passworder.getSafetyPassword(planeLoginPass, loginId);
+
+		return DBSafePassword.equals(safePassword) ? userDTO : null;
+	}
+
+	public static boolean LoginCheck(String loginId, String planeLoginPass)
+	{
+		return (UserDAO.Login(loginId, planeLoginPass) != null);
 	}
 }

@@ -25,18 +25,18 @@ public class CartDAO
 	public static CartDTO Select(int userId, int productId)
 	{
 		CartDTO cartDTO = null;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "SELECT * FROM CartTable WHERE (userId = ? AND productId = ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, productId);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if (resultSet.next())
 			{
 				cartDTO = new CartDTO(resultSet);
@@ -57,10 +57,10 @@ public class CartDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return cartDTO;
 	}
-	
+
 	/**
 	 * 	カート情報を削除する
 	 * @param userId
@@ -73,16 +73,16 @@ public class CartDAO
 	public static boolean Delete(int userId, int productId)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "DELETE FROM CartTable WHERE (userId = ? AND productId = ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, productId);
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -101,7 +101,7 @@ public class CartDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -119,9 +119,9 @@ public class CartDAO
 	public static boolean IncrementProductQuantity(int userId, int productId, int productQuantity)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "INSERT INTO CartTable (userId, productId, productQuantity) VALUES (?, ?, ?) "
@@ -131,7 +131,7 @@ public class CartDAO
 			preparedStatement.setInt(2, productId);
 			preparedStatement.setInt(3, productQuantity);
 			preparedStatement.setInt(4, productQuantity);
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -150,7 +150,7 @@ public class CartDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -161,21 +161,23 @@ public class CartDAO
 	 * @return
 	 * 	カート情報のリスト
 	 */
-	public static List<CartDTO> SelectListByUserId(int userId)
+	public static List<CartDTO> SelectList(int begin, int length, String where)
 	{
 		List<CartDTO> cartDTOList = new ArrayList<CartDTO>();
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
-			String sql = "SELECT * WHERE userId = ?";
-			
+			String sql = "SELECT * FROM CartTable WHERE ? LIMIT ?, ?";
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, userId);
-			
+			preparedStatement.setString(1, where);
+			preparedStatement.setInt(2, begin);
+			preparedStatement.setInt(3, length);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next())
 			{
 				cartDTOList.add(new CartDTO(resultSet));
@@ -196,10 +198,20 @@ public class CartDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return cartDTOList;
 	}
-	
+
+	public static List<CartDTO> SelectListByUserId(int begin, int length)
+	{
+		return CartDAO.SelectList(begin, length, "1");
+	}
+
+	public static List<CartDTO> SelectListByUserId(int begin, int length, int userId)
+	{
+		return CartDAO.SelectList(begin, length, "userId = "+ userId);
+	}
+
 	/**
 	 * 	カートに入っている商品のリストを取得する
 	 * @param userId
@@ -207,12 +219,12 @@ public class CartDAO
 	 * @return
 	 * 	商品情報リスﾄ
 	 */
-	public static List<ProductDTO> SelectProductListByUserId(int userId)
+	public static List<ProductDTO> SelectProductListByUserId(int begin, int length, int userId)
 	{
 		List<ProductDTO> productDTOList = new ArrayList<ProductDTO>();
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			//	ProductTable.*
@@ -220,13 +232,16 @@ public class CartDAO
 			String sql = "SELECT PT.id, PT.productName, PT.productPrice, CT.productQuantity, PT.productDescription, PT.salesCompanyId, PT.productionCompanyId, PT.imageQuantity, PT.releasedDate, PT.lastEditDate, PT.lastReplenishmentDate, PT.lastSalesDate "
 						+ "FROM CartTable AS CT "
 						+ "LEFT JOIN ProductTable AS PT ON CT.productId = PT.id "
-						+ "WHERE userId = ?";
-			
+						+ "WHERE userId = ? "
+						+ "LIMIT ?, ?";
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userId);
-			
+			preparedStatement.setInt(2, begin);
+			preparedStatement.setInt(3, length);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next())
 			{
 				productDTOList.add(new ProductDTO(resultSet));
@@ -247,7 +262,7 @@ public class CartDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return productDTOList;
 	}
 }

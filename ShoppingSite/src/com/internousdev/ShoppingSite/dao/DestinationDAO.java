@@ -10,90 +10,26 @@ import com.internousdev.ShoppingSite.dto.DestinationDTO;
 import com.internousdev.ShoppingSite.util.DBConnector;
 import com.mysql.jdbc.Connection;
 
-public class DestinationDAO extends DAO
+public class DestinationDAO
 {
-	/**
-	 * 	住所をIDから取得する
-	 * @param id
-	 * 	住所ID
-	 * @return
-	 * 	住所
-	 */
-	public static DestinationDTO GetDestinationById(int id)
-	{
-		DestinationDTO destinationDTO = null;
-		
-		Connection connection = DBConnector.createConnection();
-
-		try
-		{
-			String sql = "SELECT * FROM DestinationTable WHERE id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
-			
-			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if (resultSet.next())
-			{
-				destinationDTO = new DestinationDTO();
-				destinationDTO.setId(resultSet.getInt("id"));
-				destinationDTO.setUserId(resultSet.getInt("userId"));
-				destinationDTO.setFamilyName(resultSet.getString("familyName"));
-				destinationDTO.setFamilyName(resultSet.getString("firstName"));
-				destinationDTO.setGender(resultSet.getInt("gender"));
-				destinationDTO.setPostalCode(resultSet.getString("postalCode"));
-				destinationDTO.setAddress(resultSet.getString("address"));
-				destinationDTO.setEmail(resultSet.getString("email"));
-				destinationDTO.setPhoneNumber(resultSet.getString("phoneNumber"));
-				destinationDTO.setRegisteredDate(resultSet.getDate("registeredDate"));
-			}
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				if(connection != null) connection.close();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
-		}
-
-		return destinationDTO;
-	}
-
-	/**
-	 * 	住所を登録する
-	 * @param user_id
-	 * 	ユーザーID
-	 * @param address
-	 * 	住所
-	 * @return
-	 * 	結果
-	 */
-	public static boolean AddAddress(int userId, String familyName, String firstName, int gender, String postalCode, String address, String email, String phoneNumber)
+	public static boolean Insert(DestinationDTO destinationDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "INSERT INTO DestinationTable(userId, familyName, firstName, gender, postalCode, address, email, phoneNumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, userId);
-			preparedStatement.setString(2, familyName);
-			preparedStatement.setString(3, firstName);
-			preparedStatement.setInt(4, gender);
-			preparedStatement.setString(5, postalCode);
-			preparedStatement.setString(6, address);
-			preparedStatement.setString(7, email);
-			preparedStatement.setString(8, phoneNumber);
+			preparedStatement.setInt(1, destinationDTO.getUserId());
+			preparedStatement.setString(2, destinationDTO.getFamilyName());
+			preparedStatement.setString(3, destinationDTO.getFirstName());
+			preparedStatement.setInt(4, destinationDTO.getGender());
+			preparedStatement.setString(5, destinationDTO.getPostalCode());
+			preparedStatement.setString(6, destinationDTO.getAddress());
+			preparedStatement.setString(7, destinationDTO.getEmail());
+			preparedStatement.setString(8, destinationDTO.getPhoneNumber());
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
@@ -106,7 +42,7 @@ public class DestinationDAO extends DAO
 		{
 			try
 			{
-				if(connection != null) connection.close();
+				if (connection != null) connection.close();
 			}
 			catch (SQLException e)
 			{
@@ -117,42 +53,146 @@ public class DestinationDAO extends DAO
 		return success;
 	}
 
-	/**
-	 * 住所のリストをユーザーIDから取得する
-	 * @param userId
-	 * 	対象のユーザーID
-	 * @return
-	 * 	住所のリスト
-	 */
-	public static List<DestinationDTO> GetAddressListByUserId(int userId)
+	public static DestinationDTO Select(int id)
+	{
+		DestinationDTO destinationDTO = null;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT * FROM DestinationTable WHERE id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next())
+			{
+				destinationDTO = new DestinationDTO(resultSet);
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return destinationDTO;
+	}
+
+	public static boolean Update(DestinationDTO destinationDTO)
+	{
+		boolean success = false;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "UPDATE DestinationTable SET familyName = ?, firstName = ?, gender = ?, postalCode = ?, address = ?, email = ?, phoneNumber = ? WHERE id = ? AND userId = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, destinationDTO.getFamilyName());
+			preparedStatement.setString(2, destinationDTO.getFirstName());
+			preparedStatement.setInt(3, destinationDTO.getGender());
+			preparedStatement.setString(4, destinationDTO.getPostalCode());
+			preparedStatement.setString(5, destinationDTO.getAddress());
+			preparedStatement.setString(6, destinationDTO.getEmail());
+			preparedStatement.setString(7, destinationDTO.getPhoneNumber());
+			preparedStatement.setInt(8, destinationDTO.getId());
+			preparedStatement.setInt(9, destinationDTO.getUserId());
+
+			int line = preparedStatement.executeUpdate();
+			success = (line > 0);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return success;
+	}
+
+	public static boolean Delete(String where)
+	{
+		boolean success = false;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "DELETE FROM DestinationTable WHERE ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, where);
+
+			int line = preparedStatement.executeUpdate();
+			success = (line > 0);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return success;
+	}
+
+	public static boolean DeleteById(int id)
+	{
+		return Delete("id = " + id);
+	}
+
+	public static boolean DeleteByUserId(int userId)
+	{
+		return Delete("userId = " + userId);
+	}
+
+	public static boolean DeleteByIdAndUserId(int id, int userId)
+	{
+		StringBuilder where = new StringBuilder();
+		where.append("id = ").append(id);
+		where.append(" AND userId = ").append(userId);
+		return Delete(where.toString());
+	}
+
+	public static List<DestinationDTO> SelectList(int begin, int length, String where)
 	{
 		List<DestinationDTO> destinationDTOList = new ArrayList<DestinationDTO>();
 
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
-			String sql = "SELECT * FROM DestinationTable WHERE user_id = ?";
+			String sql = "SELECT * FROM DestinationTable WHERE ? LIMIT ?, ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, userId);
-			
+			preparedStatement.setString(1, where);
+			preparedStatement.setInt(2, begin);
+			preparedStatement.setInt(3, length);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			while (resultSet.next())
+
+			while(resultSet.next())
 			{
-				DestinationDTO destinationDTO = new DestinationDTO();
-				destinationDTO = new DestinationDTO();
-				destinationDTO.setId(resultSet.getInt("id"));
-				destinationDTO.setUserId(resultSet.getInt("userId"));
-				destinationDTO.setFamilyName(resultSet.getString("familyName"));
-				destinationDTO.setFamilyName(resultSet.getString("firstName"));
-				destinationDTO.setGender(resultSet.getInt("gender"));
-				destinationDTO.setPostalCode(resultSet.getString("postalCode"));
-				destinationDTO.setAddress(resultSet.getString("address"));
-				destinationDTO.setEmail(resultSet.getString("email"));
-				destinationDTO.setPhoneNumber(resultSet.getString("phoneNumber"));
-				destinationDTO.setRegisteredDate(resultSet.getDate("registeredDate"));
-				destinationDTOList.add(destinationDTO);
+				destinationDTOList.add(new DestinationDTO(resultSet));
 			}
 		}
 		catch (SQLException e)
@@ -163,7 +203,7 @@ public class DestinationDAO extends DAO
 		{
 			try
 			{
-				if(connection != null) connection.close();
+				if (connection != null) connection.close();
 			}
 			catch (SQLException e)
 			{
@@ -172,5 +212,15 @@ public class DestinationDAO extends DAO
 		}
 
 		return destinationDTOList;
+	}
+
+	public static List<DestinationDTO> SelectList(int begin, int length)
+	{
+		return DestinationDAO.SelectList(begin, length, "1");
+	}
+
+	public static List<DestinationDTO> SelectListByUserId(int begin, int length, int userId)
+	{
+		return DestinationDAO.SelectList(begin, length, "userId = " + userId);
 	}
 }
