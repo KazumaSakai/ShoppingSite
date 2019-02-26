@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class ProductReviewDAO
 	public static boolean Insert(ProductReviewDTO productReviewDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "INSERT INTO ProductReviewTable(productId, userId, reviewTitle, reviewPoint, reviewComment) VALUES(?, ?, ?, ?, ?)";
@@ -34,7 +35,7 @@ public class ProductReviewDAO
 			preparedStatement.setString(3, productReviewDTO.getReviewTitle());
 			preparedStatement.setInt(4, productReviewDTO.getReviewPoint());
 			preparedStatement.setString(5, productReviewDTO.getReviewComment());
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -53,10 +54,10 @@ public class ProductReviewDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
-	
+
 	/**
 	 * 	商品レビュー情報を更新する
 	 * @param productReviewDTO
@@ -67,9 +68,9 @@ public class ProductReviewDAO
 	public static boolean Update(ProductReviewDTO productReviewDTO)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "UPDATE ProductReviewTable SET productId = ?, userId = ?, reviewTitle = ?, reviewPoint = ?, reviewComment = ? WHERE id = ?";
@@ -80,7 +81,7 @@ public class ProductReviewDAO
 			preparedStatement.setInt(4, productReviewDTO.getReviewPoint());
 			preparedStatement.setString(5, productReviewDTO.getReviewComment());
 			preparedStatement.setInt(6, productReviewDTO.getId());
-			
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -99,7 +100,7 @@ public class ProductReviewDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -113,17 +114,17 @@ public class ProductReviewDAO
 	public static ProductReviewDTO Select(int id)
 	{
 		ProductReviewDTO productReviewDTO = null;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "SELECT * FROM ProductReviewTable WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if(resultSet.next())
 			{
 				productReviewDTO = new ProductReviewDTO(resultSet);
@@ -144,10 +145,10 @@ public class ProductReviewDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return productReviewDTO;
 	}
-	
+
 	/**
 	 * 	商品レビューを削除する
 	 * @param id
@@ -158,14 +159,15 @@ public class ProductReviewDAO
 	public static boolean Delete(int id)
 	{
 		boolean success = false;
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
 			String sql = "DELETE FROM ProductReviewTable WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			
+			preparedStatement.setInt(1, id);
+
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -184,7 +186,7 @@ public class ProductReviewDAO
 				e.printStackTrace();
 			}
 		}
-		
+
 		return success;
 	}
 
@@ -202,18 +204,16 @@ public class ProductReviewDAO
 	public static List<ProductReviewDTO> SelectList(int begin, int length, String where)
 	{
 		List<ProductReviewDTO> productReviewDTOList = new ArrayList<ProductReviewDTO>();
-		
+
 		Connection connection = DBConnector.createConnection();
-		
+
 		try
 		{
-			StringBuilder sql = new StringBuilder().append("SELECT * FROM ProductReviewTable WHERE ").append(where).append(" LIMIT ?, ?");
-			PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
-			preparedStatement.setInt(1, begin);
-			preparedStatement.setInt(2, length);
-			
+			String sql = MessageFormat.format("SELECT * FROM ProductReviewTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next())
 			{
 				productReviewDTOList.add(new ProductReviewDTO(resultSet));
@@ -223,7 +223,7 @@ public class ProductReviewDAO
 		{
 			e.printStackTrace();
 		}
-		
+
 		return productReviewDTOList;
 	}
 
@@ -240,8 +240,7 @@ public class ProductReviewDAO
 	 */
 	public static List<ProductReviewDTO> SelectListByProductId(int begin, int length, int productId)
 	{
-		String where = "productId = " + productId;
-		return SelectList(begin, length, where);
+		return SelectList(begin, length, MessageFormat.format("productId = ''{0}''", productId));
 	}
 
 	/**
@@ -257,7 +256,6 @@ public class ProductReviewDAO
 	 */
 	public static List<ProductReviewDTO> SelectListByUserId(int begin, int length, int userId)
 	{
-		String where = "userId = " + userId;
-		return SelectList(begin, length, where);
+		return SelectList(begin, length, MessageFormat.format("userId = ''{0}''", userId));
 	}
 }

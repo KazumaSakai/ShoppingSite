@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +61,8 @@ public class UserDAO
 
 		try
 		{
-			String sql = "SELECT * FROM UserTable WHERE ?";
+			String sql = MessageFormat.format("SELECT * FROM UserTable WHERE {0}", where);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -92,17 +92,17 @@ public class UserDAO
 
 	public static UserDTO SelectById(int id)
 	{
-		return UserDAO.Select("id = " + id);
+		return UserDAO.Select(MessageFormat.format("id = ''{0}''", id));
 	}
 
 	public static UserDTO SelectByLoginId(String loginId)
 	{
-		return UserDAO.Select("loginId = " + loginId);
+		return UserDAO.Select(MessageFormat.format("loginId = ''{0}''", loginId));
 	}
-	
+
 	public static UserDTO SelectByEmail(String email)
 	{
-		return UserDAO.Select("email = " + email);
+		return UserDAO.Select(MessageFormat.format("email = ''{0}''", email));
 	}
 
 	public static boolean Update(UserDTO userDTO)
@@ -158,11 +158,8 @@ public class UserDAO
 
 		try
 		{
-			String sql = "SELECT * FROM UserTable WHERE ? LIMIT ?, ?";
+			String sql = MessageFormat.format("SELECT * FROM UserTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
-			preparedStatement.setInt(2, begin);
-			preparedStatement.setInt(3, length);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -198,9 +195,8 @@ public class UserDAO
 
 		try
 		{
-			String sql = "SELECT COUNT(*) FROM UserTable WHERE ?";
+			String sql = MessageFormat.format("SELECT COUNT(*) FROM UserTable WHERE {0}", where);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -230,7 +226,7 @@ public class UserDAO
 
 	public static boolean ExistLoginId(String loginId)
 	{
-		return (UserDAO.Count("loginId = " + loginId) > 0);
+		return (UserDAO.Count(MessageFormat.format("loginId = ''{0}''", loginId)) > 0);
 	}
 
 	public static UserDTO Login(String loginId, String planeLoginPass)
@@ -239,10 +235,10 @@ public class UserDAO
 
 		if (userDTO == null) return null;
 
-		String DBSafePassword = userDTO.getLoginPass();
+		String dbSafePassword = userDTO.getLoginPass();
 		String safePassword = Passworder.getSafetyPassword(planeLoginPass, loginId);
 
-		return DBSafePassword.equals(safePassword) ? userDTO : null;
+		return dbSafePassword.equals(safePassword) ? userDTO : null;
 	}
 
 	public static UserDTO LoginByEmail(String email, String planeLoginPass)

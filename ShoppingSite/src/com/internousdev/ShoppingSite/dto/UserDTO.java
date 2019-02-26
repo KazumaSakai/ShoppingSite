@@ -102,6 +102,10 @@ public class UserDTO
 	{
 		return registeredDate;
 	}
+	public String getRegisteredDateFormat()
+	{
+		return DateConverter.toFormat(registeredDate);
+	}
 	public void setRegisteredDate(LocalDateTime registeredDate)
 	{
 		this.registeredDate = registeredDate;
@@ -110,9 +114,14 @@ public class UserDTO
 	{
 		this.registeredDate = DateConverter.toLocalDateTime(registeredDate);
 	}
+
 	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
+	}
+	public String getLastEditDateFormat()
+	{
+		return DateConverter.toFormat(lastEditDate);
 	}
 	public void setLastEditDate(LocalDateTime lastEditDate)
 	{

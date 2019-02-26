@@ -1,7 +1,7 @@
 //	Sorter
 class Sorter {
 	//	マージソート
-	static MargeSort(ary, begin, end) {
+	static MargeSort(ary, begin, end){
 		var length = (end - begin);
 		if (length == 1) return;
 		if (length == 2) {
@@ -168,7 +168,7 @@ class Sorter {
 			for (var i = begin; i < end; i++) {
 				ary[i].color = "red";
 			}
-			
+
 			//	どちらも無くなるまで回す
 			while (leftLength > 0 || rightLength > 0) {
 				//	どちらもある場合
@@ -247,10 +247,10 @@ class Sorter {
 
 				ary[leftIndex].color = "blue";
 				ary[rightIndex].color = "blue";
-				
+
 				var obj = {};
 				yield obj;
-				
+
 				ary[leftIndex].color = "rgb(70, 70, 70)";
 				ary[rightIndex].color = "rgb(70, 70, 70)";
 

@@ -36,7 +36,7 @@ public class CartAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 
 		this.productDTOList = CartDAO.SelectProductListByUserId(page * pageLength, pageLength, userId);
 		this.totalPrice = CartDAO.SumPrice(userId);

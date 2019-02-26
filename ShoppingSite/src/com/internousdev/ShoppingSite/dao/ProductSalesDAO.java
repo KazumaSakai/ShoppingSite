@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,10 +135,8 @@ public class ProductSalesDAO
 
 		try
 		{
-			StringBuilder sql = new StringBuilder("SELECT * FROM ProductSalesTable WHERE ").append(where).append(" ORDER BY salesYear DESC, salesMonth DESC LIMIT ?, ?");
-			PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
-			preparedStatement.setInt(1, begin);
-			preparedStatement.setInt(2, length);
+			String sql = MessageFormat.format("SELECT * FROM ProductSalesTable WHERE {0} ORDER BY salesYear DESC, salesMonth DESC LIMIT {1}, {2}", where, begin, length);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -167,6 +166,6 @@ public class ProductSalesDAO
 
 	public static List<ProductSalesDTO> SelectListByProductId(int begin, int length, int productId)
 	{
-		return ProductSalesDAO.SelectList(begin, length, "productId = " + productId);
+		return ProductSalesDAO.SelectList(begin, length,  MessageFormat.format("productId = ''{0}''", productId));
 	}
 }

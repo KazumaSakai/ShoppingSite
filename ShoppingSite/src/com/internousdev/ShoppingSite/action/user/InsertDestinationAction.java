@@ -54,7 +54,7 @@ public class InsertDestinationAction extends ActionSupport implements SessionAwa
 			return ERROR;
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 		DestinationDTO destinationDTO = new DestinationDTO();
 		destinationDTO.setUserId(userId);
 		destinationDTO.setFamilyName(familyName);

@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,11 +228,9 @@ public class ProductDAO
 
 		try
 		{
-			StringBuilder sql = new StringBuilder().append("SELECT * FROM ProductTable WHERE ").append(where).append(" LIMIT ?, ?");
+			String sql = MessageFormat.format("SELECT * FROM ProductTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
 
-			PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
-			preparedStatement.setInt(1, begin);
-			preparedStatement.setInt(2, length);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 

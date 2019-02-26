@@ -119,6 +119,10 @@ public class DestinationDTO
 	{
 		return registeredDate;
 	}
+	public String getRegisteredDateFormat()
+	{
+		return DateConverter.toFormat(registeredDate);
+	}
 	public void setRegisteredDate(LocalDateTime registeredDate)
 	{
 		this.registeredDate = registeredDate;

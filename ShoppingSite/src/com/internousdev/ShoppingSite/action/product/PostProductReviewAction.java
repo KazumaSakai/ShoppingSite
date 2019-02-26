@@ -26,6 +26,7 @@ public class PostProductReviewAction extends ActionSupport implements SessionAwa
 	private String reviewComment;
 
 	//	Send
+	private ProductReviewDTO productReviewDTO;
 	private List<String> errorMsgList;
 
 	//	Session
@@ -51,8 +52,8 @@ public class PostProductReviewAction extends ActionSupport implements SessionAwa
 			return ERROR;
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
-		ProductReviewDTO productReviewDTO = new ProductReviewDTO();
+		int userId = SessionSafeGetter.getInt(session, "userId");
+		productReviewDTO = new ProductReviewDTO();
 		productReviewDTO.setProductId(productId);
 		productReviewDTO.setUserId(userId);
 		productReviewDTO.setReviewTitle(reviewTitle);
@@ -118,6 +119,16 @@ public class PostProductReviewAction extends ActionSupport implements SessionAwa
 	public void setErrorMsgList(List<String> errorMsgList)
 	{
 		this.errorMsgList = errorMsgList;
+	}
+
+	public ProductReviewDTO getProductReviewDTO()
+	{
+		return productReviewDTO;
+	}
+
+	public void setProductReviewDTO(ProductReviewDTO productReviewDTO)
+	{
+		this.productReviewDTO = productReviewDTO;
 	}
 
 	public Map<String, Object> getSession()

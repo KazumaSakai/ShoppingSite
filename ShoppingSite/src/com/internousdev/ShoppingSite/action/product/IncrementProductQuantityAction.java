@@ -31,7 +31,7 @@ public class IncrementProductQuantityAction extends ActionSupport implements Ses
 		}
 
 		productQuantity = Math.max(1, productQuantity);
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 
 		return CartDAO.IncrementProductQuantity(userId, productId, productQuantity) ? SUCCESS : ERROR;
 	}

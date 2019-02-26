@@ -33,7 +33,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 		purchaseHistoryList = PurchaseHistoryDAO.SelectListByUserId(page * pageLength, pageLength, userId);
 
 		return SUCCESS;

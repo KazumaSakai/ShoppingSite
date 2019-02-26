@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+import com.internousdev.ShoppingSite.dao.CompanyDAO;
 import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class ProductDTO
@@ -14,7 +15,9 @@ public class ProductDTO
 	private int productQuantity;
 	private String productDescription;
 	private int salesCompanyId;
+	private CompanyDTO salesCompanyDTO;
 	private int productionCompanyId;
+	private CompanyDTO productionCompanyDTO;
 	private int imageQuantity;
 	private LocalDateTime releasedDate;
 	private LocalDateTime lastEditDate;
@@ -116,9 +119,14 @@ public class ProductDTO
 	{
 		this.imageQuantity = imageQuantity;
 	}
+
 	public LocalDateTime getReleasedDate()
 	{
 		return releasedDate;
+	}
+	public String getReleasedDateFormat()
+	{
+		return DateConverter.toFormat(releasedDate);
 	}
 	public void setReleasedDate(LocalDateTime releasedDate)
 	{
@@ -128,9 +136,14 @@ public class ProductDTO
 	{
 		this.releasedDate = DateConverter.toLocalDateTime(releasedDate);
 	}
+
 	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
+	}
+	public String getLastEditDateFormat()
+	{
+		return DateConverter.toFormat(lastEditDate);
 	}
 	public void setLastEditDate(LocalDateTime lastEditDate)
 	{
@@ -140,9 +153,14 @@ public class ProductDTO
 	{
 		this.lastEditDate = DateConverter.toLocalDateTime(lastEditDate);
 	}
+
 	public LocalDateTime getLastReplenishmentDate()
 	{
 		return lastReplenishmentDate;
+	}
+	public String getLastReplenishmentDateFormat()
+	{
+		return DateConverter.toFormat(lastReplenishmentDate);
 	}
 	public void setLastReplenishmentDate(LocalDateTime lastReplenishmentDate)
 	{
@@ -152,9 +170,14 @@ public class ProductDTO
 	{
 		this.lastReplenishmentDate = DateConverter.toLocalDateTime(lastReplenishmentDate);
 	}
+
 	public LocalDateTime getLastSalesDate()
 	{
 		return lastSalesDate;
+	}
+	public String getLastSalesDateFormat()
+	{
+		return DateConverter.toFormat(lastSalesDate);
 	}
 	public void setLastSalesDate(LocalDateTime lastSalesDate)
 	{
@@ -163,5 +186,21 @@ public class ProductDTO
 	public void setLastSalesDate(String lastSalesDate)
 	{
 		this.lastSalesDate = DateConverter.toLocalDateTime(lastSalesDate);
+	}
+	public CompanyDTO getSalesCompanyDTO()
+	{
+		if(salesCompanyDTO == null || salesCompanyDTO.getId() != this.salesCompanyId)
+		{
+			salesCompanyDTO = CompanyDAO.Select(this.salesCompanyId);
+		}
+		return salesCompanyDTO;
+	}
+	public CompanyDTO getProductionCompanyDTO()
+	{
+		if(productionCompanyDTO == null || productionCompanyDTO.getId() != this.productionCompanyId)
+		{
+			productionCompanyDTO = CompanyDAO.Select(this.productionCompanyId);
+		}
+		return productionCompanyDTO;
 	}
 }

@@ -46,7 +46,7 @@ public class UpdateUserNameAction extends ActionSupport implements SessionAware
 			return ERROR;
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 		UserDTO userDTO = UserDAO.SelectById(userId);
 		userDTO.setUserName(newUserName);
 		if(UserDAO.Update(userDTO))

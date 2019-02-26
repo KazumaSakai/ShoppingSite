@@ -24,7 +24,7 @@
 		</action>
 
 		<action name="AdminIncrementProductQuantityAction" class="com.internousdev.ShoppingSite.action.admin.AdminIncrementProductQuantityAction" method="execute">
-			<!-- <result name="success" type="chain">AdminProductInfoAction</result>  -->
+			<result name="success" type="chain">ProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
@@ -42,7 +42,7 @@
 		</action>
 
 		<action name="AdminPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.admin.AdminPurchaseHistoryAction" method="execute">
-			<result name="success">./Admin/purchaseHistory.jsp</result>
+			<result name="success">./Admin/PurchaseHistoryList.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
@@ -55,23 +55,22 @@
 		</action>
 
 		<action name="AdminUpdateProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminUpdateProductAction" method="execute">
-			<!-- <result name="success" type="chain">AdminProductInfoAction</result>  -->
+			<result name="success" type="chain">AdminProductInfoAction</result>
+			<result name="error" type="chain">AdminProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
-		<!-- 
 		<action name="AdminProductInfoAction" class="com.internousdev.ShoppingSite.action.admin.AdminProductInfoAction" method="execute">
-			<result name="success">./Admin/adminProductInfo.jsp</result>
+			<result name="success">./Admin/ProductInfo.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
-		-->
 
 		<action name="AdminUserListAction" class="com.internousdev.ShoppingSite.action.admin.AdminUserListAction" method="execute">
-			<result name="success">./User/userList.jsp</result>
+			<result name="success">./User/UserList.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./User/UserList.jsp</result>
 		</action>
 
 	</package>
@@ -84,11 +83,11 @@
 
 	<package name="com.internousdev.ShoppingSite.action.go" extends="struts-default">
 
-		<action name="" class="com.internousdev.ShoppingSite.action.go.GoHomeAction" method="execute">
+		<action name="" class="com.internousdev.ShoppingSite.action.go.HomeAction" method="execute">
 			<result name="success">./index.jsp</result>
 		</action>
 
-		<action name="GoHomeAction" class="com.internousdev.ShoppingSite.action.go.GoHomeAction" method="execute">
+		<action name="HomeAction" class="com.internousdev.ShoppingSite.action.go.HomeAction" method="execute">
 			<result name="success">./index.jsp</result>
 		</action>
 
@@ -97,21 +96,11 @@
 		</action>
 
 		<action name="GoLoginAction" class="com.internousdev.ShoppingSite.action.go.GoLoginAction" method="execute">
-			<result name="success">./Login/login.jsp</result>
+			<result name="success">./User/Login/Login.jsp</result>
 		</action>
 
 		<action name="GoSignUpAction" class="com.internousdev.ShoppingSite.action.go.GoSignUpAction" method="execute">
-			<result name="success">./SignUp/signup.jsp</result>
-		</action>
-
-		<action name="GoUserPageAction" class="com.internousdev.ShoppingSite.action.go.GoUserPageAction" method="execute">
-			<result name="success">./User/userPage.jsp</result>
-			<result name="needLogin" type="chain">GoLoginAction</result>
-		</action>
-
-		<action name="GoUserInfoAction" class="com.internousdev.ShoppingSite.action.go.GoUserInfoAction" method="execute">
-			<result name="success">./User/userInfo.jsp</result>
-			<result name="needLogin" type="chain">GoLoginAction</result>
+			<result name="success">./User/SignUp/SignUp.jsp</result>
 		</action>
 
 		<action name="GoAdminAction" class="com.internousdev.ShoppingSite.action.go.GoAdminAction" method="execute">
@@ -120,25 +109,25 @@
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
-		<action name="GoSalesDataAction" class="com.internousdev.ShoppingSite.action.go.GoSalesDataAction" method="execute">
+		<action name="GoProductSalesAction" class="com.internousdev.ShoppingSite.action.go.GoProductSalesAction" method="execute">
 			<result name="success">./Admin/itemSalesData.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
-		<action name="GoAdminAddItemAction" class="com.internousdev.ShoppingSite.action.go.GoAdminAddItemAction" method="execute">
-			<result name="success">./Admin/adminAddItem.jsp</result>
+		<action name="GoAdminInsertProductAction" class="com.internousdev.ShoppingSite.action.go.GoAdminInsertProductAction" method="execute">
+			<result name="success">./Admin/InsertProduct.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
 		<action name="GoBuyAction" class="com.internousdev.ShoppingSite.action.go.GoBuyAction" method="execute">
-			<result name="success">./MyCart/buyItemAddressSelect.jsp</result>
+			<result name="success">./Cart/DestinationSelect.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
-		<action name="GoAddAddressAction" class="com.internousdev.ShoppingSite.action.go.GoAddAddressAction" method="execute">
-			<result name="success">./User/addAddress.jsp</result>
+		<action name="GoInsertDestinationAction" class="com.internousdev.ShoppingSite.action.go.GoInsertDestinationAction" method="execute">
+			<result name="success">./User/InsertDestination.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
@@ -148,39 +137,39 @@
 
 
 
-	<!-- Item -->
+	<!-- Product -->
 
-	<package name="com.internousdev.ShoppingSite.action.item" extends="struts-default">
+	<package name="com.internousdev.ShoppingSite.action.product" extends="struts-default">
 
-		<action name="ItemListAction" class="com.internousdev.ShoppingSite.action.item.ItemListAction" method="execute">
-			<result name="success">./Item/itemList.jsp</result>
-			<result name="error">./Item/itemList.jsp</result>
+		<action name="ProductListAction" class="com.internousdev.ShoppingSite.action.product.ProductListAction" method="execute">
+			<result name="success">./Product/ProductList.jsp</result>
+			<result name="error">./Product/ProductList.jsp</result>
 		</action>
 
-		<action name="AddItemAction" class="com.internousdev.ShoppingSite.action.item.AddItemAction" method="execute">
-			<result name="success" type="chain">MyCartAction</result>
+		<action name="IncrementProductQuantityAction" class="com.internousdev.ShoppingSite.action.product.IncrementProductQuantityAction" method="execute">
+			<result name="success" type="chain">CartAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">ItemListAction</result>
+			<result name="error" type="chain">ProductListAction</result>
 		</action>
 
-		<action name="ItemPageAction" class="com.internousdev.ShoppingSite.action.item.ItemPageAction" method="execute">
-			<result name="success">./Item/itemPage.jsp</result>
+		<action name="ProductInfoAction" class="com.internousdev.ShoppingSite.action.product.ProductInfoAction" method="execute">
+			<result name="success">./Product/ProductInfo.jsp</result>
 		</action>
 
-		<action name="PostItemReviewAction" class="com.internousdev.ShoppingSite.action.item.PostItemReviewAction" method="execute">
-			<result name="success">./Review/confirmPostReview.jsp</result>
+		<action name="PostProductReviewAction" class="com.internousdev.ShoppingSite.action.product.PostProductReviewAction" method="execute">
+			<result name="success">./Review/PostProductReviewComplete.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">ItemPageAction</result>
+			<result name="error" type="chain">ProductPageAction</result>
 		</action>
 
-		<action name="DeleteItemReviewAction" class="com.internousdev.ShoppingSite.action.item.DeleteItemReviewAction" method="execute">
-			<result name="success">./Review/confirmDeleteReview.jsp</result>
+		<action name="DeleteProductReviewAction" class="com.internousdev.ShoppingSite.action.product.DeleteProductReviewAction" method="execute">
+			<result name="success">./Review/DeleteProductReviewComplete.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error">./Review/errorDeleteReview.jsp</result>
+			<result name="error">./Review/DeleteProductReviewComplete.js</result>
 		</action>
 
-		<action name="ItemSalesAction" class="com.internousdev.ShoppingSite.action.item.ItemSalesAction" method="execute">
-			<result name="success">./JavaScript/salesData.jsp</result>
+		<action name="ProductSalesAction" class="com.internousdev.ShoppingSite.action.product.ProductSalesAction" method="execute">
+			<result name="success">./Admin/ProductSales.jsp</result>
 			<result name="notAdmin">./Admin/notAdmin.jsp</result>
 		</action>
 
@@ -201,13 +190,13 @@
 		</action>
 
 		<action name="GoogleLoginAction" class="com.internousdev.ShoppingSite.action.google.GoogleLoginAction" method="execute">
-			<result name="success">./Login/loginSuccess.jsp</result>
+			<result name="success">./User/Login/LoginComplete.jsp</result>
 			<result name="error">./Login/loginError.jsp</result>
 		</action>
 
 		<action name="StartGoogleOAuthAction" class="com.internousdev.ShoppingSite.action.google.StartGoogleOAuthAction" method="execute">
 			<result name="redirect" type="redirect">
-				<param name="location">${url}</param>
+				<param name="location">${redirectURL}</param>
 			</result>
 		</action>
 
@@ -221,20 +210,20 @@
 
 	<package name="com.internousdev.ShoppingSite.action.cart" extends="struts-default">
 
-		<action name="MyCartAction" class="com.internousdev.ShoppingSite.action.cart.MyCartAction" method="execute">
-			<result name="success">./MyCart/myCart.jsp</result>
+		<action name="CartAction" class="com.internousdev.ShoppingSite.action.cart.CartAction" method="execute">
+			<result name="success">./Cart/Cart.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
-		<action name="ChangeCartItemQuantityAction" class="com.internousdev.ShoppingSite.action.cart.ChangeCartItemQuantityAction" method="execute">
-			<result name="toCart" type="chain">MyCartAction</result>
-			<result name="toItemList" type="chain">ItemListAction</result>
-			<result name="error" type="chain">MyCartAction</result>
+		<action name="IncrementCartProductQuantityAction" class="com.internousdev.ShoppingSite.action.cart.IncrementCartProductQuantityAction" method="execute">
+			<result name="toCart" type="chain">CartAction</result>
+			<result name="toItemList" type="chain">ProductListAction</result>
+			<result name="error" type="chain">CartAction</result>
 		</action>
 
-		<action name="BuyCartItemAction" class="com.internousdev.ShoppingSite.action.cart.BuyCartItemAction" method="execute">
-			<result name="success">./MyCart/confirmBuyCartItem.jsp</result>
-			<result name="error">./User/buyItemAddressSelect</result>
+		<action name="SettlementCartAction" class="com.internousdev.ShoppingSite.action.cart.SettlementCartAction" method="execute">
+			<result name="success">./Cart/SettlementComplete.jsp</result>
+			<result name="error" type="chain">GoBuyAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
@@ -248,23 +237,38 @@
 
 	<package name="com.internousdev.ShoppingSite.action.user" extends="struts-default">
 
-		<action name="ChangeUserNameAction" class="com.internousdev.ShoppingSite.action.user.ChangeUserNameAction" method="execute">
+		<action name="UpdateUserNameAction" class="com.internousdev.ShoppingSite.action.user.UpdateUserNameAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
 			<result name="error" type="chain">GoUserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
-		<action name="ChangeUserPasswordAction" class="com.internousdev.ShoppingSite.action.user.ChangeUserPasswordAction" method="execute">
+		<action name="UpdateUserPasswordAction" class="com.internousdev.ShoppingSite.action.user.UpdateUserPasswordAction" method="execute">
 			<result name="success" type="chain">GoUserInfoAction</result>
 			<result name="error" type="chain">GoUserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
-		<action name="AddAddressAction" class="com.internousdev.ShoppingSite.action.user.AddAddressAction" method="execute">
-			<result name="goBuy" type="chain">GoBuyAction</result>
-			<result name="success">./User/addAddress.jsp</result>
+		<action name="InsertDestinationAction" class="com.internousdev.ShoppingSite.action.user.InsertDestinationAction" method="execute">
+			<result name="goBuy" type="chain">SettlementCartAction</result>
+			<result name="success" type="chain">DestinationListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">GoAddAddressAction</result>
+			<result name="error" type="chain">InsertDestinationAction</result>
+		</action>
+
+		<action name="DestinationListAction" class="com.internousdev.ShoppingSite.action.user.DestinationListAction" method="execute">
+			<result name="success">./User/DestinationList.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+
+		<action name="UserPageAction" class="com.internousdev.ShoppingSite.action.user.UserPageAction" method="execute">
+			<result name="success">./User/UserPage.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+
+		<action name="UserInfoAction" class="com.internousdev.ShoppingSite.action.user.UserInfoAction" method="execute">
+			<result name="success">./User/UserInfo.jsp</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 	</package>
@@ -278,13 +282,13 @@
 	<package name="com.internousdev.ShoppingSite.action.user.login" extends="struts-default">
 
 		<action name="LoginAction" class="com.internousdev.ShoppingSite.action.user.login.LoginAction" method="execute">
-			<result name="success">./Login/loginSuccess.jsp</result>
+			<result name="success">./User/Login/LoginComplete.jsp</result>
 			<result name="redirectAction" type="chain">${ redirectAction }</result>
 			<result name="error" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="LogoutAction" class="com.internousdev.ShoppingSite.action.user.login.LogoutAction" method="execute">
-			<result name="success">./Login/logoutSuccess.jsp</result>
+			<result name="success">./User/Login/LogoutComplete.jsp</result>
 		</action>
 
 	</package>
@@ -298,7 +302,7 @@
 	<package name="com.internousdev.ShoppingSite.action.user.signup" extends="struts-default">
 
 		<action name="SignUpAction" class="com.internousdev.ShoppingSite.action.user.signup.SignUpAction" method="execute">
-			<result name="success">./SignUp/confirmSignUp.jsp</result>
+			<result name="success">./User/SignUp/SignUpComplete.jsp</result>
 			<result name="error" type="chain">GoSignUpAction</result>
 		</action>
 
@@ -312,15 +316,15 @@
 
 	<package name="com.internousdev.ShoppingSite.action.purchaseHistory" extends="struts-default">
 
-		<action name="MyPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.purchaseHistory.MyPurchaseHistoryAction" method="execute">
-			<result name="success">./MyCart/purchaseHistory.jsp</result>
+		<action name="PurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.purchaseHistory.PurchaseHistoryAction" method="execute">
+			<result name="success">./PurchaseHistory/PurchaseHistory.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="PurchaseHistoryDeleteAction" class="com.internousdev.ShoppingSite.action.purchaseHistory.PurchaseHistoryDeleteAction" method="execute">
-			<result name="success" type="chain">MyPurchaseHistoryAction</result>
+			<result name="success" type="chain">PurchaseHistoryAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">MyPurchaseHistoryAction</result>
+			<result name="error" type="chain">PurchaseHistoryAction</result>
 		</action>
 
 	</package>
@@ -329,12 +333,12 @@
 
 
 
-	<!-- Seller -->
+	<!-- Company -->
 
-	<package name="com.internousdev.ShoppingSite.action.seller" extends="struts-default">
+	<package name="com.internousdev.ShoppingSite.action.company" extends="struts-default">
 
-		<action name="SellerAction" class="com.internousdev.ShoppingSite.action.seller.SellerAction" method="execute">
-			<result name="success">./Seller/seller.jsp</result>
+		<action name="CompanyInfoAction" class="com.internousdev.ShoppingSite.action.company.CompanyInfoAction" method="execute">
+			<result name="success">./Company/CompanyInfo.jsp</result>
 		</action>
 
 	</package>

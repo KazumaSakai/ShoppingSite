@@ -28,6 +28,10 @@ public class DeleteProductReviewAction extends ActionSupport implements SessionA
 	public String execute()
 	{
 		productReviewDTO = ProductReviewDAO.Select(productReviewId);
+		if(productReviewDTO == null)
+		{
+			return ERROR;
+		}
 
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
@@ -36,7 +40,7 @@ public class DeleteProductReviewAction extends ActionSupport implements SessionA
 			return "needLogin";
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 		boolean isMineReview = (productReviewDTO.getUserId() == userId);
 
 		if(isMineReview || CheckAdmin.IsAdmin(session))

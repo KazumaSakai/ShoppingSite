@@ -29,7 +29,7 @@ public class PurchaseHistoryDeleteAction extends ActionSupport implements Sessio
 			return "needLogin";
 		}
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 		return PurchaseHistoryDAO.DeleteByIdAndUserId(purchaseHistoryId, userId) ? SUCCESS : ERROR;
 	}
 

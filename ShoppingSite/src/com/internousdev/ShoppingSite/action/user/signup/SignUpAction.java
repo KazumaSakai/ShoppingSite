@@ -19,7 +19,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 
 	//	Receive
 	private String loginId;
-	private String planeLoginPass;
+	private String planeLoginPassword;
 	private String userName;
 	private String email;
 
@@ -34,7 +34,7 @@ public class SignUpAction extends ActionSupport implements SessionAware
 	{
 		//	入力値チェック
 		errorMsgList = new ArrayList<String>();
-		errorMsgList.addAll(StringChecker.Check(planeLoginPass, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
+		errorMsgList.addAll(StringChecker.Check(planeLoginPassword, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
 		errorMsgList.addAll(StringChecker.Check(loginId, "ログインID", 4, 60, CharType.Alphabet, CharType.Number));
 		errorMsgList.addAll(StringChecker.Check(userName, "ユーザー名", 4, 60, CharType.IgnoreSymbol));
 		errorMsgList.addAll(StringChecker.CheckEmail(email, "メールアドレス"));
@@ -46,14 +46,16 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		UserDTO userDTO = new UserDTO();
 		userDTO.setLoginId(loginId);
 		userDTO.setEmail(email);
-		userDTO.setLoginPass(Passworder.getSafetyPassword(planeLoginPass, loginId));
+		userDTO.setUserName(userName);
+		userDTO.setLoginPass(Passworder.getSafetyPassword(planeLoginPassword, loginId));
 		if(UserDAO.Insert(userDTO))
 		{
 			return SUCCESS;
 		}
 		else
 		{
-			errorMsgList.add("ユーザーの登録に失敗しました。<br/>IDまたはメールアドレスが既に使用されています。");
+			errorMsgList.add("ユーザーの登録に失敗しました。");
+			errorMsgList.add("IDまたはメールアドレスが既に使用されています。");
 			return ERROR;
 		}
 	}
@@ -69,14 +71,14 @@ public class SignUpAction extends ActionSupport implements SessionAware
 		this.loginId = loginId;
 	}
 
-	public String getPlaneLoginPass()
+	public String getPlaneLoginPassword()
 	{
-		return planeLoginPass;
+		return planeLoginPassword;
 	}
 
-	public void setPlaneLoginPass(String planeLoginPass)
+	public void setPlaneLoginPassword(String planeLoginPassword)
 	{
-		this.planeLoginPass = planeLoginPass;
+		this.planeLoginPassword = planeLoginPassword;
 	}
 
 	public String getUserName()

@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,9 +168,8 @@ public class CompanyDAO
 
 		try
 		{
-			String sql = "SELECT * FROM CompanyTable WHERE id = ?";
+			String sql = MessageFormat.format("SELECT * FROM CompanyTable WHERE {0}", where);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -205,7 +205,7 @@ public class CompanyDAO
 	public static List<CompanyDTO> SelectListByCompanyName(int begin, int length, String companyName)
 	{
 		StringBuilder where = new StringBuilder();
-		where.append("companyName LIKE %").append(companyName).append("%");
+		where.append("companyName LIKE '%").append(companyName).append("%'");
 		return CompanyDAO.SelectList(begin, length, where.toString());
 	}
 }

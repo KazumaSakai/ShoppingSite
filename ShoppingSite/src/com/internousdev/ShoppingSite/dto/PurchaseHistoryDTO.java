@@ -4,15 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+import com.internousdev.ShoppingSite.dao.DestinationDAO;
+import com.internousdev.ShoppingSite.dao.ProductDAO;
+import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class PurchaseHistoryDTO
 {
 	private int id;
 	private int productId;
+	private ProductDTO productDTO;
 	private int productQuantity;
 	private int userId;
+	private UserDTO userDTO;
 	private int destinationId;
+	private DestinationDTO destinationDTO;
 	private int shipmentState;
 	private LocalDateTime purchasedDate;
 	private LocalDateTime requestDeliveryDate;
@@ -78,9 +84,14 @@ public class PurchaseHistoryDTO
 	{
 		this.shipmentState = shipmentState;
 	}
+
 	public LocalDateTime getPurchasedDate()
 	{
 		return purchasedDate;
+	}
+	public String getPurchasedDateFormat()
+	{
+		return DateConverter.toFormat(purchasedDate);
 	}
 	public void setPurchasedDate(LocalDateTime purchasedDate)
 	{
@@ -90,9 +101,14 @@ public class PurchaseHistoryDTO
 	{
 		this.purchasedDate = DateConverter.toLocalDateTime(purchasedDate);
 	}
+
 	public LocalDateTime getRequestDeliveryDate()
 	{
 		return requestDeliveryDate;
+	}
+	public String getRequestDeliveryDateFormat()
+	{
+		return DateConverter.toFormat(requestDeliveryDate);
 	}
 	public void setRequestDeliveryDate(LocalDateTime requestDeliveryDate)
 	{
@@ -101,5 +117,30 @@ public class PurchaseHistoryDTO
 	public void setRequestDeliveryDate(String requestDeliveryDate)
 	{
 		this.requestDeliveryDate = DateConverter.toLocalDateTime(requestDeliveryDate);
+	}
+
+	public ProductDTO getProductDTO()
+	{
+		if(productDTO == null || productDTO.getId() != this.productId)
+		{
+			productDTO = ProductDAO.Select(this.productId);
+		}
+		return productDTO;
+	}
+	public UserDTO getUserDTO()
+	{
+		if(userDTO == null || userDTO.getId() != this.userId)
+		{
+			userDTO = UserDAO.SelectById(this.userId);
+		}
+		return userDTO;
+	}
+	public DestinationDTO getDestinationDTO()
+	{
+		if(destinationDTO == null || destinationDTO.getId() != this.destinationId)
+		{
+			destinationDTO = DestinationDAO.Select(this.destinationId);
+		}
+		return destinationDTO;
 	}
 }

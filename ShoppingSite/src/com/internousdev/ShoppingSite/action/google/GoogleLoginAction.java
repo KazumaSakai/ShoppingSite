@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GoogleLoginAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	//	Receive
 	private String code;
 	private String state;
@@ -30,13 +30,13 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		GoogleOAuthToken goooAuthToken = GoogleOAuth.FetchGoogleToken(code,"http://localhost:8080/ShoppingSite/GoogleLoginAction.action");
 		GoogleOAuthTokenInfo googleOAuthTokenInfo = GoogleOAuth.FetchGoogleTokenInfo(goooAuthToken);
 		GoogleOAuthGMailInfo googleOAuthGmailInfo = GoogleOAuth.GetGmailInfo(goooAuthToken, googleOAuthTokenInfo.user_id);
-		
+
 		String email = googleOAuthGmailInfo.emailAddress;
 		String planePass = googleOAuthTokenInfo.user_id;
 
 		//	Emailでログインを試す
 		UserDTO userDTO = UserDAO.LoginByEmail(email, planePass);
-		
+
 		//	ログインできていない、もしくは認証ユーザーではないならログインさせない
 		if(userDTO == null || !userDTO.isOauthUser())
 		{
@@ -61,7 +61,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	{
 		this.scope = scope;
 	}
-	
+
 	public String getCode()
 	{
 		return code;
@@ -70,7 +70,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	{
 		this.code = code;
 	}
-	
+
 	public String getState()
 	{
 		return state;

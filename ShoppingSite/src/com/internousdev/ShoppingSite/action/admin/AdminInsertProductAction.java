@@ -40,7 +40,7 @@ public class AdminInsertProductAction extends ActionSupport implements SessionAw
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemListAction");
+			session.put("LoginedRedirectAction", "ProductListAction");
 			return "needLogin";
 		}
 		//	管理者チェック

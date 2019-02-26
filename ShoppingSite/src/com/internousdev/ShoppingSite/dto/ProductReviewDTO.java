@@ -78,9 +78,14 @@ public class ProductReviewDTO
 	{
 		this.reviewComment = reviewComment;
 	}
+
 	public LocalDateTime getPostedDate()
 	{
 		return postedDate;
+	}
+	public String getPostedDateFormat()
+	{
+		return DateConverter.toFormat(postedDate);
 	}
 	public void setPostedDate(LocalDateTime postedDate)
 	{
@@ -90,9 +95,14 @@ public class ProductReviewDTO
 	{
 		this.postedDate = DateConverter.toLocalDateTime(postedDate);
 	}
+
 	public LocalDateTime getLastEditDate()
 	{
 		return lastEditDate;
+	}
+	public String getLastEditDateFormat()
+	{
+		return DateConverter.toFormat(lastEditDate);
 	}
 	public void setLastEditDate(LocalDateTime lastEditDate)
 	{

@@ -11,7 +11,6 @@ import com.internousdev.ShoppingSite.dao.DestinationDAO;
 import com.internousdev.ShoppingSite.dto.DestinationDTO;
 import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
-import com.internousdev.ShoppingSite.util.DateConverter;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -46,10 +45,12 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 
 		//	現在の日付を取得
 		LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
-		this.minDateTime = DateConverter.toString(localDateTime);
-		this.maxDateTime = DateConverter.toString(localDateTime.plusDays(30));
+		//	分、秒、ミリ秒を0に
+		localDateTime = localDateTime.minusMinutes(localDateTime.getMinute()).minusSeconds(localDateTime.getSecond()).minusNanos(localDateTime.getNano());
+		this.minDateTime = localDateTime.toString();
+		this.maxDateTime = localDateTime.plusDays(30).toString();
 
-		int userId = SessionSafeGetter.getInt(session, "user_id");
+		int userId = SessionSafeGetter.getInt(session, "userId");
 
 		this.destinationDTOList = DestinationDAO.SelectListByUserId(destinationPage * pageLength, pageLength, userId);
 		this.productDTOList = CartDAO.SelectProductListByUserId(productPage * pageLength, pageLength, userId);

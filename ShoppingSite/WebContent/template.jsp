@@ -37,14 +37,14 @@
 	<header>
 		<p id="site_title">ShoppingSite</p>
 		<ul id="main_menu">
-			<li><a href='<s:url action="GoHomeAction"/>'>ホーム</a></li>
-			<li><a href='<s:url action="ItemListAction"/>'>商品リスト</a></li>
+			<li><a href='<s:url action="HomeAction"/>'>ホーム</a></li>
+			<li><a href='<s:url action="ProductListAction"/>'>商品リスト</a></li>
 			<s:if test="#session.isLogin">
 				<li>
 					<ul class="dropDownMenu">
-						<li><s:property value="#session.user_name" escape="false" /></li>
-						<li><a href='<s:url action="GoUserPageAction"/>'>ユーザーページ</a></li>
-						<li><a href='<s:url action="MyCartAction"/>'>マイカート</a></li>
+						<li><s:property value="#session.userName" escape="false" /></li>
+						<li><a href='<s:url action="UserPageAction"/>'>ユーザーページ</a></li>
+						<li><a href='<s:url action="CartAction"/>'>マイカート</a></li>
 						<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 					</ul>
 				</li>
@@ -53,7 +53,7 @@
 				<li>
 					<ul class="dropDownMenu">
 						<li>ログイン</li>
-						<li><a href='/ShoppingSite/GoLoginAction.action'>ログイン</a></li>
+						<li><a href='<s:url action="GoLoginAction"/>'>ログイン</a></li>
 						<li><a href='<s:url action="GoSignUpAction"/>'>新規会員登録</a></li>
 					</ul>
 				</li>
@@ -95,7 +95,7 @@
 					<div class="boxarea">
 						<h2>制作物</h2>
 						<ul class="side_menu">
-							<li><a href='<s:url action="GoSortAction"/>'>ソート可視化 JavaScript Canvas</a></li>
+							<li><a href='<s:url action="SortAction"/>'>ソート可視化 JavaScript Canvas</a></li>
 						</ul>
 					</div>
 				</div>
@@ -111,7 +111,6 @@
 			</c:if>
 		</div>
 	</c:if>
-	<footer> copyright © internous | 4each blog is the one which
-		provides A to Z about programming. </footer>
+	<footer> Kazuma Sakai </footer>
 </body>
 </html>

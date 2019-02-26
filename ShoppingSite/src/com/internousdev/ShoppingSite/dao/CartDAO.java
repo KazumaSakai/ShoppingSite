@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,12 +170,10 @@ public class CartDAO
 
 		try
 		{
-			String sql = "SELECT * FROM CartTable WHERE ? LIMIT ?, ?";
+			String sql = MessageFormat.format("SELECT * FROM CartTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
 
+			System.out.println(sql);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
-			preparedStatement.setInt(2, begin);
-			preparedStatement.setInt(3, length);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -209,7 +208,7 @@ public class CartDAO
 
 	public static List<CartDTO> SelectListByUserId(int begin, int length, int userId)
 	{
-		return CartDAO.SelectList(begin, length, "userId = "+ userId);
+		return CartDAO.SelectList(begin, length, MessageFormat.format("userId = ''{0}''", userId));
 	}
 
 	/**
@@ -231,7 +230,7 @@ public class CartDAO
 			//	 - ProductTable.productQuantity => CartTable.productQuantity
 			String sql = "SELECT PT.id, PT.productName, PT.productPrice, CT.productQuantity, PT.productDescription, PT.salesCompanyId, PT.productionCompanyId, PT.imageQuantity, PT.releasedDate, PT.lastEditDate, PT.lastReplenishmentDate, PT.lastSalesDate "
 						+ "FROM CartTable AS CT "
-						+ "LEFT JOIN ProductTable AS PT ON CT.productId = PT.id "
+						+ "LEFT JOIN ProductTable AS PT ON PT.id = CT.productId "
 						+ "WHERE userId = ? "
 						+ "LIMIT ?, ?";
 
@@ -274,9 +273,9 @@ public class CartDAO
 
 		try
 		{
-			String sql = "SELECT SUM(PT.productPrice * CT.productQuantity) AS TotalPrice"
+			String sql = "SELECT SUM(PT.productPrice * CT.productQuantity) AS TotalPrice "
 						+ "FROM CartTable AS CT "
-						+ "LEFT JOIN ProductTable AS PT ON CT.productId = PT.id "
+						+ "LEFT JOIN ProductTable AS PT ON PT.id = CT.productId "
 						+ "WHERE userId = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

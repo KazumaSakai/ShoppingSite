@@ -3,6 +3,7 @@ package com.internousdev.ShoppingSite.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +61,8 @@ public class PurchaseHistoryDAO
 
 		try
 		{
-			String sql = "SELECT * FROM PurchaseHistoryTable WHERE ?";
+			String sql = MessageFormat.format("SELECT * FROM PurchaseHistoryTable WHERE {0}", where);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -92,7 +92,7 @@ public class PurchaseHistoryDAO
 
 	public static PurchaseHistoryDTO SelectById(int id)
 	{
-		return PurchaseHistoryDAO.Select("id = " + id);
+		return PurchaseHistoryDAO.Select(MessageFormat.format("id = ''{0}''", id));
 	}
 
 	public static PurchaseHistoryDTO SelectByIdAndUserId(int id, int userId)
@@ -183,9 +183,8 @@ public class PurchaseHistoryDAO
 
 		try
 		{
-			String sql = "SELECT * FROM PurchaseHistoryTable WHERE ?";
+			String sql = MessageFormat.format("DELETE FROM PurchaseHistoryTable WHERE {0}", where);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
@@ -211,20 +210,17 @@ public class PurchaseHistoryDAO
 
 	public static boolean DeleteById(int id)
 	{
-		return Delete("id = " + id);
+		return Delete(MessageFormat.format("id = ''{0}''", id));
 	}
 
 	public static boolean DeleteByUserId(int userId)
 	{
-		return Delete("userId = " + userId);
+		return Delete(MessageFormat.format("userId = ''{0}''", userId));
 	}
 
 	public static boolean DeleteByIdAndUserId(int id, int userId)
 	{
-		StringBuilder where = new StringBuilder();
-		where.append("id = ").append(id);
-		where.append(" AND userId = ").append(userId);
-		return Delete(where.toString());
+		return Delete(MessageFormat.format("id = ''{0}'' AND userId = ''{1}''", id, userId));
 	}
 
 	public static List<PurchaseHistoryDTO> SelectList(int begin, int length, String where)
@@ -235,11 +231,8 @@ public class PurchaseHistoryDAO
 
 		try
 		{
-			String sql = "SELECT * FROM PurchaseHistoryTable WHERE ? LIMIT ?, ?";
+			String sql = MessageFormat.format("SELECT * FROM PurchaseHistoryTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, where);
-			preparedStatement.setInt(2, begin);
-			preparedStatement.setInt(3, length);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -274,11 +267,11 @@ public class PurchaseHistoryDAO
 
 	public static List<PurchaseHistoryDTO> SelectListByUserId(int begin, int length, int userId)
 	{
-		return PurchaseHistoryDAO.SelectList(begin, length, "userId = " + userId);
+		return PurchaseHistoryDAO.SelectList(begin, length, MessageFormat.format("userId = ''{0}''", userId));
 	}
 
 	public static List<PurchaseHistoryDTO> SelectListByProductId(int begin, int length, int productId)
 	{
-		return PurchaseHistoryDAO.SelectList(begin, length, "productId = " + productId);
+		return PurchaseHistoryDAO.SelectList(begin, length, MessageFormat.format("productId = ''{0}''", productId));
 	}
 }

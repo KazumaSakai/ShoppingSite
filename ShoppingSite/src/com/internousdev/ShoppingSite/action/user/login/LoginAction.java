@@ -18,7 +18,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 	private static final long serialVersionUID = 1L;
 
 	//	Receive
-	private String loginUserId;
+	private String loginId;
 	private String planeLoginPassword;
 
 	//	Send
@@ -33,15 +33,15 @@ public class LoginAction extends ActionSupport implements SessionAware
 	{
 		//	入力値チェック
 		errorMsgList = new ArrayList<String>();
-		errorMsgList.addAll(StringChecker.Check(loginUserId, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
-		errorMsgList.addAll(StringChecker.Check(planeLoginPassword, "ログインID", 4, 60, CharType.Alphabet, CharType.Number));
+		errorMsgList.addAll(StringChecker.Check(loginId, "ログインID", 4, 60, CharType.Alphabet, CharType.Number));
+		errorMsgList.addAll(StringChecker.Check(planeLoginPassword, "パスワード", 8, 60, CharType.Alphabet, CharType.Number));
 		if(!errorMsgList.isEmpty())
 		{
 			return ERROR;
 		}
 
 		//	ユーザー情報を取得
-		UserDTO userDTO = UserDAO.Login(loginUserId, planeLoginPassword);
+		UserDTO userDTO = UserDAO.Login(loginId, planeLoginPassword);
 		if(userDTO == null)
 		{
 			errorMsgList.add("ログインができませんでした、ログインIDまたはパスワードが間違っています。");
@@ -67,14 +67,14 @@ public class LoginAction extends ActionSupport implements SessionAware
 	}
 
 	//	Getter Setter
-	public String getLoginUserId()
+	public String getLoginId()
 	{
-		return loginUserId;
+		return loginId;
 	}
 
-	public void setLoginUserId(String loginUserId)
+	public void setLoginId(String loginId)
 	{
-		this.loginUserId = loginUserId;
+		this.loginId = loginId;
 	}
 
 	public String getPlaneLoginPassword()
