@@ -31,6 +31,7 @@ public class UserDAO
 			preparedStatement.setString(5, userDTO.getEmail());
 			preparedStatement.setString(6, userDTO.getUserName());
 			preparedStatement.setInt(7, userDTO.getDestinationId());
+			
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
 		}
@@ -113,7 +114,7 @@ public class UserDAO
 
 		try
 		{
-			String sql = "UPDATE UserTable SET isAdmin = ?, isOauthUser = ?, loginId = ?, loginPass = ?, email = ?, userName = ?, destinationId = ?, lastEditDate = now()) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			String sql = "UPDATE UserTable SET isAdmin = ?, isOauthUser = ?, loginId = ?, loginPass = ?, email = ?, userName = ?, destinationId = ?, lastEditDate = now()";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setBoolean(1, userDTO.isAdmin());
 			preparedStatement.setBoolean(2, userDTO.isOauthUser());
@@ -237,7 +238,7 @@ public class UserDAO
 
 		String dbSafePassword = userDTO.getLoginPass();
 		String safePassword = Passworder.getSafetyPassword(planeLoginPass, loginId);
-
+		
 		return dbSafePassword.equals(safePassword) ? userDTO : null;
 	}
 

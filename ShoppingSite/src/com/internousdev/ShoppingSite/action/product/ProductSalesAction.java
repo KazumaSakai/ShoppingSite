@@ -36,7 +36,7 @@ public class ProductSalesAction extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ItemListAction");
+			session.put("LoginedRedirectAction", "ProductSalesAction");
 			return "needLogin";
 		}
 		//	管理者チェック

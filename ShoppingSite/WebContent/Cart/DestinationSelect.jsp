@@ -64,7 +64,8 @@
 					<tr>
 						<th>配達予定日</th>
 						<td colspan="2">
-							<input type="datetime-local" name="requestDeliveryDate" required="required" step="3600" min="${ minDateTime }" max="${ maxDateTime }">
+							<input type="date" name="requestDeliveryDate" min="${ minDate }" max="${ maxDate }">
+							<input type="time" name="requestDeliveryTime" min="08:00" max="19:59" />
 						</td>
 					</tr>
 				</table>

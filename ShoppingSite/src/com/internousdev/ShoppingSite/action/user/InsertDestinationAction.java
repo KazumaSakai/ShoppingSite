@@ -10,6 +10,7 @@ import com.internousdev.ShoppingSite.dao.DestinationDAO;
 import com.internousdev.ShoppingSite.dto.DestinationDTO;
 import com.internousdev.ShoppingSite.util.CharType;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.IntChecker;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,7 +29,6 @@ public class InsertDestinationAction extends ActionSupport implements SessionAwa
 	private String address;
 	private String email;
 	private String phoneNumber;
-	private String registeredDate;
 
 	//	Send
 	private List<String> errorMsgList;
@@ -42,13 +42,19 @@ public class InsertDestinationAction extends ActionSupport implements SessionAwa
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoAddAddressAction");
+			session.put("LoginedRedirectAction", "InsertDestinationAction");
 			return "needLogin";
 		}
 
 		//	入力値チェック
 		errorMsgList = new ArrayList<String>();
+		errorMsgList.addAll(StringChecker.Check(familyName, "姓", 1, 60, CharType.IgnoreSymbol));
+		errorMsgList.addAll(StringChecker.Check(firstName, "名", 1, 60, CharType.IgnoreSymbol));
+		errorMsgList.addAll(IntChecker.Check(gender, "性別", "", 0, 3));
+		errorMsgList.addAll(StringChecker.Check(postalCode, "郵便番号", 8, 8, CharType.Number));
 		errorMsgList.addAll(StringChecker.Check(address, "住所", 10, 100, CharType.IgnoreSymbol));
+		errorMsgList.addAll(StringChecker.CheckEmail(email, "メールアドレス"));
+		errorMsgList.addAll(StringChecker.Check(phoneNumber, "電話番号", 16, 16, CharType.Number));
 		if(!errorMsgList.isEmpty())
 		{
 			return ERROR;
@@ -64,7 +70,6 @@ public class InsertDestinationAction extends ActionSupport implements SessionAwa
 		destinationDTO.setAddress(address);
 		destinationDTO.setEmail(email);
 		destinationDTO.setPhoneNumber(phoneNumber);
-		destinationDTO.setRegisteredDate(registeredDate);
 
 		if(DestinationDAO.Insert(destinationDTO))
 		{
@@ -156,16 +161,6 @@ public class InsertDestinationAction extends ActionSupport implements SessionAwa
 	public void setPhoneNumber(String phoneNumber)
 	{
 		this.phoneNumber = phoneNumber;
-	}
-
-	public String getRegisteredDate()
-	{
-		return registeredDate;
-	}
-
-	public void setRegisteredDate(String registeredDate)
-	{
-		this.registeredDate = registeredDate;
 	}
 
 	public List<String> getErrorMsgList()

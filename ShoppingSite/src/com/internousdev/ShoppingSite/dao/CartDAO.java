@@ -172,7 +172,6 @@ public class CartDAO
 		{
 			String sql = MessageFormat.format("SELECT * FROM CartTable WHERE {0} LIMIT {1}, {2}", where, begin, length);
 
-			System.out.println(sql);
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();

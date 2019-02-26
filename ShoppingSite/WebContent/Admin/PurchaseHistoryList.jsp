@@ -48,7 +48,7 @@
 						<td>
 							<s:if test="%{ requestDeliveryDate == null }">指定なし</s:if>
 							<s:else>
-								<s:property value="requestDeliveryDate" />
+								<s:property value="requestDeliveryDateFormat" />
 							</s:else>
 						</td>
 						<td>

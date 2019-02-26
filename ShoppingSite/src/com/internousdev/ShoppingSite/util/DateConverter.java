@@ -8,8 +8,8 @@ public class DateConverter
 	public static LocalDateTime toLocalDateTime(String date)
 	{
 		if(date == null) return null;
-
-		String[] dates = date.split(" ");
+		
+		String[] dates = date.contains("T") ? date.split("T") : date.split(" ");
 		if(dates.length != 2) return null;
 
 		int[] ymd = Stream.of(dates[0].split("-")).mapToInt(i -> Integer.parseInt(i)).toArray();
@@ -23,7 +23,7 @@ public class DateConverter
 		if(localDateTime == null) return null;
 
 		StringBuilder stringBuilder = new StringBuilder();
-
+		
 		stringBuilder.append(localDateTime.getYear()).append("-");
 		stringBuilder.append(String.format("%02d", localDateTime.getMonthValue())).append("-");
 		stringBuilder.append(String.format("%02d", localDateTime.getDayOfMonth())).append(" ");
@@ -36,6 +36,8 @@ public class DateConverter
 
 	public static String toFormat(LocalDateTime localDateTime)
 	{
+		if(localDateTime == null) return null;
+		
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append(localDateTime.getYear()).append("年");

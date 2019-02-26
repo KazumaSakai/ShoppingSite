@@ -1,5 +1,8 @@
 package com.internousdev.ShoppingSite.action.google;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.oauth.GoogleOAuth;
@@ -17,6 +20,9 @@ public class GoogleSignUpAction extends ActionSupport
 	private String code;
 	private String state;
 	private String scope;
+	
+	//	Send
+	private List<String> errorMsgList;
 	
 	//	Execute
 	public String execute()
@@ -37,7 +43,18 @@ public class GoogleSignUpAction extends ActionSupport
 		userDTO.setDestinationId(0);
 		userDTO.setOauthUser(true);
 		
-		return UserDAO.Insert(userDTO) ? SUCCESS : ERROR;
+		if(UserDAO.Insert(userDTO))
+		{
+			return SUCCESS;
+		}
+		else
+		{
+			errorMsgList = new ArrayList<String>();
+			errorMsgList.add("ユーザーの登録に失敗しました。");
+			errorMsgList.add("既に登録された認証アカウントでないか、確認してください。");
+			
+			return ERROR;
+		}
 	}
 
 	//	Getter Setter
@@ -66,6 +83,15 @@ public class GoogleSignUpAction extends ActionSupport
 	public void setState(String state)
 	{
 		this.state = state;
+	}
+
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
+	}
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
 	}
 }
 

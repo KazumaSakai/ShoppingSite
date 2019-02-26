@@ -51,7 +51,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 		//	セッションにユーザー情報をプットする
 		session.put("isAdmin", userDTO.isAdmin());
 		session.put("userId", userDTO.getId());
-		session.put("loginUserId", userDTO.getLoginId());
+		session.put("loginId", userDTO.getLoginId());
 		session.put("userName", userDTO.getUserName());
 		session.put("isLogin", true);
 

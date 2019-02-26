@@ -1,5 +1,7 @@
 package com.internousdev.ShoppingSite.action.google;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,6 +22,9 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	private String code;
 	private String state;
 	private String scope;
+	
+	//	Send
+	private List<String> errorMsgList;
 
 	//	Session
 	private Map<String, Object> session;
@@ -40,6 +45,9 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		//	ログインできていない、もしくは認証ユーザーではないならログインさせない
 		if(userDTO == null || !userDTO.isOauthUser())
 		{
+			errorMsgList = new ArrayList<String>();
+			errorMsgList.add("ログインできませんでした。");
+			errorMsgList.add("登録されている認証アカウントか確認してください。");
 			return ERROR;
 		}
 
@@ -80,6 +88,15 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		this.state = state;
 	}
 
+	public List<String> getErrorMsgList()
+	{
+		return errorMsgList;
+	}
+	public void setErrorMsgList(List<String> errorMsgList)
+	{
+		this.errorMsgList = errorMsgList;
+	}
+	
 	public Map<String, Object> getSession()
 	{
 		return session;
@@ -89,4 +106,5 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	{
 		this.session = session;
 	}
+
 }

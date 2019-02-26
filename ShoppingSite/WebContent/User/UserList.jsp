@@ -12,17 +12,17 @@
 			<h1>ユーザーリスト</h1>
 			<table class="table text-center">
 				<tr>
-					<th style="width: 100px">ID</th>
-					<th style="width: 100px">ユーザー名</th>
-					<th style="width: 100px">権限</th>
-					<th style="width: 100px">登録日</th>
-					<th style="width: 100px">削除</th>
+					<th>ID</th>
+					<th>ユーザー名</th>
+					<th>権限</th>
+					<th>登録日</th>
+					<th>削除</th>
 				</tr>
 				<s:iterator value="userList">
 					<tr>
-						<td style="width: 200px"><s:property value="id" /></td>
-						<td style="width: 200px"><s:property value="userName" /></td>
-						<td style="width: 200px">
+						<td><s:property value="id" /></td>
+						<td><s:property value="userName" /></td>
+						<td>
 							<s:if test="admin">
 								<span style="color: red">管理者</span>
 							</s:if>
@@ -30,7 +30,7 @@
 								ユーザー
 							</s:else>
 						</td>
-						<td style="width: 200px"><s:property value="%{ registeredDateFormat }" /></td>
+						<td><s:property value="%{ registeredDateFormat }" /></td>
 						<td>
 							<s:if test="!admin">
 								<a class="delete" href="<s:url action='AdminDeleteUserAction?userId=%{ id }'/>">削除</a>

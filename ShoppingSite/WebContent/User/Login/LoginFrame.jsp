@@ -7,15 +7,15 @@
 			<th colspan="2">ログインフォーム</th>
 		</tr>
 		<tr>
-			<td>ユーザーID</td>
+			<td>ログインID</td>
 			<td>
-				<input class="inputText" type="text" name="loginId" required="required" min="4" max="60" />
+				<input class="inputText" type="text" name="loginId" placeholder="ログインID" required="required" maxLength="60" />
 			</td>
 		</tr>
 		<tr>
 			<td>パスワード</td>
 			<td>
-				<input class="inputText" type="password" name="planeLoginPassword" required="required" min="8" max="60" />
+				<input class="inputText" type="password" name="planeLoginPassword" placeholder="パスワード" required="required" maxLength="60" />
 			</td>
 		</tr>
 		<tr>

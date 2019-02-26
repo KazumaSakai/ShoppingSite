@@ -32,7 +32,7 @@ public class CartAction extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "MyCartAction");
+			session.put("LoginedRedirectAction", "CartAction");
 			return "needLogin";
 		}
 

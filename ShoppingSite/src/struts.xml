@@ -19,38 +19,39 @@
 		<action name="AdminInsertProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminInsertProductAction" method="execute">
 			<result name="success" type="chain">ProductListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 			<result name="error" type="chain">GoAdminInsertProductAction</result>
 		</action>
 
 		<action name="AdminIncrementProductQuantityAction" class="com.internousdev.ShoppingSite.action.admin.AdminIncrementProductQuantityAction" method="execute">
-			<result name="success" type="chain">ProductInfoAction</result>
+			<result name="success" type="chain">AdminProductInfoAction</result>
+			<result name="error" type="chain">AdminProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminDeleteProductAction" class="com.internousdev.ShoppingSite.action.admin.AdminDeleteProductAction" method="execute">
 			<result name="success" type="chain">ProductListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminDeleteUserAction" class="com.internousdev.ShoppingSite.action.admin.AdminDeleteUserAction" method="execute">
 			<result name="success" type="chain">AdminUserListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminPurchaseHistoryAction" class="com.internousdev.ShoppingSite.action.admin.AdminPurchaseHistoryAction" method="execute">
 			<result name="success">./Admin/PurchaseHistoryList.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminPurchaseHistoryDeleteAction" class="com.internousdev.ShoppingSite.action.admin.AdminPurchaseHistoryDeleteAction" method="execute">
 			<result name="success" type="chain">AdminPurchaseHistoryAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 			<result name="error" type="chain">AdminPurchaseHistoryAction</result>
 		</action>
 
@@ -58,13 +59,13 @@
 			<result name="success" type="chain">AdminProductInfoAction</result>
 			<result name="error" type="chain">AdminProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminProductInfoAction" class="com.internousdev.ShoppingSite.action.admin.AdminProductInfoAction" method="execute">
 			<result name="success">./Admin/ProductInfo.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="AdminUserListAction" class="com.internousdev.ShoppingSite.action.admin.AdminUserListAction" method="execute">
@@ -91,8 +92,8 @@
 			<result name="success">./index.jsp</result>
 		</action>
 
-		<action name="GoSortAction" class="com.internousdev.ShoppingSite.action.go.GoSortAction" method="execute">
-			<result name="success">./JavaScript/sortView.jsp</result>
+		<action name="SortAction" class="com.internousdev.ShoppingSite.action.go.SortAction" method="execute">
+			<result name="success">./JavaScript/SortView.jsp</result>
 		</action>
 
 		<action name="GoLoginAction" class="com.internousdev.ShoppingSite.action.go.GoLoginAction" method="execute">
@@ -102,23 +103,11 @@
 		<action name="GoSignUpAction" class="com.internousdev.ShoppingSite.action.go.GoSignUpAction" method="execute">
 			<result name="success">./User/SignUp/SignUp.jsp</result>
 		</action>
-
-		<action name="GoAdminAction" class="com.internousdev.ShoppingSite.action.go.GoAdminAction" method="execute">
-			<result name="success">./Admin/admin.jsp</result>
-			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
-		</action>
-
-		<action name="GoProductSalesAction" class="com.internousdev.ShoppingSite.action.go.GoProductSalesAction" method="execute">
-			<result name="success">./Admin/itemSalesData.jsp</result>
-			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
-		</action>
-
+		
 		<action name="GoAdminInsertProductAction" class="com.internousdev.ShoppingSite.action.go.GoAdminInsertProductAction" method="execute">
 			<result name="success">./Admin/InsertProduct.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 		<action name="GoBuyAction" class="com.internousdev.ShoppingSite.action.go.GoBuyAction" method="execute">
@@ -170,7 +159,7 @@
 
 		<action name="ProductSalesAction" class="com.internousdev.ShoppingSite.action.product.ProductSalesAction" method="execute">
 			<result name="success">./Admin/ProductSales.jsp</result>
-			<result name="notAdmin">./Admin/notAdmin.jsp</result>
+			<result name="notAdmin">./Admin/NotAdmin.jsp</result>
 		</action>
 
 
@@ -185,13 +174,13 @@
 	<package name="com.internousdev.ShoppingSite.action.google" extends="struts-default">
 
 		<action name="GoogleSignUpAction" class="com.internousdev.ShoppingSite.action.google.GoogleSignUpAction" method="execute">
-			<result name="success" >./SignUp/confirmSignUp.jsp</result>
-			<result name="error">./SignUp/errorSignUp.jsp</result>
+			<result name="success" >./User/SignUp/SignUpComplete.jsp</result>
+			<result name="error">./User/SignUp/SignUp.jsp</result>
 		</action>
 
 		<action name="GoogleLoginAction" class="com.internousdev.ShoppingSite.action.google.GoogleLoginAction" method="execute">
 			<result name="success">./User/Login/LoginComplete.jsp</result>
-			<result name="error">./Login/loginError.jsp</result>
+			<result name="error">./User/Login/Login.jsp</result>
 		</action>
 
 		<action name="StartGoogleOAuthAction" class="com.internousdev.ShoppingSite.action.google.StartGoogleOAuthAction" method="execute">
@@ -238,19 +227,19 @@
 	<package name="com.internousdev.ShoppingSite.action.user" extends="struts-default">
 
 		<action name="UpdateUserNameAction" class="com.internousdev.ShoppingSite.action.user.UpdateUserNameAction" method="execute">
-			<result name="success" type="chain">GoUserInfoAction</result>
-			<result name="error" type="chain">GoUserInfoAction</result>
+			<result name="success" type="chain">UserInfoAction</result>
+			<result name="error" type="chain">UserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="UpdateUserPasswordAction" class="com.internousdev.ShoppingSite.action.user.UpdateUserPasswordAction" method="execute">
-			<result name="success" type="chain">GoUserInfoAction</result>
-			<result name="error" type="chain">GoUserInfoAction</result>
+			<result name="success" type="chain">UserInfoAction</result>
+			<result name="error" type="chain">UserInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
 		<action name="InsertDestinationAction" class="com.internousdev.ShoppingSite.action.user.InsertDestinationAction" method="execute">
-			<result name="goBuy" type="chain">SettlementCartAction</result>
+			<result name="goBuy" type="chain">GoBuyAction</result>
 			<result name="success" type="chain">DestinationListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="error" type="chain">InsertDestinationAction</result>

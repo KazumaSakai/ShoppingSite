@@ -15,14 +15,14 @@
 
 			<form action="InsertDestinationAction" method="post">
 				<input type="hidden" name="goBuy" value="<s:property value='goBuy'/>" />
-				<table class="table center" cellspacing="0">
+				<table class="table center">
 					<tr>
 						<th>姓</th>
-						<td><input type="text" name="familyName" required="required" min="10" max="100" /></td>
+						<td><input type="text" name="familyName" placeholder="姓" required="required" maxlength="100" /></td>
 					</tr>
 					<tr>
 						<th>名</th>
-						<td><input type="text" name="firstName" required="required" min="10" max="100" /></td>
+						<td><input type="text" name="firstName" placeholder="名" required="required" maxlength="100" /></td>
 					</tr>
 					<tr>
 						<th>性別</th>
@@ -34,19 +34,19 @@
 					</tr>
 					<tr>
 						<th>郵便番号</th>
-						<td><input type="text" name="postalCode" required="required" min="10" max="100" /></td>
+						<td><input type="text" name="postalCode" placeholder="郵便番号" required="required" maxlength="8" /></td>
 					</tr>
 					<tr>
 						<th>住所</th>
-						<td><input type="text" name="address" required="required" min="10" max="100" /></td>
+						<td><input type="text" name="address" placeholder="住所" required="required" maxlength="255" /></td>
 					</tr>
 					<tr>
 						<th>メールアドレス</th>
-						<td><input type="text" name="email" required="required" min="10" max="100" /></td>
+						<td><input type="email" name="email" placeholder="メールアドレス" required="required" maxlength="255" /></td>
 					</tr>
 					<tr>
 						<th>電話番号</th>
-						<td><input type="text" name="phoneNumber" required="required" min="10" max="100" /></td>
+						<td><input type="tel" name="phoneNumber" placeholder="電話番号" required="required" maxlength="16"/></td>
 					</tr>
 				</table>
 				<div class="text-center">

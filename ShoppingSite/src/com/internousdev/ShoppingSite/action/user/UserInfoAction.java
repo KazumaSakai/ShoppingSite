@@ -25,7 +25,7 @@ public class UserInfoAction  extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			session.put("LoginedRedirectAction", "UserInfoAction");
 			return "needLogin";
 		}
 

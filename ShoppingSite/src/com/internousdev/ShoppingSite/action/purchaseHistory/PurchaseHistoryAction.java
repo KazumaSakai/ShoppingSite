@@ -29,7 +29,7 @@ public class PurchaseHistoryAction extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "MyPurchaseHistoryAction");
+			session.put("LoginedRedirectAction", "PurchaseHistoryAction");
 			return "needLogin";
 		}
 

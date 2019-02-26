@@ -60,7 +60,7 @@
 					カートの中身が空です。
 				</p>
 				<p class="text-center">
-          			商品は<a href='<s:url action="ItemListAction"/>'>こちら</a>からご購入できます。
+          			商品は<a href='<s:url action="ProductListAction"/>'>こちら</a>からご購入できます。
 				</p>
 			</s:else>
 		</jsp:attribute>

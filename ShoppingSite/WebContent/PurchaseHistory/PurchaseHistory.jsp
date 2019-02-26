@@ -21,9 +21,9 @@
 						<li>
 							<div class="left">
 								<div>
-									<img src="./Images/ItemImages/${id }/1.jpg" />
+									<img src="./Images/ItemImages/${productId }/1.jpg" />
 									<p style="margin: 0px; padding: 0px">
-										<a href="<s:url action='ItemPageAction.action?id=%{ id }' />">
+										<a href="<s:url action='ProductInfoAction?productId=%{ productId }' />">
 											<s:property value="productDTO.productName" />
 										</a>
 									</p>
@@ -55,7 +55,7 @@
 										<li>
 											<s:if test="%{ requestDeliveryDate == null }">指定なし</s:if>
 											<s:else>
-												<s:property value="requestDeliveryDate" />
+												<s:property value="requestDeliveryDateFormat" />
 											</s:else>
 										</li>
 										<li>

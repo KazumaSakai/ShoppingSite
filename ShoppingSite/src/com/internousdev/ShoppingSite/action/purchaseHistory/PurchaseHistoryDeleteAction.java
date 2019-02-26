@@ -25,7 +25,7 @@ public class PurchaseHistoryDeleteAction extends ActionSupport implements Sessio
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "MyPurchaseHistoryAction");
+			session.put("LoginedRedirectAction", "PurchaseHistoryAction");
 			return "needLogin";
 		}
 

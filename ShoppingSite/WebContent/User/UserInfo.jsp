@@ -15,36 +15,36 @@
 			<jsp:include page="../SuccessMsgFrame.jsp" />
 
 			<s:if test="#session.isLogin">
-				<form action="ChangeUserNameAction" method="post">
+				<form action="UpdateUserNameAction" method="post">
 					<table class="inputTable">
 						<tr>
 							<th colspan="3">ユーザー名変更</th>
 						</tr>
 						<tr>
 							<td>新しいユーザー名</td>
-							<td><input type="text" name="newUserName" value='<s:property value="#session.user_name"/>' /></td>
+							<td><input type="text" name="newUserName" value='<s:property value="#session.userName"/>' /></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="text-center"><input type="submit" value="変更" class="mini_linkButton" /></td>
 						</tr>
 					</table>
 				</form>
-				<form action="ChangeUserPasswordAction" method="post">
+				<form action="UpdateUserPasswordAction" method="post">
 						<table class="inputTable">
 						<tr>
 							<th colspan="2">パスワード変更</th>
 						</tr>
 						<tr>
 							<td>現在のパスワード</td>
-							<td><input type="password" name="nowPassword" /></td>
+							<td><input type="password" placeholder="現在のパスワード" name=planePassword /></td>
 						</tr>
 						<tr>
 							<td>新しいパスワード</td>
-							<td><input type="password" name="newPassword" /></td>
+							<td><input type="password" placeholder="新しいパスワード" name="newPlanePassword" /></td>
 						</tr>
 						<tr>
-							<td>確認</td>
-							<td><input type="password" name="newPassword2" /></td>
+							<td>新しいパスワード(確認)</td>
+							<td><input type="password" placeholder="新しいパスワード(確認)" name="newPlanePasswordConfirm" /></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="text-center"><input type="submit" value="変更" class="mini_linkButton" /></td>

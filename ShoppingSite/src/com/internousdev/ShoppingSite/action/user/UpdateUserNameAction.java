@@ -34,7 +34,7 @@ public class UpdateUserNameAction extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			session.put("LoginedRedirectAction", "UserInfoAction");
 			return "needLogin";
 		}
 
@@ -51,6 +51,7 @@ public class UpdateUserNameAction extends ActionSupport implements SessionAware
 		userDTO.setUserName(newUserName);
 		if(UserDAO.Update(userDTO))
 		{
+			successMsgList = new ArrayList<String>();
 			successMsgList.add("ユーザー名の変更に成功しました。");
 			session.put("userName", newUserName);
 			return SUCCESS;

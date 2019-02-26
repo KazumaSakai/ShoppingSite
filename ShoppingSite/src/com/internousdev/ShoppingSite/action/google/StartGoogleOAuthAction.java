@@ -15,7 +15,7 @@ public class StartGoogleOAuthAction extends ActionSupport
 	public String execute()
 	{
 		//	リダイレクト先がないならば、loginSuccess.jspへ
-		if(redirectURL == null || redirectURL.isEmpty()) redirectURL = "loginSuccess.jsp";
+		if(redirectURL == null || redirectURL.isEmpty()) redirectURL = "HomeAction";	
 
 		this.redirectURL = GoogleOAuth.URLForRequestToken("http://localhost:8080/ShoppingSite/" + redirectURL, GoogleScope.UserToken, GoogleScope.GmailToken);
 

@@ -23,7 +23,7 @@
 			</tr>
 		</table>
 		<div class="text-center">
-			<input type="hidden" name="id" value="${ productId }" />
+			<input type="hidden" name="productId" value="${ productId }" />
 			<input class="linkButton" type="submit" value="商品を追加する" />
 		</div>
 	</form>

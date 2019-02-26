@@ -27,7 +27,7 @@ public class IncrementCartProductQuantityAction extends ActionSupport implements
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "MyCartAction");
+			session.put("LoginedRedirectAction", "CartAction");
 			return "needLogin";
 		}
 

@@ -313,6 +313,7 @@ public class ProductDAO
 			String sql = "UPDATE ProductTable SET productQuantity = productQuantity + ? WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, quantity);
+			preparedStatement.setInt(2, id);
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);

@@ -231,4 +231,16 @@ public class StringChecker
 		
 		return errorMsgList;
 	}
+	
+	public static List<String> CheckDateTime(String str, String columnName)
+	{
+		List<String> errorMsgList = new ArrayList<String>();
+		
+		if(DateConverter.toLocalDateTime(str) == null)
+		{
+			errorMsgList.add(MessageFormat.format("{0}は、日付でなければなりません。 (YYYY-MM-DDThh:mm:ss)", columnName));
+		}
+		
+		return errorMsgList;
+	}
 }

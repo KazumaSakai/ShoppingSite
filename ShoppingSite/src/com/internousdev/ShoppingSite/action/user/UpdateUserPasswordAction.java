@@ -1,5 +1,6 @@
 package com.internousdev.ShoppingSite.action.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class UpdateUserPasswordAction extends ActionSupport implements SessionAw
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoUserInfoAction");
+			session.put("LoginedRedirectAction", "UserInfoAction");
 			return "needLogin";
 		}
 
@@ -43,6 +44,7 @@ public class UpdateUserPasswordAction extends ActionSupport implements SessionAw
 		String loginId = SessionSafeGetter.getString(session, "loginId");
 
 		//	入力値チェック
+		errorMsgList = new ArrayList<String>();
 		if(!UserDAO.LoginCheck(loginId, planePassword))
 		{
 			errorMsgList.add("パスワードが間違っています。");
@@ -59,6 +61,7 @@ public class UpdateUserPasswordAction extends ActionSupport implements SessionAw
 		userDTO.setLoginPass(Passworder.getSafetyPassword(newPlanePassword, loginId));
 		if(UserDAO.Update(userDTO))
 		{
+			successMsgList = new ArrayList<String>();
 			successMsgList.add("パスワードの変更に成功しました。");
 			return SUCCESS;
 		}

@@ -5,7 +5,7 @@
 	<div class="errorBox">
 		<p>エラーメッセージ</p>
 		<s:iterator value="errorMsgList">
-			<s:property escape="false" />
+			<p><s:property escape="false" /></p>
 		</s:iterator>
 	</div>
 </s:if>

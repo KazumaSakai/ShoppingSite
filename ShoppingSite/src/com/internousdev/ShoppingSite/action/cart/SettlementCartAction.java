@@ -16,6 +16,7 @@ import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.DateConverter;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
+import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SettlementCartAction extends ActionSupport implements SessionAware
@@ -25,10 +26,12 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 	//	Receive
 	private int destinationId;
 	private String requestDeliveryDate;
+	private String requestDeliveryTime;
 
 	//	Send
 	private int totalPrice;
 	private List<ProductDTO> purchasedProductList;
+	private List<String> errorMsgList;
 
 	//	Session
 	private Map<String, Object> session;
@@ -43,11 +46,17 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 			return "needLogin";
 		}
 
-		//	TODO : 入力値チェック
+		//	「HH」, 「HH:MM」の形で送られてきても対応できるように:00:00を足す
+		this.requestDeliveryTime = this.requestDeliveryTime + ":00:00";
+		//	YYYY-MM-DDThh:mm-ssの形にする
+		String requestDeliveryDateTime = this.requestDeliveryDate + "T" + this.requestDeliveryTime;
+		
+		errorMsgList = new ArrayList<String>();
+		errorMsgList.addAll(StringChecker.CheckDateTime(requestDeliveryDateTime, "配達指定日"));
 
 		int userId = SessionSafeGetter.getInt(session, "userId");
 		int shipmentState = 0;
-		LocalDateTime requestDeliveryDate = DateConverter.toLocalDateTime(this.requestDeliveryDate);
+		LocalDateTime requestDeliveryLocalDateTime = DateConverter.toLocalDateTime(requestDeliveryDateTime);
 
 		//	現在のカート情報を取得
 		List<CartDTO> cartDTOList = CartDAO.SelectListByUserId(0, 100, userId);
@@ -57,7 +66,7 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 			//	在庫を差し引く
 			if(ProductDAO.DecrementProductQuantity(cartDTO.getProductId(), cartDTO.getProductQuantity()))
 			{
-				PurchaseHistoryDTO purchaseHistoryDTO = cartDTO.toPurchaseHistoryDTO(destinationId, shipmentState, requestDeliveryDate);
+				PurchaseHistoryDTO purchaseHistoryDTO = cartDTO.toPurchaseHistoryDTO(destinationId, shipmentState, requestDeliveryLocalDateTime);
 				PurchaseHistoryDAO.Insert(purchaseHistoryDTO);
 				purchaseHistoryDTOList.add(purchaseHistoryDTO);
 
@@ -96,6 +105,14 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 	public void setRequestDeliveryDate(String requestDeliveryDate)
 	{
 		this.requestDeliveryDate = requestDeliveryDate;
+	}
+	public String getRequestDeliveryTime()
+	{
+		return requestDeliveryTime;
+	}
+	public void setRequestDeliveryTime(String requestDeliveryTime)
+	{
+		this.requestDeliveryTime = requestDeliveryTime;
 	}
 	public int getTotalPrice()
 	{

@@ -27,8 +27,8 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 	private List<DestinationDTO> destinationDTOList;
 	private List<ProductDTO> productDTOList;
 	private int totalPrice;
-	private String maxDateTime;
-	private String minDateTime;
+	private String maxDate;
+	private String minDate;
 
 	//	Session
 	private Map<String, Object> session;
@@ -47,8 +47,8 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 		LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
 		//	分、秒、ミリ秒を0に
 		localDateTime = localDateTime.minusMinutes(localDateTime.getMinute()).minusSeconds(localDateTime.getSecond()).minusNanos(localDateTime.getNano());
-		this.minDateTime = localDateTime.toString();
-		this.maxDateTime = localDateTime.plusDays(30).toString();
+		this.minDate = localDateTime.toLocalDate().toString();
+		this.maxDate = localDateTime.plusDays(30).toLocalDate().toString();
 
 		int userId = SessionSafeGetter.getInt(session, "userId");
 
@@ -110,24 +110,24 @@ public class GoBuyAction extends ActionSupport implements SessionAware
 		this.totalPrice = totalPrice;
 	}
 
-	public String getMaxDateTime()
+	public String getMaxDate()
 	{
-		return maxDateTime;
+		return maxDate;
 	}
 
-	public void setMaxDateTime(String maxDateTime)
+	public void setMaxDate(String maxDate)
 	{
-		this.maxDateTime = maxDateTime;
+		this.maxDate = maxDate;
 	}
 
-	public String getMinDateTime()
+	public String getMinDate()
 	{
-		return minDateTime;
+		return minDate;
 	}
 
-	public void setMinDateTime(String minDateTime)
+	public void setMinDate(String minDate)
 	{
-		this.minDateTime = minDateTime;
+		this.minDate = minDate;
 	}
 
 	public Map<String, Object> getSession()

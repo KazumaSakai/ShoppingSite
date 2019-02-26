@@ -20,7 +20,7 @@ public class UserPageAction  extends ActionSupport implements SessionAware
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "GoUserPageAction");
+			session.put("LoginedRedirectAction", "UserPageAction");
 			return "needLogin";
 		}
 
