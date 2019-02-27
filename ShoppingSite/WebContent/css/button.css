@@ -1,41 +1,51 @@
 /*
  *		Button
  */
-.loginButton {
-	margin: 0px 5px;
-	padding: 5px 0px;
-	width: calc(100% - 10px);
-	
+.loginButton
+{
+	margin: 5px;
+	padding: 10px 0px;
+
+	width: 100%;
+	max-width: 500px;
+
 	box-shadow: 0 0 4px #777;
-	
-	background-color: #F7D358;
+
+	background-color: rgb(247, 211, 88);
 	transition: all 200ms 0s ease;
 }
-.loginButton:hover {
-	margin: 0px 0px;;
-	width: calc(100%);
-	
+
+.loginButton:hover
+{
+	margin: 3px 0px;
+	padding: 12px 5px;
+	width: calc(100% + 10px);
+	max-width: 520px;
+
 	box-shadow: 0 0 8px black;
-	
-	background-color: rgba(247, 158, 49, 1);
 }
 
-.googleButton {
-	margin: 0px 5px;
-	padding: 5px 0px;
-	width: calc(100% - 10px);
-	
+.googleButton
+{
+	margin: 5px;
+	padding: 10px 0px;
+
+	width: 100%;
+	max-width: 500px;
+
 	box-shadow: 0 0 4px #777;
-	
-	background-color: rgba(49, 237, 247, 1);
+
+	background-color: rgb(89, 205, 255);
+	transition: all 200ms 0s ease;
 }
-.googleButton:hover {
-	margin: 0px 0px;
-	width: calc(100%);
-	
+.googleButton:hover
+{
+	margin: 3px 0px;
+	padding: 12px 5px;
+	width: calc(100% + 10px);
+	max-width: 520px;
+
 	box-shadow: 0 0 8px black;
-	
-	background-color: rgba(49, 139, 247, 1);
 }
 
 .linkButton {
@@ -44,17 +54,17 @@
 	width: calc(100% - 20px);
 	margin: 10px;
 	padding: 10px 0px !important;
-	
+
 	box-shadow: 0 0 4px #777;
-	
+
 	font-family: Arial, sans-serif;
 	font-size: 1.2em;
 	text-transform: uppercase;
 	font-weight: bold;
-	
+
 	background-color: #F7D358;
 	cursor: pointer;
-	
+
 	transition: all 200ms 0s ease;
 }
 .linkButton:hover
@@ -68,26 +78,63 @@
 .mini_linkButton {
 	margin: 5px 5px;
 	padding: 5px 50px;
-	
+
 	border: solid 1px black;
 	box-shadow: 0 0 2px #777;
-	
+
 	font-family: Arial, sans-serif;
 	font-size: 1.2em;
 	text-transform: uppercase;
 	font-weight: bold;
-	
+
 	background-color: #F7D358;
 	cursor: pointer;
-	
+
 	transition: all 200ms 0s ease;
 }
 .mini_linkButton:hover
 {
 	margin: 5px 0px;
 	padding: 5px 55px;
-	
+
 	box-shadow: 0 0 4px black;
-	
+
 	transition: all 200ms 0s ease;
+}
+
+/*
+ *		ƒ{ƒ^ƒ“
+ */
+.button
+{
+	position: absolute;
+
+	margin: 2px;
+
+	width: 25px;
+	height: 25px;
+
+	border: 1px solid rgb(5, 5, 5);
+
+	background-color: white;
+
+	box-shadow: 0px 0px 5px rgb(150, 150, 150);
+
+	transition: all 200ms ease;
+}
+
+.button:hover
+{
+	margin: 0px;
+
+	width: 29px;
+	height: 29px;
+
+	box-shadow: 0px 0px 7px rgb(5, 5, 5);
+}
+.button:active
+{
+	transition: all 500ms ease;
+
+	transform: rotate(360deg);
 }

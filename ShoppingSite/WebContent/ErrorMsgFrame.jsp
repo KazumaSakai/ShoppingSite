@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:if test="errorMsgList != null && !errorMsgList.isEmpty()">
 	<div class="errorBox">
-		<p>エラーメッセージ</p>
+		<p class="errorTitle">エラーメッセージ</p>
 		<s:iterator value="errorMsgList">
 			<p><s:property escape="false" /></p>
 		</s:iterator>

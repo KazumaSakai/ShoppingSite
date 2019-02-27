@@ -9,9 +9,11 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.ShoppingSite.dao.CartDAO;
 import com.internousdev.ShoppingSite.dao.ProductDAO;
+import com.internousdev.ShoppingSite.dao.ProductSalesDAO;
 import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.CartDTO;
 import com.internousdev.ShoppingSite.dto.ProductDTO;
+import com.internousdev.ShoppingSite.dto.ProductSalesDTO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.DateConverter;
@@ -50,7 +52,7 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 		this.requestDeliveryTime = this.requestDeliveryTime + ":00:00";
 		//	YYYY-MM-DDThh:mm-ssの形にする
 		String requestDeliveryDateTime = this.requestDeliveryDate + "T" + this.requestDeliveryTime;
-		
+
 		errorMsgList = new ArrayList<String>();
 		errorMsgList.addAll(StringChecker.CheckDateTime(requestDeliveryDateTime, "配達指定日"));
 
@@ -71,6 +73,15 @@ public class SettlementCartAction extends ActionSupport implements SessionAware
 				purchaseHistoryDTOList.add(purchaseHistoryDTO);
 
 				CartDAO.Delete(cartDTO.getUserId(), cartDTO.getProductId());
+
+				ProductSalesDTO productSalesDTO = new ProductSalesDTO();
+				productSalesDTO.setProductId(cartDTO.getProductId());
+				productSalesDTO.setSalesYear(LocalDateTime.now().getYear());
+				productSalesDTO.setSalesMonth(LocalDateTime.now().getMonthValue());
+				productSalesDTO.setSalesQuantity(cartDTO.getProductQuantity());
+				productSalesDTO.setTotalSales(cartDTO.getProductQuantity() * cartDTO.getProductDTO().getProductPrice());
+
+				ProductSalesDAO.Increment(productSalesDTO);
 			}
 		}
 

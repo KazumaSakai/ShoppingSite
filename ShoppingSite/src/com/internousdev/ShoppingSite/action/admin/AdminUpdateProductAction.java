@@ -29,7 +29,7 @@ public class AdminUpdateProductAction extends ActionSupport implements SessionAw
 	//	Sned
 	private List<String> successMsgList;
 	private List<String> errorMsgList;
-	
+
 	//	Session
 	private Map<String, Object> session;
 
@@ -39,7 +39,7 @@ public class AdminUpdateProductAction extends ActionSupport implements SessionAw
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminProductInfoAction?productId" + productId);
+			session.put("LoginedRedirectAction", "AdminProductInfoAction");
 			return "needLogin";
 		}
 		//	管理者チェック
@@ -70,6 +70,7 @@ public class AdminUpdateProductAction extends ActionSupport implements SessionAw
 
 		if(ProductDAO.Update(productDTO))
 		{
+			successMsgList = new ArrayList<String>();
 			successMsgList.add("商品情報を更新しました。");
 			return SUCCESS;
 		}

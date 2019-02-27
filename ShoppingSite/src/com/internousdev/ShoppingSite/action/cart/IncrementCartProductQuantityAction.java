@@ -34,9 +34,9 @@ public class IncrementCartProductQuantityAction extends ActionSupport implements
 		int userId = SessionSafeGetter.getInt(session, "userId");
 
 		//	カートの中にある商品の数を変更する
-		if(CartDAO.IncrementProductQuantity(userId, productId, productQuantity))
+		if(CartDAO.IncrementProductQuantity(userId, productId, Math.max(1, productQuantity)))
 		{
-			return toCart ? "toCart" : "toItemList";
+			return toCart ? "toCart" : "toProductList";
 		}
 		else
 		{
@@ -65,7 +65,7 @@ public class IncrementCartProductQuantityAction extends ActionSupport implements
 		this.productQuantity = productQuantity;
 	}
 
-	public boolean isToCart()
+	public boolean getToCart()
 	{
 		return toCart;
 	}

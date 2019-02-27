@@ -103,7 +103,7 @@
 		<action name="GoSignUpAction" class="com.internousdev.ShoppingSite.action.go.GoSignUpAction" method="execute">
 			<result name="success">./User/SignUp/SignUp.jsp</result>
 		</action>
-		
+
 		<action name="GoAdminInsertProductAction" class="com.internousdev.ShoppingSite.action.go.GoAdminInsertProductAction" method="execute">
 			<result name="success">./Admin/InsertProduct.jsp</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
@@ -146,13 +146,13 @@
 		</action>
 
 		<action name="PostProductReviewAction" class="com.internousdev.ShoppingSite.action.product.PostProductReviewAction" method="execute">
-			<result name="success">./Review/PostProductReviewComplete.jsp</result>
+			<result name="success" type="chain">ProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">ProductPageAction</result>
+			<result name="error" type="chain">ProductInfoAction</result>
 		</action>
 
 		<action name="DeleteProductReviewAction" class="com.internousdev.ShoppingSite.action.product.DeleteProductReviewAction" method="execute">
-			<result name="success">./Review/DeleteProductReviewComplete.jsp</result>
+			<result name="success" type="chain">ProductInfoAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 			<result name="error">./Review/DeleteProductReviewComplete.js</result>
 		</action>
@@ -206,13 +206,25 @@
 
 		<action name="IncrementCartProductQuantityAction" class="com.internousdev.ShoppingSite.action.cart.IncrementCartProductQuantityAction" method="execute">
 			<result name="toCart" type="chain">CartAction</result>
-			<result name="toItemList" type="chain">ProductListAction</result>
+			<result name="toProductList" type="chain">ProductListAction</result>
+			<result name="error" type="chain">CartAction</result>
+		</action>
+
+		<action name="DecrementCartProductQuantityAction" class="com.internousdev.ShoppingSite.action.cart.DecrementCartProductQuantityAction" method="execute">
+			<result name="toCart" type="chain">CartAction</result>
+			<result name="toProductList" type="chain">ProductListAction</result>
 			<result name="error" type="chain">CartAction</result>
 		</action>
 
 		<action name="SettlementCartAction" class="com.internousdev.ShoppingSite.action.cart.SettlementCartAction" method="execute">
 			<result name="success">./Cart/SettlementComplete.jsp</result>
 			<result name="error" type="chain">GoBuyAction</result>
+			<result name="needLogin" type="chain">GoLoginAction</result>
+		</action>
+
+		<action name="DeleteCartProductAction" class="com.internousdev.ShoppingSite.action.cart.DeleteCartProductAction" method="execute">
+			<result name="success" type="chain">CartAction</result>
+			<result name="error" type="chain">CartAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 

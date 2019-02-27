@@ -2,47 +2,68 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<jsp:include page="../template.jsp">
-	<jsp:param value="住所を追加" name="title" />
-	<jsp:param value="false" name="showSlider" />
-	<jsp:param value="true" name="showSideMenu" />
-	<jsp:param value="true" name="showMain" />
-	<jsp:param name="content">
-		<jsp:attribute name="value">
-			<h1>住所を追加</h1>
+<c:import url="../template.jsp">
+	<c:param value="宛先一覧" name="title" />
+	<c:param value="false" name="showSlider" />
+	<c:param value="true" name="showSideMenu" />
+	<c:param value="true" name="showMain" />
+	<c:param name="content">
+		<h1>宛先一覧</h1>
 
-			<jsp:include page="../ErrorMsgFrame.jsp" />
+		<jsp:include page="../ErrorMsgFrame.jsp" />
 
-			<ul>
-				<s:iterator value="destinationDTOList">
-					<li style="border: 1px solid black">
-						<ul>
-							<li>
-								<s:property value="familyName" />
-							</li>
-							<li>
-								<s:property value="firstName" />
-							</li>
-							<li>
-								<s:property value="gender" />
-							</li>
-							<li>
-								<s:property value="postalCode" />
-							</li>
-							<li>
+		<ul class="destinationList">
+			<s:iterator value="destinationDTOList">
+				<li>
+					<table>
+						<tr>
+							<th>
+								名前
+							</th>
+							<td>
+								<s:property value="familyName" /> <s:property value="firstName" />
+							</td>
+						</tr>
+
+						<tr>
+							<th>
+								性別
+							</th>
+							<td>
+								<s:property value="genderString" />
+							</td>
+						</tr>
+
+						<tr>
+							<th>
+								住所
+							</th>
+							<td>
+								<s:property value="postalCode" /><br/>
 								<s:property value="address" />
-							</li>
-							<li>
-								<s:property value="email" />
-							</li>
-							<li>
-								<s:property value="phoneNumber" />
-							</li>
-						</ul>
-					</li>
-				</s:iterator>
-			</ul>
+							</td>
+						</tr>
 
-		</jsp:attribute>
-	</jsp:param>
-</jsp:include>
+						<tr>
+							<th>
+								メールアドレス
+							</th>
+							<td>
+								<s:property value="email" />
+							</td>
+						</tr>
+
+						<tr>
+							<th>
+								電話番号
+							</th>
+							<td>
+								<s:property value="phoneNumber" />
+							</td>
+						</tr>
+					</table>
+				</li>
+			</s:iterator>
+		</ul>
+	</c:param>
+</c:import>

@@ -4,10 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+import com.internousdev.ShoppingSite.dao.ProductDAO;
+import com.internousdev.ShoppingSite.dao.UserDAO;
+
 public class CartDTO
 {
 	private int userId;
+	private UserDTO userDTO;
 	private int productId;
+	private ProductDTO productDTO;
 	private int productQuantity;
 
 	public CartDTO() {}
@@ -55,5 +60,21 @@ public class CartDTO
 	public void setProductQuantity(int productQuantity)
 	{
 		this.productQuantity = productQuantity;
+	}
+	public UserDTO getUserDTO()
+	{
+		if(userDTO == null || userDTO.getId() != this.userId)
+		{
+			userDTO = UserDAO.SelectById(this.userId);
+		}
+		return userDTO;
+	}
+	public ProductDTO getProductDTO()
+	{
+		if(productDTO == null || productDTO.getId() != this.productId)
+		{
+			productDTO = ProductDAO.Select(this.productId);
+		}
+		return productDTO;
 	}
 }

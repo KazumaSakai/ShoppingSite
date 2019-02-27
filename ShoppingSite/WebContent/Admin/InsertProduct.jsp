@@ -2,17 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<jsp:include page="../template.jsp">
-	<jsp:param value="管理者 商品追加ページ" name="title" />
-	<jsp:param value="false" name="showSlider" />
-	<jsp:param value="true" name="showSideMenu" />
-	<jsp:param value="true" name="showMain" />
-	<jsp:param name="content">
-		<jsp:attribute name="value">
+<c:import url="../template.jsp">
+	<c:param value="商品追加" name="title" />
+	<c:param value="false" name="showSlider" />
+	<c:param value="true" name="showSideMenu" />
+	<c:param value="true" name="showMain" />
+	<c:param name="content">
 
 			<jsp:include page="../ErrorMsgFrame.jsp" />
 			<jsp:include page="./InsertProductFrame.jsp" />
 
-		</jsp:attribute>
-	</jsp:param>
-</jsp:include>
+	</c:param>
+</c:import>

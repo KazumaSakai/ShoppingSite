@@ -9,7 +9,7 @@
 			<p>
 				<img src="./Images/ItemImages/${ id }/1.jpg" />
 			</p>
-			<p>${ item_name }</p>
+			<p><s:property value="productName" /></p>
 			<p>販売価格 : <s:property value="productPrice" />円</p>
 			<p>販売個数 : <s:property value="productQuantity" />個</p>
 

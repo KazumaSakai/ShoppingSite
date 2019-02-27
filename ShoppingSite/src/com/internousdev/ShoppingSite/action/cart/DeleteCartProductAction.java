@@ -1,4 +1,4 @@
-package com.internousdev.ShoppingSite.action.product;
+package com.internousdev.ShoppingSite.action.cart;
 
 import java.util.Map;
 
@@ -9,15 +9,14 @@ import com.internousdev.ShoppingSite.util.CheckLogin;
 import com.internousdev.ShoppingSite.util.SessionSafeGetter;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class IncrementProductQuantityAction extends ActionSupport implements SessionAware
+public class DeleteCartProductAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
 
 	//	Receive
 	private int productId;
-	private int productQuantity;
 
-	//	Session
+	//	Sesiion
 	private Map<String, Object> session;
 
 	//	Execute
@@ -26,14 +25,13 @@ public class IncrementProductQuantityAction extends ActionSupport implements Ses
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ProductListAction");
+			session.put("LoginedRedirectAction", "CartAction");
 			return "needLogin";
 		}
 
-		productQuantity = Math.max(1, productQuantity);
 		int userId = SessionSafeGetter.getInt(session, "userId");
 
-		return CartDAO.IncrementProductQuantity(userId, productId, productQuantity) ? SUCCESS : ERROR;
+		return CartDAO.Delete(userId, productId) ? SUCCESS : ERROR;
 	}
 
 	//	Getter Setter
@@ -41,20 +39,9 @@ public class IncrementProductQuantityAction extends ActionSupport implements Ses
 	{
 		return productId;
 	}
-
 	public void setProductId(int productId)
 	{
 		this.productId = productId;
-	}
-
-	public int getProductQuantity()
-	{
-		return productQuantity;
-	}
-
-	public void setProductQuantity(int productQuantity)
-	{
-		this.productQuantity = productQuantity;
 	}
 
 	public Map<String, Object> getSession()

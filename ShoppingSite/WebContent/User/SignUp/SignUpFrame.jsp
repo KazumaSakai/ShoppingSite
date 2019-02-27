@@ -2,37 +2,37 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <form action="SignUpAction" method="post">
-	<table class="inputTable">
+	<table class="inputTable text-center">
 		<tr>
 			<th colspan="2">新規登録フォーム</th>
 		</tr>
 		<tr>
-			<td>ログインID</td>
+			<th>ログインID</th>
 			<td>
 				<input type="text" name="loginId" placeholder="ログインID" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<td>ユーザー名</td>
+			<th>ユーザー名</th>
 			<td>
 				<input type="text" name="userName" placeholder="ユーザー名" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<td>パスワード</td>
+			<th>パスワード</th>
 			<td>
 				<input type="password" name="planeLoginPassword" placeholder="パスワード" required="required" min="8" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<td>メールアドレス</td>
+			<th>メールアドレス</th>
 			<td>
 				<input type="email" name="email" placeholder="メールアドレス" required="required" max="255" />
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input class="loginButton" type="submit" value="登録" style="padding: 3px 30px" />
+				<input class="loginButton" type="submit" value="登録" />
 			</td>
 		</tr>
 		<tr>

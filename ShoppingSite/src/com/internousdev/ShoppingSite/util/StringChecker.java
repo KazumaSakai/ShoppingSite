@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * <b>StringChecker</b> : 文字列のチェックを行う
  * @author 酒井和馬
@@ -15,10 +16,10 @@ public class StringChecker
 {
 	/**
 	 * 文字列が半角英数字のみか判定する
-	 * 
+	 *
 	 * @param str
 	 * 	対象の文字列
-	 * 
+	 *
 	 * @return
 	 * 	<b>boolean</b><br/>
 	 * 	 - true : 半角英数字のみ<br/>
@@ -28,13 +29,13 @@ public class StringChecker
 	{
 		Pattern p = Pattern.compile("^[\\p{Alnum}]+$");
 		Matcher m = p.matcher(str);
-		
+
 		return m.find();
 	}
-	
+
 	/**
 	 * 文字列がメールアドレスか判定する
-	 * 
+	 *
 	 * @param str
 	 * 	対象の文字列
 	 * @return
@@ -50,7 +51,7 @@ public class StringChecker
                         + "(\\.[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*$");
 
 		Matcher m = p.matcher(str);
-		
+
 		return m.find();
 	}
 
@@ -70,11 +71,11 @@ public class StringChecker
 	public static boolean CheckStringLength(String str, int minLength, int maxLength)
 	{
 		if(str == null) return false;
-		
+
 		int length = str.length();
 		return (minLength <= length && length <= maxLength);
 	}
-	
+
 	/**
 	 * 文字列が指定のバイト数であるか判定する
 	 * @param str
@@ -91,7 +92,7 @@ public class StringChecker
 	public static boolean CheckStringByte(String str, int minByte, int maxByte)
 	{
 		if(str == null) return false;
-		
+
 		try
 		{
 			int byteLength = str.getBytes("UTF-8").length;
@@ -101,7 +102,7 @@ public class StringChecker
 		{
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -119,10 +120,10 @@ public class StringChecker
 	public static boolean CheckCharType(String str, CharType... allowCharTypes)
 	{
 		if (str == null || str.isEmpty()) return true;
-		
+
 		return Pattern.compile(CharType.GetRegularExpression(allowCharTypes)).matcher(str).find();
 	}
-	
+
 	/**
 	 * 対象の文字列を検証し、エラーメッセージを返します
 	 * @param str
@@ -141,7 +142,7 @@ public class StringChecker
 	public static List<String> Check(String str, String columnName, int minLength, int maxLength, CharType... allowCharTypes)
 	{
 		List<String> errorMsgList = new ArrayList<String>();
-		
+
 		//	文字列の長さ
 		if (!CheckStringLength(str, minLength, maxLength))
 		{
@@ -153,10 +154,10 @@ public class StringChecker
 		{
 			errorMsgList.add(MessageFormat.format("{0}の文字種は、{1}でなければなりません。", columnName, CharType.GetName(allowCharTypes)));
 		}
-		
+
 		return errorMsgList;
 	}
-	
+
 	/**
 	 * 対象の文字列がメールアドレスかどうか検証し、エラーメッセージを返す
 	 * @param str
@@ -169,22 +170,22 @@ public class StringChecker
 	public static List<String> CheckEmail(String str, String columnName)
 	{
 		List<String> errorMsgList = new ArrayList<String>();
-		
+
 		//	バイト数の長さ
 		if (!CheckStringByte(str, 3, 100))
 		{
 			errorMsgList.add(MessageFormat.format("{0}のバイト数は、{1}文字以上、{2}文字以下でなければなりません。", columnName, 3, 100));
 		}
-		
+
 		//	メールアドレスチェック
 		if(!IsMailAddress(str))
 		{
 			errorMsgList.add(MessageFormat.format("{0}はメールアドレスではありません。", columnName));
 		}
-		
+
 		return errorMsgList;
 	}
-	
+
 	/**
 	 * Nullも許容し、文字列の内容が同じが検証します
 	 * @param str
@@ -203,10 +204,10 @@ public class StringChecker
 			if(str == null && str2 == null) return true;
 			return false;
 		}
-		
+
 		return str.equals(str2);
 	}
-	
+
 	/**
 	 * 	文字列の内容が同じが検証し、エラーメッセージを返します
 	 * @param str
@@ -223,24 +224,24 @@ public class StringChecker
 	public static List<String> CheckEqual(String str, String str2, String columnName, String columnName2)
 	{
 		List<String> errorMsgList = new ArrayList<String>();
-		
+
 		if(!IsEqual(str, str2))
 		{
 			errorMsgList.add(MessageFormat.format("{0}と{1}が一致しません。", columnName, columnName2));
 		}
-		
+
 		return errorMsgList;
 	}
-	
+
 	public static List<String> CheckDateTime(String str, String columnName)
 	{
 		List<String> errorMsgList = new ArrayList<String>();
-		
+
 		if(DateConverter.toLocalDateTime(str) == null)
 		{
 			errorMsgList.add(MessageFormat.format("{0}は、日付でなければなりません。 (YYYY-MM-DDThh:mm:ss)", columnName));
 		}
-		
+
 		return errorMsgList;
 	}
 }

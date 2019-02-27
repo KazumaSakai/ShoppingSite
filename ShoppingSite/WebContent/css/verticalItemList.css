@@ -11,8 +11,12 @@
 
 .verticalItemList > li
 {
+	position: relative;
+
 	margin: 10px;
 	padding: 10px;
+
+	min-height: 200px;
 
 	border: 1px solid black;
 
@@ -21,6 +25,8 @@
 
     display:flex;
     flex-wrap:wrap;
+
+	box-shadow: 0px 0px 5px rgb(150, 150, 150);
 }
 
 .verticalItemList  > li .left
@@ -44,8 +50,18 @@
 
 .verticalItemList > li img
 {
+	margin: 5px;
+	width: calc(100% - 10px);
+	max-width: 100px;
+
+	transition: all 200ms ease;
+}
+
+.verticalItemList > li img:hover
+{
+	margin: 0px;
 	width: 100%;
-	max-width: 150px;
+	max-width: 110px;
 }
 
 .verticalItemList >  li .right
@@ -77,4 +93,38 @@
 {
 	margin: 2px;
 	padding: 0;
+}
+
+/*
+ *		ÉeÅ[ÉuÉã
+ */
+.verticalItemList table
+{
+	width: 100%;
+}
+.verticalItemList table th
+{
+	width: 20%;
+	padding: 3px 5px;
+}
+.verticalItemList table td
+{
+	width: 80%;
+	padding: 3px 5px;
+}
+
+/*
+ *		ÇªÇÃëº
+ */
+
+.verticalItemList p
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+.verticalItemList .price
+{
+	font-weight: bold;
+	color: red;
 }

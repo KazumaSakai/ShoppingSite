@@ -38,7 +38,7 @@ public class PostProductReviewAction extends ActionSupport implements SessionAwa
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ProductPageAction?productId=" + productId);
+			session.put("LoginedRedirectAction", "ProductListAction");
 			return "needLogin";
 		}
 

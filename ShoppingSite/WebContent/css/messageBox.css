@@ -9,22 +9,22 @@
 	margin: 10px;
 	padding: 20px 10px;
 	text-align: center;
-	
+
 	background-color: rgba(250, 5, 5, 0.2);
-	
+
 	border: 1px solid red;
 }
-.errorBox p
+.errorBox .errorTitle
 {
 	margin: 0px;
 	margin-bottom: 30px;
 	padding: 0px;
-	
+
 	font-size: 1.1em;
 	font-weight: bold;
-	
+
 	border-bottom: 1px solid rgb(250, 5, 5);
-	
+
 	color: rgb(5, 5, 5);
 }
 
@@ -41,21 +41,21 @@
 	margin: 10px;
 	padding: 20px 10px;
 	text-align: center;
-	
+
 	background-color: rgba(5, 250, 5, 0.2);
-	
-	border: 1px solid rgb(5, 250, 5);
+
+	border: 1px solid rgb(5, 200, 5);
 }
-.successBox p
+.successBox .successTitle
 {
 	margin: 0px;
 	margin-bottom: 30px;
 	padding: 0px;
-	
+
 	font-size: 1.1em;
 	font-weight: bold;
-	
-	border-bottom: 2px solid rgb(5, 250, 5);
-	
+
+	border-bottom: 1px solid rgb(5, 200, 5);
+
 	color: rgb(5, 5, 5);
 }

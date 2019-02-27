@@ -78,6 +78,20 @@ public class DestinationDTO
 	{
 		this.gender = gender;
 	}
+	public String getGenderString()
+	{
+		switch (gender)
+		{
+			case 0:
+				return "男性";
+
+			case 1:
+				return "女性";
+
+			default:
+				return "その他";
+		}
+	}
 
 	public String getPostalCode()
 	{

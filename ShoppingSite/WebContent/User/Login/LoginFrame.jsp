@@ -2,18 +2,22 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <form action="LoginAction" method="post">
-	<table class="inputTable">
+	<table class="inputTable text-center">
 		<tr>
 			<th colspan="2">ログインフォーム</th>
 		</tr>
 		<tr>
-			<td>ログインID</td>
+			<th>
+				ログインID
+			</th>
 			<td>
 				<input class="inputText" type="text" name="loginId" placeholder="ログインID" required="required" maxLength="60" />
 			</td>
 		</tr>
 		<tr>
-			<td>パスワード</td>
+			<th>
+				パスワード
+			</th>
 			<td>
 				<input class="inputText" type="password" name="planeLoginPassword" placeholder="パスワード" required="required" maxLength="60" />
 			</td>

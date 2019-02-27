@@ -26,7 +26,7 @@ public class AdminIncrementProductQuantityAction extends ActionSupport implement
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "AdminProductInfoAction?productId=" + productId);
+			session.put("LoginedRedirectAction", "AdminProductInfoAction");
 			return "needLogin";
 		}
 		//	管理者チェック

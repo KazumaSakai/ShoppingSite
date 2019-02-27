@@ -4,13 +4,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+import com.internousdev.ShoppingSite.dao.ProductDAO;
+import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.util.DateConverter;
 
 public class ProductReviewDTO
 {
 	private int id;
 	private int productId;
+	private ProductDTO productDTO;
 	private int userId;
+	private UserDTO userDTO;
 	private String reviewTitle;
 	private int reviewPoint;
 	private String reviewComment;
@@ -78,6 +82,10 @@ public class ProductReviewDTO
 	{
 		this.reviewComment = reviewComment;
 	}
+	public String getReviewCommentHTML()
+	{
+		return reviewComment.replace("\n", "<br/>");
+	}
 
 	public LocalDateTime getPostedDate()
 	{
@@ -111,5 +119,21 @@ public class ProductReviewDTO
 	public void setLastEditDate(String lastEditDate)
 	{
 		this.lastEditDate = DateConverter.toLocalDateTime(lastEditDate);
+	}
+	public ProductDTO getProductDTO()
+	{
+		if(productDTO == null || productDTO.getId() == productId)
+		{
+			productDTO = ProductDAO.Select(productId);
+		}
+		return productDTO;
+	}
+	public UserDTO getUserDTO()
+	{
+		if(userDTO == null || userDTO.getId() == userId)
+		{
+			userDTO = UserDAO.SelectById(userId);
+		}
+		return userDTO;
 	}
 }

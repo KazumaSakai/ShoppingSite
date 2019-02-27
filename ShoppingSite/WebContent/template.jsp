@@ -87,7 +87,7 @@
 				<div id="left">
 					<div class="boxarea">
 						<div class="article">
-							${ param.content }
+							<c:out value="${ param.content }" escapeXml="false" />
 						</div>
 					</div>
 				</div>

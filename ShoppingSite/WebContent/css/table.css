@@ -5,15 +5,21 @@
 {
 	margin: 0px auto;
 	padding: 1px;
-	
+
 	width: 100%;
-	
+
 	table-layout: fixed;
 	word-wrap: break-word;
-	
+
 	border: solid 1px black;
 	border-spacing:0;
 	border-collapse:collapse;
+}
+
+.table img
+{
+	width: 100%;
+	max-width: 150px;
 }
 
 .table tr
@@ -25,11 +31,11 @@
 {
 	padding: 10px;
 	box-sizing: border-box;
-	
+
 	width: 30%;
-	
+
 	font-weight: bold;
-	
+
 	border: 1px solid black;
 	background: rgb(220, 220, 220);
 }
@@ -46,22 +52,37 @@
 	padding: 2px 5px;
 }
 
+.table input[type="date"],
+.table input[type="time"]
+{
+	box-sizing: border-box;
+
+	font-size: 1.05em;
+	font-family: Arial, sans-serif;
+
+	border: solid 1px black;
+	border-radius: 3px;
+
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
 .table input[type="text"],
 .table input[type="number"],
 .table input[type="datetime-local"],
+.table input[type="email"],
 .table input[type="tel"],
 .table select,
 .table textarea
 {
 	width: calc(100% - 1.5em);
 	box-sizing: border-box;
-	
+
 	font-size: 1.05em;
 	font-family: Arial, sans-serif;
-	
+
 	border: solid 1px black;
 	border-radius: 3px;
-	
+
 	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -78,6 +99,8 @@
 .table input[type="text"]:hover,
 .table input[type="number"]:hover,
 .table input[type="datetime-local"]:hover,
+.table input[type="date"]:hover,
+.table input[type="time"]:hover,
 .table input[type="tel"]:hover,
 .table select:hover,
 .table textarea:hover

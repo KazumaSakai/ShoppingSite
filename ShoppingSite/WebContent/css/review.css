@@ -4,21 +4,24 @@
  */
 .review
 {
+	position: relative;
+
 	margin: 10px 0px;
 	padding: 10px;
-	
+
 	list-style: none;
 	border: 1px solid black;
-	
+
 	box-shadow: 0px 0px 5px rgb(100, 100, 100);
 }
+
 .review .title
 {
 	margin: 2px 0px;
 	padding: 5px;
-	
+
 	font-weight: bold;
-	
+
 	border-bottom: 1px solid rgb(100, 100, 100);
 }
 
@@ -26,7 +29,7 @@
 {
 	margin: 2px 0px;
 	padding: 20px 10px;
-	
+
 	border-bottom: 1px solid rgb(100, 100, 100);
 }
 
@@ -34,7 +37,7 @@
 {
 	margin: 2px 0px;
 	paddgin: 5px;
-	
+
 	text-align: right;
 	color: gray;
 }

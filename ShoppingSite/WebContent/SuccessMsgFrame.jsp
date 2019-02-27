@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:if test="successMsgList != null && !successMsgList.isEmpty()">
 	<div class="successBox">
-		<p>メッセージ</p>
+		<p class="successTitle">メッセージ</p>
 		<s:iterator value="successMsgList">
 			<p><s:property escape="false" /></p>
 		</s:iterator>

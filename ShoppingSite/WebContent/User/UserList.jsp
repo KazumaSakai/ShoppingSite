@@ -2,43 +2,57 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<jsp:include page="../template.jsp">
-	<jsp:param value="ユーザーリスト" name="title" />
-	<jsp:param value="false" name="showSlider" />
-	<jsp:param value="true" name="showSideMenu" />
-	<jsp:param value="true" name="showMain" />
-	<jsp:param name="content">
-		<jsp:attribute name="value">
-			<h1>ユーザーリスト</h1>
-			<table class="table text-center">
-				<tr>
-					<th>ID</th>
-					<th>ユーザー名</th>
-					<th>権限</th>
-					<th>登録日</th>
-					<th>削除</th>
-				</tr>
-				<s:iterator value="userList">
-					<tr>
-						<td><s:property value="id" /></td>
-						<td><s:property value="userName" /></td>
-						<td>
-							<s:if test="admin">
-								<span style="color: red">管理者</span>
-							</s:if>
-							<s:else>
-								ユーザー
-							</s:else>
-						</td>
-						<td><s:property value="%{ registeredDateFormat }" /></td>
-						<td>
-							<s:if test="!admin">
-								<a class="delete" href="<s:url action='AdminDeleteUserAction?userId=%{ id }'/>">削除</a>
-							</s:if>
-						</td>
-					</tr>
-				</s:iterator>
-			</table>
-		</jsp:attribute>
-	</jsp:param>
-</jsp:include>
+<c:import url="../template.jsp">
+	<c:param value="ユーザー一覧" name="title" />
+	<c:param value="false" name="showSlider" />
+	<c:param value="true" name="showSideMenu" />
+	<c:param value="true" name="showMain" />
+	<c:param name="content">
+		<h1>ユーザー一覧</h1>
+		<ul class="verticalItemList">
+			<s:iterator value="userList">
+				<li>
+					<div class="left">
+						<div>
+							<a href="<s:url action='UserInfo?userId=%{id}' />">
+								<s:property value="userName" />
+							</a>
+						</div>
+					</div>
+					<div class="right">
+						<div>
+							<table>
+								<tr>
+									<th>
+										権限
+									</th>
+									<td>
+										<s:if test="admin">
+											<span style="color: red">管理者</span>
+										</s:if>
+										<s:else>
+											ユーザー
+										</s:else>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										登録日
+									</th>
+									<td>
+										<s:property value="%{ registeredDateFormat }" />
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<s:if test="!admin">
+						<div class="button" style="top: -6px; right: -6px" onclick="location.href='<s:url action='AdminDeleteUserAction?userId=%{ id }'/>'">
+							<div class="cross"></div>
+						</div>
+					</s:if>
+				</li>
+			</s:iterator>
+		</ul>
+	</c:param>
+</c:import>

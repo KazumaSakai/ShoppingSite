@@ -91,8 +91,8 @@ public class ProductSalesDAO
 		{
 			String sql = "INSERT INTO ProductSalesTable(productId, salesQuantity, totalSales, totalRevenue, salesYear, salesMonth) VALUE(?, ?, ?, ?, ?, ?) "
 						+ "ON DUPLICATE KEY UPDATE "
-							+ "salesQuantity = salesQuantity + ? "
-							+ "totalSales = totalSales + ? "
+							+ "salesQuantity = salesQuantity + ?, "
+							+ "totalSales = totalSales + ?, "
 							+ "totalRevenue = totalRevenue + ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, productSalesDTO.getProductId());

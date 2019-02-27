@@ -19,6 +19,7 @@ public class DeleteProductReviewAction extends ActionSupport implements SessionA
 	private int productReviewId;
 
 	//	Send
+	private int productId;
 	private ProductReviewDTO productReviewDTO;
 
 	//	Session
@@ -36,11 +37,12 @@ public class DeleteProductReviewAction extends ActionSupport implements SessionA
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
-			session.put("LoginedRedirectAction", "ProductPageAction?productId=" + productReviewDTO.getProductId());
+			session.put("LoginedRedirectAction", "ProductPageAction");
 			return "needLogin";
 		}
 
 		int userId = SessionSafeGetter.getInt(session, "userId");
+		this.productId = productReviewDTO.getProductId();
 		boolean isMineReview = (productReviewDTO.getUserId() == userId);
 
 		if(isMineReview || CheckAdmin.IsAdmin(session))
@@ -69,6 +71,16 @@ public class DeleteProductReviewAction extends ActionSupport implements SessionA
 	public void setProductReviewDTO(ProductReviewDTO productReviewDTO)
 	{
 		this.productReviewDTO = productReviewDTO;
+	}
+
+	public int getProductId()
+	{
+		return productId;
+	}
+
+	public void setProductId(int productId)
+	{
+		this.productId = productId;
 	}
 
 	public Map<String, Object> getSession()

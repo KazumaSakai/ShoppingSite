@@ -154,7 +154,55 @@ public class CartDAO
 
 		return success;
 	}
+	/**
+	 * 	カート情報の商品数を増加させる
+	 * @param userId
+	 * 	ユーザーID
+	 * @param productId
+	 * 	商品ID
+	 * @param productQuantity
+	 * 	増加させる商品数
+	 * @return
+	 * 	結果
+	 */
+	public static boolean DecrementProductQuantity(int userId, int productId, int productQuantity)
+	{
+		boolean success = false;
 
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "UPDATE CartTable SET productQuantity = productQuantity - " +
+					"CASE WHEN productQuantity <= ? THEN 0 ELSE ? END " +
+					"WHERE (userId = ? AND productId = ?)";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, productQuantity);
+			preparedStatement.setInt(2, productQuantity);
+			preparedStatement.setInt(3, userId);
+			preparedStatement.setInt(4, productId);
+
+			int line = preparedStatement.executeUpdate();
+			success = (line > 0);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return success;
+	}
 	/**
 	 * 	カート情報のリストを取得する
 	 * @param userId
