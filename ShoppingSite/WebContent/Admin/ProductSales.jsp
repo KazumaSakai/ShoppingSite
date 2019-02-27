@@ -15,8 +15,6 @@
 		<style>
 			svg
 			{
-				width: 320px;
-				height: 240px;
 				border: 1px solid black;
 			}
 
@@ -42,7 +40,7 @@
 
 		<div class="text-center">
 			<svg id="myGraph"></svg>
-			<p>JavaScript d3.jsで作成しました。</p>
+			<p>JavaScript svg d3.jsで作成しました。</p>
 		</div>
 		<script type="text/javascript" src="./JavaScript/d3.js"></script>
 	</c:param>

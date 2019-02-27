@@ -9,7 +9,15 @@
 
 	<constant name="struts.devMode" value="true" />
 
-
+	<!-- API -->
+	<package name="com.internousdev.ShoppingSite.action.api" extends="struts-default">
+	
+		<action name="PriceAction" class="com.internousdev.ShoppingSite.action.api.PriceAction" method="execute">
+			<result name="success">json.jsp</result>
+		</action>
+		
+	</package>
+	
 
 
 	<!-- Admin -->
@@ -272,6 +280,10 @@
 			<result name="needLogin" type="chain">GoLoginAction</result>
 		</action>
 
+		<action name="UserAction" class="com.internousdev.ShoppingSite.action.user.UserAction" method="execute">
+			<result name="success">./User/User.jsp</result>
+		</action>
+		
 	</package>
 
 

@@ -37,10 +37,9 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 		GoogleOAuthGMailInfo googleOAuthGmailInfo = GoogleOAuth.GetGmailInfo(goooAuthToken, googleOAuthTokenInfo.user_id);
 
 		String email = googleOAuthGmailInfo.emailAddress;
-		String planePass = googleOAuthTokenInfo.user_id;
 
 		//	Emailでログインを試す
-		UserDTO userDTO = UserDAO.LoginByEmail(email, planePass);
+		UserDTO userDTO = UserDAO.LoginByOAuthUser(email);
 
 		//	ログインできていない、もしくは認証ユーザーではないならログインさせない
 		if(userDTO == null || !userDTO.isOauthUser())

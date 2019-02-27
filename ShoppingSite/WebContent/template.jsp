@@ -111,6 +111,18 @@
 			</c:if>
 		</div>
 	</c:if>
+
 	<footer> Kazuma Sakai </footer>
+	
+	<div id="fixed">
+		<s:if test="#session.isLogin">
+			<div class="windowTag text-center" onclick="location.href='<s:url action='CartAction' />'" >
+				カート合計金額 : <span class="totalPrice"><script>document.write(cartTotalPrice())</script></span>円
+			</div>
+			<div class="windowTag text-center" style="background-color: rgb(247, 211, 88);" onclick="location.href='<s:url action='GoBuyAction' />'" >
+				購入する
+			</div>
+		</s:if>
+	</div>
 </body>
 </html>

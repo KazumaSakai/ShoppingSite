@@ -250,6 +250,15 @@ public class UserDAO
 
 		return DBSafePassword.equals(safePassword) ? userDTO : null;
 	}
+	
+	public static UserDTO LoginByOAuthUser(String email)
+	{
+		UserDTO userDTO = UserDAO.SelectByEmail(email);
+
+		if (userDTO == null) return null;
+
+		return userDTO.isOauthUser() ? userDTO : null;
+	}
 
 	public static boolean LoginCheck(String loginId, String planeLoginPass)
 	{

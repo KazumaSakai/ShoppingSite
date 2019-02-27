@@ -311,7 +311,7 @@ canvas
 .windowTag
 {
 	position: fixed;
-	left: -190px;
+	left: -250px;
 
 	width: 300px;
 	height: 70px;
@@ -357,6 +357,8 @@ canvas
 	border-bottom: 2px solid rgb(100, 100, 100);
 	border-right: 2px solid rgb(100, 100, 100);
 
+	transform: rotate(90deg);
+	
 	transition: all 350ms ease;
 }
 .windowTag::before
@@ -381,6 +383,7 @@ canvas
 .windowTag:hover::after
 {
 	right: 5px;
+	transform: rotate(0deg);
 }
 .windowTag:hover::before
 {

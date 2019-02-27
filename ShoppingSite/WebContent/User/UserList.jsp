@@ -14,7 +14,7 @@
 				<li>
 					<div class="left">
 						<div>
-							<a href="<s:url action='UserInfo?userId=%{id}' />">
+							<a href="<s:url action='UserAction?userId=%{id}' />">
 								<s:property value="userName" />
 							</a>
 						</div>

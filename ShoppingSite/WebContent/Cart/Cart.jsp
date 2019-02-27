@@ -65,14 +65,6 @@
 					</li>
 				</s:iterator>
 			</ul>
-			<div class="windowTag text-center" style="top: calc(100vh - 155px)">
-				カート合計金額 : <span class="totalPrice"><s:property value="totalPrice" /></span>円
-				<span class="rightBorder"></span>
-			</div>
-			<div class="windowTag text-center" style="top: calc(100vh - 80px); background-color: rgb(247, 211, 88);" onclick="location.href='<s:url action='GoBuyAction' />'" >
-				購入する
-				<span class="rightBorder"></span>
-			</div>
 		</s:if>
 		<s:else>
 			<p class="errorMessage text-center">

@@ -5,8 +5,8 @@ async function asyncStart()
 	var dataSet = productSalesJson;
 
 	//var dataSet = ToJson(await d3.text("./d3.json"));
-	var maxPrice = d3.max(dataSet, function (d) { return d.totalSales; });
-	var maxQuantity = d3.max(dataSet, function (d) { return d.salesQuantity; });
+	var maxPrice = Math.max(1, d3.max(dataSet, function (d) { return d.totalSales; }));
+	var maxQuantity = Math.max(1, d3.max(dataSet, function (d) { return d.salesQuantity; }));
 	var length = dataSet.length;
 
 	//	define
@@ -16,6 +16,8 @@ async function asyncStart()
 	var graphWidth = width - margin.left - margin.right;
 	var graphHeight = height - margin.top - margin.bottom;
 
+	var svg = document.getElementsByTagName("svg")[0];
+	svg.setAttribute("style", "width: " + width + "px; height: " + height + "px");
 
     var cv = d3.select("#myGraph").style("width", width).style("height", height);
 
@@ -58,7 +60,8 @@ async function asyncStart()
 		.range([0, graphHeight]);
 
 	//	縦軸メモリの文字
-	var axisY = d3.axisLeft(yScale).tickFormat(function (d,i) { return d / 10000 + "万円" });
+	var axisY = maxPrice > 10000 ? d3.axisLeft(yScale).tickFormat(function (d,i) { return (d / 10000 + "万円" )})
+								 : d3.axisLeft(yScale).tickFormat(function (d,i) { return (d + "円" )} );
 
 	//	縦軸メモリ描画
     cv.append("g")
