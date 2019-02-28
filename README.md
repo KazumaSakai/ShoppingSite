@@ -9,6 +9,7 @@
 | 機能名　　　　　　　　　　 | Action                              | JSP               | JavaScript |
 |:-------------------------|:------------------------------------|:------------------|:-----------|
 | ソート可視化機能　　　　　 | [SortAction](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/src/com/internousdev/ShoppingSite/action/go/SortAction.java) |  [SortView.jsp](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/WebContent/JavaScript/SortView.jsp) | [sortView.js](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/WebContent/JavaScript/sortView.js) |
+| 商品売り上げ情報表示機能　 | [ProductSalesAction](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/src/com/internousdev/ShoppingSite/action/product/ProductSalesAction.java)                   | [ProductSales.jsp](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/WebContent/Admin/ProductSales.jsp)         | [d3.js](https://github.com/KazumaSakai/ShoppingSite/blob/master/ShoppingSite/WebContent/JavaScript/d3.js) |
 
 - **非ログイン**  
 
