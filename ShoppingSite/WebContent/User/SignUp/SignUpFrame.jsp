@@ -7,25 +7,33 @@
 			<th colspan="2">新規登録フォーム</th>
 		</tr>
 		<tr>
-			<th>ログインID</th>
+			<th>
+				ログインID
+			</th>
 			<td>
 				<input type="text" name="loginId" placeholder="ログインID" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<th>ユーザー名</th>
+			<th>
+				ユーザー名
+			</th>
 			<td>
 				<input type="text" name="userName" placeholder="ユーザー名" required="required" min="4" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<th>パスワード</th>
+			<th>
+				パスワード
+			</th>
 			<td>
 				<input type="password" name="planeLoginPassword" placeholder="パスワード" required="required" min="8" max="60" />
 			</td>
 		</tr>
 		<tr>
-			<th>メールアドレス</th>
+			<th>
+				メールアドレス
+			</th>
 			<td>
 				<input type="email" name="email" placeholder="メールアドレス" required="required" max="255" />
 			</td>

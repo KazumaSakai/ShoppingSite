@@ -114,12 +114,13 @@ public class UserDAO
 
 		try
 		{
-			String sql = "UPDATE UserTable SET isAdmin = ?, isOauthUser = ?, loginPass = ?, userName = ?, lastEditDate = now()";
+			String sql = "UPDATE UserTable SET isAdmin = ?, isOauthUser = ?, loginPass = ?, userName = ?, lastEditDate = now() WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setBoolean(1, userDTO.isAdmin());
 			preparedStatement.setBoolean(2, userDTO.isOauthUser());
 			preparedStatement.setString(3, userDTO.getLoginPass());
 			preparedStatement.setString(4, userDTO.getUserName());
+			preparedStatement.setInt(5, userDTO.getId());
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
@@ -250,7 +251,7 @@ public class UserDAO
 
 		return DBSafePassword.equals(safePassword) ? userDTO : null;
 	}
-	
+
 	public static UserDTO LoginByOAuthUser(String email)
 	{
 		UserDTO userDTO = UserDAO.SelectByEmail(email);

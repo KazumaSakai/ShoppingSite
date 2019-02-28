@@ -14,7 +14,7 @@
 			<div id="item_slider">
 				<s:iterator begin="0" end="%{ productDTO.imageQuantity - 1 }" status="st">
 					<div>
-						<img src="./Images/ItemImages/${ productDTO.id }/${ st.count }.jpg" />
+						<img src="./Images/ItemImages/${ productDTO.id }/${ st.count }.jpg" class="popupImage" />
 					</div>
 				</s:iterator>
 			</div>

@@ -13,7 +13,9 @@
 		<s:form action="SettlementCartAction" style="margin: 10px 0px">
 			<table class="table" border="1">
 				<tr>
-					<th>配達先</th>
+					<th>
+						配達先
+					</th>
 					<td>
 						<select name="destinationId" required="required">
 							<s:iterator value="destinationDTOList">
@@ -26,7 +28,9 @@
 					</td>
 				</tr>
 				<tr>
-					<th>配達予定日</th>
+					<th>
+						配達予定日
+					</th>
 					<td colspan="2">
 						<input type="date" name="requestDeliveryDate" min="${ minDate }" max="${ maxDate }">
 						<input type="time" name="requestDeliveryTime" min="08:00" max="19:59" />

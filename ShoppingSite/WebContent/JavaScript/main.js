@@ -6,7 +6,7 @@ window.onload = function()
 		var tab = tabs[i];
 		drawTab(tab);
 	}
-	
+
 	var fixed =  document.getElementsByClassName("fixed")[0];
 	var windowTags = document.getElementsByClassName("windowTag");
 	for(var i = 0; i < windowTags.length; i++)
@@ -16,12 +16,12 @@ window.onload = function()
 		windowTag.style.top = "calc(80vh - " + (75 * n) + "px)";
 	}
 
-	var images =  document.getElementsByTagName("img");
+	var images =  document.getElementsByClassName("popupImage");
 	for(var i = 0; i < images.length; i++)
 	{
 		let beforeOnClick = images[i].getAttribute("onclick");
 		let onclick = "popupImage('" + images[i].getAttribute("src") + "')";
-		
+
 		images[i].setAttribute("onclick", (beforeOnClick == null ? "" : beforeOnClick) + onclick);
 		console.log(images[i]);
 	}
@@ -94,7 +94,7 @@ function LoadScript(url, callback)
 
 	//	<head>に追加
 	document.getElementsByTagName("head")[0].appendChild(script);
-	
+
 	return script;
 }
 
@@ -111,7 +111,7 @@ function popupClose()
         duration: 200,
         fill: "forwards"
     });
-    
+
     anim.onfinish = function()
     {
         popup_back.parentNode.removeChild(popup_back);
@@ -134,29 +134,30 @@ function popupImage(imageURL)
         duration: 200,
         fill: "forwards"
     });
-    
+
     //	ラッパー
     var wrapper = document.createElement("div");
     wrapper.setAttribute("style", "position: relative; top: 50%; left: 50%;" +
 						    		" width: 80vw; height: 80vh;" +
 						    		" transform: translate(-40vw, -40vh);" +
 						    		" text-align: center");
+    popup_back.setAttribute("onclick", "popupClose()");
     popup_back.appendChild(wrapper);
 
     //	ラッパー
     var wrapper2 = document.createElement("div");
     wrapper2.setAttribute("style", "position: absolute; height: 100%; display: inline-block; transform: translateX(-50%);");
     wrapper.appendChild(wrapper2);
-    
-    //	画像	
+
+    //	画像
     var image = document.createElement("img");
     image.setAttribute("src", imageURL);
     image.setAttribute("style", "position: relative;" +
 						    		" width: auto; height: auto;" +
 						    		" max-width: 100%; max-height: 100%");
     wrapper2.appendChild(image);
-    
-    //	ボタン1	
+
+    //	ボタン1
     var button = document.createElement("div");
     button.setAttribute("class", "button");
     button.setAttribute("style", "top: -6px; right: -6px");

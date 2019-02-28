@@ -12,32 +12,6 @@
 			var productId = <s:property value="productId" />;
 			var productSalesJson = <s:property value="resultData" escape="false" />
 		</script>
-		<style>
-			svg
-			{
-				border: 1px solid black;
-			}
-
-			#myGraph rect
-			{
-				stroke: rgb(160, 0, 0);
-				stroke-width: 1px;
-				fill: rgb(255, 0, 0);
-			}
-
-			.axis text
-			{
-				font-family: sans-serif;
-				font-size: 11px;
-			}
-
-			.axis path, .axis line
-			{
-				fill: none;
-				stroke: black;
-			}
-		</style>
-
 		<div class="text-center">
 			<svg id="myGraph"></svg>
 			<p>JavaScript svg d3.jsで作成しました。</p>

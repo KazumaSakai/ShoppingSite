@@ -6,11 +6,17 @@
 	<input type="hidden" name="productId" value="<c:out value='${productDTO.id }' />" />
 	<table class="table">
 		<tr>
-			<th>タイトル</th>
-			<td><input name="reviewTitle" type="text" required="required" /></td>
+			<th>
+				タイトル
+			</th>
+			<td>
+				<input name="reviewTitle" type="text" required="required" />
+			</td>
 		</tr>
 		<tr>
-			<th>評価</th>
+			<th>
+				評価
+			</th>
 			<td>
 				<select name="reviewPoint" required="required">
 					<option value="1">1</option>
@@ -22,8 +28,12 @@
 			</td>
 		</tr>
 		<tr>
-			<th>コメント</th>
-			<td><textarea name="reviewComment" required="required"></textarea></td>
+			<th>
+				コメント
+			</th>
+			<td>
+				<textarea name="reviewComment" required="required"></textarea>
+			</td>
 		</tr>
 	</table>
 	<div class="text-center">

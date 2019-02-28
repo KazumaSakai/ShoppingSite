@@ -1,19 +1,22 @@
+@CHARSET "UTF-8";
 /*
  *	ErrorMessage
  */
-.errorMessage {
+.errorMessage
+{
 	color: rgb(250, 5, 5);
 }
 .errorBox
 {
 	margin: 10px;
 	padding: 20px 10px;
+
 	text-align: center;
+
+	border: 1px solid red;
 
 	background-color: rgba(250, 5, 5, 0.2);
 	box-shadow: 0px 0px 15px rgb(50, 5, 5);
-
-	border: 1px solid red;
 }
 .errorBox .errorTitle
 {
@@ -23,10 +26,10 @@
 
 	font-size: 1.1em;
 	font-weight: bold;
+	color: rgb(5, 5, 5);
 
 	border-bottom: 1px solid rgb(250, 5, 5);
-
-	color: rgb(5, 5, 5);
+	box-shadow: 0px 5px 10px -7px rgb(50, 5, 5);
 }
 
 
@@ -34,32 +37,34 @@
 /*
  *	SuccessMessage
  */
-.successMessage {
+.successMessage
+{
 	color: rgb(5, 250, 5);
 }
 .successBox
 {
 	margin: 10px;
 	padding: 20px 10px;
+
 	text-align: center;
+
+	border: 1px solid rgb(5, 150, 5);
 
 	background-color: rgba(5, 220, 5, 0.2);
 	box-shadow: 0px 0px 15px rgb(5, 50, 5);
-
-	border: 1px solid rgb(5, 150, 5);
 }
 .successBox .successTitle
 {
 	margin: 0px;
 	margin-bottom: 30px;
-	
+
 	padding: 0px;
 	padding-bottom: 5px;
 
 	font-size: 1.1em;
 	font-weight: bold;
+	color: rgb(5, 5, 5);
 
 	border-bottom: 1px solid rgb(5, 150, 5);
-
-	color: rgb(5, 5, 5);
+	box-shadow: 0px 5px 10px -7px rgb(5, 50, 5);
 }

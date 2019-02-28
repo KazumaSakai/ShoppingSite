@@ -11,19 +11,33 @@
 		<h1>購入が完了しました</h1>
 		<table class="table text-center" border="1">
 			<tr>
-				<th>商品名</th>
-				<th>商品画像</th>
-				<th>商品価格</th>
-				<th>購入数</th>
+				<th>
+					商品名
+				</th>
+				<th>
+					商品画像
+				</th>
+				<th>
+					商品価格
+				</th>
+				<th>
+					購入数
+				</th>
 			</tr>
 			<s:iterator value="purchasedProductList">
 				<tr>
-					<th><s:property value="productName" /></th>
+					<th>
+						<s:property value="productName" />
+					</th>
 					<td>
-						<img src="./Images/ItemImages/${id }/1.jpg" />
+						<img src="./Images/ItemImages/${id }/1.jpg" class="popupImage" />
 					</td>
-					<td><s:property value="productPrice" />円</td>
-					<td><s:property value="productQuantity" />個</td>
+					<td>
+						<s:property value="productPrice" />円
+					</td>
+					<td>
+						<s:property value="productQuantity" />個
+					</td>
 				</tr>
 			</s:iterator>
 			<tr>

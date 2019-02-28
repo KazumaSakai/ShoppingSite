@@ -310,10 +310,11 @@ public class ProductDAO
 
 		try
 		{
-			String sql = "UPDATE ProductTable SET productQuantity = productQuantity + ? WHERE id = ?";
+			String sql = "UPDATE ProductTable SET productQuantity = productQuantity + ?, lastReplenishmentDate = now() WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, quantity);
 			preparedStatement.setInt(2, id);
+
 
 			int line = preparedStatement.executeUpdate();
 			success = (line > 0);
@@ -354,7 +355,7 @@ public class ProductDAO
 
 		try
 		{
-			String sql = "UPDATE ProductTable SET productQuantity = productQuantity - " +
+			String sql = "UPDATE ProductTable SET lastSalesDate = now(), productQuantity = productQuantity - " +
 							"CASE WHEN productQuantity <= ? THEN 0 ELSE ? END " +
 							"WHERE id = ?";
 

@@ -73,7 +73,7 @@ public class ProductReviewDAO
 
 		try
 		{
-			String sql = "UPDATE ProductReviewTable SET productId = ?, userId = ?, reviewTitle = ?, reviewPoint = ?, reviewComment = ? WHERE id = ?";
+			String sql = "UPDATE ProductReviewTable SET productId = ?, userId = ?, reviewTitle = ?, reviewPoint = ?, reviewComment = ?, lastEditDate = now() WHERE id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, productReviewDTO.getProductId());
 			preparedStatement.setInt(2, productReviewDTO.getUserId());

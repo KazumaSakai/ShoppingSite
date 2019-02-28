@@ -8,9 +8,9 @@
 	<c:param value="true" name="showSideMenu" />
 	<c:param value="true" name="showMain" />
 	<c:param name="content">
-	
+
 		<h1><s:property value="userDTO.userName" /></h1>
-		
+
 		<table class="table">
 			<tr>
 				<th>
@@ -42,6 +42,6 @@
 				</td>
 			</tr>
 		</table>
-		
+
 	</c:param>
 </c:import>

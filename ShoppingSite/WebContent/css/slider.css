@@ -1,21 +1,25 @@
+@CHARSET "UTF-8";
 /*
  *	Header Slider
  */
-#top_slider {
+#top_slider
+{
 	width: 100%;
 	height: calc(100vh - 205px);
 	clear: both;
-	
+
 	background-color: white;
 }
 
-#top_slider div {
+#top_slider div
+{
 	width: 100%;
 	height: calc(100% - 5px);
 	position: relative;
 }
 
-#top_slider div img {
+#top_slider div img
+{
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -26,23 +30,24 @@
 	margin: auto;
 }
 
-
-
 /*
  *		ItemSlider
  */
-#item_slider {
+#item_slider
+{
 	width: 100%;
 	height: 40vh;
 }
 
-#item_slider div {
+#item_slider div
+{
 	width: 100%;
 	height: 100%;
 	position: relative;
 }
 
-#item_slider div img {
+#item_slider div img
+{
 	position: absolute;
 	top: 0;
 	right: 0;

@@ -18,13 +18,16 @@
 	<script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 	<script src="./JavaScript/main.js" charset="utf-8"></script>
 	<script>
-		$(document).ready(function() {
-			$('#top_slider').bxSlider({
+		$(document).ready(function()
+		{
+			$('#top_slider').bxSlider(
+			{
 				auto : true,
 				speed : 700,
 				pause : 5000
 			});
-			$('#item_slider').bxSlider({
+			$('#item_slider').bxSlider(
+			{
 				auto : true,
 				speed : 700,
 				pause : 5000
@@ -64,19 +67,19 @@
 	<c:if test="${ param.showSlider }">
 		<div id="top_slider">
 			<div>
-				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image1.jpg">
+				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image1.jpg" class="popupImage">
 			</div>
 			<div>
-				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image2.jpg">
+				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image2.jpg" class="popupImage">
 			</div>
 			<div>
-				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image3.jpg">
+				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image3.jpg" class="popupImage">
 			</div>
 			<div>
-				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image4.jpg">
+				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image4.jpg" class="popupImage">
 			</div>
 			<div>
-				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image5.jpg">
+				<img src="http://localhost:8080/ShoppingSite/Images/jQuery_image5.jpg" class="popupImage">
 			</div>
 		</div>
 	</c:if>
@@ -113,7 +116,7 @@
 	</c:if>
 
 	<footer> Kazuma Sakai </footer>
-	
+
 	<div id="fixed">
 		<s:if test="#session.isLogin">
 			<div class="windowTag text-center" onclick="location.href='<s:url action='CartAction' />'" >

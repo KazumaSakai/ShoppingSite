@@ -11,13 +11,13 @@
 
 	<!-- API -->
 	<package name="com.internousdev.ShoppingSite.action.api" extends="struts-default">
-	
+
 		<action name="PriceAction" class="com.internousdev.ShoppingSite.action.api.PriceAction" method="execute">
 			<result name="success">json.jsp</result>
 		</action>
-		
+
 	</package>
-	
+
 
 
 	<!-- Admin -->
@@ -262,7 +262,7 @@
 			<result name="goBuy" type="chain">GoBuyAction</result>
 			<result name="success" type="chain">DestinationListAction</result>
 			<result name="needLogin" type="chain">GoLoginAction</result>
-			<result name="error" type="chain">InsertDestinationAction</result>
+			<result name="error" type="chain">GoInsertDestinationAction</result>
 		</action>
 
 		<action name="DestinationListAction" class="com.internousdev.ShoppingSite.action.user.DestinationListAction" method="execute">
@@ -283,7 +283,7 @@
 		<action name="UserAction" class="com.internousdev.ShoppingSite.action.user.UserAction" method="execute">
 			<result name="success">./User/User.jsp</result>
 		</action>
-		
+
 	</package>
 
 

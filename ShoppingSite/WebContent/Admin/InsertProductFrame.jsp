@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<th>商品画像</th>
-				<td><input type="number"  name="imageQuantity" placeholder="商品画像" required="required" min="1" max="10" />
+				<td><input type="number"  name="imageQuantity" placeholder="商品画像数" required="required" min="1" max="10" />
 			</tr>
 		</table>
 		<div class="text-center">

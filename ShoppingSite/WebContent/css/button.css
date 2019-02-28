@@ -1,6 +1,9 @@
+@CHARSET "UTF-8";
 /*
  *		Button
  */
+
+ /* LoginButton */
 .loginButton
 {
 	margin: 5px;
@@ -14,7 +17,6 @@
 	background-color: rgb(247, 211, 88);
 	transition: all 200ms 0s ease;
 }
-
 .loginButton:hover
 {
 	margin: 3px 0px;
@@ -25,6 +27,7 @@
 	box-shadow: 0 0 8px black;
 }
 
+/* GoogleButton */
 .googleButton
 {
 	margin: 5px;
@@ -48,6 +51,7 @@
 	box-shadow: 0 0 8px black;
 }
 
+/* LinkButton */
 .linkButton {
 	border: solid 1px black;
 	max-width: 350px;
@@ -102,9 +106,7 @@
 	transition: all 200ms 0s ease;
 }
 
-/*
- *		ƒ{ƒ^ƒ“
- */
+/* Button */
 .button
 {
 	position: absolute;

@@ -13,20 +13,36 @@
 		</h1>
 		<table class="center table" border="1">
 			<tr>
-				<th style="width: 100px">販売者名</th>
-				<td style="width: 300px"><s:property value="companyDTO.companyName" /></td>
+				<th>
+					販売者名
+				</th>
+				<td>
+					<s:property value="companyDTO.companyName" />
+				</td>
 			</tr>
 			<tr>
-				<th>住所</th>
-				<td><s:property value="companyDTO.destinationDTO.address" /></td>
+				<th>
+					住所
+				</th>
+				<td>
+					<s:property value="companyDTO.destinationDTO.address" />
+				</td>
 			</tr>
 			<tr>
-				<th>電話番号</th>
-				<td><s:property value="companyDTO.destinationDTO.phoneNumber" /></td>
+				<th>
+					電話番号
+				</th>
+				<td>
+					<s:property value="companyDTO.destinationDTO.phoneNumber" />
+				</td>
 			</tr>
 			<tr>
-				<th>詳細</th>
-				<td><s:property value="companyDTO.companyDescription" /></td>
+				<th>
+					詳細
+				</th>
+				<td>
+					<s:property value="companyDTO.companyDescription" />
+				</td>
 			</tr>
 		</table>
 	</c:param>
