@@ -1,6 +1,16 @@
-## URL
-- http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/
-- [ポートフォリオ一覧](https://github.com/KazumaSakai/Portfolio)
+## 他に作成したプロジェクト
+ - [ポートフォリオ](https://github.com/KazumaSakai/Portfolio)
+
+## 実際のページ
+ http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/  
+ 
+ 管理者アカウントは以下のIDとパスワードで入ることができます。  
+ ※基本的に毎日DBを初期化しているので、商品削除したりしてくださって構いません。
+ 
+ | ログインID | パスワード |
+ |:----------|:---------|
+ | admin | password |
+
 
 ## 概要
 | プロジェクト名 | ShoppingSite                                      |
