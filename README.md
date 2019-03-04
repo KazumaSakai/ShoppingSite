@@ -1,5 +1,6 @@
 ## URL
-http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/
+- http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/
+- [ポートフォリオ一覧](https://github.com/KazumaSakai/Portfolio)
 
 ## 概要
 | プロジェクト名 | ShoppingSite                                      |
