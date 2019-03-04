@@ -1,6 +1,3 @@
-## 他に作成したプロジェクト
- - [ポートフォリオ](https://github.com/KazumaSakai/Portfolio)
-
 ## 実際のページ
  http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/  
  
@@ -10,7 +7,6 @@
  | ログインID | パスワード |
  |:----------|:---------|
  | admin | password |
-
 
 ## 概要
 | プロジェクト名 | ShoppingSite                                      |
@@ -88,4 +84,5 @@
 
 2019/01/15 ~ 2019/02/28
 
-
+## 他に作成したプロジェクト
+ - [ポートフォリオ](https://github.com/KazumaSakai/Portfolio)
