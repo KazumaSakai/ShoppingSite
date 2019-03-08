@@ -10,8 +10,7 @@
 				<img src="./Images/ItemImages/${ id }/1.jpg" />
 			</p>
 			<p><s:property value="productName" /></p>
-			<p>販売価格 : <s:property value="productPrice" />円</p>
-			<p>販売個数 : <s:property value="productQuantity" />個</p>
+			<p class="red"><s:property value="productPrice" />円</p>
 
 			<div class="itemButton">
 				<ul class="dropMenu">

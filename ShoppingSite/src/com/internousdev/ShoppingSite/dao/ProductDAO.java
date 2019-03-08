@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.internousdev.ShoppingSite.dto.ProductDTO;
@@ -271,26 +272,24 @@ public class ProductDAO
 	 * @return
 	 * 	商品情報のリスト
 	 */
-	public static List<ProductDTO> SearchListByProductName(int begin, int length, List<String> searchProductNameList, boolean andSearch)
+	public static List<ProductDTO> SearchListByProductName(int begin, int length, Collection<String> searchProductNameList, boolean andSearch)
 	{
-		StringBuilder where = new StringBuilder();
-
-		boolean isFirst = true;
-		for(String str : searchProductNameList)
-		{
-			if(isFirst)
-			{
-				isFirst = false;
-			}
-			else
-			{
-				where.append(andSearch ? " AND " : " OR ");
-			}
-
-			where.append("(productName LIKE '%").append(str).append("%')");
-		}
-
-		return ProductDAO.SelectList(begin, length, where.toString());
+		return ProductDAO.SelectList(begin, length, CreateSearchWhere(searchProductNameList, andSearch));
+	}
+	
+	/**
+	 * 	検索条件のWhere文を作成する
+	 * @param searchProductNameList
+	 * 	商品名のリスト
+	 * @param andSearch
+	 * 	AND検索か
+	 * @return
+	 * 	Where文
+	 */
+	public static String CreateSearchWhere(Collection<String> searchProductNameList, boolean andSearch)
+	{
+		Iterable<String> iterable = searchProductNameList.stream().map(s -> MessageFormat.format("(productName LIKE ''%{0}%'')", s))::iterator;
+		return String.join(andSearch ? " AND " : " OR ", iterable);
 	}
 
 	/**
@@ -384,5 +383,73 @@ public class ProductDAO
 		}
 
 		return success;
+	}
+
+	/**
+	 * 	すべての商品の数を取得する
+	 * @return
+	 * 	商品の数
+	 */
+	public static int Count()
+	{
+		return Count("1");
+	}
+	
+	/**
+	 *	商品名が合致する商品の数を取得する
+	 * @param searchProductNameList
+	 * 	商品名のリスト
+	 * @param andSearch
+	 * 	AND検索か
+	 * @return
+	 * 	商品の数
+	 */
+	public static int Count(Collection<String> searchProductNameList, boolean andSearch)
+	{
+		return Count(CreateSearchWhere(searchProductNameList, andSearch));
+	}
+
+	/**
+	 *	検索条件に合致する商品の数を取得する
+	 * @param where
+	 * 	検索条件
+	 * @return
+	 * 	商品の数
+	 */
+	public static int Count(String where)
+	{
+		int count = 0;
+
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT COUNT(*) FROM ProductTable WHERE " + where;
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+			{
+				count = resultSet.getInt("COUNT(*)");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return count;
 	}
 }

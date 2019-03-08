@@ -9,13 +9,14 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.internousdev.ShoppingSite.dao.ProductDAO;
 import com.internousdev.ShoppingSite.dto.ProductDTO;
 import com.internousdev.ShoppingSite.util.CharType;
+import com.internousdev.ShoppingSite.util.Pager;
 import com.internousdev.ShoppingSite.util.StringChecker;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ProductListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	private static final int pageLength = 50;
+	private static final int pageLength = 20;
 
 	//	Receive
 	private boolean andSearch;
@@ -25,6 +26,7 @@ public class ProductListAction extends ActionSupport implements SessionAware
 	//	Send
 	private List<ProductDTO> productDTOList;
 	private List<String> errorMsgList;
+	private int[] pager;
 
 	//	Session
 	private Map<String, Object> session;
@@ -32,10 +34,14 @@ public class ProductListAction extends ActionSupport implements SessionAware
 	//	Execute
 	public String execute()
 	{
+		page = Math.max(1, page) - 1;
+		
 		//	検索指定がない場合
 		if(searchWords == null || searchWords.isEmpty())
 		{
 			this.productDTOList = ProductDAO.SelectList(page * pageLength, pageLength);
+			this.pager = Pager.CreatePager(page, Pager.PageCount(ProductDAO.Count(), pageLength), 7);
+			
 			return SUCCESS;
 		}
 
@@ -49,6 +55,7 @@ public class ProductListAction extends ActionSupport implements SessionAware
 		//	検索指定の文字列をリストにして、DBからデータを得る
 		List<String> seachList = Arrays.asList(searchWords.replaceAll("　", " ").split(" "));
 		this.productDTOList = ProductDAO.SearchListByProductName(page * pageLength, pageLength, seachList, andSearch);
+		this.pager = Pager.CreatePager(page, Pager.PageCount(ProductDAO.Count(seachList, andSearch), pageLength), 7);
 
 		return SUCCESS;
 	}
@@ -104,6 +111,15 @@ public class ProductListAction extends ActionSupport implements SessionAware
 		this.errorMsgList = errorMsgList;
 	}
 
+	public int[] getPager()
+	{
+		return pager;
+	}
+	public void setPager(int[] pager)
+	{
+		this.pager = pager;
+	}
+	
 	public Map<String, Object> getSession()
 	{
 		return session;

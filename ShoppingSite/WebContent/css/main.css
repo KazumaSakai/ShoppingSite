@@ -17,6 +17,7 @@
 @IMPORT url("./symbol.css");
 @IMPORT url("./d3.css");
 @IMPORT url("./box.css");
+@IMPORT url("./pager.css");
 
 /*
  *	Body
@@ -122,6 +123,10 @@ body
 	font-weight: bold;
 	line-height: 70px;
 	float: left;
+}
+.red
+{
+	color: red;
 }
 canvas
 {
