@@ -27,7 +27,7 @@ public class GoogleSignUpAction extends ActionSupport
 	//	Execute
 	public String execute()
 	{
-		GoogleOAuthToken token = GoogleOAuth.FetchGoogleToken(code,"http://localhost:8080/ShoppingSite/GoogleSignUpAction.action");
+		GoogleOAuthToken token = GoogleOAuth.FetchGoogleToken(code,"http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/GoogleSignUpAction.action");
 		GoogleOAuthTokenInfo tokenInfo = GoogleOAuth.FetchGoogleTokenInfo(token);
 		GoogleOAuthGMailInfo gMailInfo = GoogleOAuth.GetGmailInfo(token, tokenInfo.user_id);
 		

@@ -7,7 +7,7 @@
 
 	<!-- DevMode -->
 
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 
 	<!-- API -->
 	<package name="com.internousdev.ShoppingSite.action.api" extends="struts-default">

@@ -32,7 +32,7 @@ public class GoogleLoginAction extends ActionSupport implements SessionAware
 	//	Execute
 	public String execute()
 	{
-		GoogleOAuthToken goooAuthToken = GoogleOAuth.FetchGoogleToken(code,"http://localhost:8080/ShoppingSite/GoogleLoginAction.action");
+		GoogleOAuthToken goooAuthToken = GoogleOAuth.FetchGoogleToken(code,"http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/GoogleLoginAction.action");
 		GoogleOAuthTokenInfo googleOAuthTokenInfo = GoogleOAuth.FetchGoogleTokenInfo(goooAuthToken);
 		GoogleOAuthGMailInfo googleOAuthGmailInfo = GoogleOAuth.GetGmailInfo(goooAuthToken, googleOAuthTokenInfo.user_id);
 
