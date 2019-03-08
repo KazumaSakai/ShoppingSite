@@ -12,7 +12,7 @@
 			<p><s:property value="productName" /></p>
 			<p class="red"><s:property value="productPrice" />円</p>
 
-			<div class="itemButton">
+			<div class="itemButton" onclick="event.cancelBubble=true">
 				<ul class="dropMenu">
 					<li><a href="<s:url action='IncrementProductQuantityAction?productId=%{ id }'/>">カートに追加</a></li>
 					<s:if test="#session.isAdmin">

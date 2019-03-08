@@ -217,4 +217,51 @@ public class DestinationDAO
 	{
 		return DestinationDAO.SelectList(begin, length, MessageFormat.format("userId = ''{0}''", userId));
 	}
+
+	public static int Count(String where)
+	{
+		int count = 0;
+		
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT COUNT(*) FROM DestinationTable WHERE " + where;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next())
+			{
+				count = resultSet.getInt("COUNT(*)");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+
+	public static int Count()
+	{
+		return Count("1");
+	}
+	
+	public static int Count(int userId)
+	{
+		return Count("userId = " + userId);
+	}
 }

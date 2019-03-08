@@ -274,4 +274,51 @@ public class PurchaseHistoryDAO
 	{
 		return PurchaseHistoryDAO.SelectList(begin, length, MessageFormat.format("productId = ''{0}''", productId));
 	}
+	
+	public static int Count(String where)
+	{
+		int count = 0;
+		
+		Connection connection = DBConnector.createConnection();
+
+		try
+		{
+			String sql = "SELECT COUNT(*) FROM PurchaseHistoryTable WHERE " + where;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next())
+			{
+				count = resultSet.getInt("COUNT(*)");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if (connection != null) connection.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+
+	public static int Count()
+	{
+		return Count("1");
+	}
+	
+	public static int Count(int userId)
+	{
+		return Count("userId = " + userId);
+	}
 }

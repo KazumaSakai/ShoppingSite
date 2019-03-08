@@ -54,5 +54,21 @@
 				</li>
 			</s:iterator>
 		</ul>
+		
+		<ul class="pager">
+			<s:iterator value="pager" var="v">
+			<c:if test="${ (page + 1) == v }"> 
+				<li class="disable">
+					<s:property value="v" />
+				</li>
+			</c:if>
+			<c:if test="${ (page + 1) != v }">
+				<li onclick="location.href='<s:url action="AdminUserListAction"><s:param name="page" value="v" /></s:url>'">
+					<s:property value="v" />
+				</li>
+			</c:if>
+			</s:iterator>
+		</ul>
+		
 	</c:param>
 </c:import>

@@ -9,17 +9,19 @@ import com.internousdev.ShoppingSite.dao.UserDAO;
 import com.internousdev.ShoppingSite.dto.UserDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.Pager;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminUserListAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	private static final int pageLength = 50;
+	private static final int pageLength = 10;
 
 	//	Receive
 	private int page;
 
 	//	Send
+	private int[] pager;
 	private List<UserDTO> userList;
 
 	//	Session
@@ -28,6 +30,8 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 	//	Execute
 	public String execute()
 	{
+		this.page = Math.max(1, this.page) - 1;
+		
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
@@ -40,7 +44,8 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 			return "notAdmin";
 		}
 
-		 userList = UserDAO.SelectList(pageLength * page, pageLength);
+		this.userList = UserDAO.SelectList(pageLength * page, pageLength);
+		this.pager = Pager.CreatePager(page, Pager.PageCount(UserDAO.Count(), pageLength), 7);
 
 		return SUCCESS;
 	}
@@ -53,6 +58,14 @@ public class AdminUserListAction extends ActionSupport implements SessionAware
 	public void setPage(int page)
 	{
 		this.page = page;
+	}
+	public int[] getPager()
+	{
+		return pager;
+	}
+	public void setPager(int[] pager)
+	{
+		this.pager = pager;
 	}
 	public List<UserDTO> getUserList()
 	{

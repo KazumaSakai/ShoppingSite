@@ -65,13 +65,16 @@
 					</li>
 				</s:iterator>
 			</ul>
+			<div class="text-center">
+				<input type="button" class="linkButton" onclick="location.href='<s:url action='GoBuyAction' />'" value="購入する" />
+			</div>
 		</s:if>
 		<s:else>
 			<p class="errorMessage text-center">
 				カートの中身が空です。
 			</p>
 			<p class="text-center">
-         			商品は<a href='<s:url action="ProductListAction"/>'>こちら</a>からご購入できます。
+       			商品は<a href='<s:url action="ProductListAction"/>'>こちら</a>からご購入できます。
 			</p>
 		</s:else>
 	</c:param>

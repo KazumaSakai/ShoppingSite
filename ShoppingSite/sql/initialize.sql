@@ -26,7 +26,30 @@ CREATE TABLE DestinationTable
 	registeredDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時'
 ) COMMENT '宛先テーブル';
 INSERT INTO DestinationTable(userId, familyName, firstName, gender, postalCode, address, email, phoneNumber) VALUES
-	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@internousdev.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
+	(1, "酒井", "和馬", 0, "132-0022", "東京都江戸川区大杉 0-0-00 xxxxxxxx 101", "admin@xxx.com", "81---08000010001"),
 	(2, "土地所有者姓2", "土地所有者名2", 0, "160-0022", "東京都 新宿区新宿 0-0-00 xxxxxxxx 101", "mail@aaa.com", "81---00300010002"),
 	(3, "土地所有者姓3", "土地所有者名3", 0, "102-0075", "東京都 千代田区三番町 0-0-00 xxxxxxxx", "mail@bbb.com", "81---00300010003"),
 	(4, "土地所有者姓4", "土地所有者名4", 0, "100-0001", "東京都 千代田区千代田  0-0-00 xxxxxxxx", "mail@ccc.com", "81---00300010004"),
@@ -399,4 +422,19 @@ CREATE TABLE UserTable
 	lastEditDate DATETIME COMMENT '最終編集日時'
 ) COMMENT 'ユーザー情報テーブル';
 INSERT INTO UserTable(isAdmin, isOauthUser, loginId, loginPass, email, userName, destinationId) VALUES
-	(1, 0, "admin","3f74691ad7292c5f0ee29cc8fba0b03463e3b1c4a1d368838dbe11b925d244c4", "admin@internousdev.com", "管理者", 1);
+	(1, 0, "admin","3f74691ad7292c5f0ee29cc8fba0b03463e3b1c4a1d368838dbe11b925d244c4", "admin@internousdev.com", "管理者", 1),
+	(0, 0, "user001","password", "user001@internousdev.com", "ユーザー001", 1),
+	(0, 0, "user002","password", "user002@internousdev.com", "ユーザー002", 1),
+	(0, 0, "user003","password", "user003@internousdev.com", "ユーザー003", 1),
+	(0, 0, "user004","password", "user004@internousdev.com", "ユーザー004", 1),
+	(0, 0, "user005","password", "user005@internousdev.com", "ユーザー005", 1),
+	(0, 0, "user006","password", "user006@internousdev.com", "ユーザー006", 1),
+	(0, 0, "user007","password", "user007@internousdev.com", "ユーザー007", 1),
+	(0, 0, "user008","password", "user008@internousdev.com", "ユーザー008", 1),
+	(0, 0, "user009","password", "user009@internousdev.com", "ユーザー009", 1),
+	(0, 0, "user010","password", "user010@internousdev.com", "ユーザー010", 1),
+	(0, 0, "user011","password", "user011@internousdev.com", "ユーザー011", 1),
+	(0, 0, "user012","password", "user012@internousdev.com", "ユーザー012", 1),
+	(0, 0, "user013","password", "user013@internousdev.com", "ユーザー013", 1),
+	(0, 0, "user014","password", "user014@internousdev.com", "ユーザー014", 1),
+	(0, 0, "user015","password", "user015@internousdev.com", "ユーザー015", 1);

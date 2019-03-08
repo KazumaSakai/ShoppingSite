@@ -9,17 +9,19 @@ import com.internousdev.ShoppingSite.dao.PurchaseHistoryDAO;
 import com.internousdev.ShoppingSite.dto.PurchaseHistoryDTO;
 import com.internousdev.ShoppingSite.util.CheckAdmin;
 import com.internousdev.ShoppingSite.util.CheckLogin;
+import com.internousdev.ShoppingSite.util.Pager;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AdminPurchaseHistoryAction extends ActionSupport implements SessionAware
 {
 	private static final long serialVersionUID = 1L;
-	private static final int pageLength = 50;
+	private static final int pageLength = 10;
 
 	//	Receive
 	private int page;
 
 	//	Send
+	private int[] pager;
 	private List<PurchaseHistoryDTO> purchaseHistoryList;
 
 	//	Session
@@ -28,6 +30,8 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	//	Execute
 	public String execute()
 	{
+		this.page = Math.max(1, this.page) - 1;
+		
 		//	ログインチェック
 		if(!CheckLogin.IsLogin(session))
 		{
@@ -40,7 +44,8 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 			return "notAdmin";
 		}
 
-		purchaseHistoryList = PurchaseHistoryDAO.SelectList(pageLength * page, pageLength);
+		this.purchaseHistoryList = PurchaseHistoryDAO.SelectList(pageLength * page, pageLength);
+		this.pager = Pager.CreatePager(page, Pager.PageCount(PurchaseHistoryDAO.Count(), pageLength), 7);
 
 		return SUCCESS;
 	}
@@ -53,6 +58,14 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	public void setPage(int page)
 	{
 		this.page = page;
+	}
+	public int[] getPager()
+	{
+		return pager;
+	}
+	public void setPager(int[] pager)
+	{
+		this.pager = pager;
 	}
 	public List<PurchaseHistoryDTO> getPurchaseHistoryList()
 	{
@@ -71,5 +84,4 @@ public class AdminPurchaseHistoryAction extends ActionSupport implements Session
 	{
 		this.session = session;
 	}
-
 }

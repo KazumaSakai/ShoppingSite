@@ -222,6 +222,11 @@ public class UserDAO
 
 		return count;
 	}
+	
+	public static int Count()
+	{
+		return Count("1");
+	}
 
 	public static boolean ExistLoginId(String loginId)
 	{
@@ -299,4 +304,5 @@ public class UserDAO
 
 		return success;
 	}
+
 }

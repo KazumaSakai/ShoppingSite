@@ -102,6 +102,22 @@
 					</li>
 				</s:iterator>
 			</ul>
+			
+			<ul class="pager">
+				<s:iterator value="pager" var="v">
+				<c:if test="${ (page + 1) == v }"> 
+					<li class="disable">
+						<s:property value="v" />
+					</li>
+				</c:if>
+				<c:if test="${ (page + 1) != v }">
+					<li onclick="location.href='<s:url action="AdminPurchaseHistoryAction"><s:param name="page" value="v" /><s:param name="searchWords" value="searchWords" /><s:param name="andSearch" value="andSearch" /></s:url>'">
+						<s:property value="v" />
+					</li>
+				</c:if>
+				</s:iterator>
+			</ul>
+			
 		</s:if>
 		<s:else>
 			<p class="errorMessage text-center">
