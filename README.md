@@ -1,5 +1,6 @@
 ## 実際のページ
-http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/
+
+~~http://ec2-54-200-170-136.us-west-2.compute.amazonaws.com:8080/ShoppingSite/~~
  
  **管理者アカウントは以下のIDとパスワードで入ることができます。**
 
